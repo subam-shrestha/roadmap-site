@@ -12,21 +12,24 @@
         }
 
         :root {
-            --primary: #2c3e50;
-            --secondary: #34495e;
-            --accent: #3498db;
-            --success: #27ae60;
-            --warning: #e74c3c;
-            --light: #ecf0f1;
-            --lighter: #f8f9fa;
-            --text: #2c3e50;
-            --text-light: #7f8c8d;
-            --border: #ddd;
+            --primary: #1f2937;
+            --secondary: #0f172a;
+            --accent: #0056d2;
+            --accent-soft: #eaf2ff;
+            --success: #1f8f5f;
+            --warning: #b42318;
+            --gold: #f5b400;
+            --light: #eef2f7;
+            --lighter: #f7f9fc;
+            --text: #1f2937;
+            --text-light: #667085;
+            --border: #d9e2ef;
+            --shadow: 0 14px 35px rgba(15, 23, 42, 0.08);
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f5f7fa;
+            background: #f6f8fb;
             min-height: 100vh;
             color: var(--text);
         }
@@ -344,6 +347,178 @@
 
         .add-task-btn:hover {
             background: #2980b9;
+        }
+
+        .leaderboard-list {
+            display: grid;
+            gap: 8px;
+        }
+
+        .leaderboard-item {
+            display: grid;
+            grid-template-columns: 28px 1fr auto;
+            gap: 8px;
+            align-items: center;
+            padding: 9px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.78em;
+            animation: riseIn 0.35s ease both;
+        }
+
+        .leaderboard-item.current {
+            border-color: rgba(0, 86, 210, 0.45);
+            background: var(--accent-soft);
+        }
+
+        .rank-badge {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: #eef2f7;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .leaderboard-item:first-child .rank-badge {
+            background: #fff7d6;
+            color: #8a6100;
+        }
+
+        .leader-name {
+            font-weight: 700;
+            color: var(--primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .leader-meta {
+            margin-top: 2px;
+            color: var(--text-light);
+            font-size: 0.86em;
+        }
+
+        .leader-percent {
+            color: var(--accent);
+            font-weight: 800;
+        }
+
+        .admin-panel {
+            display: none;
+        }
+
+        body.admin-open .admin-panel {
+            display: block;
+        }
+
+        .admin-hint {
+            font-size: 0.74em;
+            color: var(--text-light);
+            line-height: 1.35;
+            margin-bottom: 10px;
+        }
+
+        .admin-user-list {
+            display: grid;
+            gap: 8px;
+            max-height: 260px;
+            overflow-y: auto;
+        }
+
+        .admin-user-row {
+            padding: 9px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        .admin-user-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            align-items: start;
+            margin-bottom: 8px;
+        }
+
+        .admin-user-name {
+            font-size: 0.8em;
+            font-weight: 700;
+            color: var(--primary);
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .admin-user-email {
+            margin-top: 2px;
+            font-size: 0.7em;
+            color: var(--text-light);
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .admin-status {
+            border-radius: 999px;
+            padding: 3px 7px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-size: 0.66em;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .admin-status.banned {
+            background: #fff5f4;
+            color: var(--warning);
+        }
+
+        .admin-status.kicked {
+            background: #fff7d6;
+            color: #8a6100;
+        }
+
+        .admin-actions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+        }
+
+        .admin-action-btn {
+            padding: 6px 5px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: #fff;
+            color: var(--primary);
+            font-size: 0.7em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .admin-action-btn:hover {
+            border-color: var(--accent);
+            background: var(--accent-soft);
+        }
+
+        .admin-action-btn.danger {
+            color: var(--warning);
+            border-color: #ffd2cc;
+        }
+
+        .admin-action-btn.danger:hover {
+            background: #fff5f4;
+        }
+
+        @keyframes riseIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* MAIN CONTENT */
@@ -930,6 +1105,179 @@
             object-fit: cover;
         }
 
+        /* Coursera-inspired minimal polish */
+        .auth-container {
+            background:
+                radial-gradient(circle at 18% 14%, rgba(0, 86, 210, 0.14), transparent 28%),
+                linear-gradient(180deg, #ffffff 0%, #f3f7fd 100%);
+        }
+
+        .auth-form,
+        .countdown-card,
+        .stat-card,
+        .progress-container,
+        .phase-section,
+        .custom-tasks-section,
+        .modal-content {
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .auth-form {
+            border: 1px solid var(--border);
+            padding: 34px;
+        }
+
+        .auth-form h2 {
+            color: var(--secondary);
+            letter-spacing: 0;
+        }
+
+        .auth-btn,
+        .add-task-btn,
+        .btn-primary {
+            background: var(--accent);
+            border-radius: 6px;
+            box-shadow: 0 8px 20px rgba(0, 86, 210, 0.18);
+        }
+
+        .auth-btn:hover,
+        .add-task-btn:hover,
+        .btn-primary:hover {
+            background: #0647a8;
+            transform: translateY(-1px);
+        }
+
+        .main-layout {
+            background: linear-gradient(180deg, #ffffff 0%, #f6f8fb 280px);
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(14px);
+            box-shadow: none;
+        }
+
+        .profile-card {
+            text-align: left;
+            display: grid;
+            grid-template-columns: 58px 1fr;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .profile-pic {
+            width: 58px;
+            height: 58px;
+            grid-row: span 2;
+            margin: 0;
+            border: 2px solid var(--accent);
+            box-shadow: 0 8px 18px rgba(0, 86, 210, 0.14);
+        }
+
+        .profile-name,
+        .profile-email {
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .edit-profile-btn,
+        .logout-btn {
+            grid-column: 1 / -1;
+            border-radius: 6px;
+        }
+
+        .logout-btn {
+            background: #fff5f4;
+            color: var(--warning);
+            border-color: #ffd2cc;
+        }
+
+        .sidebar-section {
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 13px;
+        }
+
+        .sidebar-title {
+            color: var(--secondary);
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            font-size: 0.74em;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        header {
+            text-align: left;
+            padding: 12px 0 18px;
+            margin-bottom: 22px;
+        }
+
+        header h1 {
+            color: var(--secondary);
+            font-size: 2.18em;
+        }
+
+        .countdown-card,
+        .stat-card {
+            animation: riseIn 0.45s ease both;
+        }
+
+        .countdown-card:hover,
+        .stat-card:hover,
+        .phase-section:hover {
+            transform: translateY(-2px);
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--accent), #2a73e8);
+        }
+
+        .phase-header {
+            background: #ffffff;
+        }
+
+        .phase-header:hover {
+            background: var(--accent-soft);
+        }
+
+        .task-item,
+        .custom-task-item {
+            border-left-width: 2px;
+            background: #fbfcff;
+            border-radius: 8px;
+        }
+
+        .task-item:hover,
+        .custom-task-item:hover {
+            background: var(--accent-soft);
+            transform: translateX(2px);
+        }
+
+        .checkbox {
+            border-radius: 5px;
+        }
+
+        .task-item.completed .checkbox,
+        .custom-task-item.completed .checkbox {
+            font-size: 0;
+        }
+
+        .task-item.completed .checkbox::after,
+        .custom-task-item.completed .checkbox::after {
+            content: "✓";
+            font-size: 0.8rem;
+        }
+
         @media (max-width: 768px) {
             .main-layout {
                 flex-direction: column;
@@ -937,6 +1285,8 @@
 
             .sidebar {
                 width: 100%;
+                position: static;
+                height: auto;
                 border-right: none;
                 border-bottom: 1px solid var(--border);
             }
@@ -964,7 +1314,7 @@
     <div id="authScreen" class="auth-container">
         <div class="auth-form">
             <div id="loginForm">
-                <h2>🎯 Roadmap Prep</h2>
+                <h2>Roadmap Prep</h2>
                 <div class="form-group">
                     <label>Email</label>
                     <input type="email" id="loginEmail" placeholder="your@email.com">
@@ -975,7 +1325,7 @@
                 </div>
                 <button class="auth-btn" onclick="login()">Login</button>
                 <div class="auth-toggle">
-                    Don't have account? <a onclick="toggleAuthForm()">Sign Up</a>
+                    New here? <a onclick="toggleAuthForm()">Create account</a>
                 </div>
             </div>
 
@@ -999,7 +1349,7 @@
                 </div>
                 <button class="auth-btn" onclick="signup()">Create Account</button>
                 <div class="auth-toggle">
-                    Already have account? <a onclick="toggleAuthForm()">Login</a>
+                    Already have an account? <a onclick="toggleAuthForm()">Login</a>
                 </div>
             </div>
         </div>
@@ -1034,13 +1384,26 @@
                     <div id="keyDatesList"></div>
                 </div>
 
+                <!-- LEADERBOARD -->
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Leaderboard</div>
+                    <div class="leaderboard-list" id="leaderboardList"></div>
+                </div>
+
+                <!-- ADMIN CONTROLS -->
+                <div class="sidebar-section admin-panel" id="adminPanel">
+                    <div class="sidebar-title">Admin Controls</div>
+                    <div class="admin-hint">Kick hides a learner from the leaderboard. Ban also blocks login.</div>
+                    <div class="admin-user-list" id="adminUserList"></div>
+                </div>
+
                 <!-- ADD TASK -->
                 <div class="sidebar-section">
                     <div class="sidebar-title">➕ Add Task</div>
                     <form class="add-task-form" onsubmit="addCustomTask(event)">
-                        <input type="text" id="taskTitle" placeholder="Task title" required>
-                        <textarea id="taskDesc" placeholder="Description"></textarea>
-                        <button type="submit" class="add-task-btn">Add</button>
+                        <input type="text" id="taskTitle" placeholder="Note title" required>
+                        <textarea id="taskDesc" placeholder="Details"></textarea>
+                        <button type="submit" class="add-task-btn">Save Note</button>
                     </form>
                 </div>
             </div>
@@ -1171,6 +1534,8 @@
         ];
 
         // State
+        const ADMIN_EMAIL = 'admin@roadmap.local';
+        const ADMIN_PASSWORD = 'admin123';
         let currentUser = null;
         let currentFilter = 'all';
         let tasks = [];
@@ -1179,6 +1544,24 @@
         let calendarLanguage = 'english';
 
         // AUTH FUNCTIONS
+        function ensureAdminAccount() {
+            const users = JSON.parse(localStorage.getItem('users') || '{}');
+            users[ADMIN_EMAIL] = {
+                ...(users[ADMIN_EMAIL] || {}),
+                name: 'Admin',
+                password: (users[ADMIN_EMAIL] && users[ADMIN_EMAIL].password) || ADMIN_PASSWORD,
+                pfp: (users[ADMIN_EMAIL] && users[ADMIN_EMAIL].pfp) || profilePictures[6],
+                role: 'admin',
+                banned: false,
+                leaderboardHidden: true
+            };
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+
+        function isAdminUser(user = currentUser) {
+            return !!user && user.role === 'admin';
+        }
+
         function toggleAuthForm() {
             document.getElementById('loginForm').classList.toggle('hidden');
             document.getElementById('signupForm').classList.toggle('hidden');
@@ -1205,6 +1588,7 @@
                 return;
             }
 
+            ensureAdminAccount();
             const users = JSON.parse(localStorage.getItem('users') || '{}');
             const existingEmail = Object.keys(users).find(savedEmail => savedEmail.toLowerCase() === email);
             if (existingEmail) {
@@ -1215,17 +1599,20 @@
             users[email] = {
                 name: name,
                 password: password,
-                pfp: profilePictures[0]
+                pfp: profilePictures[0],
+                role: 'learner',
+                banned: false,
+                leaderboardHidden: false
             };
 
             localStorage.setItem('users', JSON.stringify(users));
             currentUser = {
                 email: email,
                 name: name,
-                pfp: users[email].pfp
+                pfp: users[email].pfp,
+                role: users[email].role
             };
             localStorage.setItem('currentUser', JSON.stringify(currentUser));
-            alert('Account created! Opening home page.');
             document.getElementById('signupName').value = '';
             document.getElementById('signupEmail').value = '';
             document.getElementById('signupPassword').value = '';
@@ -1242,6 +1629,7 @@
                 return;
             }
 
+            ensureAdminAccount();
             const users = JSON.parse(localStorage.getItem('users') || '{}');
             const accountEmail = Object.keys(users).find(savedEmail => savedEmail.toLowerCase() === email);
             if (!accountEmail || users[accountEmail].password !== password) {
@@ -1249,10 +1637,16 @@
                 return;
             }
 
+            if (users[accountEmail].banned && users[accountEmail].role !== 'admin') {
+                alert('This account has been banned by the admin.');
+                return;
+            }
+
             currentUser = {
                 email: accountEmail,
                 name: users[accountEmail].name,
-                pfp: users[accountEmail].pfp
+                pfp: users[accountEmail].pfp,
+                role: users[accountEmail].role || 'learner'
             };
 
             localStorage.setItem('currentUser', JSON.stringify(currentUser));
@@ -1270,8 +1664,11 @@
         }
 
         function showAuth() {
+            ensureAdminAccount();
+            cleanStaticLabels();
             document.body.classList.add('auth-locked');
             document.body.classList.remove('app-open');
+            document.body.classList.remove('admin-open');
             document.getElementById('mainApp').classList.add('hidden');
             document.getElementById('authScreen').classList.remove('hidden');
             document.getElementById('loginForm').classList.remove('hidden');
@@ -1280,8 +1677,11 @@
         }
 
         function showApp() {
+            ensureAdminAccount();
+            cleanStaticLabels();
             document.body.classList.remove('auth-locked');
             document.body.classList.add('app-open');
+            document.body.classList.toggle('admin-open', isAdminUser());
             document.getElementById('authScreen').classList.add('hidden');
             document.getElementById('mainApp').classList.remove('hidden');
             window.scrollTo(0, 0);
@@ -1293,6 +1693,31 @@
             renderPhases();
             updateCountdowns();
             renderCustomTasks();
+            renderLeaderboard();
+            renderAdminPanel();
+        }
+
+        function cleanStaticLabels() {
+            const loginTitle = document.querySelector('#loginForm h2');
+            if (loginTitle) loginTitle.textContent = 'Roadmap Prep';
+
+            const subtitle = document.querySelector('header p:nth-of-type(2)');
+            if (subtitle) subtitle.textContent = 'Nepal to USA | June 2026 - August 2027';
+
+            const sidebarTitles = document.querySelectorAll('.sidebar-title');
+            const labels = ['Calendar', 'Important Dates', 'Leaderboard', 'Admin Controls', 'Personal Notes'];
+            sidebarTitles.forEach((title, index) => {
+                if (labels[index]) title.textContent = labels[index];
+            });
+
+            const nepaliButton = document.getElementById('nepCalendarBtn');
+            if (nepaliButton) nepaliButton.textContent = 'NEP';
+
+            const customTitle = document.querySelector('.custom-tasks-title');
+            if (customTitle) customTitle.textContent = 'My Personal Notes';
+
+            const modalClose = document.querySelector('.modal-close');
+            if (modalClose) modalClose.textContent = 'x';
         }
 
         // PROFILE FUNCTIONS
@@ -1408,6 +1833,123 @@
             `).join('');
         }
 
+        function escapeHTML(value) {
+            return String(value || '').replace(/[&<>"']/g, char => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;'
+            }[char]));
+        }
+
+        function getBaseProgressForEmail(email) {
+            const saved = JSON.parse(localStorage.getItem(`user_${email}`) || '{}');
+            const savedCompleted = saved.completed || {};
+            const done = tasks.filter(task => savedCompleted[task.id]).length;
+            const percent = tasks.length ? Math.round((done / tasks.length) * 100) : 0;
+            return { done, total: tasks.length, percent };
+        }
+
+        function renderLeaderboard() {
+            const list = document.getElementById('leaderboardList');
+            if (!list) return;
+
+            const users = JSON.parse(localStorage.getItem('users') || '{}');
+            const entries = Object.keys(users)
+                .filter(email => users[email].role !== 'admin')
+                .filter(email => !users[email].banned && !users[email].leaderboardHidden)
+                .map(email => ({
+                    email,
+                    name: users[email].name || email,
+                    ...getBaseProgressForEmail(email)
+                })).sort((a, b) => b.percent - a.percent || b.done - a.done || a.name.localeCompare(b.name));
+
+            if (!entries.length) {
+                list.innerHTML = '<div class="leader-meta">No ranked learners yet.</div>';
+                return;
+            }
+
+            list.innerHTML = entries.slice(0, 5).map((entry, index) => `
+                <div class="leaderboard-item ${currentUser && entry.email === currentUser.email ? 'current' : ''}">
+                    <div class="rank-badge">${index + 1}</div>
+                    <div>
+                        <div class="leader-name">${escapeHTML(entry.name)}</div>
+                        <div class="leader-meta">${entry.done}/${entry.total} completed</div>
+                    </div>
+                    <div class="leader-percent">${entry.percent}%</div>
+                </div>
+            `).join('');
+        }
+
+        function renderAdminPanel() {
+            const list = document.getElementById('adminUserList');
+            if (!list || !isAdminUser()) return;
+
+            const users = JSON.parse(localStorage.getItem('users') || '{}');
+            const entries = Object.keys(users)
+                .filter(email => users[email].role !== 'admin')
+                .sort((a, b) => (users[a].name || a).localeCompare(users[b].name || b));
+
+            if (!entries.length) {
+                list.innerHTML = '<div class="leader-meta">No learner accounts yet.</div>';
+                return;
+            }
+
+            list.innerHTML = entries.map(email => {
+                const user = users[email];
+                const progress = getBaseProgressForEmail(email);
+                const status = user.banned ? 'Banned' : user.leaderboardHidden ? 'Kicked' : 'Active';
+                const statusClass = user.banned ? 'banned' : user.leaderboardHidden ? 'kicked' : '';
+                return `
+                    <div class="admin-user-row">
+                        <div class="admin-user-top">
+                            <div>
+                                <div class="admin-user-name">${escapeHTML(user.name || email)}</div>
+                                <div class="admin-user-email">${escapeHTML(email)} · ${progress.done}/${progress.total}</div>
+                            </div>
+                            <span class="admin-status ${statusClass}">${status}</span>
+                        </div>
+                        <div class="admin-actions">
+                            <button class="admin-action-btn" onclick="setLeaderboardAccess('${email}', 'kick')">Kick</button>
+                            <button class="admin-action-btn danger" onclick="setLeaderboardAccess('${email}', 'ban')">Ban</button>
+                            <button class="admin-action-btn" onclick="setLeaderboardAccess('${email}', 'restore')">Restore</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function setLeaderboardAccess(email, action) {
+            if (!isAdminUser()) return;
+            const users = JSON.parse(localStorage.getItem('users') || '{}');
+            if (!users[email] || users[email].role === 'admin') return;
+
+            if (action === 'kick') {
+                users[email].leaderboardHidden = true;
+                users[email].banned = false;
+            }
+
+            if (action === 'ban') {
+                users[email].leaderboardHidden = true;
+                users[email].banned = true;
+                const activeUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+                if (activeUser && activeUser.email === email) {
+                    localStorage.removeItem('currentUser');
+                }
+            }
+
+            if (action === 'restore') {
+                users[email].leaderboardHidden = false;
+                users[email].banned = false;
+            }
+
+            localStorage.setItem('users', JSON.stringify(users));
+            renderLeaderboard();
+            renderAdminPanel();
+            showSaveIndicator();
+        }
+
         // CUSTOM TASKS
         function addCustomTask(event) {
             event.preventDefault();
@@ -1461,8 +2003,8 @@
                 <div class="custom-task-item ${task.completed ? 'completed' : ''}" onclick="toggleCustomTask('${task.id}')">
                     <div class="checkbox">${task.completed ? '✓' : ''}</div>
                     <div class="task-content">
-                        <div class="task-title">${task.title}</div>
-                        ${task.description ? `<div class="task-description">${task.description}</div>` : ''}
+                        <div class="task-title">${escapeHTML(task.title)}</div>
+                        ${task.description ? `<div class="task-description">${escapeHTML(task.description)}</div>` : ''}
                     </div>
                     <button class="delete-task-btn" onclick="event.stopPropagation(); deleteCustomTask('${task.id}')">Delete</button>
                 </div>
@@ -1474,18 +2016,25 @@
             localStorage.setItem(`user_${currentUser.email}`, JSON.stringify({
                 completed: completed,
                 customTasks: customTasks,
+                baseTotal: tasks.length,
+                baseCompleted: tasks.filter(task => completed[task.id]).length,
                 timestamp: new Date().toLocaleString()
             }));
+            renderLeaderboard();
             showSaveIndicator();
         }
 
         function loadUserData() {
             const saved = localStorage.getItem(`user_${currentUser.email}`);
+            completed = {};
+            customTasks = [];
             if (saved) {
                 const data = JSON.parse(saved);
                 completed = data.completed || {};
                 customTasks = data.customTasks || [];
                 document.getElementById('lastSaved').textContent = data.timestamp || 'Unknown';
+            } else {
+                document.getElementById('lastSaved').textContent = 'Never';
             }
             updateStats();
         }
@@ -1749,18 +2298,17 @@
 
         function updateStats() {
             const total = tasks.length;
-            const done = Object.values(completed).filter(v => v).length;
-            const customComplete = customTasks.filter(t => t.completed).length;
-            const totalComplete = done + customComplete;
-            const totalAll = total + customTasks.length;
-            const percent = totalAll > 0 ? Math.round((totalComplete / totalAll) * 100) : 0;
+            const done = tasks.filter(task => completed[task.id]).length;
+            const percent = total > 0 ? Math.round((done / total) * 100) : 0;
 
-            document.getElementById('totalTasks').textContent = totalAll;
-            document.getElementById('completedTasks').textContent = totalComplete;
+            document.getElementById('totalTasks').textContent = total;
+            document.getElementById('completedTasks').textContent = done;
             document.getElementById('overallPercent').textContent = percent + '%';
-            document.getElementById('remainingTasks').textContent = totalAll - totalComplete;
+            document.getElementById('remainingTasks').textContent = total - done;
             document.getElementById('progressFill').style.width = percent + '%';
-            document.getElementById('progressText').textContent = `${totalComplete} of ${totalAll} tasks completed`;
+            document.getElementById('progressText').textContent = `${done} of ${total} roadmap tasks completed`;
+            renderLeaderboard();
+            renderAdminPanel();
         }
 
         function filterPhase(phase) {
@@ -1859,8 +2407,9 @@
                 exportDate: new Date().toLocaleString(),
                 user: currentUser.name,
                 stats: {
-                    total: tasks.length + customTasks.length,
-                    completed: Object.values(completed).filter(v => v).length + customTasks.filter(t => t.completed).length
+                    total: tasks.length,
+                    completed: tasks.filter(task => completed[task.id]).length,
+                    personalNotes: customTasks.length
                 }
             };
 
@@ -1882,6 +2431,7 @@
                 updateStats();
                 renderPhases();
                 renderCustomTasks();
+                renderLeaderboard();
                 document.getElementById('lastSaved').textContent = 'Never';
                 showSaveIndicator();
             }
