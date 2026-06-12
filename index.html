@@ -1173,7 +1173,7 @@
 
         function signup() {
             const name = document.getElementById('signupName').value.trim();
-            const email = document.getElementById('signupEmail').value.trim();
+            const email = document.getElementById('signupEmail').value.trim().toLowerCase();
             const password = document.getElementById('signupPassword').value;
             const confirm = document.getElementById('signupConfirm').value;
 
@@ -1193,7 +1193,8 @@
             }
 
             const users = JSON.parse(localStorage.getItem('users') || '{}');
-            if (users[email]) {
+            const existingEmail = Object.keys(users).find(savedEmail => savedEmail.toLowerCase() === email);
+            if (existingEmail) {
                 alert('Email already registered');
                 return;
             }
@@ -1207,6 +1208,8 @@
             localStorage.setItem('users', JSON.stringify(users));
             alert('Account created! Please login.');
             toggleAuthForm();
+            document.getElementById('loginEmail').value = email;
+            document.getElementById('loginPassword').value = '';
             document.getElementById('signupName').value = '';
             document.getElementById('signupEmail').value = '';
             document.getElementById('signupPassword').value = '';
@@ -1214,7 +1217,7 @@
         }
 
         function login() {
-            const email = document.getElementById('loginEmail').value.trim();
+            const email = document.getElementById('loginEmail').value.trim().toLowerCase();
             const password = document.getElementById('loginPassword').value;
 
             if (!email || !password) {
@@ -1223,15 +1226,16 @@
             }
 
             const users = JSON.parse(localStorage.getItem('users') || '{}');
-            if (!users[email] || users[email].password !== password) {
+            const accountEmail = Object.keys(users).find(savedEmail => savedEmail.toLowerCase() === email);
+            if (!accountEmail || users[accountEmail].password !== password) {
                 alert('Invalid email or password');
                 return;
             }
 
             currentUser = {
-                email: email,
-                name: users[email].name,
-                pfp: users[email].pfp
+                email: accountEmail,
+                name: users[accountEmail].name,
+                pfp: users[accountEmail].pfp
             };
 
             localStorage.setItem('currentUser', JSON.stringify(currentUser));
