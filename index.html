@@ -28,8 +28,316 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #f5f7fa;
             min-height: 100vh;
-            padding: 20px;
             color: var(--text);
+        }
+
+        .hidden { display: none; }
+
+        /* AUTH SCREENS */
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 20px;
+        }
+
+        .auth-form {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .auth-form h2 {
+            margin-bottom: 30px;
+            color: var(--primary);
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            font-size: 0.95em;
+            font-family: inherit;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .auth-btn:hover {
+            background: #2980b9;
+        }
+
+        .auth-toggle {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+
+        .auth-toggle a {
+            color: var(--accent);
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* MAIN LAYOUT */
+        .main-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 300px;
+            background: white;
+            border-right: 1px solid var(--border);
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+        }
+
+        .profile-card {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .profile-pic {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-name {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .profile-email {
+            font-size: 0.8em;
+            color: var(--text-light);
+        }
+
+        .edit-profile-btn, .logout-btn {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid var(--border);
+            background: white;
+            color: var(--primary);
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.85em;
+            transition: all 0.3s ease;
+        }
+
+        .edit-profile-btn:hover {
+            background: var(--lighter);
+        }
+
+        .logout-btn {
+            background: #fee;
+            color: #c00;
+            border-color: #fbb;
+        }
+
+        .logout-btn:hover {
+            background: #fcc;
+        }
+
+        .sidebar-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: var(--lighter);
+            border-radius: 8px;
+        }
+
+        .sidebar-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+
+        .calendar-toggle {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .calendar-toggle button {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.75em;
+            transition: all 0.3s ease;
+        }
+
+        .calendar-toggle button.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .mini-calendar {
+            width: 100%;
+            font-size: 0.75em;
+        }
+
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+            margin-bottom: 5px;
+        }
+
+        .calendar-weekdays div {
+            text-align: center;
+            font-weight: 600;
+            color: var(--text-light);
+            padding: 3px;
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.7em;
+            transition: all 0.2s ease;
+        }
+
+        .calendar-day:hover {
+            background: var(--lighter);
+        }
+
+        .calendar-day.today {
+            background: var(--accent);
+            color: white;
+            font-weight: 600;
+        }
+
+        .calendar-day.key-date {
+            background: #ffeaa7;
+            font-weight: 600;
+        }
+
+        .key-date-item {
+            padding: 8px;
+            background: white;
+            border-left: 3px solid var(--warning);
+            margin-bottom: 8px;
+            border-radius: 3px;
+            font-size: 0.8em;
+        }
+
+        .key-date-item.ioe { border-left-color: #e74c3c; }
+        .key-date-item.sat { border-left-color: #3498db; }
+        .key-date-item.visa { border-left-color: #27ae60; }
+
+        .key-date-name {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .key-date-date {
+            font-size: 0.75em;
+            color: var(--text-light);
+            margin-top: 2px;
+        }
+
+        .add-task-form input, .add-task-form textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            margin-bottom: 8px;
+            font-size: 0.8em;
+            font-family: inherit;
+        }
+
+        .add-task-form textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .add-task-btn {
+            width: 100%;
+            padding: 8px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8em;
+        }
+
+        .add-task-btn:hover {
+            background: #2980b9;
+        }
+
+        /* MAIN CONTENT */
+        .content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
         }
 
         .container {
@@ -224,10 +532,6 @@
             transition: all 0.3s ease;
         }
 
-        .phase-section:hover {
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-
         .phase-header {
             background: var(--lighter);
             color: var(--primary);
@@ -302,12 +606,8 @@
         }
 
         @keyframes slideIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .month-header {
@@ -415,6 +715,61 @@
         .tag-critical { background: #fee2e2; color: #991b1b; }
         .tag-deadline { background: #fed7aa; color: #92400e; }
         .tag-document { background: #f3e8ff; color: #5b21b6; }
+        .tag-custom { background: #dbeafe; color: #1e40af; }
+
+        .custom-tasks-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin-bottom: 25px;
+        }
+
+        .custom-tasks-title {
+            font-size: 1.05em;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .custom-task-item {
+            background: var(--lighter);
+            border-left: 3px solid var(--accent);
+            padding: 12px;
+            border-radius: 5px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 8px;
+        }
+
+        .custom-task-item:hover {
+            background: #f0f3f7;
+        }
+
+        .custom-task-item.completed {
+            opacity: 0.6;
+            background: #f0f8f5;
+            border-left-color: var(--success);
+        }
+
+        .delete-task-btn {
+            background: #fee;
+            color: #c00;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.75em;
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+
+        .delete-task-btn:hover {
+            background: #fcc;
+        }
 
         .action-buttons {
             display: flex;
@@ -483,7 +838,96 @@
             font-size: 0.85em;
         }
 
+        /* MODALS */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .pfp-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .pfp-option {
+            aspect-ratio: 1;
+            border: 3px solid var(--border);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .pfp-option:hover {
+            transform: scale(1.1);
+            border-color: var(--accent);
+        }
+
+        .pfp-option.selected {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+        }
+
+        .pfp-option img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         @media (max-width: 768px) {
+            .main-layout {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+
             header h1 {
                 font-size: 1.5em;
             }
@@ -496,353 +940,520 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .phase-stats {
-                margin-top: 10px;
-                width: 100%;
-            }
-
-            .filter-btn {
-                font-size: 0.8em;
-                padding: 6px 12px;
+            .pfp-grid {
+                grid-template-columns: repeat(3, 1fr);
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>IOE & SAT Prep Roadmap</h1>
-            <p>Complete Your Preparation Timeline</p>
-            <p style="font-size: 0.8em; color: var(--text-light); margin-top: 8px;">Nepal → USA | June 2026 - August 2027</p>
-        </header>
-
-        <div class="countdown-section">
-            <div class="countdown-card ioe">
-                <div class="exam-name">IOE Exam</div>
-                <span class="days" id="ioeCountdown">0</span>
-                <div class="label">Days Remaining</div>
-                <div class="date">July 5, 2026</div>
+    <!-- AUTH SCREEN -->
+    <div id="authScreen" class="auth-container">
+        <div class="auth-form">
+            <div id="loginForm">
+                <h2>🎯 Roadmap Prep</h2>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" placeholder="Password">
+                </div>
+                <button class="auth-btn" onclick="login()">Login</button>
+                <div class="auth-toggle">
+                    Don't have account? <a onclick="toggleAuthForm()">Sign Up</a>
+                </div>
             </div>
-            <div class="countdown-card">
-                <div class="exam-name">SAT Exam</div>
-                <span class="days" id="satCountdown">0</span>
-                <div class="label">Days Remaining</div>
-                <div class="date">October 5, 2026</div>
+
+            <div id="signupForm" class="hidden">
+                <h2>Create Account</h2>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="signupName" placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="signupEmail" placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signupPassword" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" id="signupConfirm" placeholder="Confirm">
+                </div>
+                <button class="auth-btn" onclick="signup()">Create Account</button>
+                <div class="auth-toggle">
+                    Already have account? <a onclick="toggleAuthForm()">Login</a>
+                </div>
             </div>
         </div>
-
-        <div class="stats-container">
-            <div class="stat-card">
-                <span class="number" id="totalTasks">0</span>
-                <span class="label">Total Tasks</span>
-            </div>
-            <div class="stat-card">
-                <span class="number" id="completedTasks">0</span>
-                <span class="label">Completed</span>
-            </div>
-            <div class="stat-card">
-                <span class="number" id="overallPercent">0%</span>
-                <span class="label">Progress</span>
-            </div>
-            <div class="stat-card">
-                <span class="number" id="remainingTasks">0</span>
-                <span class="label">Remaining</span>
-            </div>
-        </div>
-
-        <div class="progress-container">
-            <label>Overall Progress</label>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
-            </div>
-            <div class="progress-text" id="progressText">0 of 0 tasks completed</div>
-        </div>
-
-        <div class="phase-filters">
-            <button class="filter-btn active" onclick="filterPhase('all')">All</button>
-            <button class="filter-btn" onclick="filterPhase('foundation')">Foundation</button>
-            <button class="filter-btn" onclick="filterPhase('testing')">Testing</button>
-            <button class="filter-btn" onclick="filterPhase('applications')">Applications</button>
-            <button class="filter-btn" onclick="filterPhase('deadlines')">Deadlines</button>
-            <button class="filter-btn" onclick="filterPhase('waiting')">Waiting</button>
-            <button class="filter-btn" onclick="filterPhase('decisions')">Decisions</button>
-            <button class="filter-btn" onclick="filterPhase('visa')">Visa</button>
-            <button class="filter-btn" onclick="filterPhase('departure')">Departure</button>
-        </div>
-
-        <div class="phases-container" id="phasesContainer"></div>
-
-        <div class="action-buttons">
-            <button class="btn btn-primary" onclick="exportProgress()">Export Data</button>
-            <button class="btn btn-secondary" onclick="resetAll()">Reset Progress</button>
-            <button class="btn btn-secondary" onclick="toggleAllPhases()">Toggle All</button>
-        </div>
-
-        <footer>
-            <p>Your progress is automatically saved to your browser</p>
-            <p style="margin-top: 8px; font-size: 0.8em;">Last saved: <span id="lastSaved">Never</span></p>
-        </footer>
-
-        <div class="save-indicator" id="saveIndicator"></div>
     </div>
 
-    <script>
-        // All tasks data (same as before)
-        const roadmap = {
-            foundation: {
-                title: 'Phase 1: Foundation & IOE Focus',
-                subtitle: 'June - July 2026 | IOE: Ashadh 20 (July 5)',
-                months: [
-                    {
-                        month: 'June 2026 (Pre-IOE Intensive)',
-                        tasks: [
-                            { id: 'ioe1', title: 'IOE Physics: Mechanics & Thermodynamics Deep Dive', description: 'KEY TOPICS: Circular motion, gravitational force, fluid mechanics, heat transfer. Solve 5+ problems daily. Focus on diagrams.', date: 'June 12-18', tag: 'CRITICAL' },
-                            { id: 'ioe2', title: 'IOE Chemistry: Organic Compounds & Reactions', description: 'KEY TOPICS: Alkanes, alkenes, alkynes, functional groups. Make reaction flow charts. Memorize common reactions.', date: 'June 12-18', tag: 'CRITICAL' },
-                            { id: 'ioe3', title: 'IOE Mathematics: Calculus, Algebra & Vectors', description: 'KEY TOPICS: Integration, differentiation, limits, matrices, vectors. Time yourself: 20 questions in 30 min.', date: 'June 12-25', tag: 'CRITICAL' },
-                            { id: 'ioe4', title: 'Create IOE Study Schedule (3 weeks plan)', description: 'SCHEDULE: 5 hrs/day for IOE prep. Morning: Physics (2 hrs). Afternoon: Chemistry (1.5 hrs). Evening: Math (1.5 hrs).', date: 'June 12', tag: 'CRITICAL' },
-                            { id: 'ioe5', title: 'Gather ALL IOE resources & materials', description: 'RESOURCES: NEB textbook, HC Verma (Physics), MS Chauhan (Chemistry), RD Sharma (Math), Previous 5 years IOE papers.', date: 'June 12', tag: 'PREP' },
-                            { id: 'ioe6', title: 'Take Full-Length IOE Mock Test #1', description: 'CONDITIONS: 3 hours, no breaks, strict timing, quiet environment. Target: 80%+. Review all mistakes after.', date: 'June 15', tag: 'CRITICAL' },
-                            { id: 'ioe7', title: 'IOE Physics - Problem Solving Mastery', description: 'FOCUS: Circular motion (20+), Gravitation (15+), Fluid mechanics (10+). Solve with formula derivation. Time: 2 hours.', date: 'June 16-20', tag: 'PREP' },
-                            { id: 'ioe8', title: 'IOE Chemistry - Organic Reactions Crash Course', description: 'CRITICAL: Learn substitution, elimination, addition reactions. Draw mechanisms by hand. Do 30+ reactions daily.', date: 'June 16-25', tag: 'PREP' },
-                            { id: 'ioe9', title: 'IOE Math - Integration & Calculus Intensive', description: 'PRACTICE: 50+ integration problems. Do derivatives quickly. Solve 10 problems in 15 min. Time: 1.5 hours daily.', date: 'June 16-25', tag: 'PREP' },
-                            { id: 'ioe10', title: 'Take Full-Length IOE Mock Test #2', description: 'CONDITIONS: Same as Test #1. Target: 85%+. Track Physics, Chemistry, Math scores separately.', date: 'June 20', tag: 'CRITICAL' },
-                            { id: 'ioe11', title: 'IOE Speed Drills - Focus on Weak Areas', description: 'STRATEGY: Identify weakest topic. Spend 3 hours doing 100+ problems in that area. Repeat daily.', date: 'June 21-25', tag: 'CRITICAL' },
-                            { id: 'ioe12', title: 'Take Full-Length IOE Mock Test #3', description: 'CONDITIONS: Exam simulation - 3 hours, strict timing. Target: 88%+. This is your last full mock.', date: 'June 24', tag: 'CRITICAL' },
-                            { id: 'f1', title: 'Take diagnostic SAT practice test', description: 'TIMING: Take this AFTER IOE exam (July 6 onwards). Get baseline SAT score to plan your October prep strategy.', date: 'July 6', tag: 'PREP' },
-                            { id: 'f3', title: 'Get a valid passport', description: 'If needed, apply at Department of Passport, Kathmandu. Takes 2-4 weeks. Needed for visa, TOEFL, SAT registration.', date: 'June 1', tag: 'DOCUMENT' }
-                        ]
-                    },
-                    {
-                        month: 'July 2026 (IOE Final Days + Post-IOE)',
-                        tasks: [
-                            { id: 'ioe13', title: 'Final IOE Prep - June 26 to July 3', description: 'STRATEGY: NO NEW TOPICS. Only review. Formula flashcards. Review mock test mistakes. 2-3 hours study. Sleep 8 hours.', date: 'June 26-July 3', tag: 'PREP' },
-                            { id: 'ioe14', title: 'July 4 - Day Before IOE Exam', description: 'DO NOT STUDY. Relax. Light revision only (30 mins). Verify exam center location & time. Prepare materials. Sleep early.', date: 'July 4', tag: 'PREP' },
-                            { id: 'ioe15', title: 'July 5 - IOE EXAMINATION DAY (Ashadh 20)', description: 'EXAM TIPS: Reach 30 mins early. Calm your mind. Read questions carefully. Attempt easier questions first. You are ready!', date: 'July 5', tag: 'CRITICAL' },
-                            { id: 'ioe16', title: 'Celebrate & Rest After IOE', description: 'POST-EXAM: Congratulations! Rest for 2-3 days. Sleep, eat well, relax with family. Do not think about exam.', date: 'July 5-10', tag: 'PREP' },
-                            { id: 'f6', title: 'Begin SAT Prep (After IOE Rest)', description: 'TIMING: July 8 onwards. 12 weeks before October SAT. Plan: 3-4 hours/day prep. Khan Academy (free). Target: 1400+.', date: 'July 8', tag: 'PREP' },
-                            { id: 'f7', title: 'Register for October SAT test date', description: 'Registration deadline: ~August 15. Register at sat.collegeboard.org. British Council Kathmandu as test center.', date: 'August 1', tag: 'CRITICAL' },
-                            { id: 'f8', title: 'Register for TOEFL or IELTS', description: 'Target: TOEFL 100+ or IELTS 7.0+. Register for August or September at British Council or IDP. Allow 2 weeks for delivery.', date: 'July 20', tag: 'CRITICAL' },
-                            { id: 'f2', title: 'Assess your +2 grades honestly', description: 'Calculate GPA. US schools want strong grades in Math, Physics, English, and major-related subjects. Target: 3.5+ GPA.', date: 'July 15', tag: 'PREP' },
-                            { id: 'f4', title: 'Draft your initial school list of 15-20 schools', description: 'Categorize: reach (5), target (8), safety (5). Verify each school\'s international aid policy and SAT/TOEFL acceptance.', date: 'July 25', tag: 'PREP' },
-                            { id: 'f9', title: 'Identify 2 teachers for recommendation letters', description: 'Choose teachers from Grade 11-12, ideally Math and English. Brief them early about goals and timeline.', date: 'July 15', tag: 'DOCUMENT' },
-                            { id: 'f10', title: 'Start reading about Common App', description: 'Go to commonapp.org. Understand 650-word personal essay, 10 activity slots, supplemental essays. Start brainstorming.', date: 'July 20', tag: 'PREP' }
-                        ]
-                    }
-                ]
-            },
-            testing: {
-                title: 'Phase 2: SAT Testing & Standardized Prep',
-                subtitle: 'August - September 2026 | SAT Oct 5 + Retake Nov',
-                months: [
-                    {
-                        month: 'August 2026',
-                        tasks: [
-                            { id: 'sat1', title: 'SAT Reading & Writing Strategy', description: 'READING: Read passage first, then questions. WRITING: Review grammar rules. Do 10 passages/week from Khan Academy.', date: 'August 1-15', tag: 'PREP' },
-                            { id: 'sat2', title: 'SAT Math: Calculator & No-Calculator Strategy', description: 'NO-CALC: Algebra, geometry basics. CALC: Tougher concepts. Use Desmos graphing. Do 15+ practice tests.', date: 'August 1-15', tag: 'PREP' },
-                            { id: 'sat3', title: 'SAT Time Management Drills', description: 'TIMING: Reading 52 min, Writing 34 min, Math 80 min. Do quick drills - solve 10 questions in 8 minutes. Timed conditions always.', date: 'August 5', tag: 'CRITICAL' },
-                            { id: 'sat4', title: 'Take SAT Practice Test #1', description: 'CONDITIONS: 3 hours, full test. Target: 1200+. If <1100, increase to 4 hours daily. Track section scores separately.', date: 'August 10', tag: 'CRITICAL' },
-                            { id: 't1', title: 'Create your Common App account', description: 'Opens August 1. Create at commonapp.org. Fill personal info, education history, activities. Start thinking about essay.', date: 'August 1', tag: 'CRITICAL' },
-                            { id: 't2', title: 'Sit TOEFL or IELTS exam', description: 'TOEFL: Reading 35 min, Listening 36 min, Speaking 20 min, Writing 29 min. Target: 100+. Take mock tests first!', date: 'August 15', tag: 'DEADLINE' },
-                            { id: 't3', title: 'Intensify SAT preparation - Daily Routine', description: 'SCHEDULE: 3-4 hours daily. Morning: Khan Academy (1 hr). Afternoon: Reading (1 hr). Evening: Math (1-1.5 hrs).', date: 'Throughout', tag: 'PREP' },
-                            { id: 't4', title: 'Begin brainstorming personal essay', description: 'The Common App essay (650 words) is critical. Think deeply—what story truly represents you? Start collecting ideas.', date: 'August 20', tag: 'PREP' },
-                            { id: 't5', title: 'Collect +2 academic documents', description: 'Get official transcripts, mark sheets, character certificate, migration certificate. Get multiple certified copies.', date: 'August 25', tag: 'DOCUMENT' },
-                            { id: 't6', title: 'Formally ask teachers for recommendations', description: 'Clear deadline: September 30. Provide activities list, goals, why US. Remind them in September.', date: 'August 20', tag: 'DOCUMENT' }
-                        ]
-                    },
-                    {
-                        month: 'September 2026 (Final SAT Push)',
-                        tasks: [
-                            { id: 'sat5', title: 'SAT Math - Advanced Problem Solving', description: 'FOCUS: Quadratic equations (15+), Exponents (10+), Polynomials (10+), Systems (10+), Word problems (15+). Do 20 daily.', date: 'September 1-10', tag: 'CRITICAL' },
-                            { id: 'sat6', title: 'SAT Reading - Vocabulary & Comprehension', description: 'VOCAB: Learn 500+ SAT words (Quizlet). READING: Close reading + evidence-based answers. Do 5 passages daily.', date: 'September 1-20', tag: 'CRITICAL' },
-                            { id: 'sat7', title: 'SAT Writing - Grammar Mastery', description: 'RULES: Agreement, clarity, parallelism, modifiers, commas, semicolons. Correct answer usually shortest. Do 10 daily.', date: 'September 1-15', tag: 'PREP' },
-                            { id: 'sat8', title: 'Take SAT Practice Test #2', description: 'CONDITIONS: Full 3-hour test. TARGET: 1300+. Identify weak sections. Adjust prep for remaining 2 weeks accordingly.', date: 'September 7', tag: 'CRITICAL' },
-                            { id: 'sat9', title: 'SAT Final 2-Week Intensive', description: 'STRATEGY: Sept 22-Oct 4. Do 1 practice test every 2-3 days. Spend 2+ hours reviewing. Focus on accuracy over speed.', date: 'September 22-Oct 4', tag: 'CRITICAL' },
-                            { id: 'sat10', title: 'Take SAT Practice Test #3', description: 'CONDITIONS: Full timed test. TARGET: 1350+. This is your dress rehearsal. Identify last-minute weak areas.', date: 'September 14', tag: 'CRITICAL' },
-                            { id: 't7', title: 'Take SAT retake if TOEFL score was low', description: 'If scored below 95, retake. Many schools allow superscore. Plan specifically for weak areas only.', date: 'September 15', tag: 'PREP' },
-                            { id: 't8', title: 'Write first full draft of Common App essay', description: 'Write it, let it sit 2 days, rewrite. Ask trusted English teacher for feedback. No AI—schools have detection tools.', date: 'September 20', tag: 'CRITICAL' },
-                            { id: 't9', title: 'Register for CSS Profile (opens Oct 1)', description: 'Have financial documents ready: salary slips, bank statements, tax returns (if any), property details for all parents.', date: 'September 25', tag: 'CRITICAL' },
-                            { id: 't10', title: 'Research each school\'s supplemental essays', description: 'Most schools have 1-3 extra essays (Why this school? Contribution?). Begin outlining responses for each school.', date: 'September 15', tag: 'PREP' },
-                            { id: 't11', title: 'Confirm teachers have started recommendations', description: 'Follow up politely. Ensure they have your brag sheet (achievements) and know Nov 1 EA/ED deadline.', date: 'September 25', tag: 'DOCUMENT' }
-                        ]
-                    }
-                ]
-            },
-            applications: {
-                title: 'Phase 3: Applications',
-                subtitle: 'October - November 2026',
-                months: [
-                    {
-                        month: 'October 2026 (SAT + EA/ED)',
-                        tasks: [
-                            { id: 'a1', title: 'October 5 - SAT EXAMINATION DAY (British Council)', description: 'TIPS: Arrive 30 mins early. Bring admit card, passport, #2 pencils, calculator. Answer easier Qs first. Manage time.', date: 'October 5', tag: 'CRITICAL' },
-                            { id: 'a1b', title: 'SAT Scores Released (Oct 18-19)', description: 'Check at sat.collegeboard.org. If 1400+: Excellent! If 1300-1399: Good. If <1300: Plan November retake.', date: 'October 18', tag: 'DEADLINE' },
-                            { id: 'a2', title: 'Submit CSS Profile for EA/ED schools', description: 'CSS Profile opens October 1. Submit immediately for Early Action or Early Decision schools.', date: 'October 5', tag: 'DEADLINE' },
-                            { id: 'a3', title: 'Finalize and submit ED/EA applications', description: 'ED binding deadline: Nov 1. EA usually Nov 1-15. Submit at least 1 week early to avoid technical issues.', date: 'October 20', tag: 'DEADLINE' },
-                            { id: 'a4', title: 'Complete Common App activities section', description: '10 activity slots. List by importance. For each: role, organization, description (150 chars), hours/week, weeks/year.', date: 'October 15', tag: 'CRITICAL' },
-                            { id: 'a5', title: 'Send SAT scores directly to schools', description: 'Order official score reports from College Board ($16 per school). Do this as soon as scores arrive.', date: 'October 20', tag: 'DOCUMENT' },
-                            { id: 'a6', title: 'Begin writing regular decision supplemental essays', description: 'RD deadline is Jan 1. Start now. Research schools deeply—mention specific professors, programs, clubs.', date: 'October 25', tag: 'PREP' }
-                        ]
-                    },
-                    {
-                        month: 'November 2026 (EA/ED Submissions + SAT Retake)',
-                        tasks: [
-                            { id: 'a7', title: 'Submit all EA/ED applications by Nov 15', description: 'Final deadline for Early Action schools. Amherst, MIT, Harvard, Yale deadlines here. Do not miss.', date: 'November 15', tag: 'DEADLINE' },
-                            { id: 'a8', title: 'Take November SAT if October score was low', description: 'RETAKE: Focus on weak section only. If Reading weak: 20+ passages. If Math: 50+ problems. Target: 50 points higher.', date: 'November 5', tag: 'PREP' },
-                            { id: 'a9', title: 'Continue writing RD supplemental essays', description: 'Focus on "Why this school?" essays. Deep research—mention professors, programs, clubs, opportunities.', date: 'November 15', tag: 'PREP' },
-                            { id: 'a10', title: 'Check EA/ED application portals weekly', description: 'Schools send confirmation emails and may request missing documents. Track every portal in spreadsheet.', date: 'Throughout', tag: 'CRITICAL' },
-                            { id: 'a11', title: 'Prepare financial documents for CSS Profile (RD schools)', description: 'CSS for RD due Dec-Jan. Gather: income proof, bank statements, land documents, loans/liabilities.', date: 'November 20', tag: 'DOCUMENT' }
-                        ]
-                    }
-                ]
-            },
-            deadlines: {
-                title: 'Phase 4: Deadlines',
-                subtitle: 'December 2026 - January 2027',
-                months: [
-                    {
-                        month: 'December 2026',
-                        tasks: [
-                            { id: 'd1', title: 'Early Decision results arrive (~Dec 15)', description: 'If accepted ED: celebrate and confirm enrollment. If deferred/rejected: focus on RD applications.', date: 'December 15', tag: 'DEADLINE' },
-                            { id: 'd2', title: 'Submit CSS Profile for all Regular Decision schools', description: 'Most RD financial aid deadlines are Jan 1-Feb 1. Submit now. Late = less aid. Every school is different.', date: 'December 20', tag: 'DEADLINE' },
-                            { id: 'd3', title: 'Finalize all Regular Decision applications', description: 'RD deadline is Jan 1 (most schools). Polished drafts for all essays. Final review and submit by Dec 28.', date: 'December 28', tag: 'CRITICAL' },
-                            { id: 'd4', title: 'Send TOEFL/IELTS scores to all RD schools', description: 'Order official score reports from ETS (TOEFL) or British Council (IELTS). Allow 2 weeks for delivery.', date: 'December 20', tag: 'DOCUMENT' },
-                            { id: 'd5', title: 'Request mid-year school report from +2 school', description: 'Many US schools want mid-year report (grades through December). Ask school to send directly to universities.', date: 'December 15', tag: 'DOCUMENT' }
-                        ]
-                    },
-                    {
-                        month: 'January 2027',
-                        tasks: [
-                            { id: 'd6', title: 'Submit ALL Regular Decision applications by Jan 1-15', description: 'Hard deadline. Most schools: Jan 1. Some: Jan 15. Verify portal shows "complete" after submission.', date: 'January 15', tag: 'DEADLINE' },
-                            { id: 'd7', title: 'Submit all financial aid forms (CSS, ISFAA)', description: 'Some schools use ISFAA instead of CSS. Check each school individually for requirements.', date: 'January 31', tag: 'DEADLINE' },
-                            { id: 'd8', title: 'Confirm all applications are complete in portals', description: 'Log into each school portal. Confirm transcripts, test scores, recommendations, financial documents received.', date: 'January 20', tag: 'CRITICAL' },
-                            { id: 'd9', title: 'Research external scholarships for Nepali students', description: 'Fulbright, AAUW, university-specific Nepali awards. Some have Jan-Mar deadlines. Apply widely.', date: 'January 15', tag: 'PREP' },
-                            { id: 'd10', title: 'Prepare for potential interview requests', description: 'Some schools (Yale, Dartmouth) conduct alumni interviews. Review application. Practice responses.', date: 'January 25', tag: 'PREP' }
-                        ]
-                    }
-                ]
-            },
-            waiting: {
-                title: 'Phase 5: Waiting',
-                subtitle: 'February - March 2027',
-                months: [
-                    {
-                        month: 'February 2027',
-                        tasks: [
-                            { id: 'w1', title: 'Attend any alumni interviews requested', description: 'Interviews are evaluative. Research school deeply. Know your "Why us?" answer. Be authentic and confident.', date: 'Throughout', tag: 'CRITICAL' },
-                            { id: 'w2', title: 'Continue monitoring portals for missing documents', description: 'Schools email if incomplete. Check every portal twice weekly. Missing document = rejection risk.', date: 'Throughout', tag: 'PREP' },
-                            { id: 'w3', title: 'Research each school\'s financial aid appeal process', description: 'Most schools allow one formal appeal if aid insufficient. Know process in advance. Be ready to move fast.', date: 'February 15', tag: 'PREP' },
-                            { id: 'w4', title: 'Keep your grades strong', description: 'Some schools request final transcripts before enrollment. Grade drop = offer rescission risk. Stay focused.', date: 'Throughout', tag: 'CRITICAL' }
-                        ]
-                    },
-                    {
-                        month: 'March 2027',
-                        tasks: [
-                            { id: 'w5', title: 'Regular Decision results begin arriving (Mar-Apr)', description: 'Most RD decisions come March 28-April 15. Check emails. Some schools release at specific times.', date: 'March 28 onwards', tag: 'DEADLINE' },
-                            { id: 'w6', title: 'Compare all financial aid offer letters carefully', description: 'Look at grants (free), loans (repay), work-study (job). Calculate actual net cost for each school.', date: 'April 1 onwards', tag: 'CRITICAL' },
-                            { id: 'w7', title: 'Ask parents/guardians to review finances', description: 'Honest family conversation about real contribution capacity. Factor NPR-USD rate, living costs, 4-year total.', date: 'March 30', tag: 'CRITICAL' },
-                            { id: 'w8', title: 'Research cost of living in each city', description: 'Rural Iowa << NYC. Factor housing, food, transport for complete cost analysis.', date: 'March 20', tag: 'PREP' }
-                        ]
-                    }
-                ]
-            },
-            decisions: {
-                title: 'Phase 6: Decisions',
-                subtitle: 'April 2027',
-                months: [
-                    {
-                        month: 'April 2027',
-                        tasks: [
-                            { id: 'dec1', title: 'Receive all decisions by April 15', description: 'By April 15, you should have all results. Make spreadsheet: school, acceptance, scholarship, net cost.', date: 'April 15', tag: 'DEADLINE' },
-                            { id: 'dec2', title: 'Appeal financial aid if necessary', description: 'If top choice has insufficient aid, appeal. Formal letter with proof of competing offers. Be specific.', date: 'April 10', tag: 'CRITICAL' },
-                            { id: 'dec3', title: 'Attend any admitted student days (virtually or in-person)', description: 'Many schools hold days in April. Attend virtually. Talk to current students. Ask hard questions.', date: 'April 10-20', tag: 'PREP' },
-                            { id: 'dec4', title: 'Make your FINAL decision by May 1 (National Decision Day)', description: 'MUST submit enrollment deposit ($200-$500) by May 1. Miss this = lose your spot. No exceptions.', date: 'May 1', tag: 'DEADLINE' },
-                            { id: 'dec5', title: 'Decline all other offers politely', description: 'After committing, log into all other portals and formally decline. Frees spots for other students.', date: 'May 2', tag: 'DOCUMENT' }
-                        ]
-                    }
-                ]
-            },
-            visa: {
-                title: 'Phase 7: Visa',
-                subtitle: 'May - June 2027',
-                months: [
-                    {
-                        month: 'May 2027',
-                        tasks: [
-                            { id: 'v1', title: 'Receive your I-20 document from the university', description: 'After deposit, international office emails I-20. Official document for F-1 student visa. Save it!', date: 'May 10', tag: 'DOCUMENT' },
-                            { id: 'v2', title: 'Pay SEVIS fee ($350)', description: 'Go to fmjfee.com. Student and Exchange Visitor Information System fee. Need this for visa interview.', date: 'May 15', tag: 'DEADLINE' },
-                            { id: 'v3', title: 'Schedule F-1 visa interview at US Embassy Kathmandu', description: 'Go to ustraveldocs.com/np. Embassy at Maharajgunj, Kathmandu. Slots fill fast—book immediately.', date: 'May 20', tag: 'CRITICAL' },
-                            { id: 'v4', title: 'Begin gathering visa documents', description: 'Required: I-20, SEVIS receipt, DS-160, passport, admission letter, financial proof, academic records.', date: 'May 25', tag: 'DOCUMENT' },
-                            { id: 'v5', title: 'Apply for university housing', description: 'Housing deadline May-June. Apply early. On-campus housing cheaper, safer for first-year international students.', date: 'May 20', tag: 'CRITICAL' }
-                        ]
-                    },
-                    {
-                        month: 'June 2027',
-                        tasks: [
-                            { id: 'v6', title: 'Complete DS-160 visa application form', description: 'Go to ceac.state.gov. Fill carefully and honestly. Inconsistencies with I-20 cause problems.', date: 'June 1', tag: 'DEADLINE' },
-                            { id: 'v7', title: 'Attend F-1 visa interview at US Embassy Kathmandu', description: 'Dress professionally. Bring organized documents. Be confident, honest, concise. Show strong Nepal ties.', date: 'June 15', tag: 'DEADLINE' },
-                            { id: 'v8', title: 'Send final official transcripts to university', description: 'Final +2 transcript with SEE/NEB results must be sent officially from school to university.', date: 'June 10', tag: 'DOCUMENT' },
-                            { id: 'v9', title: 'Research pre-departure orientation', description: 'Most universities hold online orientations in June-July. Critical for registration, housing, insurance, campus life.', date: 'June 15', tag: 'PREP' },
-                            { id: 'v10', title: 'Open a USD bank account or get a travel card', description: 'Research Nepali banks with USD accounts or Nabil/Global IME travel card. Need some USD on arrival.', date: 'June 20', tag: 'PREP' }
-                        ]
-                    }
-                ]
-            },
-            departure: {
-                title: 'Phase 8: Departure',
-                subtitle: 'July - August 2027',
-                months: [
-                    {
-                        month: 'July 2027',
-                        tasks: [
-                            { id: 'dp1', title: 'Receive F-1 visa in passport', description: 'If approved, arrives in days. Check: name spelling, visa type (F-1), entries, dates. Cannot enter >30 days before start.', date: 'July 5', tag: 'DOCUMENT' },
-                            { id: 'dp2', title: 'Book your flights to the US', description: 'Book round-trip with return after first semester (shows intent). Allow 2-3 days before orientation.', date: 'July 10', tag: 'CRITICAL' },
-                            { id: 'dp3', title: 'Attend university\'s online pre-orientation', description: 'Complete all pre-arrival: housing confirmation, health insurance, course pre-registration, advising, safety training.', date: 'July 15', tag: 'CRITICAL' },
-                            { id: 'dp4', title: 'Pack and prepare', description: 'Check packing list. Note: 110V in US (Nepal uses 220V). Bring adapters. Important docs in hand luggage.', date: 'July 25', tag: 'PREP' },
-                            { id: 'dp5', title: 'Final financial preparation', description: 'Confirm tuition payment arrangements. Know exact USD amounts due. Verify no payment issues.', date: 'July 30', tag: 'CRITICAL' }
-                        ]
-                    },
-                    {
-                        month: 'August 2027',
-                        tasks: [
-                            { id: 'dp6', title: 'Arrive in the US', description: 'Enter 30 days from start but not >30 days before. Have I-20, passport, SEVIS receipt ready. Stay calm.', date: 'August 10', tag: 'DEADLINE' },
-                            { id: 'dp7', title: 'Report to International Student Office (ISSS)', description: 'Within first days: register arrival. Required by US law. They validate SEVIS status and explain F-1 rules.', date: 'August 12', tag: 'DEADLINE' },
-                            { id: 'dp8', title: 'Attend orientation week', description: 'Do not skip events. Register for courses, set up bank account, get student ID, meet advisors, meet students.', date: 'August 15-20', tag: 'CRITICAL' },
-                            { id: 'dp9', title: 'Begin Fall 2027 semester', description: 'You made it! Attend every class. Full-time enrollment (12+ credits). Focus on academics. Build professor relationships.', date: 'August 25', tag: 'PREP' }
-                        ]
-                    }
-                ]
-            }
-        };
+    <!-- MAIN APP -->
+    <div id="mainApp" class="hidden">
+        <div class="main-layout">
+            <!-- SIDEBAR -->
+            <div class="sidebar">
+                <div class="profile-card">
+                    <img id="profilePic" class="profile-pic" src="" onclick="openPfpModal()" alt="Profile">
+                    <div class="profile-name" id="profileName">User</div>
+                    <div class="profile-email" id="profileEmail">email@example.com</div>
+                    <button class="edit-profile-btn" onclick="openPfpModal()">Change Photo</button>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </div>
 
+                <!-- CALENDAR -->
+                <div class="sidebar-section">
+                    <div class="sidebar-title">📅 Calendar</div>
+                    <div class="calendar-toggle">
+                        <button class="active" id="engCalendarBtn" onclick="switchCalendarLanguage('english')">ENG</button>
+                        <button id="nepCalendarBtn" onclick="switchCalendarLanguage('nepali')">नेपाली</button>
+                    </div>
+                    <div class="mini-calendar" id="miniCalendar"></div>
+                </div>
+
+                <!-- KEY DATES -->
+                <div class="sidebar-section">
+                    <div class="sidebar-title">📌 Important Dates</div>
+                    <div id="keyDatesList"></div>
+                </div>
+
+                <!-- ADD TASK -->
+                <div class="sidebar-section">
+                    <div class="sidebar-title">➕ Add Task</div>
+                    <form class="add-task-form" onsubmit="addCustomTask(event)">
+                        <input type="text" id="taskTitle" placeholder="Task title" required>
+                        <textarea id="taskDesc" placeholder="Description"></textarea>
+                        <button type="submit" class="add-task-btn">Add</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- MAIN CONTENT -->
+            <div class="content">
+                <div class="container">
+                    <header>
+                        <h1>IOE & SAT Prep Roadmap</h1>
+                        <p>Complete Your Preparation Timeline</p>
+                        <p style="font-size: 0.8em; color: var(--text-light); margin-top: 8px;">Nepal → USA | June 2026 - August 2027</p>
+                    </header>
+
+                    <div class="countdown-section">
+                        <div class="countdown-card ioe">
+                            <div class="exam-name">IOE Exam</div>
+                            <span class="days" id="ioeCountdown">0</span>
+                            <div class="label">Days Remaining</div>
+                            <div class="date">July 5, 2026</div>
+                        </div>
+                        <div class="countdown-card">
+                            <div class="exam-name">SAT Exam</div>
+                            <span class="days" id="satCountdown">0</span>
+                            <div class="label">Days Remaining</div>
+                            <div class="date">October 5, 2026</div>
+                        </div>
+                    </div>
+
+                    <div class="stats-container">
+                        <div class="stat-card">
+                            <span class="number" id="totalTasks">0</span>
+                            <span class="label">Total Tasks</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="number" id="completedTasks">0</span>
+                            <span class="label">Completed</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="number" id="overallPercent">0%</span>
+                            <span class="label">Progress</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="number" id="remainingTasks">0</span>
+                            <span class="label">Remaining</span>
+                        </div>
+                    </div>
+
+                    <div class="progress-container">
+                        <label>Overall Progress</label>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                        </div>
+                        <div class="progress-text" id="progressText">0 of 0 tasks completed</div>
+                    </div>
+
+                    <!-- CUSTOM TASKS -->
+                    <div id="customTasksContainer" class="hidden">
+                        <div class="custom-tasks-section">
+                            <div class="custom-tasks-title">📝 My Custom Tasks</div>
+                            <div id="customTasksList"></div>
+                        </div>
+                    </div>
+
+                    <div class="phase-filters">
+                        <button class="filter-btn active" onclick="filterPhase('all')">All</button>
+                        <button class="filter-btn" onclick="filterPhase('foundation')">Foundation</button>
+                        <button class="filter-btn" onclick="filterPhase('testing')">Testing</button>
+                        <button class="filter-btn" onclick="filterPhase('applications')">Applications</button>
+                        <button class="filter-btn" onclick="filterPhase('deadlines')">Deadlines</button>
+                        <button class="filter-btn" onclick="filterPhase('waiting')">Waiting</button>
+                        <button class="filter-btn" onclick="filterPhase('decisions')">Decisions</button>
+                        <button class="filter-btn" onclick="filterPhase('visa')">Visa</button>
+                        <button class="filter-btn" onclick="filterPhase('departure')">Departure</button>
+                    </div>
+
+                    <div class="phases-container" id="phasesContainer"></div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="exportProgress()">Export Data</button>
+                        <button class="btn btn-secondary" onclick="resetAll()">Reset Progress</button>
+                        <button class="btn btn-secondary" onclick="toggleAllPhases()">Toggle All</button>
+                    </div>
+
+                    <footer>
+                        <p>Your progress is automatically saved to your browser</p>
+                        <p style="margin-top: 8px; font-size: 0.8em;">Last saved: <span id="lastSaved">Never</span></p>
+                    </footer>
+
+                    <div class="save-indicator" id="saveIndicator"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PFP MODAL -->
+    <div id="pfpModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closePfpModal()">✕</button>
+            <div class="modal-header">Choose Your Profile Picture</div>
+            <div class="pfp-grid" id="pfpGrid"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Profile Pictures - 8 colorful avatar options
+        const profilePictures = [
+            'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect fill="%233498db" width="200" height="200"/><circle fill="white" cx="100" cy="70" r="35"/><ellipse fill="white" cx="100" cy="140" rx="45" ry="40"/></svg>',
+            'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect fill="%23e74c3c" width="200" height="200"/><circle fill="white" cx="100" cy="70" r="35"/><ellipse fill="white" cx="100" cy="140" rx="45" ry="40"/></svg>',
+            'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect fill="%2327ae60" width="200" height="200"/><circle fill="white" cx="100" cy="70" r="35"/><ellipse fill="white" cx="100" cy="140" rx="45" ry="40"/></svg>',
+            'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect fill="%23f39c12" width="200" height="200"/><circle fill="white" cx="100" cy="70" r="35"/><ellipse fill="white" cx="100" cy="140" rx="45" ry="40"/></svg>',
+            'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect fill="%239b59b6" width="200" height="200"/><circle fill="white" cx="100" cy="70" r="35"/><ellipse fill="white" cx="100" cy="140" rx="45" ry="40"/></svg>',
+            'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect fill="%231abc9c" width="200" height="200"/><circle fill="white" cx="100" cy="70" r="35"/><ellipse fill="white" cx="100" cy="140" rx="45" ry="40"/></svg>',
+            'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect fill="%2334495e" width="200" height="200"/><circle fill="white" cx="100" cy="70" r="35"/><ellipse fill="white" cx="100" cy="140" rx="45" ry="40"/></svg>',
+            'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect fill="%23c0392b" width="200" height="200"/><circle fill="white" cx="100" cy="70" r="35"/><ellipse fill="white" cx="100" cy="140" rx="45" ry="40"/></svg>',
+        ];
+
+        // Nepali Calendar Labels
+        const nepaliMonths = ['जनवरी', 'फेब्रुअरी', 'मार्च', 'अप्रिल', 'मे', 'जुन', 'जुलाई', 'अगस्ट', 'सेप्टेम्बर', 'अक्टोबर', 'नोभेम्बर', 'डिसेम्बर'];
+        const nepaliWeekdays = ['आ', 'सो', 'म', 'बु', 'बि', 'शु', 'श'];
+        const englishWeekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+        // Important Dates
+        const keyDates = [
+            { name: 'IOE Exam', date: '2026-07-05', type: 'ioe' },
+            { name: 'SAT Exam', date: '2026-10-05', type: 'sat' },
+            { name: 'Visa Interview', date: '2027-06-15', type: 'visa' },
+        ];
+
+        // State
+        let currentUser = null;
         let currentFilter = 'all';
         let tasks = [];
         let completed = {};
+        let customTasks = [];
+        let calendarLanguage = 'english';
 
-        function flattenTasks() {
-            tasks = [];
-            Object.keys(roadmap).forEach(phase => {
-                roadmap[phase].months.forEach(monthData => {
-                    monthData.tasks.forEach(task => {
-                        task.phase = phase;
-                        tasks.push(task);
-                    });
-                });
-            });
+        // AUTH FUNCTIONS
+        function toggleAuthForm() {
+            document.getElementById('loginForm').classList.toggle('hidden');
+            document.getElementById('signupForm').classList.toggle('hidden');
         }
 
-        function saveProgress() {
-            localStorage.setItem('roadmapData', JSON.stringify({
+        function signup() {
+            const name = document.getElementById('signupName').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
+            const password = document.getElementById('signupPassword').value;
+            const confirm = document.getElementById('signupConfirm').value;
+
+            if (!name || !email || !password) {
+                alert('Please fill all fields');
+                return;
+            }
+
+            if (password !== confirm) {
+                alert('Passwords do not match');
+                return;
+            }
+
+            if (password.length < 6) {
+                alert('Password must be at least 6 characters');
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('users') || '{}');
+            if (users[email]) {
+                alert('Email already registered');
+                return;
+            }
+
+            users[email] = {
+                name: name,
+                password: password,
+                pfp: profilePictures[0]
+            };
+
+            localStorage.setItem('users', JSON.stringify(users));
+            alert('Account created! Please login.');
+            toggleAuthForm();
+            document.getElementById('signupName').value = '';
+            document.getElementById('signupEmail').value = '';
+            document.getElementById('signupPassword').value = '';
+            document.getElementById('signupConfirm').value = '';
+        }
+
+        function login() {
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            if (!email || !password) {
+                alert('Please enter email and password');
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('users') || '{}');
+            if (!users[email] || users[email].password !== password) {
+                alert('Invalid email or password');
+                return;
+            }
+
+            currentUser = {
+                email: email,
+                name: users[email].name,
+                pfp: users[email].pfp
+            };
+
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            showApp();
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                currentUser = null;
+                localStorage.removeItem('currentUser');
+                document.getElementById('loginEmail').value = '';
+                document.getElementById('loginPassword').value = '';
+                document.getElementById('mainApp').classList.add('hidden');
+                document.getElementById('authScreen').classList.remove('hidden');
+                document.getElementById('loginForm').classList.remove('hidden');
+                document.getElementById('signupForm').classList.add('hidden');
+            }
+        }
+
+        function showApp() {
+            document.getElementById('authScreen').classList.add('hidden');
+            document.getElementById('mainApp').classList.remove('hidden');
+            updateProfileUI();
+            renderMiniCalendar();
+            renderKeyDates();
+            flattenTasks();
+            loadUserData();
+            renderPhases();
+            updateCountdowns();
+            renderCustomTasks();
+        }
+
+        // PROFILE FUNCTIONS
+        function updateProfileUI() {
+            document.getElementById('profileName').textContent = currentUser.name;
+            document.getElementById('profileEmail').textContent = currentUser.email;
+            document.getElementById('profilePic').src = currentUser.pfp;
+        }
+
+        function openPfpModal() {
+            const grid = document.getElementById('pfpGrid');
+            grid.innerHTML = '';
+            
+            profilePictures.forEach((pic, idx) => {
+                const option = document.createElement('div');
+                option.className = 'pfp-option';
+                if (currentUser.pfp === pic) option.classList.add('selected');
+                option.innerHTML = `<img src="${pic}" alt="PFP">`;
+                option.onclick = () => changePfp(pic);
+                grid.appendChild(option);
+            });
+
+            document.getElementById('pfpModal').classList.add('show');
+        }
+
+        function changePfp(pic) {
+            currentUser.pfp = pic;
+            updateProfileUI();
+            
+            const users = JSON.parse(localStorage.getItem('users') || '{}');
+            users[currentUser.email].pfp = pic;
+            localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            
+            closePfpModal();
+            showSaveIndicator();
+        }
+
+        function closePfpModal() {
+            document.getElementById('pfpModal').classList.remove('show');
+        }
+
+        // CALENDAR FUNCTIONS
+        function switchCalendarLanguage(lang) {
+            calendarLanguage = lang;
+            document.getElementById('engCalendarBtn').classList.toggle('active');
+            document.getElementById('nepCalendarBtn').classList.toggle('active');
+            renderMiniCalendar();
+        }
+
+        function renderMiniCalendar() {
+            const cal = document.getElementById('miniCalendar');
+            const now = new Date();
+            
+            const header = document.createElement('div');
+            header.style.textAlign = 'center';
+            header.style.marginBottom = '5px';
+            header.style.fontSize = '0.8em';
+            header.style.fontWeight = '600';
+            header.textContent = calendarLanguage === 'english' 
+                ? `${now.toLocaleString('en-US', { month: 'short', year: 'numeric' })}`
+                : `${nepaliMonths[now.getMonth()]} ${now.getFullYear()}`;
+            
+            cal.innerHTML = '';
+            cal.appendChild(header);
+
+            const weekdays = document.createElement('div');
+            weekdays.className = 'calendar-weekdays';
+            const days = calendarLanguage === 'english' ? englishWeekdays : nepaliWeekdays;
+            days.forEach(day => {
+                const d = document.createElement('div');
+                d.textContent = day;
+                weekdays.appendChild(d);
+            });
+            cal.appendChild(weekdays);
+
+            const daysContainer = document.createElement('div');
+            daysContainer.className = 'calendar-days';
+
+            const firstDay = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
+            const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+            
+            for (let i = 0; i < firstDay; i++) {
+                const empty = document.createElement('div');
+                daysContainer.appendChild(empty);
+            }
+
+            for (let d = 1; d <= daysInMonth; d++) {
+                const dayEl = document.createElement('div');
+                dayEl.className = 'calendar-day';
+                dayEl.textContent = d;
+
+                if (d === now.getDate()) dayEl.classList.add('today');
+
+                const dateStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+                if (keyDates.some(kd => kd.date === dateStr)) {
+                    dayEl.classList.add('key-date');
+                }
+
+                daysContainer.appendChild(dayEl);
+            }
+
+            cal.appendChild(daysContainer);
+        }
+
+        function renderKeyDates() {
+            const list = document.getElementById('keyDatesList');
+            list.innerHTML = keyDates.map(kd => `
+                <div class="key-date-item ${kd.type}">
+                    <div class="key-date-name">${kd.name}</div>
+                    <div class="key-date-date">${new Date(kd.date).toLocaleDateString()}</div>
+                </div>
+            `).join('');
+        }
+
+        // CUSTOM TASKS
+        function addCustomTask(event) {
+            event.preventDefault();
+            const title = document.getElementById('taskTitle').value.trim();
+            const desc = document.getElementById('taskDesc').value.trim();
+
+            if (!title) return;
+
+            customTasks.push({
+                id: 'custom_' + Date.now(),
+                title: title,
+                description: desc,
+                completed: false
+            });
+
+            saveUserData();
+            document.getElementById('taskTitle').value = '';
+            document.getElementById('taskDesc').value = '';
+            renderCustomTasks();
+            showSaveIndicator();
+        }
+
+        function toggleCustomTask(id) {
+            const task = customTasks.find(t => t.id === id);
+            if (task) {
+                task.completed = !task.completed;
+                saveUserData();
+                renderCustomTasks();
+                updateStats();
+            }
+        }
+
+        function deleteCustomTask(id) {
+            customTasks = customTasks.filter(t => t.id !== id);
+            saveUserData();
+            renderCustomTasks();
+            updateStats();
+        }
+
+        function renderCustomTasks() {
+            const container = document.getElementById('customTasksContainer');
+            const list = document.getElementById('customTasksList');
+
+            if (customTasks.length === 0) {
+                container.classList.add('hidden');
+                return;
+            }
+
+            container.classList.remove('hidden');
+            list.innerHTML = customTasks.map(task => `
+                <div class="custom-task-item ${task.completed ? 'completed' : ''}" onclick="toggleCustomTask('${task.id}')">
+                    <div class="checkbox">${task.completed ? '✓' : ''}</div>
+                    <div class="task-content">
+                        <div class="task-title">${task.title}</div>
+                        ${task.description ? `<div class="task-description">${task.description}</div>` : ''}
+                    </div>
+                    <button class="delete-task-btn" onclick="event.stopPropagation(); deleteCustomTask('${task.id}')">Delete</button>
+                </div>
+            `).join('');
+        }
+
+        // DATA PERSISTENCE
+        function saveUserData() {
+            localStorage.setItem(`user_${currentUser.email}`, JSON.stringify({
                 completed: completed,
+                customTasks: customTasks,
                 timestamp: new Date().toLocaleString()
             }));
             showSaveIndicator();
         }
 
-        function loadProgress() {
-            const saved = localStorage.getItem('roadmapData');
+        function loadUserData() {
+            const saved = localStorage.getItem(`user_${currentUser.email}`);
             if (saved) {
                 const data = JSON.parse(saved);
                 completed = data.completed || {};
+                customTasks = data.customTasks || [];
                 document.getElementById('lastSaved').textContent = data.timestamp || 'Unknown';
             }
             updateStats();
@@ -858,9 +1469,111 @@
             document.getElementById('lastSaved').textContent = new Date().toLocaleString();
         }
 
+        // ROADMAP DATA
+        const roadmap = {
+            foundation: {
+                title: 'Phase 1: Foundation & IOE Focus',
+                subtitle: 'June - July 2026 | IOE: Ashadh 20 (July 5)',
+                months: [
+                    {
+                        month: 'June 2026 (Pre-IOE Intensive)',
+                        tasks: [
+                            { id: 'ioe1', title: 'IOE Physics: Mechanics & Thermodynamics', description: 'Circular motion, gravitational force, fluid mechanics. Solve 5+ problems daily.', date: 'June 12-18', tag: 'CRITICAL' },
+                            { id: 'ioe2', title: 'IOE Chemistry: Organic Compounds', description: 'Alkanes, alkenes, alkynes. Make reaction flow charts. Memorize reactions.', date: 'June 12-18', tag: 'CRITICAL' },
+                            { id: 'ioe3', title: 'IOE Mathematics: Calculus & Vectors', description: 'Integration, differentiation, matrices. Time yourself: 20 questions in 30 min.', date: 'June 12-25', tag: 'CRITICAL' },
+                            { id: 'ioe4', title: 'Create IOE Study Schedule', description: 'Plan: 5 hrs/day. Morning Physics, Afternoon Chemistry, Evening Math.', date: 'June 12', tag: 'CRITICAL' },
+                            { id: 'ioe5', title: 'Gather IOE resources', description: 'NEB textbook, HC Verma, MS Chauhan, RD Sharma, Previous IOE papers.', date: 'June 12', tag: 'PREP' },
+                            { id: 'ioe6', title: 'Mock Test #1', description: '3 hours, no breaks. Target: 80%+. Review mistakes.', date: 'June 15', tag: 'CRITICAL' },
+                            { id: 'ioe7', title: 'Physics Problem Solving', description: 'Circular motion, Gravitation, Fluid mechanics focus.', date: 'June 16-20', tag: 'PREP' },
+                            { id: 'ioe8', title: 'Chemistry Reactions Crash Course', description: 'Learn substitution, elimination, addition. 30+ reactions daily.', date: 'June 16-25', tag: 'PREP' },
+                            { id: 'ioe9', title: 'Math Integration Intensive', description: '50+ integration problems. 1.5 hours daily.', date: 'June 16-25', tag: 'PREP' },
+                            { id: 'ioe10', title: 'Mock Test #2', description: 'Same as Test #1. Target: 85%+.', date: 'June 20', tag: 'CRITICAL' },
+                        ]
+                    },
+                    {
+                        month: 'July 2026 (IOE Final + Post-IOE)',
+                        tasks: [
+                            { id: 'ioe13', title: 'Final IOE Prep', description: 'No new topics. Only review. Formula flashcards. Sleep 8 hours.', date: 'June 26-July 3', tag: 'PREP' },
+                            { id: 'ioe14', title: 'Day Before IOE', description: 'Do NOT study. Light revision 30 mins. Sleep early.', date: 'July 4', tag: 'PREP' },
+                            { id: 'ioe15', title: 'IOE EXAM DAY', description: 'Reach 30 mins early. Read carefully. Easier questions first. You got this!', date: 'July 5', tag: 'CRITICAL' },
+                            { id: 'ioe16', title: 'Celebrate & Rest', description: 'Congrats! Rest 2-3 days. Sleep, eat well, relax.', date: 'July 5-10', tag: 'PREP' },
+                            { id: 'f6', title: 'Begin SAT Prep', description: 'July 8 onwards. 12 weeks. 3-4 hours daily. Target: 1400+.', date: 'July 8', tag: 'PREP' },
+                            { id: 'f7', title: 'Register for SAT', description: 'August 15 deadline. British Council Kathmandu.', date: 'August 1', tag: 'CRITICAL' },
+                            { id: 'f8', title: 'Register for TOEFL/IELTS', description: 'Target: TOEFL 100+ or IELTS 7.0+. British Council/IDP.', date: 'July 20', tag: 'CRITICAL' },
+                        ]
+                    }
+                ]
+            },
+            testing: {
+                title: 'Phase 2: SAT Testing',
+                subtitle: 'August - September 2026',
+                months: [
+                    {
+                        month: 'August 2026',
+                        tasks: [
+                            { id: 'sat1', title: 'SAT Reading & Writing', description: 'Read passage first. Review grammar. 10 passages/week.', date: 'August 1-15', tag: 'PREP' },
+                            { id: 'sat2', title: 'SAT Math Strategy', description: 'No-Calc algebra. Calc for tough concepts. 15+ practice tests.', date: 'August 1-15', tag: 'PREP' },
+                            { id: 'sat3', title: 'Time Management', description: 'Reading 52 min, Writing 34 min, Math 80 min. Quick drills daily.', date: 'August 5', tag: 'CRITICAL' },
+                            { id: 'sat4', title: 'Practice Test #1', description: '3 hours full test. Target: 1200+.', date: 'August 10', tag: 'CRITICAL' },
+                        ]
+                    },
+                    {
+                        month: 'September 2026',
+                        tasks: [
+                            { id: 'sat5', title: 'Math Advanced Problems', description: 'Quadratic, Exponents, Polynomials, Systems. 20 daily.', date: 'September 1-10', tag: 'CRITICAL' },
+                            { id: 'sat6', title: 'Reading Vocabulary', description: '500+ SAT words. 5 passages daily. Evidence-based answers.', date: 'September 1-20', tag: 'CRITICAL' },
+                        ]
+                    }
+                ]
+            },
+            applications: {
+                title: 'Phase 3: Applications',
+                subtitle: 'October - November 2026',
+                months: [{ month: 'October 2026', tasks: [{ id: 'a1', title: 'SAT EXAM DAY', description: 'Arrive 30 mins early. Pencils, calculator, admit card, passport.', date: 'October 5', tag: 'CRITICAL' }] }]
+            },
+            deadlines: {
+                title: 'Phase 4: Deadlines',
+                subtitle: 'December 2026 - January 2027',
+                months: [{ month: 'December 2026', tasks: [{ id: 'd1', title: 'ED Results Arrive', description: 'Celebrate or focus on RD.', date: 'December 15', tag: 'DEADLINE' }] }]
+            },
+            waiting: {
+                title: 'Phase 5: Waiting',
+                subtitle: 'February - March 2027',
+                months: [{ month: 'February 2027', tasks: [{ id: 'w1', title: 'Alumni Interviews', description: 'Research school. Know "Why us?" Be authentic.', date: 'Throughout', tag: 'CRITICAL' }] }]
+            },
+            decisions: {
+                title: 'Phase 6: Decisions',
+                subtitle: 'April 2027',
+                months: [{ month: 'April 2027', tasks: [{ id: 'dec1', title: 'All Decisions Arrive', description: 'Compare aid. Make spreadsheet.', date: 'April 15', tag: 'DEADLINE' }] }]
+            },
+            visa: {
+                title: 'Phase 7: Visa',
+                subtitle: 'May - June 2027',
+                months: [{ month: 'May 2027', tasks: [{ id: 'v1', title: 'Receive I-20', description: 'International office email. F-1 visa doc.', date: 'May 10', tag: 'DOCUMENT' }] }]
+            },
+            departure: {
+                title: 'Phase 8: Departure',
+                subtitle: 'July - August 2027',
+                months: [{ month: 'July 2027', tasks: [{ id: 'dp1', title: 'F-1 Visa in Passport', description: 'Check spelling and dates. Cannot enter >30 days before.', date: 'July 5', tag: 'DOCUMENT' }] }]
+            }
+        };
+
+        // TASK FUNCTIONS
+        function flattenTasks() {
+            tasks = [];
+            Object.keys(roadmap).forEach(phase => {
+                roadmap[phase].months.forEach(monthData => {
+                    monthData.tasks.forEach(task => {
+                        task.phase = phase;
+                        tasks.push(task);
+                    });
+                });
+            });
+        }
+
         function toggleTask(taskId) {
             completed[taskId] = !completed[taskId];
-            saveProgress();
+            saveUserData();
             updateStats();
             renderPhases();
         }
@@ -868,14 +1581,17 @@
         function updateStats() {
             const total = tasks.length;
             const done = Object.values(completed).filter(v => v).length;
-            const percent = total > 0 ? Math.round((done / total) * 100) : 0;
+            const customComplete = customTasks.filter(t => t.completed).length;
+            const totalComplete = done + customComplete;
+            const totalAll = total + customTasks.length;
+            const percent = totalAll > 0 ? Math.round((totalComplete / totalAll) * 100) : 0;
 
-            document.getElementById('totalTasks').textContent = total;
-            document.getElementById('completedTasks').textContent = done;
+            document.getElementById('totalTasks').textContent = totalAll;
+            document.getElementById('completedTasks').textContent = totalComplete;
             document.getElementById('overallPercent').textContent = percent + '%';
-            document.getElementById('remainingTasks').textContent = total - done;
+            document.getElementById('remainingTasks').textContent = totalAll - totalComplete;
             document.getElementById('progressFill').style.width = percent + '%';
-            document.getElementById('progressText').textContent = `${done} of ${total} tasks completed`;
+            document.getElementById('progressText').textContent = `${totalComplete} of ${totalAll} tasks completed`;
         }
 
         function filterPhase(phase) {
@@ -972,16 +1688,11 @@
         function exportProgress() {
             const data = {
                 exportDate: new Date().toLocaleString(),
+                user: currentUser.name,
                 stats: {
-                    total: tasks.length,
-                    completed: Object.values(completed).filter(v => v).length,
-                    percentage: Math.round((Object.values(completed).filter(v => v).length / tasks.length) * 100)
-                },
-                tasks: tasks.map(t => ({
-                    title: t.title,
-                    completed: completed[t.id] || false,
-                    phase: t.phase
-                }))
+                    total: tasks.length + customTasks.length,
+                    completed: Object.values(completed).filter(v => v).length + customTasks.filter(t => t.completed).length
+                }
             };
 
             const json = JSON.stringify(data, null, 2);
@@ -989,7 +1700,7 @@
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `roadmap-${new Date().toISOString().split('T')[0]}.json`;
+            a.download = `roadmap-${currentUser.name}-${new Date().toISOString().split('T')[0]}.json`;
             a.click();
             showSaveIndicator();
         }
@@ -997,10 +1708,13 @@
         function resetAll() {
             if (confirm('Reset all progress? This cannot be undone.')) {
                 completed = {};
-                localStorage.removeItem('roadmapData');
+                customTasks = [];
+                localStorage.removeItem(`user_${currentUser.email}`);
                 updateStats();
                 renderPhases();
+                renderCustomTasks();
                 document.getElementById('lastSaved').textContent = 'Never';
+                showSaveIndicator();
             }
         }
 
@@ -1009,20 +1723,22 @@
             const satDate = new Date('2026-10-05');
             const now = new Date();
             
-            const ioDiff = ioeDate - now;
-            const ioeDays = Math.ceil(ioDiff / (1000 * 60 * 60 * 24));
+            const ioeDays = Math.max(0, Math.ceil((ioeDate - now) / (1000 * 60 * 60 * 24)));
+            const satDays = Math.max(0, Math.ceil((satDate - now) / (1000 * 60 * 60 * 24)));
             
-            const satDiff = satDate - now;
-            const satDays = Math.ceil(satDiff / (1000 * 60 * 60 * 24));
-            
-            document.getElementById('ioeCountdown').textContent = Math.max(0, ioeDays);
-            document.getElementById('satCountdown').textContent = Math.max(0, satDays);
+            document.getElementById('ioeCountdown').textContent = ioeDays;
+            document.getElementById('satCountdown').textContent = satDays;
         }
 
-        flattenTasks();
-        loadProgress();
-        renderPhases();
-        updateCountdowns();
+        // INIT
+        window.addEventListener('load', () => {
+            const user = localStorage.getItem('currentUser');
+            if (user) {
+                currentUser = JSON.parse(user);
+                showApp();
+            }
+        });
+
         setInterval(updateCountdowns, 60000);
     </script>
 </body>
