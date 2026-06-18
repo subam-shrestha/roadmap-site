@@ -764,6 +764,7 @@
             align-items: center;
             gap: 10px;
             flex-shrink: 0;
+            position: relative;
         }
 
         .icon-btn {
@@ -808,7 +809,7 @@
         /* ── Countdown Cards ─────────────────── */
         .countdown-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(1, minmax(0, 420px));
             gap: 16px;
             margin-bottom: 20px;
         }
@@ -2856,6 +2857,705 @@
         @media (max-width: 560px) {
             .sat-mastery-grid { grid-template-columns: 1fr; }
         }
+
+        /* ═══════════════════════════════════════════
+           SAT GOAL CARD
+        ═══════════════════════════════════════════ */
+        .sat-goal-card {
+            background: linear-gradient(135deg, #0f1d3e 0%, #1a2f5e 60%, #1769e8 100%);
+            border-radius: var(--radius-xl);
+            padding: 28px 32px;
+            margin-bottom: 22px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(23,105,232,0.28);
+        }
+
+        .sat-goal-card::before {
+            content: '1500+';
+            position: absolute;
+            right: -20px;
+            top: -30px;
+            font-size: 9rem;
+            font-weight: 900;
+            color: rgba(255,255,255,0.04);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .sat-goal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 22px;
+        }
+
+        .sat-goal-title {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 4px;
+        }
+
+        .sat-goal-headline {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: white;
+            letter-spacing: -0.03em;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .sat-goal-edit-btn {
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            border-radius: 8px;
+            padding: 6px 14px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .sat-goal-edit-btn:hover { background: rgba(255,255,255,0.2); }
+
+        .sat-goal-scores {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+        }
+
+        .sat-goal-score-box {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: var(--radius);
+            padding: 14px 12px;
+            text-align: center;
+        }
+
+        .sat-goal-score-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: rgba(255,255,255,0.55);
+            margin-bottom: 6px;
+        }
+
+        .sat-goal-score-val {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: white;
+            line-height: 1;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .sat-goal-score-sub {
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.5);
+            margin-top: 4px;
+        }
+
+        .sat-goal-score-box.target .sat-goal-score-val { color: #fbbf24; }
+        .sat-goal-score-box.predicted .sat-goal-score-val { color: #34d399; }
+        .sat-goal-score-box.gap .sat-goal-score-val { color: #f87171; }
+
+        .sat-goal-score-box.readiness { background: rgba(52,211,153,0.15); border-color: rgba(52,211,153,0.3); }
+
+        .sat-goal-breakdown {
+            display: flex;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .sat-goal-sub-score {
+            flex: 1;
+            background: rgba(255,255,255,0.07);
+            border-radius: var(--radius-sm);
+            padding: 10px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sat-goal-sub-label { font-size: 0.78rem; color: rgba(255,255,255,0.7); font-weight: 600; }
+        .sat-goal-sub-val { font-size: 1rem; font-weight: 900; color: white; }
+        .sat-goal-sub-target { font-size: 0.65rem; color: rgba(255,255,255,0.45); margin-top: 1px; }
+
+        @media (max-width: 900px) {
+            .sat-goal-scores { grid-template-columns: repeat(3, 1fr); }
+            .sat-goal-breakdown { flex-direction: column; gap: 8px; }
+        }
+        @media (max-width: 560px) {
+            .sat-goal-scores { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* Goal Edit Modal */
+        .sat-goal-modal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        /* ═══════════════════════════════════════════
+           CHAPTER PROGRESS TRACKER
+        ═══════════════════════════════════════════ */
+        .sat-chapter-section-label {
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin: 20px 0 10px;
+            padding: 0 2px;
+        }
+
+        .sat-chapter-tabs {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .sat-chapter-tab {
+            padding: 7px 16px;
+            border-radius: 20px;
+            border: 1.5px solid var(--border);
+            background: var(--surface);
+            color: var(--text-light);
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .sat-chapter-tab:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+        .sat-chapter-tab.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+        .sat-chapter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 14px;
+        }
+
+        .sat-chapter-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 18px 20px;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-slow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sat-chapter-card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 4px;
+            background: var(--chapter-color, var(--accent));
+            border-radius: 4px 0 0 4px;
+        }
+
+        .sat-chapter-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+
+        .sat-chapter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .sat-chapter-name {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: var(--secondary);
+            line-height: 1.2;
+        }
+
+        .sat-chapter-domain {
+            font-size: 0.62rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--chapter-color, var(--accent));
+            background: rgba(23,105,232,0.08);
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .sat-chapter-mastery-badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+
+        .mastery-novice { background: #fee2e2; color: #991b1b; }
+        .mastery-beginner { background: #fef9c3; color: #92400e; }
+        .mastery-intermediate { background: #dbeafe; color: #1d4ed8; }
+        .mastery-advanced { background: #d1fae5; color: #065f46; }
+        .mastery-expert { background: #f3e8ff; color: #6b21a8; }
+
+        .sat-chapter-track {
+            height: 8px;
+            background: var(--surface-3);
+            border-radius: 999px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .sat-chapter-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: var(--chapter-color, var(--accent));
+            transition: width 0.7s ease;
+        }
+
+        .sat-chapter-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .sat-chapter-meta-box {
+            background: var(--surface-2);
+            border-radius: 6px;
+            padding: 8px 10px;
+            text-align: center;
+        }
+
+        .sat-chapter-meta-val {
+            font-size: 1rem;
+            font-weight: 900;
+            color: var(--text);
+            line-height: 1;
+        }
+
+        .sat-chapter-meta-label {
+            font-size: 0.62rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .sat-chapter-log-btn {
+            width: 100%;
+            margin-top: 12px;
+            padding: 7px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            background: var(--surface);
+            color: var(--text-light);
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .sat-chapter-log-btn:hover { border-color: var(--chapter-color, var(--accent)); color: var(--chapter-color, var(--accent)); background: var(--accent-soft); }
+
+        /* ═══════════════════════════════════════════
+           STUDY PLAN GENERATOR
+        ═══════════════════════════════════════════ */
+        .sat-planner-form {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 24px 28px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 24px;
+        }
+
+        .sat-planner-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sat-planner-title-icon {
+            width: 28px; height: 28px;
+            background: var(--accent);
+            border-radius: 7px;
+            display: grid; place-items: center;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .sat-planner-inputs {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .sat-planner-field label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 5px;
+        }
+
+        .sat-planner-field input, .sat-planner-field select {
+            width: 100%;
+            padding: 9px 12px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--text);
+            background: var(--surface);
+            outline: none;
+            transition: all var(--transition);
+        }
+
+        .sat-planner-field input:focus, .sat-planner-field select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(23,105,232,0.1);
+        }
+
+        .sat-planner-generate-btn {
+            background: linear-gradient(135deg, var(--accent) 0%, #1256c0 100%);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            padding: 11px 28px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all var(--transition);
+            box-shadow: var(--accent-shadow);
+        }
+
+        .sat-planner-generate-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(23,105,232,0.3); }
+
+        .sat-generated-plan {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .sat-plan-day {
+            border-bottom: 1px solid var(--border-soft);
+            padding: 18px 22px;
+            transition: background var(--transition);
+        }
+
+        .sat-plan-day:last-child { border-bottom: none; }
+        .sat-plan-day:hover { background: var(--surface-2); }
+
+        .sat-plan-day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .sat-plan-day-date {
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: var(--secondary);
+        }
+
+        .sat-plan-day-time {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent);
+            background: var(--accent-soft);
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
+
+        .sat-plan-task-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 8px 0;
+        }
+
+        /* ── Unified Plan Styles ── */
+        .plan-header-bar {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            background: linear-gradient(135deg, #f8faff, #eef3fd);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .plan-legend { display: flex; align-items: center; gap: 4px; font-size: 0.72rem; color: var(--text-muted); }
+        .plan-day-card {
+            border-bottom: 1px solid var(--border-soft);
+            padding: 16px 20px;
+            transition: background var(--transition);
+        }
+        .plan-day-card:hover { background: var(--surface-2); }
+        .plan-day-card.plan-today { background: linear-gradient(135deg, #f0f6ff, #eef3fd); border-left: 3px solid var(--accent); }
+        .plan-day-card.plan-sat { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border-left: 3px solid #7c3aed; }
+        .plan-day-card.plan-exam-day {
+            background: linear-gradient(135deg, #faf5ff, #ede9fe, #ddd6fe);
+            border-left: 4px solid #7c3aed;
+            box-shadow: 0 4px 20px rgba(124,58,237,0.15);
+        }
+        .plan-exam-badge {
+            font-size: 0.68rem; font-weight: 800; background: linear-gradient(135deg,#7c3aed,#a855f7);
+            color: white; padding: 3px 10px; border-radius: 999px; display: inline-block; width: fit-content;
+            letter-spacing: 0.03em;
+        }
+        .plan-day-card.plan-day-done { background: linear-gradient(135deg, #f0fdf4, #dcfce7); }
+        .plan-day-card.plan-day-failed { background: linear-gradient(135deg, #fff5f5, #fee2e2); }
+        .plan-day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .plan-day-left { display: flex; flex-direction: column; gap: 3px; }
+        .plan-day-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+        .plan-today-badge { font-size: 0.65rem; font-weight: 800; background: var(--accent); color: white; padding: 2px 8px; border-radius: 999px; display: inline-block; width: fit-content; }
+        .plan-sat-badge { font-size: 0.65rem; font-weight: 800; background: #7c3aed; color: white; padding: 2px 8px; border-radius: 999px; display: inline-block; width: fit-content; }
+        .plan-day-date { font-size: 0.9rem; font-weight: 700; color: var(--text); }
+        .plan-day-phase { font-size: 0.72rem; color: var(--text-muted); }
+        .plan-day-time { font-size: 0.78rem; font-weight: 600; color: var(--text-light); }
+        .plan-day-complete-badge { font-size: 0.65rem; font-weight: 800; background: var(--success-soft); color: var(--success); padding: 2px 8px; border-radius: 999px; }
+        .plan-day-fail-badge { font-size: 0.65rem; font-weight: 800; background: var(--warning-soft); color: var(--warning); padding: 2px 8px; border-radius: 999px; }
+        .plan-day-tasks { display: flex; flex-direction: column; gap: 6px; }
+        .plan-task-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 10px 12px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            transition: all var(--transition);
+        }
+        .plan-task-row:hover { box-shadow: var(--shadow-sm); }
+        .plan-task-row.plan-done { background: #f0fdf4; border-color: rgba(22,163,74,0.2); opacity: 0.75; }
+        .plan-task-row.plan-failed { background: #fff5f5; border-color: rgba(220,38,38,0.25); border-left: 3px solid #dc2626; }
+        .plan-task-row.plan-shifted-out { opacity: 0.5; }
+        .plan-task-row.plan-shifted-in { background: #fffbeb; border-color: rgba(245,158,11,0.25); border-left: 3px solid #f59e0b; }
+        .plan-task-left { display: flex; align-items: flex-start; gap: 8px; flex: 1; min-width: 0; }
+        .plan-task-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0; }
+        .plan-task-check {
+            width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 5px; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center; cursor: pointer; margin-top: 1px;
+            transition: all var(--transition); background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .plan-task-check:hover { border-color: var(--success); background: var(--success-soft); transform: scale(1.1); }
+        .plan-task-check.checked { background: var(--success); border-color: var(--success); box-shadow: 0 2px 6px rgba(22,163,74,0.3); }
+        .plan-task-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+        .plan-countdown-badge {
+            font-size: 0.68rem; font-weight: 700; padding: 2px 8px; border-radius: 999px;
+            display: inline-flex; align-items: center; gap: 2px;
+        }
+        .plan-task-body { flex: 1; min-width: 0; }
+        .plan-task-title { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+        .plan-task-title.strikethrough { text-decoration: line-through; color: var(--text-muted); }
+        .plan-task-sub { font-size: 0.75rem; color: var(--text-light); margin-top: 2px; line-height: 1.4; }
+        .plan-task-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 5px; }
+        .plan-time-badge { font-size: 0.68rem; font-weight: 700; background: var(--surface-3); color: var(--text-light); padding: 2px 7px; border-radius: 999px; }
+        .plan-tag-badge { font-size: 0.68rem; font-weight: 700; padding: 2px 7px; border-radius: 999px; }
+        .plan-sync-badge { font-size: 0.68rem; font-weight: 700; background: rgba(23,105,232,0.1); color: var(--accent); padding: 2px 7px; border-radius: 999px; }
+        .plan-failed-badge { font-size: 0.7rem; font-weight: 800; background: #dc2626; color: white; padding: 3px 10px; border-radius: 999px; white-space: nowrap; animation: failPulse 2s ease infinite; }
+        @keyframes failPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }
+        .plan-shift-btn {
+            font-size: 0.7rem; font-weight: 700; background: #fff7ed; color: #d97706; border: 1.5px solid #fcd34d;
+            padding: 4px 10px; border-radius: 6px; cursor: pointer; white-space: nowrap; transition: all var(--transition);
+        }
+        .plan-shift-btn:hover { background: #fef3c7; }
+        .plan-done-label { font-size: 0.7rem; font-weight: 700; color: var(--success); }
+        .plan-shifted-label { font-size: 0.7rem; font-weight: 700; color: #f59e0b; }
+
+        .sat-plan-task-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 5px;
+        }
+
+        .sat-plan-task-text {
+            font-size: 0.82rem;
+            color: var(--text);
+            line-height: 1.4;
+        }
+
+        .sat-plan-task-sub {
+            font-size: 0.72rem;
+            color: var(--text-light);
+            margin-top: 1px;
+        }
+
+        @media (max-width: 760px) {
+            .sat-planner-inputs { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 480px) {
+            .sat-planner-inputs { grid-template-columns: 1fr; }
+        }
+
+        /* ═══════════════════════════════════════════
+           ENHANCED BADGES / GAMIFICATION
+        ═══════════════════════════════════════════ */
+        .sat-badges-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .sat-badge-card {
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 20px 16px;
+            text-align: center;
+            transition: all var(--transition-slow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sat-badge-card.earned {
+            border-color: var(--badge-color, var(--accent));
+            background: linear-gradient(135deg, white 60%, var(--badge-bg, var(--accent-soft)));
+            box-shadow: 0 4px 20px var(--badge-glow, rgba(23,105,232,0.15));
+        }
+
+        .sat-badge-card.locked {
+            opacity: 0.55;
+            filter: grayscale(0.6);
+        }
+
+        .sat-badge-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .sat-badge-name {
+            font-size: 0.78rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .sat-badge-req {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .sat-badge-earned-tag {
+            position: absolute;
+            top: 8px; right: 8px;
+            font-size: 0.6rem;
+            font-weight: 800;
+            background: var(--badge-color, var(--accent));
+            color: white;
+            padding: 2px 6px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 760px) { .sat-badges-grid { grid-template-columns: repeat(2,1fr); } }
+
+        /* ═══════════════════════════════════════════
+           CHAPTER LOG MODAL
+        ═══════════════════════════════════════════ */
+        .chapter-log-modal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        /* ═══════════════════════════════════════════
+           ENHANCED DAILY MISSION CARDS
+        ═══════════════════════════════════════════ */
+        .sat-mission-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px 18px;
+            margin-bottom: 10px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            transition: all var(--transition-slow);
+        }
+
+        .sat-mission-card:hover { transform: translateX(3px); box-shadow: var(--shadow); }
+
+        .sat-mission-card.done { opacity: 0.6; }
+
+        .sat-mission-icon {
+            width: 36px; height: 36px;
+            border-radius: 9px;
+            display: grid; place-items: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .sat-mission-body { flex: 1; min-width: 0; }
+
+        .sat-mission-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+
+        .sat-mission-desc {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            line-height: 1.4;
+            margin-bottom: 6px;
+        }
+
+        .sat-mission-meta {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .sat-mission-pill {
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .sat-mission-check {
+            width: 22px; height: 22px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            flex-shrink: 0;
+            display: grid; place-items: center;
+            color: transparent;
+            cursor: pointer;
+            transition: all var(--transition);
+            margin-top: 2px;
+        }
+
+        .sat-mission-check.done {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
     </style>
 </head>
 <body class="auth-locked">
@@ -2991,13 +3691,17 @@
 
                 <div class="sidebar-divider"></div>
 
-                <!-- Add Personal Note -->
+                <!-- SAT Study Note -->
                 <div style="margin-bottom:16px">
-                    <div class="sidebar-section-label">Personal Notes</div>
+                    <div class="sidebar-section-label">📝 SAT Study Notes</div>
                     <form class="add-note-form" onsubmit="addCustomTask(event)">
-                        <input type="text" id="taskTitle" class="note-input" placeholder="Note title" required>
-                        <textarea id="taskDesc" class="note-textarea" placeholder="Details (optional)"></textarea>
-                        <button type="submit" class="note-submit-btn">Save Note</button>
+                        <input type="text" id="taskTitle" class="note-input"
+                            placeholder="e.g. Missed quadratic trap on Test #3"
+                            title="Write what you studied, a mistake you made, or a topic to revisit"
+                            required>
+                        <textarea id="taskDesc" class="note-textarea"
+                            placeholder="Add details — e.g. I set up the equation wrong. Correct method: factor first, then solve. Review this type before Test #4."></textarea>
+                        <button type="submit" class="note-submit-btn">Save SAT Note</button>
                     </form>
                 </div>
 
@@ -3032,47 +3736,36 @@
                     <div id="sectionDashboard" class="dashboard-section">
                         <div class="topbar">
                             <div>
-                                <div class="topbar-title">SAT & IELTS Roadmap</div>
+                                <div class="topbar-title">US College Roadmap</div>
                                 <div class="topbar-sub">Nepal → USA &nbsp;·&nbsp; June 2026 – August 2027</div>
                             </div>
                             <div class="topbar-actions">
-                                <button class="icon-btn" title="Notifications">
+                                <button class="icon-btn" id="notifBellBtn" title="Notifications" onclick="toggleNotifPanel()" style="position:relative">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M18 8a6 6 0 1 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21a2 2 0 0 0 4 0"/>
                                     </svg>
-                                    <span class="notif-badge">3</span>
+                                    <span class="notif-badge" id="notifBadgeCount">0</span>
                                 </button>
+                                <!-- Notification Panel -->
+                                <div id="notifPanel" style="display:none;position:absolute;top:52px;right:16px;width:340px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-xl);z-index:500;overflow:hidden">
+                                    <div style="padding:14px 16px 10px;border-bottom:1px solid var(--border-soft);display:flex;justify-content:space-between;align-items:center">
+                                        <div style="font-size:0.88rem;font-weight:800;color:var(--secondary)">🔔 Notifications & Reminders</div>
+                                        <div style="display:flex;gap:6px">
+                                            <button onclick="requestNotifPermission()" id="notifPermBtn" style="font-size:0.7rem;font-weight:700;padding:4px 10px;border-radius:6px;border:1.5px solid var(--accent);color:var(--accent);background:transparent;cursor:pointer" title="Enable browser push reminders">Enable Push</button>
+                                            <button onclick="markAllNotifsRead()" style="font-size:0.7rem;font-weight:700;padding:4px 10px;border-radius:6px;border:1px solid var(--border);color:var(--text-light);background:transparent;cursor:pointer">Mark all read</button>
+                                        </div>
+                                    </div>
+                                    <div id="notifList" style="max-height:380px;overflow-y:auto;padding:8px 0"></div>
+                                    <div style="padding:10px 14px;border-top:1px solid var(--border-soft);font-size:0.72rem;color:var(--text-muted);text-align:center" id="notifFooter">
+                                        Enable push reminders to get daily SAT study alerts
+                                    </div>
+                                </div>
                             </div>
+                            <div id="notifOverlay" onclick="closeNotifPanel()" style="display:none;position:fixed;inset:0;z-index:499"></div>
                         </div>
 
                         <!-- Countdown Cards -->
                         <div class="countdown-grid">
-                            <div class="countdown-card sat">
-                                <div class="countdown-icon-row">
-                                    <div class="countdown-icon">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
-                                        </svg>
-                                    </div>
-                                    <span class="countdown-label">SAT Exam</span>
-                                </div>
-                                <div class="countdown-days" id="satCountdown">0</div>
-                                <div class="countdown-name">Days Remaining</div>
-                                <div class="countdown-date">October 5, 2026</div>
-                            </div>
-                            <div class="countdown-card ielts">
-                                <div class="countdown-icon-row">
-                                    <div class="countdown-icon">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/>
-                                        </svg>
-                                    </div>
-                                    <span class="countdown-label">IELTS Exam</span>
-                                </div>
-                                <div class="countdown-days" id="ieltsCountdown">0</div>
-                                <div class="countdown-name">Days Remaining</div>
-                                <div class="countdown-date">September 27, 2026</div>
-                            </div>
                             <div class="countdown-card visa">
                                 <div class="countdown-icon-row">
                                     <div class="countdown-icon">
@@ -3160,7 +3853,7 @@
                         <!-- Phase Filters -->
                         <div class="phase-filters">
                             <button class="filter-btn active" onclick="filterPhase('all', event)">All</button>
-                            <button class="filter-btn" onclick="filterPhase('foundation', event)">SAT & IELTS</button>
+                            <button class="filter-btn" onclick="filterPhase('foundation', event)">Foundation</button>
                             <button class="filter-btn" onclick="filterPhase('testing', event)">Testing</button>
                             <button class="filter-btn" onclick="filterPhase('portfolio', event)">Portfolio</button>
                             <button class="filter-btn" onclick="filterPhase('applications', event)">Applications</button>
@@ -3243,8 +3936,8 @@
                                 Dashboard
                             </button>
                             <button class="sat-tab" id="satTabTasks" onclick="switchSATTab('tasks')">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-                                Study Tasks
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
+                                Study Planner
                             </button>
                             <button class="sat-tab" id="satTabBank" onclick="switchSATTab('bank')">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/></svg>
@@ -3262,6 +3955,11 @@
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
                                 Analytics
                             </button>
+                            <button class="sat-tab" id="satTabChapters" onclick="switchSATTab('chapters')">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19l-7 7-7-7"/><path d="M6.5 2H19v17.5a.5.5 0 0 1-.5.5H6"/></svg>
+                                Chapters
+                            </button>
+
                         </div>
 
                         <!-- ─── SAT DASHBOARD TAB ─── -->
@@ -3274,6 +3972,60 @@
                                 <div class="topbar-actions">
                                     <div class="sat-days-badge">
                                         <span id="satDaysCountdown">0</span> days to SAT
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ── SAT GOAL CARD ── -->
+                            <div class="sat-goal-card" id="satGoalCard">
+                                <div class="sat-goal-header">
+                                    <div>
+                                        <div class="sat-goal-title">🎯 SAT Target</div>
+                                        <div class="sat-goal-headline">1500+ Score Mission</div>
+                                    </div>
+                                    <button class="sat-goal-edit-btn" onclick="openGoalModal()">✏️ Update Scores</button>
+                                </div>
+                                <div class="sat-goal-scores">
+                                    <div class="sat-goal-score-box">
+                                        <div class="sat-goal-score-label">Current</div>
+                                        <div class="sat-goal-score-val" id="goalCurrentScore">—</div>
+                                        <div class="sat-goal-score-sub">Baseline</div>
+                                    </div>
+                                    <div class="sat-goal-score-box target">
+                                        <div class="sat-goal-score-label">Target</div>
+                                        <div class="sat-goal-score-val">1500</div>
+                                        <div class="sat-goal-score-sub">Goal</div>
+                                    </div>
+                                    <div class="sat-goal-score-box gap">
+                                        <div class="sat-goal-score-label">Gap</div>
+                                        <div class="sat-goal-score-val" id="goalScoreGap">—</div>
+                                        <div class="sat-goal-score-sub">Points needed</div>
+                                    </div>
+                                    <div class="sat-goal-score-box predicted">
+                                        <div class="sat-goal-score-label">Predicted</div>
+                                        <div class="sat-goal-score-val" id="goalPredicted">—</div>
+                                        <div class="sat-goal-score-sub">Based on trend</div>
+                                    </div>
+                                    <div class="sat-goal-score-box readiness">
+                                        <div class="sat-goal-score-label">Readiness</div>
+                                        <div class="sat-goal-score-val" id="goalReadinessPct">0%</div>
+                                        <div class="sat-goal-score-sub">Estimated</div>
+                                    </div>
+                                </div>
+                                <div class="sat-goal-breakdown">
+                                    <div class="sat-goal-sub-score">
+                                        <div>
+                                            <div class="sat-goal-sub-label">📐 Math Score</div>
+                                            <div class="sat-goal-sub-target">Target: 780+</div>
+                                        </div>
+                                        <div class="sat-goal-sub-val" id="goalMathScore">—</div>
+                                    </div>
+                                    <div class="sat-goal-sub-score">
+                                        <div>
+                                            <div class="sat-goal-sub-label">📖 Reading & Writing</div>
+                                            <div class="sat-goal-sub-target">Target: 720+</div>
+                                        </div>
+                                        <div class="sat-goal-sub-val" id="goalRWScore">—</div>
                                     </div>
                                 </div>
                             </div>
@@ -3384,48 +4136,113 @@
                             <div class="sat-milestones-grid" id="satMilestonesGrid"></div>
 
                             <!-- Achievements -->
-                            <div class="sat-section-label">Achievements</div>
-                            <div class="sat-achievements-row" id="satAchievementsRow"></div>
+                            <!-- Achievements / Badges -->
+                            <div class="sat-section-label">Achievement Badges</div>
+                            <div class="sat-badges-grid" id="satBadgesGrid">
+                                <!-- Rendered by JS -->
+                            </div>
 
-                            <!-- Today's Study Tasks -->
                             <div class="sat-section-label">Adaptive Daily SAT Mission</div>
                             <div id="satTodayTasks" class="sat-today-tasks"></div>
+
                         </div>
 
-                        <!-- ─── SAT STUDY TASKS TAB ─── -->
+                        <!-- ─── AUTO STUDY PLANNER TAB (replaces Study Tasks) ─── -->
                         <div id="satPanelTasks" class="sat-panel" style="display:none">
                             <div class="topbar">
                                 <div>
-                                    <div class="topbar-title">SAT Study Tasks</div>
-                                    <div class="topbar-sub">Complete daily tasks to reach your 1500+ target</div>
+                                    <div class="topbar-title" style="background:linear-gradient(135deg,#1769e8,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Auto Study Planner</div>
+                                    <div class="topbar-sub">Unified day-by-day schedule — synced with your tasks — targeting 1500+ for Sept & Oct SAT</div>
                                 </div>
                                 <div class="topbar-actions">
-                                    <select class="sat-filter-select" onchange="filterSATTasks(this.value)">
-                                        <option value="all">All Tasks</option>
-                                        <option value="june">June</option>
-                                        <option value="july">July</option>
-                                        <option value="august">August</option>
-                                        <option value="september">September</option>
-                                        <option value="october">October</option>
-                                        <option value="pending">Pending</option>
-                                        <option value="completed">Completed</option>
-                                    </select>
+                                    <div class="sat-days-badge"><span id="satDaysCountdown2">—</span> days to exam</div>
                                 </div>
                             </div>
 
-                            <!-- SAT Progress Bar (also visible here) -->
-                            <div class="sat-progress-card" style="margin-bottom:20px">
-                                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-                                    <div style="font-size:0.88rem;font-weight:700;color:var(--text)">1500+ Readiness Progress</div>
-                                    <div style="font-size:1.1rem;font-weight:900;color:var(--accent)" id="satProgressPct2">0%</div>
+                            <!-- Planner Config Form -->
+                            <div class="sat-planner-form" style="margin-bottom:0;border-radius:var(--radius-lg) var(--radius-lg) 0 0;border-bottom:none">
+                                <div class="sat-planner-title">
+                                    <div class="sat-planner-title-icon">⚡</div>
+                                    Build Your Personalised 1500+ Study Plan
                                 </div>
-                                <div class="sat-progress-track">
-                                    <div class="sat-progress-fill" id="satProgressFill2" style="width:0%"></div>
+
+                                <!-- Helper intro -->
+                                <div style="font-size:0.8rem;color:var(--text-light);background:var(--surface-2);border:1px solid var(--border-soft);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:16px;line-height:1.6">
+                                    Fill in the four fields below. The planner will create a <strong>day-by-day schedule</strong> from today through your SAT exam date — splitting your daily study hours between <strong>Math (College Board question bank + Desmos drills)</strong> and <strong>Reading &amp; Writing (Khan Academy lessons + timed passage sets)</strong>. Saturdays become full Bluebook Mock Test days.
+                                </div>
+
+                                <div class="sat-planner-inputs">
+                                    <div class="sat-planner-field">
+                                        <label>
+                                            Your Current SAT Score
+                                            <span style="font-weight:400;color:var(--text-light)"> (total, 400–1600)</span>
+                                        </label>
+                                        <input type="number" id="plannerCurrentScore"
+                                            placeholder="e.g. 1150 — enter your most recent Bluebook or diagnostic score"
+                                            min="400" max="1590"
+                                            title="Enter the total score from your most recent Bluebook practice test or SAT diagnostic. If you haven't taken one yet, estimate honestly — 900–1100 is a common starting point.">
+                                        <div style="font-size:0.72rem;color:var(--text-muted);margin-top:4px">📌 Don't have a score yet? Take Bluebook Test #1 first, then come back.</div>
+                                    </div>
+                                    <div class="sat-planner-field">
+                                        <label>
+                                            Your Target SAT Score
+                                            <span style="font-weight:400;color:var(--text-light)"> (goal, 1500 recommended)</span>
+                                        </label>
+                                        <input type="number" id="plannerTargetScore"
+                                            placeholder="e.g. 1500 — the plan is designed around hitting this exact goal"
+                                            min="800" max="1600" value="1500"
+                                            title="This is the score you want to achieve on test day. 1500+ is the recommended target for competitive US colleges. The planner adjusts daily intensity based on how far you are from this goal.">
+                                        <div style="font-size:0.72rem;color:var(--text-muted);margin-top:4px">🎯 1500+ = Math 780+ &amp; Reading/Writing 720+. The plan keeps both targets in view.</div>
+                                    </div>
+                                    <div class="sat-planner-field">
+                                        <label>
+                                            Which SAT Are You Preparing For?
+                                        </label>
+                                        <select id="plannerExamDate" style="height:40px;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:0 12px;font-size:0.85rem;font-weight:600;color:var(--text);background:var(--surface);cursor:pointer"
+                                            title="Pick September if you want an earlier attempt — good for a confidence check. Pick October if you want maximum prep time. Pick 'Both' if you want to sit both tests.">
+                                            <option value="2026-09-13">September 13, 2026 SAT — Earlier attempt, less prep time</option>
+                                            <option value="2026-10-04" selected>October 4, 2026 SAT — Recommended: maximum study time</option>
+                                            <option value="both">Both exams — Sep 13 first attempt + Oct 4 final push</option>
+                                        </select>
+                                        <div style="font-size:0.72rem;color:var(--text-muted);margin-top:4px">📅 Saturdays between now and your exam become full 3-hour Bluebook mock test days automatically.</div>
+                                    </div>
+                                    <div class="sat-planner-field">
+                                        <label>
+                                            How Many Hours Can You Study Per Day?
+                                        </label>
+                                        <select id="plannerHoursPerDay"
+                                            title="Be realistic — it is better to commit to 2 hours every day than to plan 4 hours and skip sessions. The plan adjusts task density to fit your chosen hours.">
+                                            <option value="1">1 hour/day — Light schedule, slower progress</option>
+                                            <option value="1.5">1.5 hours/day — Moderate pace</option>
+                                            <option value="2" selected>2 hours/day — Recommended minimum for 1500+</option>
+                                            <option value="2.5">2.5 hours/day — Good pace, strong results</option>
+                                            <option value="3">3 hours/day — Intensive, fastest score gains</option>
+                                            <option value="4">4+ hours/day — Full-time prep mode</option>
+                                        </select>
+                                        <div style="font-size:0.72rem;color:var(--text-muted);margin-top:4px">⏱ 2 hours/day = ~1h Math drills + ~1h Reading &amp; Writing. Scales proportionally above or below.</div>
+                                    </div>
+                                </div>
+                                <button class="sat-planner-generate-btn" onclick="generateStudyPlan()" style="width:100%;margin-top:12px;font-size:0.92rem;padding:14px 24px">
+                                    ⚡ Generate My 1500+ Day-by-Day Plan (June → October)
+                                </button>
+                                <div style="text-align:center;font-size:0.75rem;color:var(--text-muted);margin-top:8px">
+                                    The plan covers every day from today to your exam — with Math, Reading &amp; Writing, mock tests, and review sessions already scheduled.
                                 </div>
                             </div>
 
-                            <!-- SAT Task Phases -->
-                            <div id="satTasksContainer"></div>
+                            <!-- Plan Output -->
+                            <div id="satGeneratedPlan" class="sat-generated-plan" style="display:none;margin-top:0;border-radius:0 0 var(--radius-lg) var(--radius-lg)">
+                                <!-- Rendered by JS -->
+                            </div>
+
+                            <!-- Empty state -->
+                            <div id="plannerEmptyState" style="text-align:center;padding:60px 24px;color:var(--text-muted)">
+                                <div style="font-size:3rem;margin-bottom:12px">📅</div>
+                                <div style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:8px">Your personalised SAT study plan will appear here</div>
+                                <div style="font-size:0.83rem;line-height:1.6;max-width:380px;margin:0 auto">
+                                    Enter your current score, your target score (1500+), which SAT date you're preparing for, and how many hours a day you can study — then click <strong>Generate</strong>. The planner will build a complete schedule with Math drills, Reading &amp; Writing sessions, and full Bluebook mock tests every Saturday.
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Math Question Bank Tab -->
@@ -3596,6 +4413,51 @@
                             </div>
                         </div>
 
+                        <!-- ─── CHAPTER PROGRESS TRACKER ─── -->
+                        <div id="satPanelChapters" class="sat-panel" style="display:none">
+                            <div class="topbar">
+                                <div>
+                                    <div class="topbar-title">Chapter Progress Tracker</div>
+                                    <div class="topbar-sub">Track mastery across all SAT Math & Reading/Writing domains</div>
+                                </div>
+                            </div>
+
+                            <!-- Summary cards -->
+                            <div class="sat-stats-grid" style="margin-bottom:20px">
+                                <div class="sat-stat-card">
+                                    <div class="sat-stat-num" id="chapTotalQ">0</div>
+                                    <div class="sat-stat-label">Questions Solved</div>
+                                </div>
+                                <div class="sat-stat-card">
+                                    <div class="sat-stat-num" id="chapAvgAcc">0%</div>
+                                    <div class="sat-stat-label">Overall Accuracy</div>
+                                </div>
+                                <div class="sat-stat-card">
+                                    <div class="sat-stat-num" id="chapMastered">0</div>
+                                    <div class="sat-stat-label">Chapters Advanced+</div>
+                                </div>
+                                <div class="sat-stat-card">
+                                    <div class="sat-stat-num" id="chapWeakest">—</div>
+                                    <div class="sat-stat-label">Weakest Area</div>
+                                </div>
+                            </div>
+
+                            <!-- Domain filter tabs -->
+                            <div class="sat-chapter-tabs">
+                                <button class="sat-chapter-tab active" onclick="filterChapters('all',this)">All Chapters</button>
+                                <button class="sat-chapter-tab" onclick="filterChapters('algebra',this)">Algebra</button>
+                                <button class="sat-chapter-tab" onclick="filterChapters('advanced-math',this)">Advanced Math</button>
+                                <button class="sat-chapter-tab" onclick="filterChapters('psda',this)">Problem Solving</button>
+                                <button class="sat-chapter-tab" onclick="filterChapters('geometry',this)">Geometry & Trig</button>
+                                <button class="sat-chapter-tab" onclick="filterChapters('rw',this)">Reading & Writing</button>
+                            </div>
+
+                            <div class="sat-chapter-grid" id="satChapterGrid">
+                                <!-- Rendered by JS -->
+                            </div>
+                        </div>
+
+
                     </div>
                     <!-- END SAT SECTION -->
 
@@ -3610,6 +4472,57 @@
             <button class="modal-close" onclick="closePfpModal()">✕</button>
             <div class="modal-header">Choose Profile Picture</div>
             <div class="pfp-grid" id="pfpGrid"></div>
+        </div>
+    </div>
+
+    <!-- ════════════════ SAT GOAL MODAL ════════════════ -->
+    <div id="satGoalModal" class="modal">
+        <div class="modal-content" style="max-width:480px">
+            <button class="modal-close" onclick="closeAllModals()">✕</button>
+            <div class="modal-header">Update SAT Score Goals</div>
+            <div style="display:flex;flex-direction:column;gap:12px;margin-top:16px">
+                <div class="sat-goal-modal-grid">
+                    <div>
+                        <label class="form-label">Current Total Score</label>
+                        <input type="number" id="goalInputCurrent" class="form-input" placeholder="e.g. 1180" min="400" max="1590">
+                    </div>
+                    <div>
+                        <label class="form-label">Current Math Score</label>
+                        <input type="number" id="goalInputMath" class="form-input" placeholder="e.g. 590" min="200" max="800">
+                    </div>
+                    <div>
+                        <label class="form-label">Current RW Score</label>
+                        <input type="number" id="goalInputRW" class="form-input" placeholder="e.g. 590" min="200" max="800">
+                    </div>
+                    <div>
+                        <label class="form-label">SAT Exam Date</label>
+                        <input type="date" id="goalInputExamDate" class="form-input" value="2026-10-05">
+                    </div>
+                </div>
+                <button class="auth-btn" onclick="saveGoalData()" style="margin-top:4px">Save Goals</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════ CHAPTER LOG MODAL ════════════════ -->
+    <div id="satChapterLogModal" class="modal">
+        <div class="modal-content" style="max-width:460px">
+            <button class="modal-close" onclick="closeAllModals()">✕</button>
+            <div class="modal-header" id="chapterLogModalTitle">Log Practice Session</div>
+            <div style="display:flex;flex-direction:column;gap:12px;margin-top:16px">
+                <div class="chapter-log-modal-grid">
+                    <div>
+                        <label class="form-label">Questions Solved</label>
+                        <input type="number" id="chLogQSolved" class="form-input" placeholder="e.g. 25" min="1">
+                    </div>
+                    <div>
+                        <label class="form-label">Correct Answers</label>
+                        <input type="number" id="chLogCorrect" class="form-input" placeholder="e.g. 20" min="0">
+                    </div>
+                </div>
+                <input type="hidden" id="chLogChapterId">
+                <button class="auth-btn" onclick="saveChapterLog()">Save Session</button>
+            </div>
         </div>
     </div>
 
@@ -4260,6 +5173,27 @@
             renderPhases();
         }
 
+        // Tags belonging exclusively to SAT/IELTS prep — hidden from the main College Roadmap dashboard
+        const EXAM_PREP_TAGS = new Set(['SAT','IELTS']);
+
+        // Clean phase titles so they don't mention SAT/IELTS in the main dashboard
+        function cleanPhaseTitle(raw) {
+            return raw
+                .replace('SAT & IELTS Foundation', 'College Prep Foundation')
+                .replace('Phase 1: SAT & IELTS Foundation', 'Phase 1: College Prep Foundation')
+                .replace('Phase 2: Exam Month — IELTS & SAT', 'Phase 2: Testing & Exams')
+                .replace('Exam Month — IELTS & SAT', 'Testing & Exams');
+        }
+
+        function cleanMonthHeader(raw) {
+            return raw
+                .replace('SAT & IELTS Setup', 'College Prep Setup')
+                .replace('SAT & IELTS Intensive', 'Intensive Prep')
+                .replace('Mock Tests & Weak Areas', 'Mock Tests & Review')
+                .replace('Final Prep', 'Final Exam Prep')
+                .replace('SAT & Score Review', 'Score Review & Next Steps');
+        }
+
         function renderPhases() {
             const container = document.getElementById('phasesContainer');
             container.innerHTML = '';
@@ -4272,15 +5206,21 @@
                 phaseSection.dataset.step = index + 1;
                 phaseSection.style.animationDelay = `${index * 0.04}s`;
 
+                // Collect only non-exam-prep tasks for stats
                 let phaseTasks = [];
-                phase.months.forEach(m => m.tasks.forEach(t => { t.phase = phaseKey; phaseTasks.push(t); }));
+                phase.months.forEach(m => m.tasks.forEach(t => {
+                    if (!EXAM_PREP_TAGS.has(t.tag)) { t.phase = phaseKey; phaseTasks.push(t); }
+                }));
                 const phaseComplete = phaseTasks.filter(t => completed[t.id]).length;
+
+                // Skip whole phase if it has zero non-exam-prep tasks
+                if (phaseTasks.length === 0) return;
 
                 phaseSection.innerHTML = `
                     <div class="phase-header" onclick="togglePhase(this)">
                         <div class="phase-info">
-                            <div class="phase-title">${phase.title}</div>
-                            <div class="phase-subtitle">${phase.subtitle}</div>
+                            <div class="phase-title">${cleanPhaseTitle(phase.title)}</div>
+                            <div class="phase-subtitle">${cleanPhaseTitle(phase.subtitle)}</div>
                         </div>
                         <div class="phase-right">
                             <div class="phase-stat">
@@ -4298,9 +5238,12 @@
 
                 const content = phaseSection.querySelector('.phase-content');
                 phase.months.forEach(monthData => {
+                    // Filter out SAT/IELTS tasks within each month
+                    const visibleTasks = monthData.tasks.filter(t => !EXAM_PREP_TAGS.has(t.tag));
+                    if (!visibleTasks.length) return;
                     const monthDiv = document.createElement('div');
-                    monthDiv.innerHTML = `<div class="month-header">${monthData.month}</div>`;
-                    monthData.tasks.forEach(task => {
+                    monthDiv.innerHTML = `<div class="month-header">${cleanMonthHeader(monthData.month)}</div>`;
+                    visibleTasks.forEach(task => {
                         const taskEl = document.createElement('div');
                         taskEl.className = `task-item ${completed[task.id] ? 'completed' : ''}`;
                         taskEl.onclick = () => toggleTask(task.id);
@@ -4617,78 +5560,90 @@
         /* ── SAT Roadmap ── */
         const satRoadmap = [
             {
-                id: 'sat-june', title: 'June 15–30: Diagnostics & Foundations', month: 'june',
+                id: 'sat-june', title: 'June: Baseline + Foundation Sprint', month: 'june',
                 tasks: [
-                    { id: 'sat_j01', title: 'Take SAT Diagnostic Test (Full)', desc: 'Bluebook Test #1 under real conditions. No interruptions. Mark every answer. This sets your baseline.', time: '3h', tag: 'test', date: 'June 15' },
-                    { id: 'sat_j02', title: 'Analyze Diagnostic Results', desc: 'Score every section. List every wrong answer by category. Identify your 3 biggest weak areas.', time: '1.5h', tag: 'review', date: 'June 16' },
-                    { id: 'sat_j03', title: 'Set Up Error Notebook', desc: 'Create your SAT Error Notebook in this dashboard. Log all diagnostic mistakes with correct approaches.', time: '1h', tag: 'strategy', date: 'June 16–17' },
-                    { id: 'sat_j04', title: 'Official Math Bank: Linear Equations & Systems', desc: 'Solve official College Board linear equations, systems, and word-problem translation questions. Log topic, difficulty, accuracy, and time.', time: '2h', tag: 'math', date: 'June 17–19' },
-                    { id: 'sat_j05', title: 'Official Math Bank: Quadratics & Polynomials', desc: 'Use official hard questions for factoring, quadratic formula, vertex form, and parabola behavior. Push toward Level 4 difficulty.', time: '2h', tag: 'math', date: 'June 20–22' },
-                    { id: 'sat_j06', title: 'SAT Reading: Main Idea & Evidence', desc: 'Practice identifying central claim, author purpose, and supporting evidence. Use the "find the line" strategy.', time: '1.5h', tag: 'rw', date: 'June 19–21' },
-                    { id: 'sat_j07', title: 'SAT Writing: Grammar Core Rules', desc: 'Subject-verb agreement, comma splices, semicolons, colons, modifiers, and parallel structure. Master these 7 rules.', time: '1.5h', tag: 'rw', date: 'June 22–24' },
-                    { id: 'sat_j08', title: 'SAT Math: Ratios, Percents & Statistics', desc: 'Unit rates, percent change, weighted averages, mean/median/mode, and standard deviation interpretation.', time: '2h', tag: 'math', date: 'June 24–26' },
-                    { id: 'sat_j09', title: 'Build 30-Day July Study Schedule', desc: 'Block 2–3 hours daily for July. Alternate Math and RW focus days. Schedule Sunday full mocks.', time: '45min', tag: 'strategy', date: 'June 27' },
-                    { id: 'sat_j10', title: 'Week 2 Mini Practice Test (50 questions)', desc: 'Do one full module of Math and one of RW timed. Score yourself and log all errors.', time: '1.5h', tag: 'test', date: 'June 28–30' },
+                    { id: 'sat_j01', title: '🎯 Bluebook Test #1 — Full Baseline Diagnostic', desc: 'Real conditions: 2h 14min, no breaks except the built-in one. No music. Treat it like test day. This score is your starting line.', time: '3h', tag: 'test', date: 'Jun 16' },
+                    { id: 'sat_j02', title: '📊 Diagnostic Deep Dive — Category Error Map', desc: 'Score every question. Build a 2-column table: question type → right/wrong. Find your worst 3 Math subtypes and worst 2 RW domains. These become your entire June focus.', time: '2h', tag: 'review', date: 'Jun 17' },
+                    { id: 'sat_j03', title: '📓 Launch Error Notebook System', desc: 'Log every diagnostic error in this dashboard. For each: question type, your wrong answer, correct answer, WHY you were wrong (concept gap / careless / time). This notebook becomes your most important prep tool.', time: '1h', tag: 'strategy', date: 'Jun 17–18' },
+                    { id: 'sat_j04', title: '📐 Math: Linear Equations & Systems (Official CB)', desc: 'Pull official College Board Digital SAT questions on linear equations, systems, and word-problem translation. Solve 25 questions. Log every miss. Target: 90%+ accuracy before moving on.', time: '2h', tag: 'math', date: 'Jun 18–20' },
+                    { id: 'sat_j05', title: '📐 Math: Quadratics — All 4 Approaches', desc: 'Factoring, quadratic formula, completing the square, vertex form. 20 official hard questions. Know when to use each method under 60-second pressure.', time: '2h', tag: 'math', date: 'Jun 20–22' },
+                    { id: 'sat_j06', title: '✍️ RW: Command of Evidence — Quantitative', desc: 'Practice the chart/table+passage combo questions. These show up 4–6x per test and most students panic. Strategy: answer the passage question first, then use the chart to confirm.', time: '1.5h', tag: 'rw', date: 'Jun 19–21' },
+                    { id: 'sat_j07', title: '✍️ RW: Core Grammar — 8 Rules That Cover 90%', desc: 'Subject-verb agreement, pronoun case, comma splices, semicolons, colons, modifiers, parallelism, apostrophes. Do 25 official grammar questions. These are free points once mastered.', time: '1.5h', tag: 'rw', date: 'Jun 22–24' },
+                    { id: 'sat_j08', title: '📐 Math: Ratios, Percents, Unit Rates & Statistics', desc: 'Percent change, weighted averages, mean/median interpretation, standard deviation concepts. 20 official questions. These are the "easy" questions you cannot afford to drop.', time: '1.5h', tag: 'math', date: 'Jun 23–25' },
+                    { id: 'sat_j09', title: '🎯 Bluebook Test #2 — First Progress Check', desc: 'Second full mock. Compare section-by-section to Test #1. Calculate exact point gains. Are you improving in your focus areas? Adjust if not.', time: '3h', tag: 'test', date: 'Jun 28' },
+                    { id: 'sat_j10', title: '📋 Test #2 Review + Weekly Error Log Update', desc: 'Full review of all Test #2 errors. Update error notebook. Identify any new patterns. Set July weekly targets based on Test #2 gaps.', time: '2h', tag: 'review', date: 'Jun 29–30' },
                 ]
             },
             {
-                id: 'sat-july', title: 'July: Intensive Skill Building', month: 'july',
+                id: 'sat-july', title: 'July: Intensive Skill Building (Both Tests)', month: 'july',
                 tasks: [
-                    { id: 'sat_jl01', title: 'SAT Math: Exponential & Radical Functions', desc: 'Growth/decay models, exponent rules, radical equations. These appear in every digital SAT.', time: '2h', tag: 'math', date: 'July 1–3' },
-                    { id: 'sat_jl02', title: 'SAT Math: Geometry — Lines & Triangles', desc: 'Parallel lines, angle relationships, triangle congruence, similarity ratios, and the Pythagorean theorem.', time: '2h', tag: 'math', date: 'July 4–6' },
-                    { id: 'sat_jl03', title: 'SAT Math: Circles & Volume', desc: 'Arc length, sector area, circle equations, cylinder/cone/sphere volume. 3–5 questions per test.', time: '1.5h', tag: 'math', date: 'July 7–9' },
-                    { id: 'sat_jl04', title: 'SAT Math: Trigonometry Basics', desc: 'SOHCAHTOA, special right triangles (30-60-90, 45-45-90), and basic sine/cosine identities.', time: '1.5h', tag: 'math', date: 'July 10–12' },
-                    { id: 'sat_jl05', title: 'Bluebook Practice Test #2 (Full Timed)', desc: 'Full 2h15min timed test. Simulate real conditions. Score all sections and log errors immediately after.', time: '3h', tag: 'test', date: 'July 6' },
-                    { id: 'sat_jl06', title: 'Test #2 Deep Review', desc: 'Spend 2 hours reviewing every wrong answer. Categorize errors: concept gap, careless, or time pressure.', time: '2h', tag: 'review', date: 'July 7' },
-                    { id: 'sat_jl07', title: 'SAT Reading: Inference & Paired Passages', desc: 'Practice drawing valid inferences (never over-interpret). Master paired passage comparison questions.', time: '1.5h', tag: 'rw', date: 'July 8–11' },
-                    { id: 'sat_jl08', title: 'SAT Reading: Charts, Graphs & Data', desc: 'Practice questions that combine a passage with a data table or figure. These are free points if you practice.', time: '1.5h', tag: 'rw', date: 'July 12–15' },
-                    { id: 'sat_jl09', title: 'SAT Writing: Transitions & Rhetorical Purpose', desc: 'However/therefore/furthermore distinctions. Identify when to add, delete, or revise sentences for clarity.', time: '1.5h', tag: 'rw', date: 'July 13–16' },
-                    { id: 'sat_jl10', title: 'Bluebook Practice Test #3 (Full Timed)', desc: 'Third full mock — you should be seeing improvement. Compare score breakdown to Test #1 and #2.', time: '3h', tag: 'test', date: 'July 20' },
-                    { id: 'sat_jl11', title: 'Test #3 Deep Review + Error Notebook Update', desc: 'Log all new errors. Identify patterns: are the same categories appearing repeatedly?', time: '2h', tag: 'review', date: 'July 21' },
-                    { id: 'sat_jl12', title: 'Official Math Bank: Weak Topic Sprint', desc: 'Do 40 official questions from your weakest Math topic. Use Khan Academy Math only if a concept explanation is needed afterward.', time: '1.5h', tag: 'math', date: 'July 22–25' },
-                    { id: 'sat_jl13', title: 'Khan Academy R&W Mastery Sprint', desc: 'Complete official Khan Academy Digital SAT Reading & Writing lessons, practice sets, and unit tests for your lowest R&W domain.', time: '1.5h', tag: 'rw', date: 'July 26–29' },
-                    { id: 'sat_jl14', title: 'July Summary: Score Analysis & August Plan', desc: 'Compare Jul score trajectory vs projection. Adjust August schedule to focus on remaining gaps.', time: '1h', tag: 'strategy', date: 'July 31' },
+                    { id: 'sat_jl01', title: '📐 Math: Exponential & Radical Functions', desc: 'Growth/decay models, exponent rules, radical equations. Every digital SAT has 3–5 of these. Master the standard form y = ab^x and what each variable means.', time: '2h', tag: 'math', date: 'Jul 1–3' },
+                    { id: 'sat_jl02', title: '📐 Math: Geometry — Lines, Triangles, Similarity', desc: 'Parallel lines & transversals, triangle congruence & similarity ratios, Pythagorean theorem applications, 30-60-90 and 45-45-90. 20 official questions timed.', time: '2h', tag: 'math', date: 'Jul 3–6' },
+                    { id: 'sat_jl03', title: '📐 Math: Circles, Volume & Coordinate Geometry', desc: 'Arc length, sector area, standard circle equation, cylinder/cone/sphere volume, distance & midpoint. These appear every test and are highly learnable.', time: '1.5h', tag: 'math', date: 'Jul 7–9' },
+                    { id: 'sat_jl04', title: '📐 Math: Trigonometry — SOH CAH TOA + Identities', desc: 'Right triangle trig, special triangles, sin/cos/tan values at common angles, and sin²+cos²=1. The SAT only tests a narrow slice — learn that slice perfectly.', time: '1.5h', tag: 'math', date: 'Jul 9–11' },
+                    { id: 'sat_jl05', title: '🎯 Bluebook Test #3 — Saturday Mock (Full)', desc: 'Full 2h14m mock. Aim to be 50+ points above your June #1 baseline. Score, log errors immediately. Focus heavily on which Math question types you\'re still missing.', time: '3h', tag: 'test', date: 'Jul 5' },
+                    { id: 'sat_jl06', title: '📋 Test #3 Deep Review — Categorize Every Error', desc: 'Three error categories: (1) concept gap — didn\'t know how, (2) careless — knew but rushed, (3) time — ran out. Track your ratio. Careless errors = the fastest points to reclaim.', time: '2h', tag: 'review', date: 'Jul 6' },
+                    { id: 'sat_jl07', title: '✍️ RW: Inference & Paired Passages', desc: 'Valid inference questions test whether you can stay within the text. Practice the "prove it with a line" rule — every correct inference answer can be traced to an exact sentence.', time: '1.5h', tag: 'rw', date: 'Jul 8–11' },
+                    { id: 'sat_jl08', title: '✍️ RW: Transitions & Rhetorical Purpose', desc: 'However/therefore/furthermore/for example — know what each signals. Sentence add/delete/revise questions: always check if it matches the paragraph\'s main idea.', time: '1.5h', tag: 'rw', date: 'Jul 11–14' },
+                    { id: 'sat_jl09', title: '✍️ RW: Craft & Structure — Words in Context', desc: 'The SAT uses common words with uncommon meanings. Rule: ignore the word, read the sentence without it, then pick the answer that fits the blank perfectly. Drill 30 questions.', time: '1.5h', tag: 'rw', date: 'Jul 14–17' },
+                    { id: 'sat_jl10', title: '📐 Math: Advanced Algebra — Functions & Graphs', desc: 'Function notation, domain/range, transformations (shift left/right/up/down/reflect), even/odd functions, composite functions. These appear in Module 2 hard questions.', time: '2h', tag: 'math', date: 'Jul 17–20' },
+                    { id: 'sat_jl11', title: '🎯 Bluebook Test #4 — Mid-Summer Benchmark', desc: 'You should be hitting 1400+ by now. If not, today\'s review is your most important session. Full 2h14m mock. Compare all four section scores to your previous tests.', time: '3h', tag: 'test', date: 'Jul 19' },
+                    { id: 'sat_jl12', title: '📋 Test #4 Review + Error Notebook Deep Update', desc: 'Full error categorization. Look for repeated mistake types across Tests #1–4. Any mistake that appears 2+ times is a systematic gap — schedule a targeted drill session.', time: '2h', tag: 'review', date: 'Jul 20' },
+                    { id: 'sat_jl13', title: '📐 Math: Data Analysis — Scatterplots & Best Fit', desc: 'Interpret linear/exponential line-of-best-fit models. Understand residuals, correlation vs causation, sampling bias, and two-way tables. These are consistent high-value questions.', time: '1.5h', tag: 'math', date: 'Jul 22–25' },
+                    { id: 'sat_jl14', title: '✍️ RW: Khan Academy Digital SAT Full Skill Sprint', desc: 'Complete the official Khan Academy Digital SAT RW skill sections for your two lowest domains. Do every practice problem, not just the lessons. These are the same bank as real questions.', time: '2h', tag: 'rw', date: 'Jul 25–28' },
+                    { id: 'sat_jl15', title: '🎯 Bluebook Test #5 — End of July Full Mock', desc: 'Fifth full practice test. By now your score should be within 50 points of your September target. Analyze where the remaining gap is — math module 2? RW craft & structure?', time: '3h', tag: 'test', date: 'Jul 26' },
+                    { id: 'sat_jl16', title: '📋 Test #5 Review + August Plan Calibration', desc: 'Score every section. Update error notebook. Draft August weekly plan based on remaining gaps. August = full mastery mode — no new concepts, just perfect execution.', time: '2h', tag: 'review', date: 'Jul 27–31' },
                 ]
             },
             {
-                id: 'sat-august', title: 'August: Full-Length Mastery', month: 'august',
+                id: 'sat-august', title: 'August: Full Mastery + September Peak', month: 'august',
                 tasks: [
-                    { id: 'sat_a01', title: 'August Week 1 Weak Area Sprint', desc: 'Dedicate the full first week to your single lowest-scoring subsection. Timed drills daily.', time: '2h/day', tag: 'strategy', date: 'Aug 1–7' },
-                    { id: 'sat_a02', title: 'Bluebook Practice Test #4 (Full Timed)', desc: 'Fourth mock test. You should be hitting your goal range. If not, diagnose why and adjust.', time: '3h', tag: 'test', date: 'Aug 10' },
-                    { id: 'sat_a03', title: 'Test #4 Deep Review', desc: 'Full error analysis. Update error notebook. Look for patterns you\'ve missed in previous reviews.', time: '2h', tag: 'review', date: 'Aug 11' },
-                    { id: 'sat_a04', title: 'Digital SAT Tools Mastery', desc: 'Practice using built-in annotation, desmos calculator, answer eliminator, and mark-for-review strategically.', time: '1h', tag: 'strategy', date: 'Aug 8–12' },
-                    { id: 'sat_a05', title: 'SAT Math: Advanced Data Analysis', desc: 'Two-variable data, scatter plots, line/exponential of best fit, probability, and survey conclusions.', time: '1.5h', tag: 'math', date: 'Aug 12–14' },
-                    { id: 'sat_a06', title: 'SAT Math: Word Problem Sprint (30 problems)', desc: 'Do 30 mixed word problems under timed conditions. Focus on setup speed and unit awareness.', time: '1.5h', tag: 'math', date: 'Aug 14–16' },
-                    { id: 'sat_a07', title: 'SAT Reading: Vocabulary in Context', desc: 'Words-in-context questions use common words with unexpected meanings. Practice using passage context only.', time: '1h', tag: 'rw', date: 'Aug 15–17' },
-                    { id: 'sat_a08', title: 'Bluebook Practice Test #5 (Full Timed)', desc: 'Fifth mock — your most important benchmark before September. Aim for or exceed your target score.', time: '3h', tag: 'test', date: 'Aug 24' },
-                    { id: 'sat_a09', title: 'Test #5 Review + Strategy Refinement', desc: 'Final deep review. At this stage, 90% of errors should be careless — eliminate them with a checklist.', time: '2h', tag: 'review', date: 'Aug 25' },
-                    { id: 'sat_a10', title: 'Error Notebook Full Review Session', desc: 'Review every single error logged since June. Are old mistakes reappearing? Drill those again.', time: '2h', tag: 'review', date: 'Aug 27–28' },
-                    { id: 'sat_a11', title: 'Create Test-Day Strategy Cheat Sheet', desc: 'Write your personal cheat sheet: time allocation per module, flagging strategy, calculator rules, common traps.', time: '1h', tag: 'strategy', date: 'Aug 29–30' },
-                    { id: 'sat_a12', title: 'Bluebook Practice Test #6 (Full Timed)', desc: 'Final full mock of August. This score is your realistic test-day prediction.', time: '3h', tag: 'test', date: 'Aug 31' },
+                    { id: 'sat_a01', title: '🏋️ August Week 1: Weakest Math Subtype Sprint', desc: 'Pick your single weakest Math subtype from Tests #1–5. Do 50 official questions from that one type over 5 days. Goal: flip it from a weakness into a consistent strength.', time: '2h/day', tag: 'math', date: 'Aug 1–7' },
+                    { id: 'sat_a02', title: '✍️ August Week 1: RW Expression of Ideas Mastery', desc: '\"Expression of Ideas\" questions (add/delete/revise/reorder sentences) are the highest-leverage RW skill. Master the single rule: every change must serve the paragraph\'s main point.', time: '1.5h', tag: 'rw', date: 'Aug 3–6' },
+                    { id: 'sat_a03', title: '🎯 Bluebook Test #6 — August Benchmark', desc: 'Sixth mock. You should be at or above your September target score. If not, identify exactly which two question types are dragging your score — that\'s your final focus for August.', time: '3h', tag: 'test', date: 'Aug 9' },
+                    { id: 'sat_a04', title: '📋 Test #6 Deep Review — Precision Mode', desc: 'At this stage, review every wrong answer plus every question you weren\'t 100% confident on. Even correct lucky guesses need to become confident correct answers.', time: '2h', tag: 'review', date: 'Aug 10' },
+                    { id: 'sat_a05', title: '🖥️ Desmos & Digital Tools Mastery Session', desc: 'Practice with the Desmos calculator built into Bluebook: graphing equations to solve, finding intersections, checking quadratic roots. Also: annotation tool, eliminator, mark-for-review workflow.', time: '1.5h', tag: 'strategy', date: 'Aug 11–13' },
+                    { id: 'sat_a06', title: '📐 Math: Hard Module 2 Drill — Level 4 & 5 Only', desc: 'Pull only the hardest questions from CB question bank. Focus on: strange function notation, multi-step geometry, combined algebra+geometry, and nonlinear systems. These are the 1500+ differentiators.', time: '2h', tag: 'math', date: 'Aug 13–16' },
+                    { id: 'sat_a07', title: '✍️ RW: Full Passage Timed Drill (30 min)', desc: 'Do one complete RW module (27 questions) under 32-minute timed conditions. Track your pacing: are you finishing? Adjust your skip-and-return strategy if you run out of time.', time: '1h', tag: 'rw', date: 'Aug 15–17' },
+                    { id: 'sat_a08', title: '🎯 Bluebook Test #7 — Pre-September Final Dress Rehearsal', desc: 'Most important mock test of August. Simulate the EXACT September test-day routine: wake at the same time, eat the same breakfast, start at the same hour as the real test. Score and review immediately.', time: '4h', tag: 'test', date: 'Aug 23' },
+                    { id: 'sat_a09', title: '📋 Test #7 Review — Final Gap Identification', desc: 'This is your last major review session. Identify your final 1–2 remaining weak areas. Make a targeted drill plan for the last 2 weeks of August. Also review error notebook from scratch.', time: '2.5h', tag: 'review', date: 'Aug 24' },
+                    { id: 'sat_a10', title: '📓 Full Error Notebook Review — All Months', desc: 'Read through every error logged since June. Categorize: resolved (don\'t need to see again) vs persistent (need one more drill). Any concept gap that appears 3+ times needs a focused reteach session today.', time: '2h', tag: 'review', date: 'Aug 25–27' },
+                    { id: 'sat_a11', title: '📐 Math: Careless Error Elimination Protocol', desc: 'Review every careless math error from all 7 mocks. Create your personal careless error checklist: units, re-reading the question, checking signs, checking if answer is reasonable. Internalize it.', time: '1.5h', tag: 'math', date: 'Aug 26–28' },
+                    { id: 'sat_a12', title: '🗒️ Build Personal Test-Day Strategy Card', desc: 'Write (by hand) your personal SAT strategy card: time per module, when to skip, calculator yes/no per type, top 5 careless error traps to avoid, and mental reset phrase for tough questions.', time: '1h', tag: 'strategy', date: 'Aug 29–30' },
+                    { id: 'sat_a13', title: '🎯 Bluebook Test #8 — Final August Mock', desc: 'Last full practice test of August. This is your September SAT prediction score. Treat it with full test-day seriousness. Do NOT review heavily — light review only. Rest is more valuable now.', time: '3h', tag: 'test', date: 'Aug 30' },
                 ]
             },
             {
-                id: 'sat-september', title: 'September: Final Preparation', month: 'september',
+                id: 'sat-september', title: 'September: September SAT Execution + October Peak', month: 'september',
                 tasks: [
-                    { id: 'sat_s01', title: 'Week 1: Math Formula Sheet Review', desc: 'Review all algebra formulas, geometry formulas, and trigonometric identities. Confirm you can recall them cold.', time: '1.5h', tag: 'math', date: 'Sep 1–3' },
-                    { id: 'sat_s02', title: 'Week 1: Grammar Rules Final Review', desc: 'Review all 7 core grammar rules. Do 20 targeted grammar questions under timed conditions.', time: '1h', tag: 'rw', date: 'Sep 2–4' },
-                    { id: 'sat_s03', title: 'Bluebook Practice Test #7 (Full Timed)', desc: 'Seventh mock. Light review only. Trust your training. Don\'t make major strategy changes this late.', time: '3h', tag: 'test', date: 'Sep 7' },
-                    { id: 'sat_s04', title: 'Week 2: Targeted Weakness Drill (Last Round)', desc: 'One final sprint on your persistent weak area. Maximum 3 hours. Don\'t burn out.', time: '3h', tag: 'strategy', date: 'Sep 8–12' },
-                    { id: 'sat_s05', title: 'Week 2: Full Error Notebook Review', desc: 'Final scan of all errors. Flag any unresolved concept gaps for one more review session.', time: '1.5h', tag: 'review', date: 'Sep 10–12' },
-                    { id: 'sat_s06', title: 'Week 3: Light Practice Only', desc: 'Short 30-min daily practice sessions only. No full mocks. Protect your mental freshness.', time: '30min/day', tag: 'strategy', date: 'Sep 15–21' },
-                    { id: 'sat_s07', title: 'Print SAT Admission Ticket', desc: 'Download and print your College Board admission ticket. Confirm test center location and reporting time.', time: '30min', tag: 'strategy', date: 'Sep 25' },
-                    { id: 'sat_s08', title: 'Prepare Test-Day Supplies', desc: 'Pack: printed ticket, valid photo ID, approved calculator (charged), pencils, water, light snack, watch.', time: '30min', tag: 'strategy', date: 'Sep 30' },
+                    { id: 'sat_s01', title: '🧠 Sep Week 1: Math Formula Cold Recall Drill', desc: 'Write out every formula from memory — geometry, algebra, trig — without looking. Fill gaps. These formulas are given on the test, but recalling them saves 5–10 seconds per question.', time: '1h', tag: 'math', date: 'Sep 1–3' },
+                    { id: 'sat_s02', title: '✍️ Sep Week 1: Grammar Final Rapid Review', desc: 'Quick-fire 20 grammar questions on your weakest rule. Time yourself at 45 seconds per question. At this stage grammar should feel automatic.', time: '45min', tag: 'rw', date: 'Sep 2–4' },
+                    { id: 'sat_s03', title: '💤 Sep Week 1: Sleep & Energy Protocol', desc: 'Shift your sleep schedule to match test-day. Be asleep by 10pm, awake by 7am for 7 consecutive nights before Sep 13. Cognitive performance drops 20% on poor sleep.', time: 'Lifestyle', tag: 'strategy', date: 'Sep 5–12' },
+                    { id: 'sat_s04', title: '⚡ Sep Week 1: Light 30-Min Daily Sharpening', desc: 'Daily 30-min sessions only: 10 math questions, 10 RW questions, review your strategy card. No mocks, no heavy drilling. Protect mental freshness. You\'ve done the work — now trust it.', time: '30min/day', tag: 'strategy', date: 'Sep 6–12' },
+                    { id: 'sat_s05', title: '🎫 September SAT: Print Ticket & Prepare Supplies', desc: 'Print admission ticket (College Board). Pack: ticket, valid photo ID, approved calculator (fully charged), 2 pencils, watch, water bottle, light snack. Check test center location and parking.', time: '30min', tag: 'strategy', date: 'Sep 11' },
+                    { id: 'sat_s06', title: '🌙 September SAT: Night Before Protocol', desc: 'Skim strategy card once only. Eat a real dinner, avoid screens after 9pm. Pack your test bag tonight. Set 2 alarms. Sleep by 10pm. Confidence comes from training — not last-minute review.', time: '30min', tag: 'strategy', date: 'Sep 12' },
+                    { id: 'sat_s07', title: '🏆 SEPTEMBER SAT EXAM DAY', desc: 'Arrive 45 minutes early. Breathe. Read every question fully before answering. On hard questions: eliminate 2, guess confidently, mark for review, move on. Come back with fresh eyes. Execute your strategy card.', time: 'Full day', tag: 'test', date: 'Sep 13' },
+                    { id: 'sat_s08', title: '🛌 September SAT: Recovery Day', desc: 'Complete rest. Do not attempt to recall specific questions — it\'s done. Eat well, sleep, do something enjoyable. Your brain consolidates learning during rest.', time: 'Rest day', tag: 'strategy', date: 'Sep 14' },
+                    { id: 'sat_s09', title: '🔄 September Results Analysis + October Plan', desc: 'How did you feel section by section? Log your intuitions. If scores come early, analyze the breakdown. What still needs work for October? Build a 2-week October sprint plan NOW.', time: '1.5h', tag: 'review', date: 'Sep 15–17' },
+                    { id: 'sat_s10', title: '🎯 Bluebook Practice Test — October Prep Benchmark', desc: 'Take a fresh full practice test (use the most recent Bluebook practice test you haven\'t done). This is your October baseline. Don\'t compare aggressively to September — this is a fresh start.', time: '3h', tag: 'test', date: 'Sep 20' },
+                    { id: 'sat_s11', title: '📋 October Sprint Plan — Targeted Weakness Attack', desc: 'Based on September experience and practice test results, identify your top 2 remaining improvement areas. Build a specific daily drill schedule for September 20 – October 2.', time: '1h', tag: 'strategy', date: 'Sep 21' },
+                    { id: 'sat_s12', title: '📐 October Prep: Math Weak Spot Final Drill', desc: 'Deep-dive on your single weakest math subtype from September. 40 official questions, timed. If you can\'t find more CB questions on that type, use the explanation videos on Khan Academy Math.', time: '2h', tag: 'math', date: 'Sep 22–25' },
+                    { id: 'sat_s13', title: '✍️ October Prep: RW High-Value Question Sprint', desc: 'Focus on the 3 RW question types with highest point value: Command of Evidence (quantitative), Transitions, and Expression of Ideas. Do 10 of each under timed conditions.', time: '1.5h', tag: 'rw', date: 'Sep 23–26' },
+                    { id: 'sat_s14', title: '🎯 October Dress Rehearsal — Full Mock (Final)', desc: 'Full Bluebook practice test under exact October test-day conditions: same wake time, same breakfast, start at the same time the real test starts. This is your last full-length run before Oct 4.', time: '3.5h', tag: 'test', date: 'Sep 27' },
+                    { id: 'sat_s15', title: '📋 October Dress Rehearsal Review (Light)', desc: 'Light review only — 60 min max. Focus on any systematic patterns still showing up. Update strategy card if needed. Don\'t make big changes this close to test day.', time: '1h', tag: 'review', date: 'Sep 28' },
+                    { id: 'sat_s16', title: '⚡ Oct Prep Week: Final Sharpening Only', desc: 'Daily 20-min sessions: review strategy card, 5 math, 5 RW. Keep sharp without burning out. No mocks. No new material. Trust your training.', time: '20min/day', tag: 'strategy', date: 'Sep 29–30' },
                 ]
             },
             {
-                id: 'sat-october', title: 'October: Exam Day & Beyond', month: 'october',
+                id: 'sat-october', title: 'October: October SAT Execution', month: 'october',
                 tasks: [
-                    { id: 'sat_o01', title: 'Night Before: Light Review Only', desc: 'Skim your cheat sheet once. Sleep by 10pm. No new material. Confidence is built in training, not the night before.', time: '30min', tag: 'strategy', date: 'Oct 4' },
-                    { id: 'sat_o02', title: 'SAT EXAM DAY 🎯', desc: 'Arrive 45 min early. Eat a real breakfast. Read every question carefully. Flag hard questions and move on. You\'ve trained for this.', time: 'Full day', tag: 'test', date: 'Oct 5' },
-                    { id: 'sat_o03', title: 'Post-Exam Recovery', desc: 'Rest completely the day after. Do not attempt to recall questions. Trust your preparation.', time: '—', tag: 'strategy', date: 'Oct 6' },
-                    { id: 'sat_o04', title: 'Check SAT Score Release', desc: 'Scores released approximately 2 weeks after exam (Oct 17–20). Log score immediately.', time: '—', tag: 'review', date: 'Oct 17–20' },
-                    { id: 'sat_o05', title: 'Analyze Score Results', desc: 'Review section breakdown. If 1500+: celebrate and send scores. If below: assess retake options for Nov/Dec.', time: '1h', tag: 'review', date: 'Oct 20' },
-                    { id: 'sat_o06', title: 'Send Scores to Colleges', desc: 'Send official SAT scores through College Board to all target colleges. Verify each school\'s CEEB code.', time: '1h', tag: 'strategy', date: 'Oct 22–28' },
+                    { id: 'sat_o01', title: '🔋 October 1–3: Maintenance & Rest', desc: '20-min daily sessions max. Review strategy card each morning. Eat well. Protect sleep. You have done the work — do not cram now. The goal is to arrive sharp, rested, and confident.', time: '20min/day', tag: 'strategy', date: 'Oct 1–3' },
+                    { id: 'sat_o02', title: '🎫 October SAT: Print Ticket & Pack Bag', desc: 'Print admission ticket. Pack the night before: ticket, ID, calculator (charged), pencils, water, watch, snack. Confirm test center address and how long it takes to get there.', time: '30min', tag: 'strategy', date: 'Oct 2' },
+                    { id: 'sat_o03', title: '🌙 October SAT: Night Before Protocol', desc: 'One final skim of your strategy card. Light meal, no heavy food. No screens after 9pm. Set two alarms. Sleep by 10pm. You know this material — confidence is earned in training.', time: '30min', tag: 'strategy', date: 'Oct 3' },
+                    { id: 'sat_o04', title: '🏆 OCTOBER SAT EXAM DAY — Execute Everything', desc: 'Arrive 45 min early. Eat a real breakfast 90 min before. Read every question fully. Skip truly hard questions without guilt — come back. On guesses: eliminate 2, commit confidently. Execute your strategy card. You\'ve trained for this exact moment.', time: 'Full day', tag: 'test', date: 'Oct 4' },
+                    { id: 'sat_o05', title: '🛌 October SAT: Full Recovery', desc: 'Complete rest. Celebrate the fact you did two full SAT preps. Do not replay questions. Trust your preparation. Eat well, sleep, recover.', time: 'Rest day', tag: 'strategy', date: 'Oct 5' },
+                    { id: 'sat_o06', title: '📊 Score Release: Analyze & Decide', desc: 'Scores typically release 2–3 weeks after test (Oct 20–25). When available: log total and section scores. If 1500+: send to colleges immediately. Below 1500: assess November SAT retake eligibility.', time: '1h', tag: 'review', date: 'Oct 20–25' },
+                    { id: 'sat_o07', title: '🏫 Send SAT Scores to Colleges', desc: 'Send official scores through College Board Score Send. Verify each college\'s CEEB code. Check if colleges require all scores sent (Score Choice policies vary by school).', time: '1h', tag: 'strategy', date: 'Oct 25–30' },
                 ]
             }
         ];
@@ -4884,28 +5839,181 @@
             }).join('');
         }
 
-        /* ── Today's Tasks ── */
+        /* ══════════════════════════════════════════════
+           PLANNER-SYNCED ADAPTIVE DAILY MISSION ENGINE
+        ══════════════════════════════════════════════ */
+
+        // Maps a planner task title to a concrete, countable daily mission
+        function deriveMissionFromPlanTask(planTask) {
+            const title = (planTask.title || '').toLowerCase();
+            const tag = planTask.tag;
+
+            const missionMap = [
+                // Math topics → specific drill missions
+                { match: ['linear equation','linear function','systems'], mission: { title: '🔢 Solve 20 Hard Linear Equations (Level 4–5)', desc: 'Pull official College Board Digital SAT questions on linear equations and systems. Set a 90-second limit per question. Log every wrong answer in the Error Notebook with the correct method written out.', time: '75min', tag: 'math', count: 20 }},
+                { match: ['quadratic','parabola','vertex'], mission: { title: '📐 Drill 20 Quadratic Questions — All 4 Methods', desc: 'Factoring, quadratic formula, completing the square, vertex form. Every question from CB official bank. Note which method is fastest for each problem type.', time: '70min', tag: 'math', count: 20 }},
+                { match: ['exponential','radical','growth','decay'], mission: { title: '📈 Solve 18 Exponential & Radical Questions', desc: 'Official CB questions on y=ab^x models, exponent rules, and radical equations. Know what each variable means in context. Target 85%+ accuracy.', time: '65min', tag: 'math', count: 18 }},
+                { match: ['geometry','triangle','circle','angle','line'], mission: { title: '📏 Complete 20 Geometry Questions (Triangles + Circles)', desc: 'Parallel lines, triangle similarity, Pythagorean theorem, arc length, sector area, and coordinate geometry. All Level 3–5 from CB bank. Draw diagrams for every question.', time: '70min', tag: 'math', count: 20 }},
+                { match: ['trigonometry','trig','soh','sin','cos','tan'], mission: { title: '📐 Master 15 SAT Trigonometry Questions', desc: 'Right-triangle trig, SOH-CAH-TOA, special triangles (30-60-90 and 45-45-90), sin²+cos²=1. SAT trig is a narrow, learnable slice — drill it until every variant feels familiar.', time: '60min', tag: 'math', count: 15 }},
+                { match: ['data analysis','scatterplot','statistics','two-way table'], mission: { title: '📊 Tackle 15 Data Analysis Questions (Charts + Tables)', desc: 'Scatterplot line-of-best-fit, two-way tables, mean/median interpretation, and correlation vs causation. Pull all official CB data questions. Write your reasoning before picking.', time: '60min', tag: 'math', count: 15 }},
+                { match: ['function','domain','range','transformation','graph'], mission: { title: '🔁 Solve 20 Functions & Transformations Questions', desc: 'Function notation, composite functions, shift/reflect/stretch graphs, even/odd, domain & range. Module 2 difficulty. These are top-5 hardest question types — solve them methodically.', time: '75min', tag: 'math', count: 20 }},
+                { match: ['word problem','rate','ratio','percent'], mission: { title: '💬 Complete 20 Word Problems (Rates, Ratios, Percents)', desc: 'Translate every word problem into an equation before solving. Percent change, weighted average, unit conversion, and multi-step rates. All official CB. Aim for zero careless errors.', time: '70min', tag: 'math', count: 20 }},
+                { match: ['hard module','level 4','level 5','module 2'], mission: { title: '🔥 Hard Module 2 Sprint — 15 Level 4–5 Questions', desc: 'Pull only Level 4 and Level 5 questions from the CB question bank. Nonlinear systems, strange function notation, multi-step geometry. These are the 1500+ differentiators — master them.', time: '80min', tag: 'math', count: 15 }},
+                // R&W topics → specific missions
+                { match: ['command of evidence','quantitative','chart+passage'], mission: { title: '📊 Practice 15 Command of Evidence Questions', desc: 'Chart-and-passage combo questions (appear 4–6× per test). Answer the passage question first, then use the chart to confirm. Prove every answer with an exact sentence or data point.', time: '55min', tag: 'rw', count: 15 }},
+                { match: ['grammar','subject-verb','punctuation','apostrophe'], mission: { title: '✍️ Drill 25 SAT Grammar Rules Questions', desc: 'Subject-verb agreement, comma splices, semicolons, colons, modifiers, parallelism, apostrophes. These are free points once mastered. Drill until every rule is automatic.', time: '55min', tag: 'rw', count: 25 }},
+                { match: ['vocabulary','words in context','word choice'], mission: { title: '📖 Solve 25 Words-in-Context Questions', desc: 'Ignore the tested word. Read the sentence without it. Pick the answer that best fills the blank. Do not rely on dictionary definitions — use context only. 25 official CB questions.', time: '50min', tag: 'rw', count: 25 }},
+                { match: ['inference','evidence','paired passage'], mission: { title: '🔍 Complete 15 Inference & Evidence Questions', desc: '"Prove it with a line" — every correct inference answer maps to an exact sentence in the passage. No guessing. Drill 15 official CB inference questions and mark your evidence line for each.', time: '55min', tag: 'rw', count: 15 }},
+                { match: ['transition','however','therefore','for example'], mission: { title: '🔗 Master 20 Transition Questions', desc: 'Contrast (however, yet), addition (furthermore, also), cause-effect (therefore, as a result), example (for instance). Categorize the relationship first, then pick. 20 official questions.', time: '45min', tag: 'rw', count: 20 }},
+                { match: ['expression of ideas','add','delete','revise','reorder'], mission: { title: '✏️ Drill 20 Expression of Ideas Questions', desc: 'Every add/delete/revise/reorder decision must serve the paragraph\'s main point. Ask: does this sentence support, introduce, or contradict the main idea? 20 official CB questions.', time: '55min', tag: 'rw', count: 20 }},
+                { match: ['craft','structure','rhetorical','author','purpose'], mission: { title: '🎯 Complete 15 Craft & Structure Questions', desc: 'Author\'s purpose, text structure, point of view, and rhetorical effect questions. Read the question stem carefully — it tells you exactly what to look for. Drill 15 official questions.', time: '55min', tag: 'rw', count: 15 }},
+                { match: ['khan academy','skill sprint','rw mastery'], mission: { title: '🎓 Khan Academy Digital SAT RW — Full Skill Sprint', desc: 'Go to Khan Academy → Digital SAT → Reading and Writing. Complete every practice problem (not just lessons) in your two lowest-scoring skill domains. Log your accuracy in the Error Notebook.', time: '60min', tag: 'rw', count: 0 }},
+                // Test days
+                { match: ['bluebook','mock test','practice test','full mock'], mission: { title: '🏆 Full Bluebook Mock SAT (Timed — 2h14m)', desc: 'Open Bluebook app. Start the practice test. No music, no phone, 10-min break only. Simulate test day exactly: same start time, same snack, same calculator. Score immediately after.', time: '3h', tag: 'test', count: 0 }},
+                // Review days
+                { match: ['error','notebook','review','mistake'], mission: { title: '📋 Error Notebook Review Session', desc: 'Review every unreviewed error in the Error Notebook tab. For each: confirm you know the correct method, re-solve without looking, mark as reviewed. Find patterns across multiple errors.', time: '45min', tag: 'review', count: 0 }},
+                { match: ['desmos','calculator','digital tools'], mission: { title: '🖥️ Desmos & Digital Tools Practice', desc: 'Practice graphing to solve equations in Desmos, finding intersections, checking roots. Also: annotation tool, eliminator, mark-for-review flow. Master the tools — they save minutes per test.', time: '45min', tag: 'strategy', count: 0 }},
+                { match: ['strategy','test day','approach'], mission: { title: '🗒️ Test Strategy & Process Review', desc: 'Review your personal strategy card. Confirm time-per-module targets, skip-and-return triggers, and top 5 careless error traps. Write out your mental reset phrase for difficult questions.', time: '30min', tag: 'strategy', count: 0 }},
+            ];
+
+            // Find matching mission
+            for (const entry of missionMap) {
+                if (entry.match.some(kw => title.includes(kw))) {
+                    return { ...entry.mission, id: 'mission_' + planTask.id };
+                }
+            }
+
+            // Generic fallback based on tag
+            if (tag === 'math') return { id: 'mission_' + planTask.id, title: `📐 Math Drill: ${planTask.title.replace(/^[^\w]+/,'')}`, desc: planTask.desc + ' — Solve at least 15 official College Board questions from this topic and log every error.', time: planTask.time, tag: 'math', count: 15 };
+            if (tag === 'rw')   return { id: 'mission_' + planTask.id, title: `✍️ R&W Session: ${planTask.title.replace(/^[^\w]+/,'')}`, desc: planTask.desc + ' — Complete all practice questions and note any patterns in your errors.', time: planTask.time, tag: 'rw', count: 0 };
+            if (tag === 'test') return { id: 'mission_' + planTask.id, title: '🏆 Full Bluebook Mock SAT', desc: planTask.desc, time: '3h', tag: 'test', count: 0 };
+            return { id: 'mission_' + planTask.id, title: planTask.title, desc: planTask.desc, time: planTask.time, tag: planTask.tag, count: 0 };
+        }
+
+        /* ── Today's Adaptive Mission (synced with study planner) ── */
         function renderSATTodayTasks() {
             const container = document.getElementById('satTodayTasks');
             if (!container) return;
-            const allTasks = satRoadmap.flatMap(p => p.tasks);
-            const weakTopic = getWeakMathTopic();
-            const latest = satPracticeTests[satPracticeTests.length - 1];
-            const needsBluebookReview = latest && (parseInt(latest.total) || 0) < 1500;
-            const pendingMathErrors = satErrors.filter(e => e.section === 'math' && !e.reviewed).length;
-            const adaptive = [
-                { id: 'adaptive_math', title: `Solve 20 hard ${weakTopic} questions`, desc: 'Use the Official College Board SAT Question Bank or Bluebook missed-question review. Record topic, Level 4/5 difficulty, result, and solve time.', time: '75min', tag: 'math', date: 'Today' },
-                { id: 'adaptive_errors', title: `Review ${Math.min(Math.max(pendingMathErrors, 5), 10)} previous Math mistakes`, desc: 'Focus on repeated mistake types and write the correct method before re-solving.', time: '35min', tag: 'review', date: 'Today' },
-                needsBluebookReview
-                    ? { id: 'adaptive_bluebook', title: 'Bluebook score repair block', desc: 'Review latest module performance, especially Math Module 2 and any timing collapse.', time: '45min', tag: 'test', date: 'Today' }
-                    : { id: 'adaptive_rw', title: 'Khan Academy Digital SAT R&W mastery', desc: 'Complete one Reading/Writing lesson or practice set in the weakest domain, then log accuracy trend.', time: '45min', tag: 'rw', date: 'Today' }
-            ];
-            const upcoming = adaptive.concat(allTasks.filter(t => !satCompleted[t.id]).slice(0, 2));
-            if (!upcoming.length) {
-                container.innerHTML = '<div style="text-align:center;padding:24px;color:var(--success);font-weight:700;font-size:0.9rem">🎉 All SAT tasks completed! You\'re ready.</div>';
+
+            const todayISO = new Date().toISOString().split('T')[0];
+            const planDays = window._generatedPlanDays || [];
+
+            // Find today in the plan
+            const todayPlan = planDays.find(d => d.dateISO === todayISO);
+
+            let missions = [];
+
+            if (todayPlan && todayPlan.tasks.length > 0) {
+                // ── PLAN EXISTS: derive missions directly from today's scheduled tasks ──
+                // Deduplicate by derived mission title so the same task never appears twice
+                const seenTitles = new Set();
+                todayPlan.tasks.forEach(planTask => {
+                    const derived = deriveMissionFromPlanTask(planTask);
+                    if (!seenTitles.has(derived.title)) {
+                        seenTitles.add(derived.title);
+                        missions.push(derived);
+                    }
+                });
+
+                // Add a topic-specific warm-up if it's not a test/exam day
+                const hasErrorLog = missions.some(m => (m.title || '').toLowerCase().includes('error log') || (m.title || '').toLowerCase().includes('daily error'));
+                if (!hasErrorLog && todayPlan.dayOfWeek !== 6 && !todayPlan.isExamDay) {
+                    // Make the daily task specific to today's main subject
+                    const mainTask = todayPlan.tasks[0];
+                    const mainTag = mainTask ? mainTask.tag : '';
+                    const mainTitle = mainTask ? (mainTask.title || '').toLowerCase() : '';
+                    let dailyWarmup;
+                    if (mainTag === 'math' || mainTag === 'math-hard') {
+                        // Derive a specific practice count from today's topic
+                        const topicHint = mainTitle.includes('linear') ? 'Linear Equations' :
+                                          mainTitle.includes('quadratic') ? 'Quadratic' :
+                                          mainTitle.includes('geometry') ? 'Geometry' :
+                                          mainTitle.includes('function') ? 'Functions' :
+                                          mainTitle.includes('exponential') ? 'Exponential' :
+                                          mainTitle.includes('data') || mainTitle.includes('statistics') ? 'Data Analysis' :
+                                          mainTitle.includes('word') || mainTitle.includes('ratio') || mainTitle.includes('percent') ? 'Word Problems' :
+                                          'Hard Math';
+                        dailyWarmup = { id: 'daily_warmup_' + todayISO, title: `🔥 Warm-Up: Solve 20 Hard ${topicHint} Questions`, desc: `Before your main session, pull 20 Level 4–5 ${topicHint} questions from the CB Question Bank. 90-second limit per question. Log every wrong answer in the Error Notebook. This primes your brain for today's deeper drill.`, time: '20min', tag: 'math' };
+                    } else if (mainTag === 'rw') {
+                        const rwHint = mainTitle.includes('grammar') || mainTitle.includes('punctuation') ? 'Grammar' :
+                                       mainTitle.includes('vocab') || mainTitle.includes('word') ? 'Words-in-Context' :
+                                       mainTitle.includes('transition') ? 'Transitions' :
+                                       mainTitle.includes('inference') || mainTitle.includes('evidence') ? 'Inference' :
+                                       mainTitle.includes('craft') || mainTitle.includes('structure') ? 'Craft & Structure' :
+                                       'Reading & Writing';
+                        dailyWarmup = { id: 'daily_warmup_' + todayISO, title: `📝 Warm-Up: 15 ${rwHint} Questions (No Timer)`, desc: `Start today with 15 untimed ${rwHint} questions from the CB bank. Focus on your process — eliminate wrong answers by finding their flaw, not by feeling. Then move into the main session.`, time: '20min', tag: 'rw' };
+                    } else {
+                        dailyWarmup = { id: 'daily_warmup_' + todayISO, title: '📝 15-Min Error Log Review', desc: "Before starting today's session, revisit every mistake from your last practice. For each error: confirm you know the correct method, then write it out once. This single habit is what separates 1400 from 1500.", time: '15min', tag: 'review' };
+                    }
+                    missions.push(dailyWarmup);
+                }
+            } else {
+                // ── NO PLAN: generate smart date-based adaptive missions ──
+                // Use day-of-year as a seed so every calendar day gets a unique sequence
+                const dayOfYear = Math.floor((new Date(todayISO) - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+                const weakTopic = getWeakMathTopic();
+                const pendingErrors = satErrors.filter(e => !e.reviewed).length;
+                const latest = satPracticeTests[satPracticeTests.length - 1];
+                const latestScore = latest ? (parseInt(latest.total) || 0) : 0;
+
+                const mathTopics = [
+                    { title: `🔢 Solve 20 Hard ${weakTopic} Questions (Level 4–5)`, desc: `Your weakest math area right now is ${weakTopic}. Pull 20 Level 4–5 questions from the Official CB Question Bank. Log every wrong answer. Set a 90-second limit per question.`, time: '75min', tag: 'math' },
+                    { title: '🔥 Hard Module 2 Sprint — 15 Level 4–5 Questions', desc: 'Focus on the hardest questions only — nonlinear systems, strange function notation, multi-step geometry. These are the questions that separate 1400 from 1500.', time: '80min', tag: 'math' },
+                    { title: '📐 Quadratic Deep Drill — 20 Official Questions', desc: 'Factoring, quadratic formula, completing the square, and vertex form. Know which method is fastest for each type. 20 official CB questions with 90-sec limit.', time: '70min', tag: 'math' },
+                    { title: '📈 Exponential Functions Sprint — 18 Questions', desc: 'Growth and decay models, exponent rules, radical equations. Every question from CB official bank. Target: 85%+ accuracy before moving on.', time: '65min', tag: 'math' },
+                    { title: '📊 Data Analysis Drill — 15 Chart & Table Questions', desc: 'Scatterplot best-fit lines, two-way tables, correlation vs causation, sampling bias. Draw out or annotate each chart before solving.', time: '60min', tag: 'math' },
+                    { title: '💬 Word Problem Sprint — 20 Official Questions', desc: 'Translate first, then solve. Rates, ratios, percents, and multi-step scenarios. Read every word of the question before writing anything.', time: '70min', tag: 'math' },
+                    { title: '🔁 Functions & Transformations — 20 Level 3–5 Questions', desc: 'Composite functions, domain/range, graph shifts, reflections. These appear in Module 2 hard questions. Take your time to sketch the transformation.', time: '75min', tag: 'math' },
+                ];
+                const rwTopics = [
+                    { title: '✍️ Grammar Rapid Drill — 25 Official Questions', desc: 'Subject-verb agreement, comma splices, semicolons, modifiers, parallelism. These are free points — drill until every rule feels automatic.', time: '55min', tag: 'rw' },
+                    { title: '🔍 Inference & Evidence — 15 Prove-It Questions', desc: 'Every correct inference answer has an exact line in the passage. Mark it. If you can\'t find the line, the answer is wrong. 15 official questions.', time: '55min', tag: 'rw' },
+                    { title: '📖 Words in Context — 25 Official Questions', desc: 'Ignore the word being tested. Read without it, fill the blank with your own word, then pick the closest match. Never use dictionary definitions.', time: '50min', tag: 'rw' },
+                    { title: '🔗 Transitions Sprint — 20 Official Questions', desc: 'Classify the relationship (contrast/addition/cause-effect/example) before picking. 20 official CB questions. These are fast points once you know the categories.', time: '45min', tag: 'rw' },
+                    { title: '🎓 Khan Academy Digital SAT R&W Skill Sprint', desc: 'Go to Khan Academy → Digital SAT → Reading & Writing. Complete all practice problems in your two lowest-scoring domains. Log accuracy in the Error Notebook.', time: '60min', tag: 'rw' },
+                    { title: '✏️ Expression of Ideas — 20 Add/Delete/Revise Questions', desc: 'Every decision must serve the paragraph\'s main idea. Ask: does this sentence support, introduce, or contradict the main point? 20 official CB questions.', time: '55min', tag: 'rw' },
+                    { title: '🎯 Craft & Structure — 15 Purpose & Effect Questions', desc: 'Author\'s purpose, text structure, and rhetorical effect. Read the question stem carefully — it tells you exactly what to look for. 15 official questions.', time: '55min', tag: 'rw' },
+                ];
+
+                const mathPick = mathTopics[dayOfYear % mathTopics.length];
+                const rwPick   = rwTopics[Math.floor(dayOfYear / 2) % rwTopics.length];
+                missions.push({ id: 'adp_m_' + todayISO, ...mathPick });
+                missions.push({ id: 'adp_rw_' + todayISO, ...rwPick });
+
+                if (pendingErrors >= 3) {
+                    missions.push({ id: 'adp_err_' + todayISO, title: `📋 Review ${Math.min(pendingErrors, 8)} Unreviewed Errors`, desc: 'Open the Error Notebook tab. For each unreviewed error: confirm the correct method, re-solve independently, mark as reviewed. Identify any repeated patterns.', time: '35min', tag: 'review' });
+                } else if (latestScore > 0 && latestScore < 1500) {
+                    missions.push({ id: 'adp_bb_' + todayISO, title: '🎯 Bluebook Score Gap Session', desc: `Your last score was ${latestScore}. Today: revisit every question type you missed in that test and do a targeted mini-drill of 10 questions per weak area.`, time: '45min', tag: 'review' });
+                } else {
+                    missions.push({ id: 'adp_log_' + todayISO, title: '📝 15-Min Error Log & Plan Review', desc: "Quick review of this week's mistakes. Confirm you understand every correct method before today's sessions. Then check the Study Planner for your next scheduled task.", time: '15min', tag: 'review' });
+                }
+            }
+
+            if (!missions.length) {
+                container.innerHTML = '<div style="text-align:center;padding:24px;color:var(--success);font-weight:700;font-size:0.9rem">🎉 All SAT tasks completed for today! You\'re ready for test day.</div>';
                 return;
             }
-            container.innerHTML = upcoming.map(t => buildSATTaskHTML(t, true)).join('');
+
+            // Render each mission with full descriptions visible
+            container.innerHTML = missions.map(t => {
+                const done = !!satCompleted[t.id];
+                const tagColors = { math: { bg: '#dbeafe', color: '#1d4ed8', label: 'Math' }, rw: { bg: '#f3e8ff', color: '#6b21a8', label: 'Reading & Writing' }, test: { bg: '#fee2e2', color: '#991b1b', label: 'Mock Test' }, review: { bg: '#fef9c3', color: '#92400e', label: 'Review' }, strategy: { bg: '#d1fae5', color: '#065f46', label: 'Strategy' } };
+                const tc = tagColors[t.tag] || { bg: '#f1f5fb', color: '#6b7a99', label: t.tag };
+                const countBadge = t.count ? `<span style="background:#edf4ff;color:#1769e8;font-size:0.65rem;font-weight:800;padding:2px 8px;border-radius:4px;border:1px solid #d0e4ff">${t.count} questions</span>` : '';
+                return `<div class="sat-task-item ${done ? 'completed' : ''}" onclick="toggleSATTask('${t.id}')" style="border-left:3px solid ${tc.color}40">
+                    <div class="sat-task-check"></div>
+                    <div class="sat-task-content">
+                        <div class="sat-task-title" style="font-size:0.9rem">${t.title}</div>
+                        <div class="sat-task-desc" style="display:block">${t.desc}</div>
+                        <div class="sat-task-meta" style="margin-top:6px">
+                            <span class="sat-task-tag" style="background:${tc.bg};color:${tc.color}">${tc.label}</span>
+                            <span class="sat-task-time">⏱ ${t.time}</span>
+                            ${countBadge}
+                            ${todayPlan ? '<span style="background:#d1fae5;color:#065f46;font-size:0.65rem;font-weight:700;padding:2px 8px;border-radius:4px">📅 From your plan</span>' : '<span style="background:#f3e8ff;color:#6b21a8;font-size:0.65rem;font-weight:700;padding:2px 8px;border-radius:4px">🤖 Adaptive</span>'}
+                        </div>
+                    </div>
+                </div>`;
+            }).join('');
         }
 
         /* ── Task HTML builder ── */
@@ -5328,9 +6436,9 @@
         /* ── SAT Section Switching ── */
         function switchSATTab(tab) {
             currentSATTab = tab;
-            const tabs = ['dashboard','tasks','bank','tests','errors','analytics'];
-            const panels = ['satPanelDashboard','satPanelTasks','satPanelBank','satPanelTests','satPanelErrors','satPanelAnalytics'];
-            const tabBtns = ['satTabDash','satTabTasks','satTabBank','satTabTests','satTabErrors','satTabAnalytics'];
+            const tabs = ['dashboard','tasks','bank','tests','errors','analytics','chapters'];
+            const panels = ['satPanelDashboard','satPanelTasks','satPanelBank','satPanelTests','satPanelErrors','satPanelAnalytics','satPanelChapters'];
+            const tabBtns = ['satTabDash','satTabTasks','satTabBank','satTabTests','satTabErrors','satTabAnalytics','satTabChapters'];
 
             panels.forEach((p, i) => {
                 const el = document.getElementById(p);
@@ -5342,12 +6450,670 @@
             });
 
             // Render the appropriate panel
-            if (tab === 'dashboard') { updateSATStats(); }
+            if (tab === 'dashboard') { updateSATStats(); renderSATGoalCard(); renderSATBadges(); prefillPlannerFromGoal(); }
             if (tab === 'tasks') { renderSATTasks(satTaskFilter); updateSATStats(); }
             if (tab === 'bank') { renderQuestionBank(); updateSATStats(); }
             if (tab === 'tests') { renderSATTests(); }
             if (tab === 'errors') { renderSATErrors(satErrorFilter); }
             if (tab === 'analytics') { renderSATAnalytics(); }
+            if (tab === 'chapters') { renderChapterTracker(); }
+        }
+
+        /* ══════════════════════════════════════════════
+           SAT GOAL CARD
+        ══════════════════════════════════════════════ */
+        let satGoalData = { current: null, math: null, rw: null, examDate: '2026-10-05' };
+
+        function loadGoalData() {
+            const key = `sat_goal_${currentUser ? currentUser.email : '_'}`;
+            const raw = localStorage.getItem(key);
+            if (raw) { try { satGoalData = { ...satGoalData, ...JSON.parse(raw) }; } catch(e) {} }
+        }
+
+        function saveGoalData() {
+            const c = parseInt(document.getElementById('goalInputCurrent').value) || null;
+            const m = parseInt(document.getElementById('goalInputMath').value) || null;
+            const rw = parseInt(document.getElementById('goalInputRW').value) || null;
+            const examDate = document.getElementById('goalInputExamDate').value || '2026-10-05';
+            satGoalData = { current: c, math: m, rw: rw, examDate };
+            const key = `sat_goal_${currentUser ? currentUser.email : '_'}`;
+            localStorage.setItem(key, JSON.stringify(satGoalData));
+            closeAllModals();
+            renderSATGoalCard();
+            showSaveIndicator();
+        }
+
+        function openGoalModal() {
+            document.getElementById('goalInputCurrent').value = satGoalData.current || '';
+            document.getElementById('goalInputMath').value = satGoalData.math || '';
+            document.getElementById('goalInputRW').value = satGoalData.rw || '';
+            document.getElementById('goalInputExamDate').value = satGoalData.examDate || '2026-10-05';
+            document.getElementById('satGoalModal').classList.add('show');
+        }
+
+        function predictedScore() {
+            // If they have test results, use trend; else estimate from tasks completed
+            if (satPracticeTests.length >= 2) {
+                const scores = satPracticeTests.map(t => t.total);
+                const last = scores[scores.length - 1];
+                const prev = scores[scores.length - 2];
+                const trend = last - prev;
+                return Math.min(1600, Math.max(400, last + trend * 1.5));
+            }
+            if (satGoalData.current) {
+                const allTasks = satRoadmap.flatMap(p => p.tasks);
+                const pct = allTasks.length ? allTasks.filter(t => satCompleted[t.id]).length / allTasks.length : 0;
+                const gap = 1500 - satGoalData.current;
+                return Math.round(satGoalData.current + gap * pct * 1.1);
+            }
+            return null;
+        }
+
+        function renderSATGoalCard() {
+            const current = satGoalData.current;
+            const target = 1500;
+            const gap = current ? Math.max(0, target - current) : null;
+            const predicted = predictedScore();
+            const allTasks = satRoadmap.flatMap(p => p.tasks);
+            const doneCount = allTasks.filter(t => satCompleted[t.id]).length;
+            const readiness = allTasks.length ? Math.round((doneCount / allTasks.length) * 100) : 0;
+
+            document.getElementById('goalCurrentScore').textContent = current || '—';
+            document.getElementById('goalScoreGap').textContent = gap !== null ? (gap === 0 ? '✓' : gap) : '—';
+            document.getElementById('goalPredicted').textContent = predicted ? predicted : '—';
+            document.getElementById('goalReadinessPct').textContent = readiness + '%';
+            document.getElementById('goalMathScore').textContent = satGoalData.math || '—';
+            document.getElementById('goalRWScore').textContent = satGoalData.rw || '—';
+        }
+
+        function prefillPlannerFromGoal() {
+            // Auto-fill planner inputs from saved goal data
+            if (satGoalData.current) {
+                const el = document.getElementById('plannerCurrentScore');
+                if (el && !el.value) el.value = satGoalData.current;
+            }
+            if (satGoalData.examDate) {
+                const el = document.getElementById('plannerExamDate');
+                if (el) el.value = satGoalData.examDate;
+            }
+        }
+
+        /* ══════════════════════════════════════════════
+           BADGE SYSTEM
+        ══════════════════════════════════════════════ */
+        const satBadgeDefs = [
+            { id: 'b_bronze', icon: '🥉', name: 'Bronze Scholar', req: '500 Questions Solved', color: '#b45309', bg: '#fef3c7', glow: 'rgba(180,83,9,0.15)', check: () => totalQSolved() >= 500 },
+            { id: 'b_silver', icon: '🥈', name: 'Silver Grinder', req: '1500 Questions Solved', color: '#6b7280', bg: '#f3f4f6', glow: 'rgba(107,114,128,0.15)', check: () => totalQSolved() >= 1500 },
+            { id: 'b_gold', icon: '🥇', name: 'Gold Warrior', req: '3000 Questions Solved', color: '#d97706', bg: '#fffbeb', glow: 'rgba(217,119,6,0.2)', check: () => totalQSolved() >= 3000 },
+            { id: 'b_master', icon: '🏆', name: 'Master Badge', req: '1500+ Predicted Score', color: '#7c3aed', bg: '#f5f3ff', glow: 'rgba(124,58,237,0.2)', check: () => (predictedScore() || 0) >= 1500 },
+            { id: 'b_streak7', icon: '🔥', name: '7-Day Streak', req: 'Study 7 days in a row', color: '#dc2626', bg: '#fee2e2', glow: 'rgba(220,38,38,0.15)', check: () => satStreak >= 7 },
+            { id: 'b_test1', icon: '📝', name: 'Test Taker', req: 'Complete first Bluebook test', color: '#0891b2', bg: '#e0f2fe', glow: 'rgba(8,145,178,0.15)', check: () => satPracticeTests.length >= 1 },
+            { id: 'b_error50', icon: '🔍', name: 'Error Hunter', req: 'Log 50 errors reviewed', color: '#059669', bg: '#d1fae5', glow: 'rgba(5,150,105,0.15)', check: () => satErrors.filter(e => e.reviewed).length >= 50 },
+            { id: 'b_chap', icon: '📚', name: 'Chapter Master', req: '5 chapters at Advanced+', color: '#1769e8', bg: '#dbeafe', glow: 'rgba(23,105,232,0.15)', check: () => advancedChapters() >= 5 },
+        ];
+
+        function totalQSolved() { return satQuestionBank.length + chaptersData.reduce((s, c) => s + (c.solved || 0), 0); }
+        function advancedChapters() { return chaptersData.filter(c => getMastery(c) === 'Advanced' || getMastery(c) === 'Expert').length; }
+
+        function renderSATBadges() {
+            const grid = document.getElementById('satBadgesGrid');
+            if (!grid) return;
+            grid.innerHTML = satBadgeDefs.map(b => {
+                const earned = b.check();
+                return `<div class="sat-badge-card ${earned ? 'earned' : 'locked'}" style="--badge-color:${b.color};--badge-bg:${b.bg};--badge-glow:${b.glow}">
+                    ${earned ? `<div class="sat-badge-earned-tag">Earned!</div>` : ''}
+                    <span class="sat-badge-icon">${b.icon}</span>
+                    <div class="sat-badge-name">${b.name}</div>
+                    <div class="sat-badge-req">${b.req}</div>
+                </div>`;
+            }).join('');
+        }
+
+        /* ══════════════════════════════════════════════
+           CHAPTER PROGRESS TRACKER
+        ══════════════════════════════════════════════ */
+        const chaptersDefinition = [
+            // Algebra
+            { id: 'alg_linear_eq', name: 'Linear Equations', domain: 'Algebra', color: '#1769e8', section: 'algebra', total: 60 },
+            { id: 'alg_linear_fn', name: 'Linear Functions', domain: 'Algebra', color: '#1769e8', section: 'algebra', total: 50 },
+            { id: 'alg_systems', name: 'Systems of Equations', domain: 'Algebra', color: '#1769e8', section: 'algebra', total: 50 },
+            { id: 'alg_inequalities', name: 'Inequalities', domain: 'Algebra', color: '#1769e8', section: 'algebra', total: 40 },
+            // Advanced Math
+            { id: 'adv_quadratics', name: 'Quadratics', domain: 'Advanced Math', color: '#7c3aed', section: 'advanced-math', total: 70 },
+            { id: 'adv_polynomials', name: 'Polynomials', domain: 'Advanced Math', color: '#7c3aed', section: 'advanced-math', total: 50 },
+            { id: 'adv_functions', name: 'Functions', domain: 'Advanced Math', color: '#7c3aed', section: 'advanced-math', total: 50 },
+            { id: 'adv_exponents', name: 'Exponents & Radicals', domain: 'Advanced Math', color: '#7c3aed', section: 'advanced-math', total: 40 },
+            { id: 'adv_nonlinear', name: 'Nonlinear Equations', domain: 'Advanced Math', color: '#7c3aed', section: 'advanced-math', total: 40 },
+            // Problem Solving & Data
+            { id: 'ps_percentages', name: 'Percentages', domain: 'Problem Solving & Data', color: '#0891b2', section: 'psda', total: 35 },
+            { id: 'ps_ratios', name: 'Ratios & Rates', domain: 'Problem Solving & Data', color: '#0891b2', section: 'psda', total: 35 },
+            { id: 'ps_probability', name: 'Probability', domain: 'Problem Solving & Data', color: '#0891b2', section: 'psda', total: 30 },
+            { id: 'ps_statistics', name: 'Statistics', domain: 'Problem Solving & Data', color: '#0891b2', section: 'psda', total: 40 },
+            { id: 'ps_scatterplots', name: 'Scatterplots', domain: 'Problem Solving & Data', color: '#0891b2', section: 'psda', total: 30 },
+            // Geometry
+            { id: 'geo_triangles', name: 'Triangles', domain: 'Geometry & Trigonometry', color: '#059669', section: 'geometry', total: 40 },
+            { id: 'geo_circles', name: 'Circles', domain: 'Geometry & Trigonometry', color: '#059669', section: 'geometry', total: 35 },
+            { id: 'geo_angles', name: 'Lines & Angles', domain: 'Geometry & Trigonometry', color: '#059669', section: 'geometry', total: 30 },
+            { id: 'geo_area', name: 'Area & Perimeter', domain: 'Geometry & Trigonometry', color: '#059669', section: 'geometry', total: 30 },
+            { id: 'geo_volume', name: 'Volume', domain: 'Geometry & Trigonometry', color: '#059669', section: 'geometry', total: 25 },
+            { id: 'geo_trig', name: 'Trigonometry', domain: 'Geometry & Trigonometry', color: '#059669', section: 'geometry', total: 30 },
+            // Reading & Writing
+            { id: 'rw_info_ideas', name: 'Information & Ideas', domain: 'Reading & Writing', color: '#d97706', section: 'rw', total: 60 },
+            { id: 'rw_craft', name: 'Craft & Structure', domain: 'Reading & Writing', color: '#d97706', section: 'rw', total: 55 },
+            { id: 'rw_expression', name: 'Expression of Ideas', domain: 'Reading & Writing', color: '#d97706', section: 'rw', total: 55 },
+            { id: 'rw_conventions', name: 'Standard English Conventions', domain: 'Reading & Writing', color: '#d97706', section: 'rw', total: 60 },
+        ];
+
+        let chaptersData = [];
+        let chaptersFilter = 'all';
+
+        function loadChapterData() {
+            const key = `sat_chapters_${currentUser ? currentUser.email : '_'}`;
+            const raw = localStorage.getItem(key);
+            if (raw) {
+                try {
+                    const saved = JSON.parse(raw);
+                    chaptersData = chaptersDefinition.map(def => {
+                        const s = saved.find(x => x.id === def.id) || {};
+                        return { ...def, solved: s.solved || 0, correct: s.correct || 0 };
+                    });
+                    return;
+                } catch(e) {}
+            }
+            chaptersData = chaptersDefinition.map(def => ({ ...def, solved: 0, correct: 0 }));
+        }
+
+        function saveChapterData() {
+            const key = `sat_chapters_${currentUser ? currentUser.email : '_'}`;
+            localStorage.setItem(key, JSON.stringify(chaptersData.map(c => ({ id: c.id, solved: c.solved, correct: c.correct }))));
+        }
+
+        function getMastery(ch) {
+            const acc = ch.solved > 0 ? (ch.correct / ch.solved) * 100 : 0;
+            const pct = ch.total > 0 ? (ch.solved / ch.total) * 100 : 0;
+            const score = acc * 0.6 + pct * 0.4;
+            if (score >= 85) return 'Expert';
+            if (score >= 65) return 'Advanced';
+            if (score >= 45) return 'Intermediate';
+            if (score >= 20) return 'Beginner';
+            return 'Novice';
+        }
+
+        function getMasteryClass(m) {
+            return { Expert: 'mastery-expert', Advanced: 'mastery-advanced', Intermediate: 'mastery-intermediate', Beginner: 'mastery-beginner', Novice: 'mastery-novice' }[m] || 'mastery-novice';
+        }
+
+        function filterChapters(section, btn) {
+            chaptersFilter = section;
+            document.querySelectorAll('.sat-chapter-tab').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            renderChapterTracker();
+        }
+
+        function openChapterLog(chapId) {
+            document.getElementById('chLogChapterId').value = chapId;
+            const ch = chaptersData.find(c => c.id === chapId);
+            document.getElementById('chapterLogModalTitle').textContent = `Log: ${ch ? ch.name : ''}`;
+            document.getElementById('chLogQSolved').value = '';
+            document.getElementById('chLogCorrect').value = '';
+            document.getElementById('satChapterLogModal').classList.add('show');
+        }
+
+        function saveChapterLog() {
+            const chapId = document.getElementById('chLogChapterId').value;
+            const solved = parseInt(document.getElementById('chLogQSolved').value) || 0;
+            const correct = parseInt(document.getElementById('chLogCorrect').value) || 0;
+            const ch = chaptersData.find(c => c.id === chapId);
+            if (ch && solved > 0) {
+                ch.solved += solved;
+                ch.correct += correct;
+                saveChapterData();
+                closeAllModals();
+                renderChapterTracker();
+                showSaveIndicator();
+            }
+        }
+
+        function renderChapterTracker() {
+            loadChapterData();
+            const filtered = chaptersFilter === 'all' ? chaptersData : chaptersData.filter(c => c.section === chaptersFilter);
+
+            // Summary stats
+            const totalSolved = chaptersData.reduce((s, c) => s + (c.solved || 0), 0);
+            const totalCorrect = chaptersData.reduce((s, c) => s + (c.correct || 0), 0);
+            const overallAcc = totalSolved > 0 ? Math.round((totalCorrect / totalSolved) * 100) : 0;
+            const advCount = chaptersData.filter(c => ['Advanced','Expert'].includes(getMastery(c))).length;
+            const weakest = chaptersData.filter(c => c.solved > 0).sort((a, b) => {
+                const accA = a.correct / a.solved;
+                const accB = b.correct / b.solved;
+                return accA - accB;
+            })[0];
+
+            const el = id => document.getElementById(id);
+            if (el('chapTotalQ')) el('chapTotalQ').textContent = totalSolved;
+            if (el('chapAvgAcc')) el('chapAvgAcc').textContent = overallAcc + '%';
+            if (el('chapMastered')) el('chapMastered').textContent = advCount;
+            if (el('chapWeakest')) el('chapWeakest').textContent = weakest ? weakest.name.split(' ').slice(0,2).join(' ') : '—';
+
+            const grid = document.getElementById('satChapterGrid');
+            if (!grid) return;
+
+            grid.innerHTML = filtered.map(ch => {
+                const acc = ch.solved > 0 ? Math.round((ch.correct / ch.solved) * 100) : 0;
+                const pct = ch.total > 0 ? Math.min(100, Math.round((ch.solved / ch.total) * 100)) : 0;
+                const mastery = getMastery(ch);
+                const masteryClass = getMasteryClass(mastery);
+                const remaining = Math.max(0, ch.total - ch.solved);
+                return `<div class="sat-chapter-card" style="--chapter-color:${ch.color}">
+                    <div class="sat-chapter-header">
+                        <div class="sat-chapter-name">${ch.name}</div>
+                        <div class="sat-chapter-domain" style="background:${ch.color}22;color:${ch.color}">${ch.domain.split(' ')[0]}</div>
+                    </div>
+                    <div class="sat-chapter-mastery-badge ${masteryClass}">${mastery}</div>
+                    <div class="sat-chapter-track">
+                        <div class="sat-chapter-fill" style="width:${pct}%"></div>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;margin-bottom:10px">
+                        <span style="font-size:0.7rem;color:var(--text-muted)">${ch.solved} / ${ch.total} questions</span>
+                        <span style="font-size:0.7rem;font-weight:700;color:${ch.color}">${pct}%</span>
+                    </div>
+                    <div class="sat-chapter-meta">
+                        <div class="sat-chapter-meta-box">
+                            <div class="sat-chapter-meta-val">${ch.solved}</div>
+                            <div class="sat-chapter-meta-label">Solved</div>
+                        </div>
+                        <div class="sat-chapter-meta-box">
+                            <div class="sat-chapter-meta-val" style="color:${acc >= 80 ? '#16a34a' : acc >= 60 ? '#d97706' : '#dc2626'}">${acc}%</div>
+                            <div class="sat-chapter-meta-label">Accuracy</div>
+                        </div>
+                        <div class="sat-chapter-meta-box">
+                            <div class="sat-chapter-meta-val">${remaining}</div>
+                            <div class="sat-chapter-meta-label">Remaining</div>
+                        </div>
+                    </div>
+                    <button class="sat-chapter-log-btn" onclick="openChapterLog('${ch.id}')">+ Log Practice Session</button>
+                </div>`;
+            }).join('');
+        }
+
+        /* ══════════════════════════════════════════════
+           UNIFIED STUDY PLAN — Merged Generator + SAT Tasks
+           Generates up to Sept 30, synced with satRoadmap,
+           Saturdays = Full Mock SAT + Review,
+           Tasks have time limits + overdue FAILED state + shift option
+        ══════════════════════════════════════════════ */
+
+        // Storage for generated plan tasks (separate from base satCompleted)
+        let generatedPlanTasks = {}; // { taskId: { completed, completedAt, shiftedTo, deadline } }
+
+        function savePlanTasks() {
+            if (!currentUser) return;
+            const key = `plan_${currentUser.email}`;
+            localStorage.setItem(key, JSON.stringify(generatedPlanTasks));
+        }
+
+        function loadPlanTasks() {
+            if (!currentUser) return;
+            const key = `plan_${currentUser.email}`;
+            const saved = localStorage.getItem(key);
+            generatedPlanTasks = saved ? JSON.parse(saved) : {};
+        }
+
+        // Check if a task's deadline has passed and it's not completed
+        function isPlanTaskFailed(taskId) {
+            const state = generatedPlanTasks[taskId];
+            if (!state) return false;
+            if (state.completed) return false;
+            if (!state.deadline) return false;
+            return new Date() > new Date(state.deadline);
+        }
+
+        function completePlanTask(taskId) {
+            if (!generatedPlanTasks[taskId]) generatedPlanTasks[taskId] = {};
+            generatedPlanTasks[taskId].completed = true;
+            generatedPlanTasks[taskId].completedAt = new Date().toISOString();
+            savePlanTasks();
+            // Also mark in satCompleted if it's a real satRoadmap task
+            satCompleted[taskId] = true;
+            saveSATData();
+            renderCurrentPlan();
+            loadSATData(); updateSATStats();
+            showSaveIndicator();
+        }
+
+        function shiftPlanTask(taskId, taskTitle, taskTime, taskTag) {
+            // Find next available day (tomorrow) and push task there
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(23, 59, 59, 0);
+            const shiftedId = 'shifted_' + taskId + '_' + Date.now();
+            if (!generatedPlanTasks[taskId]) generatedPlanTasks[taskId] = {};
+            generatedPlanTasks[taskId].shifted = true;
+            generatedPlanTasks[taskId].shiftedTo = tomorrow.toISOString().split('T')[0];
+
+            // Add a shifted task entry
+            const shiftedTaskId = shiftedId;
+            generatedPlanTasks[shiftedTaskId] = {
+                isShifted: true,
+                originalId: taskId,
+                title: '⟳ ' + taskTitle,
+                time: taskTime,
+                tag: taskTag,
+                deadline: new Date(tomorrow.getTime() + 86400000).toISOString(),
+                completed: false,
+                date: tomorrow.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })
+            };
+            savePlanTasks();
+            renderCurrentPlan();
+            showSaveIndicator();
+        }
+
+        function generateStudyPlan() {
+            loadPlanTasks();
+            const current = parseInt(document.getElementById('plannerCurrentScore').value) || 1100;
+            const target = parseInt(document.getElementById('plannerTargetScore').value) || 1500;
+            const examSel = document.getElementById('plannerExamDate').value;
+            const hpd = parseFloat(document.getElementById('plannerHoursPerDay').value) || 2;
+
+            // Determine actual end date
+            let primaryExamDate, secondaryExamDate;
+            if (examSel === 'both') {
+                primaryExamDate = new Date('2026-09-13');
+                secondaryExamDate = new Date('2026-10-04');
+            } else {
+                primaryExamDate = new Date(examSel);
+                secondaryExamDate = null;
+            }
+
+            const today = new Date(); today.setHours(0,0,0,0);
+            const hardEnd = secondaryExamDate || primaryExamDate;
+            const endDate = hardEnd;
+            const daysLeft = Math.max(1, Math.round((endDate - today) / 86400000));
+            const gap = target - current;
+
+            // Build SAT task lookup by month
+            const satTaskByMonth = {};
+            satRoadmap.forEach(phase => { satTaskByMonth[phase.month] = phase.tasks; });
+
+            const mathPractice = [
+                { title: 'Linear Equations & Systems Sprint (CB Official)', time: '2h', tag: 'math' },
+                { title: 'Quadratics — All 4 Methods Drill', time: '2h', tag: 'math' },
+                { title: 'Data Analysis & Scatterplot Interpretation', time: '1.5h', tag: 'math' },
+                { title: 'Geometry: Triangles, Lines & Circles', time: '1.5h', tag: 'math' },
+                { title: 'Advanced Functions & Transformations', time: '2h', tag: 'math' },
+                { title: 'Word Problems Sprint — 30 Official Questions', time: '1.5h', tag: 'math' },
+                { title: 'Exponential & Radical Equations Drill', time: '1.5h', tag: 'math' },
+                { title: 'Hard Module 2 — Level 4 & 5 Questions Only', time: '2h', tag: 'math' },
+                { title: 'Trig: SOH CAH TOA + Special Triangles', time: '1.5h', tag: 'math' },
+                { title: 'Probability, Two-Way Tables & Sampling', time: '1h', tag: 'math' },
+            ];
+            const rwPractice = [
+                { title: 'Command of Evidence — Quantitative (Chart+Passage)', time: '1.5h', tag: 'rw' },
+                { title: 'Craft & Structure: Words in Context (30 questions)', time: '1.5h', tag: 'rw' },
+                { title: 'Grammar Core Rules Rapid Drill', time: '1h', tag: 'rw' },
+                { title: 'Expression of Ideas: Add/Delete/Revise/Reorder', time: '1.5h', tag: 'rw' },
+                { title: 'Inference & Evidence: Prove-It-With-A-Line Method', time: '1.5h', tag: 'rw' },
+                { title: 'Transitions Sprint: However/Therefore/For Example', time: '1h', tag: 'rw' },
+                { title: 'Vocabulary in Context — 30 Official Questions', time: '1h', tag: 'rw' },
+                { title: 'Full RW Module Timed (32 min, 27 questions)', time: '1h', tag: 'rw' },
+                { title: 'Khan Academy Digital SAT RW Skill Sprint', time: '1.5h', tag: 'rw' },
+                { title: 'Rhetorical Purpose & Author\'s Claim Questions', time: '1.5h', tag: 'rw' },
+            ];
+
+            const satTaskQueue = {};
+            const satQueuePointers = {};
+            satRoadmap.forEach(phase => {
+                satTaskQueue[phase.month] = [...phase.tasks];
+                satQueuePointers[phase.month] = 0;
+            });
+
+            function getMonthKey(dayIndex) {
+                const d = new Date(today); d.setDate(d.getDate() + dayIndex);
+                const m = d.getMonth();
+                if (m === 5) return 'june';
+                if (m === 6) return 'july';
+                if (m === 7) return 'august';
+                if (m === 8) return 'september';
+                if (m === 9) return 'october';
+                return 'october';
+            }
+
+            function nextSatTask(monthKey) {
+                const q = satTaskQueue[monthKey];
+                if (!q) return null;
+                const idx = satQueuePointers[monthKey] || 0;
+                if (idx >= q.length) return null;
+                satQueuePointers[monthKey] = idx + 1;
+                return q[idx];
+            }
+
+            const phase1End = Math.round(daysLeft * 0.30);
+            const phase2End = Math.round(daysLeft * 0.65);
+            let mockTestCount = 0;
+            const days = [];
+
+            for (let i = 0; i < daysLeft; i++) {
+                const d = new Date(today); d.setDate(d.getDate() + i);
+                const dayOfWeek = d.getDay();
+                const dateStr = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+                const dateISO = d.toISOString().split('T')[0];
+                const phase = i < phase1End ? 1 : i < phase2End ? 2 : 3;
+                const phaseLabel = phase === 1 ? 'Foundation' : phase === 2 ? 'Skill Building' : 'Final Push';
+                const monthKey = getMonthKey(i);
+
+                // Deadline = end of next day at 23:59
+                const nextDay = new Date(d); nextDay.setDate(nextDay.getDate() + 1);
+                const taskDeadline = nextDay.toISOString().split('T')[0] + 'T23:59:00';
+
+                // Special exam days
+                const isExam1 = primaryExamDate && dateISO === primaryExamDate.toISOString().split('T')[0];
+                const isExam2 = secondaryExamDate && dateISO === secondaryExamDate.toISOString().split('T')[0];
+
+                let dayTasks = [];
+
+                if (isExam1) {
+                    dayTasks.push({ id: 'real_exam_sep', title: '🏆 SEPTEMBER SAT EXAM DAY', desc: 'Arrive 45 min early. Read every question fully. Skip hard ones, return later. Execute your strategy card. You\'ve trained for this.', time: 'Full day', tag: 'test', color: '#7c3aed', deadline: taskDeadline });
+                } else if (isExam2) {
+                    dayTasks.push({ id: 'real_exam_oct', title: '🏆 OCTOBER SAT EXAM DAY', desc: 'Execute everything. Arrive early, breathe, trust your training. This is what all the months of work were for.', time: 'Full day', tag: 'test', color: '#7c3aed', deadline: taskDeadline });
+                } else if (dayOfWeek === 6) {
+                    // Saturday = Full Mock SAT
+                    mockTestCount++;
+                    const testNames = ['Bluebook Test #1','Bluebook Test #2','Bluebook Test #3','Bluebook Test #4','Bluebook Test #5','Bluebook Test #6','Bluebook Test #7','Bluebook Test #8'];
+                    const testName = testNames[Math.min(mockTestCount - 1, testNames.length - 1)];
+                    const testSatTask = satTaskQueue[monthKey]?.find((t, idx) => idx >= (satQueuePointers[monthKey]||0) && t.tag === 'test');
+                    if (testSatTask) {
+                        const tqIdx = satTaskQueue[monthKey].indexOf(testSatTask);
+                        satQueuePointers[monthKey] = tqIdx + 1;
+                        dayTasks.push({ id: testSatTask.id, title: testSatTask.title, desc: testSatTask.desc, time: '3h', tag: 'test', color: '#7c3aed', isSatRoadmap: true, deadline: taskDeadline });
+                    } else {
+                        dayTasks.push({ id: `mock_${i}`, title: `🎯 Full SAT Mock Test (${testName})`, desc: 'Full 2h14m — timed conditions, Bluebook app. No music, no interruptions. Simulate test day exactly. Score immediately after.', time: '3h', tag: 'test', color: '#7c3aed', deadline: taskDeadline });
+                    }
+                    dayTasks.push({ id: `review_${i}`, title: '📋 Test Review & Error Notebook', desc: 'Score every section. Log every wrong answer: question type, your answer, correct answer, reason for error. Update the error notebook in this dashboard.', time: '2h', tag: 'review', color: '#dc2626', deadline: taskDeadline });
+
+                } else if (dayOfWeek === 0) {
+                    // Sunday = review + weak area
+                    dayTasks.push({ id: `wk_review_${i}`, title: '🔁 Weekly Error Notebook Review', desc: 'Review all errors from the week. Find patterns: same question type appearing twice = systematic gap. Drill that gap Monday.', time: '1h', tag: 'review', color: '#dc2626', deadline: taskDeadline });
+                    const satT = nextSatTask(monthKey);
+                    if (satT && satT.tag !== 'test') {
+                        dayTasks.push({ id: satT.id, title: satT.title, desc: satT.desc, time: satT.time, tag: satT.tag, color: satT.tag === 'math' ? '#1769e8' : '#d97706', isSatRoadmap: true, deadline: taskDeadline });
+                    }
+
+                } else {
+                    // Weekday: satRoadmap task + alternating math/rw + error log
+                    const satT = nextSatTask(monthKey);
+                    if (satT && satT.tag !== 'test') {
+                        dayTasks.push({ id: satT.id, title: satT.title, desc: satT.desc, time: satT.time, tag: satT.tag, color: satT.tag === 'math' ? '#1769e8' : satT.tag === 'rw' ? '#d97706' : '#059669', isSatRoadmap: true, deadline: taskDeadline });
+                    }
+                    const isEven = i % 2 === 0;
+                    const drillTask = isEven ? mathPractice[(Math.floor(i/2)) % mathPractice.length] : rwPractice[(Math.floor(i/2)) % rwPractice.length];
+                    dayTasks.push({ id: `drill_${i}`, title: drillTask.title, desc: `Phase ${phase}: ${phaseLabel} — Official CB questions or Khan Academy SAT only`, time: drillTask.time, tag: drillTask.tag, color: isEven ? '#1769e8' : '#d97706', deadline: taskDeadline });
+                    dayTasks.push({ id: `errlog_${i}`, title: '📝 Daily Error Log (15 min)', desc: "Quick review of yesterday's mistakes. Confirm you understand the correct method before moving to today's work.", time: '15min', tag: 'review', color: '#6b7a99', deadline: taskDeadline });
+                }
+
+                // Initialize plan task state for new tasks
+                dayTasks.forEach(t => {
+                    if (!generatedPlanTasks[t.id]) {
+                        generatedPlanTasks[t.id] = { completed: false, deadline: t.deadline };
+                    }
+                });
+
+                const isExamDay = isExam1 || isExam2;
+                days.push({ date: dateStr, dateISO, dayOfWeek, tasks: dayTasks, hours: dayOfWeek === 6 ? 5 : isExamDay ? 0 : hpd, phase, phaseLabel, isExamDay, isExam1, isExam2 });
+            }
+
+            window._generatedPlanDays = days;
+            window._planGap = gap;
+            window._planHpd = hpd;
+            window._planDaysLeft = daysLeft;
+            window._planExamLabel = examSel === 'both' ? 'Sep 13 + Oct 4' : examSel === '2026-09-13' ? 'Sep 13' : 'Oct 4';
+
+            // Hide empty state, show plan
+            const emptyEl = document.getElementById('plannerEmptyState');
+            if (emptyEl) emptyEl.style.display = 'none';
+
+            savePlanTasks();
+            renderCurrentPlan();
+        }
+
+        function renderCurrentPlan() {
+            const planEl = document.getElementById('satGeneratedPlan');
+            if (!planEl) return;
+            const days = window._generatedPlanDays;
+            if (!days) return;
+
+            const gap = window._planGap || 0;
+            const hpd = window._planHpd || 2;
+            const daysLeft = window._planDaysLeft || 0;
+
+            const today = new Date(); today.setHours(0,0,0,0);
+
+            // Collect shifted tasks to show on their target date
+            const shiftedByDate = {};
+            Object.entries(generatedPlanTasks).forEach(([id, s]) => {
+                if (s.isShifted && s.shiftedTo) {
+                    if (!shiftedByDate[s.shiftedTo]) shiftedByDate[s.shiftedTo] = [];
+                    shiftedByDate[s.shiftedTo].push({ id, ...s });
+                }
+            });
+
+            const now = new Date();
+
+            function getTimeRemaining(deadlineStr) {
+                if (!deadlineStr) return null;
+                const diff = new Date(deadlineStr) - now;
+                if (diff <= 0) return null;
+                const totalMins = Math.floor(diff / 60000);
+                const hours = Math.floor(totalMins / 60);
+                const mins = totalMins % 60;
+                if (hours > 48) return null; // don't show if >2 days away
+                if (hours >= 24) return { label: `${hours}h left`, urgency: 'low' };
+                if (hours >= 12) return { label: `${hours}h ${mins}m left`, urgency: 'low' };
+                if (hours >= 6)  return { label: `${hours}h ${mins}m left`, urgency: 'medium' };
+                if (hours >= 1)  return { label: `${hours}h ${mins}m left`, urgency: 'high' };
+                return { label: `${mins}m left`, urgency: 'critical' };
+            }
+
+            function renderTask(t, dayDateISO, isFuture) {
+                const state = generatedPlanTasks[t.id] || {};
+                const done = state.completed || satCompleted[t.id];
+                const deadline = state.deadline || t.deadline;
+                const failed = !done && !isFuture && deadline && new Date(deadline) < now;
+                const shifted = state.shifted;
+                const timeLeft = !done && !failed && deadline ? getTimeRemaining(deadline) : null;
+
+                const tagColors = { math: '#1769e8', rw: '#d97706', test: '#7c3aed', review: '#dc2626', strategy: '#059669' };
+                const dotColor = t.color || tagColors[t.tag] || '#6b7a99';
+
+                const urgencyColors = { low: '#16a34a', medium: '#d97706', high: '#f97316', critical: '#dc2626' };
+
+                return `<div class="plan-task-row ${done ? 'plan-done' : ''} ${failed ? 'plan-failed' : ''} ${shifted ? 'plan-shifted-out' : ''}" id="ptask_${t.id}">
+                    <div class="plan-task-left">
+                        <div class="plan-task-check ${done ? 'checked' : ''}" onclick="completePlanTask('${t.id}')" title="${done ? 'Completed!' : 'Click to mark complete'}">
+                            ${done ? `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="11" height="11"><polyline points="20 6 9 17 4 12"/></svg>` : ''}
+                        </div>
+                        <div class="plan-task-dot" style="background:${dotColor}"></div>
+                        <div class="plan-task-body">
+                            <div class="plan-task-title ${done ? 'strikethrough' : ''}">${t.title}</div>
+                            <div class="plan-task-sub">${t.desc || ''}</div>
+                            <div class="plan-task-meta">
+                                <span class="plan-time-badge">⏱ ${t.time}</span>
+                                <span class="plan-tag-badge" style="background:${dotColor}22;color:${dotColor}">${t.tag}</span>
+                                ${t.isSatRoadmap ? '<span class="plan-sync-badge">🔗 SAT Tasks</span>' : ''}
+                                ${timeLeft ? `<span class="plan-countdown-badge" style="background:${urgencyColors[timeLeft.urgency]}18;color:${urgencyColors[timeLeft.urgency]};border:1px solid ${urgencyColors[timeLeft.urgency]}40">⏳ ${timeLeft.label}</span>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="plan-task-right">
+                        ${failed && !shifted ? `
+                            <div class="plan-failed-badge">✕ FAILED</div>
+                            <button class="plan-shift-btn" onclick="shiftPlanTask('${t.id}', ${JSON.stringify(t.title)}, '${t.time}', '${t.tag}')">
+                                ↪ Shift to Tomorrow
+                            </button>
+                        ` : ''}
+                        ${shifted ? '<div class="plan-shifted-label">↪ Shifted</div>' : ''}
+                        ${done ? '<div class="plan-done-label">✓ Done</div>' : ''}
+                    </div>
+                </div>`;
+            }
+
+            const html = `<div class="plan-header-bar">
+                <div>
+                    <div style="font-size:0.9rem;font-weight:800;color:var(--secondary)">1500+ Unified Study Plan · June → ${window._planExamLabel || 'Oct 4'}</div>
+                    <div style="font-size:0.75rem;color:var(--text-light);margin-top:2px">${daysLeft} days · ${gap > 0 ? '+'+gap : gap} pts needed · ${hpd}h/day · Sat = Full Mock SAT · 🔗 Synced with roadmap tasks</div>
+                </div>
+                <div style="display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap">
+                    <div class="plan-legend"><span style="background:#7c3aed22;color:#7c3aed" class="plan-tag-badge">🏆 exam</span> Real SAT</div>
+                    <div class="plan-legend"><span style="background:#7c3aed22;color:#7c3aed" class="plan-tag-badge">test</span> Mock</div>
+                    <div class="plan-legend"><span class="plan-sync-badge">🔗 Roadmap</span> Synced</div>
+                </div>
+            </div>
+            ${days.map(day => {
+                const isToday = day.dateISO === today.toISOString().split('T')[0];
+                const isPast = new Date(day.dateISO) < today;
+                const isFuture = new Date(day.dateISO) > today;
+                const isSat = day.dayOfWeek === 6;
+                const isSun = day.dayOfWeek === 0;
+                const isExamDay = day.isExamDay;
+                const extraShifted = shiftedByDate[day.dateISO] || [];
+
+                const allDone = day.tasks.every(t => (generatedPlanTasks[t.id]||{}).completed || satCompleted[t.id]);
+                const anyFailed = day.tasks.some(t => !((generatedPlanTasks[t.id]||{}).completed || satCompleted[t.id]) && (generatedPlanTasks[t.id]||{}).deadline && new Date((generatedPlanTasks[t.id]||{}).deadline) < now && !isFuture);
+
+                return `<div class="plan-day-card ${isToday ? 'plan-today' : ''} ${isSat && !isExamDay ? 'plan-sat' : ''} ${isExamDay ? 'plan-exam-day' : ''} ${allDone && day.tasks.length ? 'plan-day-done' : ''} ${anyFailed ? 'plan-day-failed' : ''}">
+                    <div class="plan-day-header">
+                        <div class="plan-day-left">
+                            ${isToday ? '<div class="plan-today-badge">TODAY</div>' : ''}
+                            ${isExamDay ? `<div class="plan-exam-badge">🏆 ${day.isExam1 ? 'SEPTEMBER' : 'OCTOBER'} SAT DAY</div>` : isSat ? '<div class="plan-sat-badge">📝 MOCK SAT DAY</div>' : ''}
+                            <div class="plan-day-date">${day.date}</div>
+                            <div class="plan-day-phase">${isExamDay ? '🎯 Real Test — Execute Your Strategy' : `Phase ${day.phase}: ${day.phaseLabel}`}</div>
+                        </div>
+                        <div class="plan-day-right">
+                            <div class="plan-day-time">⏱ ${day.hours}h total</div>
+                            ${allDone && day.tasks.length ? '<div class="plan-day-complete-badge">✓ Complete</div>' : ''}
+                            ${anyFailed ? '<div class="plan-day-fail-badge">✕ Overdue</div>' : ''}
+                        </div>
+                    </div>
+                    <div class="plan-day-tasks">
+                        ${day.tasks.map(t => renderTask(t, day.dateISO, isFuture)).join('')}
+                        ${extraShifted.map(t => `<div class="plan-task-row plan-shifted-in">
+                            <div class="plan-task-left">
+                                <div class="plan-task-check ${t.completed ? 'checked' : ''}" onclick="completePlanTask('${t.id}')">
+                                    ${t.completed ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>` : ''}
+                                </div>
+                                <div class="plan-task-dot" style="background:#f59e0b"></div>
+                                <div class="plan-task-body">
+                                    <div class="plan-task-title">${t.title}</div>
+                                    <div class="plan-task-sub">Shifted from previous day</div>
+                                    <div class="plan-task-meta"><span class="plan-time-badge">⏱ ${t.time}</span><span class="plan-tag-badge" style="background:#f59e0b22;color:#f59e0b">${t.tag}</span><span class="plan-sync-badge" style="background:#f59e0b22;color:#f59e0b">↪ Shifted</span></div>
+                                </div>
+                            </div>
+                        </div>`).join('')}
+                    </div>
+                </div>`;
+            }).join('')}`;
+
+            planEl.style.display = '';
+            planEl.innerHTML = html;
         }
 
         /* ── Hook into switchSection ── */
@@ -5367,6 +7133,8 @@
                 document.getElementById('navSAT').classList.add('active');
                 if (satEl) satEl.style.display = '';
                 loadSATData();
+                loadGoalData();
+                loadChapterData();
                 switchSATTab(currentSATTab || 'dashboard');
                 closeMobileSidebar();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -5380,8 +7148,272 @@
         showApp = function() {
             _origShowApp();
             loadSATData();
+            loadGoalData();
+            loadChapterData();
+            loadPlanTasks();
             // Don't update SAT stats here — only when SAT tab is active
         }
+
+        /* ══════════════════════════════════════════════
+           NOTIFICATION & REMINDER SYSTEM
+        ══════════════════════════════════════════════ */
+
+        let notifPanelOpen = false;
+        let _notifs = []; // in-memory notifications list
+
+        function toggleNotifPanel() {
+            notifPanelOpen ? closeNotifPanel() : openNotifPanel();
+        }
+
+        function openNotifPanel() {
+            buildNotifications();
+            document.getElementById('notifPanel').style.display = 'block';
+            document.getElementById('notifOverlay').style.display = 'block';
+            notifPanelOpen = true;
+        }
+
+        function closeNotifPanel() {
+            document.getElementById('notifPanel').style.display = 'none';
+            document.getElementById('notifOverlay').style.display = 'none';
+            notifPanelOpen = false;
+        }
+
+        function getNotifStorage() {
+            try { return JSON.parse(localStorage.getItem('notif_read') || '{}'); } catch { return {}; }
+        }
+        function saveNotifRead(read) {
+            localStorage.setItem('notif_read', JSON.stringify(read));
+        }
+
+        function buildNotifications() {
+            const todayISO = new Date().toISOString().split('T')[0];
+            const now = new Date();
+            const read = getNotifStorage();
+            _notifs = [];
+
+            // ── 1. Today's study plan tasks ──
+            const planDays = window._generatedPlanDays || [];
+            const todayPlan = planDays.find(d => d.dateISO === todayISO);
+            if (todayPlan) {
+                todayPlan.tasks.forEach(t => {
+                    const done = generatedPlanTasks[t.id]?.completed || satCompleted[t.id];
+                    if (!done) {
+                        _notifs.push({ id: 'plan_' + t.id, type: 'today', icon: '📅', title: 'Today\'s Plan Task Due', body: t.title, action: () => { closeNotifPanel(); switchSection('sat'); switchSATTab('tasks'); }, urgent: true });
+                    }
+                });
+            } else {
+                _notifs.push({ id: 'no_plan', type: 'reminder', icon: '⚡', title: 'Generate Your Study Plan', body: 'You haven\'t generated a day-by-day plan yet. Go to SAT Prep → Study Planner to build your personalised 1500+ schedule.', action: () => { closeNotifPanel(); switchSection('sat'); switchSATTab('tasks'); } });
+            }
+
+            // ── 2. Overdue plan tasks ──
+            planDays.forEach(day => {
+                if (day.dateISO >= todayISO) return;
+                day.tasks.forEach(t => {
+                    const state = generatedPlanTasks[t.id] || {};
+                    if (!state.completed && !satCompleted[t.id] && !state.shifted) {
+                        _notifs.push({ id: 'overdue_' + t.id, type: 'overdue', icon: '⚠️', title: 'Overdue Task', body: `${t.title} (was due ${day.date})`, action: () => { closeNotifPanel(); switchSection('sat'); switchSATTab('tasks'); }, urgent: true });
+                    }
+                });
+            });
+
+            // ── 3. SAT exam countdown warnings ──
+            const satExam = new Date('2026-10-04'); satExam.setHours(0,0,0,0);
+            const sepExam = new Date('2026-09-13'); sepExam.setHours(0,0,0,0);
+            const daysToOct = Math.ceil((satExam - now) / 86400000);
+            const daysToSep = Math.ceil((sepExam - now) / 86400000);
+            if (daysToSep > 0 && daysToSep <= 7) _notifs.push({ id: 'sep_warn', type: 'exam', icon: '🏆', title: `September SAT in ${daysToSep} day${daysToSep===1?'':'s'}!`, body: 'Final prep mode: review your strategy card, do one timed RW module and one Math module today. Rest well tonight.', urgent: true });
+            else if (daysToOct > 0 && daysToOct <= 7) _notifs.push({ id: 'oct_warn', type: 'exam', icon: '🏆', title: `October SAT in ${daysToOct} day${daysToOct===1?'':'s'}!`, body: 'You are in final-week mode. Light review only — no new concepts. Confidence and rest are your highest-value prep now.', urgent: true });
+            else if (daysToOct > 0 && daysToOct <= 14) _notifs.push({ id: 'oct_2wk', type: 'exam', icon: '📌', title: `${daysToOct} days to October SAT`, body: 'Two weeks out: do one full timed mock this weekend, then switch to maintenance drills only.', urgent: false });
+            else if (daysToOct > 0 && daysToOct <= 30) _notifs.push({ id: 'oct_1mo', type: 'exam', icon: '📌', title: `${daysToOct} days to October SAT`, body: 'One month out: full intensity prep. 2+ hours daily, one mock per week minimum.', urgent: false });
+
+            // ── 4. Streak alerts ──
+            if (satStreak === 0) {
+                _notifs.push({ id: 'streak_0', type: 'reminder', icon: '🔥', title: 'Start Your Study Streak Today', body: 'Complete at least one SAT task today to begin your study streak. Consistency is the #1 predictor of score improvement.', action: () => { closeNotifPanel(); switchSection('sat'); } });
+            } else if (satStreak >= 7) {
+                _notifs.push({ id: 'streak_' + satStreak, type: 'achievement', icon: '🎉', title: `${satStreak}-Day Study Streak!`, body: `Incredible consistency — ${satStreak} days in a row. Keep it going. Streaks like this are what get scores to 1500+.` });
+            }
+
+            // ── 5. Error notebook reminders ──
+            const unreviewed = (satErrors || []).filter(e => !e.reviewed).length;
+            if (unreviewed >= 5) {
+                _notifs.push({ id: 'err_review', type: 'reminder', icon: '📋', title: `${unreviewed} Errors Need Review`, body: 'Open the Error Notebook and review your unreviewed mistakes. Identifying patterns in your errors is the fastest way to gain points.', action: () => { closeNotifPanel(); switchSection('sat'); switchSATTab('errors'); } });
+            }
+
+            // ── 6. Mock test reminder (if no test in 14+ days) ──
+            if (satPracticeTests.length > 0) {
+                const lastTest = satPracticeTests[satPracticeTests.length - 1];
+                const daysSince = Math.floor((now - new Date(lastTest.date)) / 86400000);
+                if (daysSince >= 14) {
+                    _notifs.push({ id: 'test_due', type: 'reminder', icon: '🎯', title: `${daysSince} Days Since Last Mock Test`, body: `Your last Bluebook test was ${daysSince} days ago. Schedule one this Saturday — regular mock tests are essential for 1500+.`, action: () => { closeNotifPanel(); switchSection('sat'); switchSATTab('tests'); } });
+                }
+            } else {
+                _notifs.push({ id: 'no_test', type: 'reminder', icon: '🎯', title: 'Take Your First Bluebook Test', body: 'You haven\'t logged a practice test yet. Take Bluebook Test #1 to establish your baseline score — the entire plan is built around it.', action: () => { closeNotifPanel(); switchSection('sat'); switchSATTab('tests'); } });
+            }
+
+            // ── 7. Visa countdown ──
+            const visa = new Date('2027-06-15');
+            const daysToVisa = Math.ceil((visa - now) / 86400000);
+            if (daysToVisa <= 60 && daysToVisa > 0) _notifs.push({ id: 'visa', type: 'reminder', icon: '🛂', title: `Visa Interview in ${daysToVisa} Days`, body: 'Check the Visa phase on your roadmap dashboard. Make sure DS-160, SEVIS fee, and financial documents are ready.' });
+
+            // ── Render ──
+            const list = document.getElementById('notifList');
+            const unread = _notifs.filter(n => !read[n.id]);
+            const badge = document.getElementById('notifBadgeCount');
+            if (badge) badge.textContent = unread.length > 0 ? Math.min(unread.length, 99) : '';
+            if (badge) badge.style.display = unread.length > 0 ? '' : 'none';
+
+            if (!_notifs.length) {
+                list.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text-muted);font-size:0.84rem">✅ No notifications right now. Great work staying on track!</div>';
+                return;
+            }
+
+            const typeColors = { today: '#1769e8', overdue: '#dc2626', exam: '#7c3aed', reminder: '#d97706', achievement: '#16a34a' };
+            list.innerHTML = _notifs.map(n => {
+                const isRead = !!read[n.id];
+                const c = typeColors[n.type] || '#6b7a99';
+                return `<div onclick="handleNotifClick('${n.id}')" style="display:flex;gap:10px;align-items:flex-start;padding:11px 14px;border-bottom:1px solid var(--border-soft);cursor:${n.action ? 'pointer' : 'default'};background:${isRead ? 'transparent' : n.urgent ? c + '06' : 'transparent'};transition:background 0.15s" onmouseover="this.style.background='${c}08'" onmouseout="this.style.background='${isRead ? 'transparent' : n.urgent ? c+'06' : 'transparent'}'">
+                    <div style="font-size:1.2rem;flex-shrink:0;margin-top:1px">${n.icon}</div>
+                    <div style="flex:1;min-width:0">
+                        <div style="font-size:0.82rem;font-weight:${isRead ? '600' : '800'};color:${isRead ? 'var(--text-light)' : 'var(--text)'};line-height:1.3">${n.title}</div>
+                        <div style="font-size:0.75rem;color:var(--text-light);margin-top:2px;line-height:1.45">${n.body}</div>
+                    </div>
+                    <div style="flex-shrink:0;width:8px;height:8px;border-radius:50%;background:${isRead ? 'transparent' : c};margin-top:5px"></div>
+                </div>`;
+            }).join('');
+
+            // Update badge
+            updateNotifBadge();
+        }
+
+        function handleNotifClick(id) {
+            const n = _notifs.find(x => x.id === id);
+            const read = getNotifStorage(); read[id] = true; saveNotifRead(read);
+            if (n && n.action) n.action();
+            else { buildNotifications(); } // re-render to show as read
+        }
+
+        function markAllNotifsRead() {
+            const read = getNotifStorage();
+            _notifs.forEach(n => { read[n.id] = true; });
+            saveNotifRead(read);
+            buildNotifications();
+        }
+
+        function updateNotifBadge() {
+            const read = getNotifStorage();
+            const unread = _notifs.filter(n => !read[n.id]).length;
+            const badge = document.getElementById('notifBadgeCount');
+            if (!badge) return;
+            if (unread > 0) { badge.textContent = Math.min(unread, 99); badge.style.display = ''; }
+            else { badge.style.display = 'none'; }
+        }
+
+        // ── Browser Push Notifications ──
+        async function requestNotifPermission() {
+            if (!('Notification' in window)) {
+                alert('Your browser does not support push notifications. You can still see in-app notifications using the bell icon.');
+                return;
+            }
+            const perm = await Notification.requestPermission();
+            const btn = document.getElementById('notifPermBtn');
+            if (perm === 'granted') {
+                if (btn) { btn.textContent = '✓ Enabled'; btn.style.background = '#d1fae5'; btn.style.borderColor = '#16a34a'; btn.style.color = '#16a34a'; }
+                document.getElementById('notifFooter').textContent = '✅ Push reminders enabled — you\'ll get a daily SAT study alert';
+                scheduleDailyReminders();
+            } else {
+                if (btn) { btn.textContent = 'Blocked'; btn.style.color = '#dc2626'; btn.style.borderColor = '#dc2626'; }
+                document.getElementById('notifFooter').textContent = 'Push blocked in browser settings. In-app notifications still work.';
+            }
+        }
+
+        function scheduleDailyReminders() {
+            if (Notification.permission !== 'granted') return;
+
+            // Morning reminder — fires once per day
+            const lastReminder = localStorage.getItem('last_notif_date');
+            const todayISO = new Date().toISOString().split('T')[0];
+            if (lastReminder === todayISO) return; // already sent today
+
+            const todayPlan = (window._generatedPlanDays || []).find(d => d.dateISO === todayISO);
+            const firstTask = todayPlan?.tasks?.[0];
+
+            setTimeout(() => {
+                const notif = new Notification('📚 1500+ SAT Study Reminder', {
+                    body: firstTask
+                        ? `Today: ${firstTask.title}. Open your study plan to start.`
+                        : 'Your daily SAT study session is waiting. Stay consistent — every day counts.',
+                    icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="%231769e8"/><text y="22" x="8" font-size="18">📚</text></svg>',
+                    tag: 'sat-daily',
+                    requireInteraction: false
+                });
+                notif.onclick = () => { window.focus(); notif.close(); };
+                localStorage.setItem('last_notif_date', todayISO);
+            }, 2000); // fire 2s after permission granted (to confirm it works)
+
+            // Also schedule a 7pm reminder if it's earlier than 7pm
+            const now = new Date();
+            const evening = new Date(); evening.setHours(19, 0, 0, 0);
+            const msUntilEvening = evening - now;
+            if (msUntilEvening > 0) {
+                setTimeout(() => {
+                    if (Notification.permission === 'granted') {
+                        new Notification('🌙 Evening SAT Check-In', {
+                            body: 'Did you complete today\'s study plan? Log your progress and review any errors before tomorrow.',
+                            tag: 'sat-evening',
+                            requireInteraction: false
+                        });
+                    }
+                }, msUntilEvening);
+            }
+        }
+
+        // ── Initialize notifications on load ──
+        function initNotifications() {
+            // Refresh badge count without opening panel
+            const todayISO = new Date().toISOString().split('T')[0];
+            const read = getNotifStorage();
+            const planDays = window._generatedPlanDays || [];
+            const todayPlan = planDays.find(d => d.dateISO === todayISO);
+            let unread = 0;
+            if (!todayPlan) unread++;
+            if ((satErrors||[]).filter(e=>!e.reviewed).length >= 5) unread++;
+            if (!satPracticeTests.length) unread++;
+            const daysToOct = Math.ceil((new Date('2026-10-04') - new Date()) / 86400000);
+            if (daysToOct > 0 && daysToOct <= 14) unread++;
+            const badge = document.getElementById('notifBadgeCount');
+            if (badge && unread > 0) { badge.textContent = unread; badge.style.display = ''; }
+            else if (badge) badge.style.display = 'none';
+
+            // Restore push reminder scheduling if already granted
+            if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
+                const btn = document.getElementById('notifPermBtn');
+                if (btn) { btn.textContent = '✓ Enabled'; btn.style.background = '#d1fae5'; btn.style.borderColor = '#16a34a'; btn.style.color = '#16a34a'; }
+                scheduleDailyReminders();
+            }
+        }
+
+        // Re-export initNotifications so it runs after SAT data is loaded
+        const _origShowApp2 = showApp;
+        showApp = function() {
+            _origShowApp2();
+            setTimeout(initNotifications, 600);
+        }
+
+        // Re-run badge update whenever SAT data changes
+        const _origSaveSATData = saveSATData;
+        saveSATData = function() {
+            _origSaveSATData();
+            setTimeout(initNotifications, 100);
+        }
+
+        // Re-calculate badge after plan is generated
+        const _origGeneratePlan = generateStudyPlan;
+        generateStudyPlan = function() {
+            _origGeneratePlan();
+            setTimeout(initNotifications, 300);
+        }
+
+        setInterval(() => { if (window._generatedPlanDays) renderCurrentPlan(); }, 30000);
     </script>
 </body>
 </html>
