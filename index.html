@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>ScoreMax Elite · 1500+ SAT Coaching System</title>
+<title>StudyMax Elite · SAT · KUCAT · USA 2027</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Inter+Tight:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -466,6 +466,11 @@ a{text-decoration:none;color:inherit}
 .analytics-section{margin-bottom:24px}
 .analytics-section-title{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-4);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--line-2)}
 
+/* ── KUCAT TWO-COLUMN ── */
+#page-kucat [style*="grid-template-columns:1fr 300px"]{display:grid;grid-template-columns:1fr 300px;gap:16px;align-items:start}
+@media(max-width:860px){#page-kucat [style*="grid-template-columns:1fr 300px"]{grid-template-columns:1fr}}
+
+
 /* ── QUICK STAT ROW ── */
 .qstat-row{display:flex;gap:0;border-radius:var(--r-lg);border:1px solid var(--line);overflow:hidden;margin-bottom:16px}
 .qstat{flex:1;padding:14px;text-align:center;border-right:1px solid var(--line)}
@@ -478,11 +483,11 @@ a{text-decoration:none;color:inherit}
 <div id="authScreen">
   <div class="auth-card">
     <div class="auth-logo">
-      <div class="auth-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-      <div><div class="auth-title">ScoreMax Elite</div><div class="auth-sub">1500+ SAT Coaching System</div></div>
+      <div class="auth-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+      <div><div class="auth-title">StudyMax Elite</div><div class="auth-sub">SAT · KUCAT · USA 2027</div></div>
     </div>
     <div style="font-size:1.35rem;font-family:var(--font-display);font-weight:800;letter-spacing:-0.03em;margin-bottom:4px">Welcome back</div>
-    <div style="font-size:0.82rem;color:var(--ink-3);margin-bottom:22px">Your premium 15-week coaching program awaits.</div>
+    <div style="font-size:0.82rem;color:var(--ink-3);margin-bottom:22px">Your SAT, KUCAT & USA 2027 command center.</div>
     <div class="field"><label class="field-label">Your name</label><input class="field-input" id="authName" placeholder="e.g. Alex Johnson" autocomplete="name"></div>
     <div class="field"><label class="field-label">Email</label><input class="field-input" id="authEmail" type="email" placeholder="you@email.com" autocomplete="email"></div>
     <button class="btn btn-primary" style="width:100%;margin-top:4px" onclick="login()">Enter ScoreMax Elite →</button>
@@ -493,36 +498,41 @@ a{text-decoration:none;color:inherit}
 <div id="mainApp" style="display:none">
   <div class="mtopbar">
     <div class="mtopbar-brand">
-      <div class="brand-mark" style="width:26px;height:26px;border-radius:7px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;color:#fff"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-      <div class="mtopbar-title">ScoreMax Elite</div>
+      <div class="brand-mark" style="width:26px;height:26px;border-radius:7px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;color:#fff"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+      <div class="mtopbar-title">StudyMax Elite</div>
     </div>
     <button class="icon-btn" onclick="toggleTheme()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button>
   </div>
   <div class="app-body">
     <nav class="sidebar">
       <div class="brand">
-        <div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-        <div><div class="brand-name">ScoreMax Elite</div><div class="brand-sub">1500+ Coaching System</div></div>
+        <div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+        <div><div class="brand-name">StudyMax Elite</div><div class="brand-sub">SAT · KUCAT · USA 2027</div></div>
       </div>
-      <div class="nav-group-label">Core</div>
+
+      <div class="nav-group-label">Home</div>
       <button class="nav-item active" id="nav-today" onclick="showPage('today')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>Dashboard</button>
-      <button class="nav-item" id="nav-roadmap" onclick="showPage('roadmap')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>15-Week Roadmap<span class="nav-badge">NEW</span></button>
-      <button class="nav-item" id="nav-planner" onclick="showPage('planner')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Study Planner</button>
-      <button class="nav-item" id="nav-tests" onclick="showPage('tests')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Practice Tests</button>
-      <div class="nav-group-label">Analysis</div>
-      <button class="nav-item" id="nav-errors" onclick="showPage('errors')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Elite Error Log</button>
-      <button class="nav-item" id="nav-traps" onclick="showPage('traps')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Trap Database<span class="nav-badge">NEW</span></button>
-      <button class="nav-item" id="nav-hardq" onclick="showPage('hardq')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Hard-Q Cert<span class="nav-badge">NEW</span></button>
-      <button class="nav-item" id="nav-analytics" onclick="showPage('analytics')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Analytics</button>
-      <button class="nav-item" id="nav-weaknesses" onclick="showPage('weaknesses')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Weakness Radar</button>
-      <div class="nav-group-label">Review</div>
-      <button class="nav-item" id="nav-weekly" onclick="showPage('weekly')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Weekly Review</button>
       <button class="nav-item" id="nav-streak" onclick="showPage('streak')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Streaks</button>
-      <div class="nav-group-label">Tools</div>
-      <button class="nav-item" id="nav-resources" onclick="showPage('resources')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Resources</button>
-      <button class="nav-item" id="nav-college" onclick="showPage('college')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>USA 2027<span class="nav-badge">🇺🇸</span></button>
       <button class="nav-item" id="nav-achievements" onclick="showPage('achievements')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>Achievements</button>
       <button class="nav-item" id="nav-community" onclick="showPage('community')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Community<span class="nav-badge" style="background:var(--good)">LIVE</span></button>
+
+      <div class="nav-group-label" style="margin-top:4px;display:flex;align-items:center;gap:5px"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#4338CA;flex-shrink:0"></span>SAT Prep</div>
+      <button class="nav-item" id="nav-roadmap" onclick="showPage('roadmap')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>15-Week Roadmap</button>
+      <button class="nav-item" id="nav-planner" onclick="showPage('planner')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Study Planner</button>
+      <button class="nav-item" id="nav-tests" onclick="showPage('tests')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Practice Tests</button>
+      <button class="nav-item" id="nav-errors" onclick="showPage('errors')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Error Log</button>
+      <button class="nav-item" id="nav-traps" onclick="showPage('traps')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Trap Database</button>
+      <button class="nav-item" id="nav-hardq" onclick="showPage('hardq')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Hard-Q Bank</button>
+      <button class="nav-item" id="nav-analytics" onclick="showPage('analytics')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Score Analytics</button>
+      <button class="nav-item" id="nav-weaknesses" onclick="showPage('weaknesses')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Weakness Radar</button>
+      <button class="nav-item" id="nav-weekly" onclick="showPage('weekly')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Weekly Review</button>
+      <button class="nav-item" id="nav-resources" onclick="showPage('resources')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>SAT Resources</button>
+
+      <div class="nav-group-label" style="margin-top:4px;display:flex;align-items:center;gap:5px"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#6D28D9;flex-shrink:0"></span>Nepal Entrance</div>
+      <button class="nav-item" id="nav-kucat" onclick="showPage('kucat')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 0 6 1 6 3 0-2 3-3 6-3v-5"/></svg>KUCAT Prep<span class="nav-badge" style="background:var(--elite);color:#fff">🇳🇵</span></button>
+
+      <div class="nav-group-label" style="margin-top:4px;display:flex;align-items:center;gap:5px"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#15803D;flex-shrink:0"></span>USA 2027</div>
+      <button class="nav-item" id="nav-college" onclick="showPage('college')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>College Command<span class="nav-badge">🇺🇸</span></button>
       <div class="sidebar-foot">
         <div class="xp-strip">
           <div class="xp-strip-top"><span class="xp-level-chip"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Lv.<span id="xpLevel">1</span></span><span style="color:var(--ink-4);font-weight:600" id="xpCount">0 XP</span></div>
@@ -560,6 +570,7 @@ a{text-decoration:none;color:inherit}
       <button class="sheet-item" onclick="showPage('resources');closeMoreSheet()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>Resources</span></button>
       <button class="sheet-item" onclick="showPage('college');closeMoreSheet()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span>College</span></button>
       <button class="sheet-item" onclick="showPage('community');closeMoreSheet()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Community</span></button>
+      <button class="sheet-item" onclick="showPage('kucat');closeMoreSheet()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 0 6 1 6 3 0-2 3-3 6-3v-5"/></svg><span>KUCAT</span></button>
     </div></div>
   </div>
 </div>
@@ -796,7 +807,7 @@ function logout(){try{localStorage.removeItem('sm_elite_user')}catch(ex){}locati
 function initApp(){loadAll();buildPages();renderAll();document.getElementById('authScreen').style.display='none';document.getElementById('mainApp').style.display='flex';document.getElementById('mainApp').style.flexDirection='column';const av=document.getElementById('profileAvatar');if(av)av.src=`https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(currentUser.name)}&backgroundColor=4F46E5&fontColor=ffffff`;document.getElementById('profileName').textContent=currentUser.name;document.getElementById('profileEmail').textContent=currentUser.email;const td=document.getElementById('testDate');if(td)td.value=todayISO();const ed=document.getElementById('errReviewDate');if(ed)ed.value=new Date(Date.now()+3*86400000).toISOString().split('T')[0]}
 
 /* ========== NAV ========== */
-function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-item,.tab-item').forEach(n=>n.classList.remove('active'));const p=document.getElementById('page-'+id);if(p)p.classList.add('active');const nb=document.getElementById('nav-'+id);if(nb)nb.classList.add('active');const tb=document.getElementById('tab-'+id);if(tb)tb.classList.add('active');window.scrollTo(0,0);const map={today:renderTodayPage,planner:renderPlanContainer,tests:renderTestsPage,errors:renderErrorsPage,analytics:renderAnalyticsPage,weaknesses:renderWeaknessPage,streak:renderStreakPage,roadmap:renderRoadmapPage,traps:renderTrapsPage,hardq:renderHardQPage,weekly:renderWeeklyPage,resources:renderResources,college:renderCollegePage,achievements:renderAchievements,community:renderCommunityPage};if(map[id])map[id]()}
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-item,.tab-item').forEach(n=>n.classList.remove('active'));const p=document.getElementById('page-'+id);if(p)p.classList.add('active');const nb=document.getElementById('nav-'+id);if(nb)nb.classList.add('active');const tb=document.getElementById('tab-'+id);if(tb)tb.classList.add('active');window.scrollTo(0,0);const map={today:renderTodayPage,planner:renderPlanContainer,tests:renderTestsPage,errors:renderErrorsPage,analytics:renderAnalyticsPage,weaknesses:renderWeaknessPage,streak:renderStreakPage,roadmap:renderRoadmapPage,traps:renderTrapsPage,hardq:renderHardQPage,weekly:renderWeeklyPage,resources:renderResources,college:renderCollegePage,achievements:renderAchievements,community:renderCommunityPage,kucat:renderKucatPage};if(map[id])map[id]()}
 function openMoreSheet(){document.getElementById('moreSheet').classList.add('show');document.body.style.overflow='hidden'}
 function closeMoreSheet(){document.getElementById('moreSheet').classList.remove('show');document.body.style.overflow=''}
 function openModal(id){document.getElementById(id).classList.add('show');document.body.style.overflow='hidden'}
@@ -842,221 +853,288 @@ function buildPages(){
   <div class="page" id="page-resources"></div>
   <div class="page" id="page-college"></div>
   <div class="page" id="page-achievements"></div>
-  <div class="page" id="page-community"></div>`;
+  <div class="page" id="page-community"></div>
+  <div class="page" id="page-kucat"></div>`;
 }
-function renderAll(){loadCmdData();renderTodayPage();renderTestsPage();renderErrorsPage();renderAnalyticsPage();renderStreakPage();renderWeaknessPage();renderAchievements();renderResources();renderCollegePage();renderWeeklyPage();renderXP();if(generatedPlan)renderPlanContainer()}
+function renderAll(){loadCmdData();renderTodayPage();renderTestsPage();renderErrorsPage();renderAnalyticsPage();renderStreakPage();renderWeaknessPage();renderAchievements();renderResources();renderCollegePage();renderWeeklyPage();renderXP();if(generatedPlan)renderPlanContainer();renderKucatPage()}
 
-/* ========== TODAY PAGE ========== */
+/* ========== DASHBOARD PAGE ========== */
 function renderTodayPage(){
   const h=new Date().getHours();
   const greet=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
   const name=currentUser.name.split(' ')[0];
-  const exam=new Date((userProfile.examDate||'2026-10-03')+'T07:00:00');
-  const diff=exam-new Date();
-  const d=Math.max(0,Math.floor(diff/86400000));
-  const hrs=Math.max(0,Math.floor((diff%86400000)/3600000));
-  const mins=Math.max(0,Math.floor((diff%3600000)/60000));
-  const streak=calcStreak();
-  const sorted=[...satTests].sort((a,b)=>new Date(a.date)-new Date(b.date));
-  const current=sorted.length?sorted[sorted.length-1].total:null;
-  const predicted=predictedScore();
-  const target=userProfile.target||1500;
-  const phase=getCurrentPhase();
-  const week=getCurrentWeek();
-  const phaseLabels=['Phase 1 · Foundation','Phase 2 · Skill Build','Phase 3 · Trap Mastery','Phase 4 · Peak Performance'];
   const today=todayISO();
+  const streak=calcStreak();
+  const bl=getBurnoutLevel();
+  const burnoutColor=bl>=7?'var(--good)':bl>=5?'var(--warn)':'var(--bad)';
+  const burnoutLabel=bl>=7?`⚡ ${bl}/10`:bl>=5?`😐 ${bl}/10`:`😩 ${bl}/10`;
 
-  // Missions
+  // SAT data
+  const satSorted=[...satTests].sort((a,b)=>new Date(a.date)-new Date(b.date));
+  const satCurrent=satSorted.length?satSorted[satSorted.length-1].total:null;
+  const satPredicted=predictedScore();
+  const satTarget=userProfile.target||1500;
+  const satExam=new Date((userProfile.examDate||'2026-10-03')+'T07:00:00');
+  const satDiff=satExam-new Date();
+  const satDays=Math.max(0,Math.floor(satDiff/86400000));
+  const satWeek=getCurrentWeek();
+  const phase=getCurrentPhase();
+  const phaseLabel=['Foundation','Skill Build','Trap Mastery','Peak Performance'][phase];
+
+  // KUCAT data
+  const kcDays=kcDaysLeft();
+  const kcDone=kcDoneChapters();
+  const kcTotal=kcTotalChapters();
+  const kcMocks=kucatData.mockScores.length;
+  const kcAvg=kcAvgScore();
+  const kcReady=kcReadiness();
+  const kcPi=kcPhaseInfo();
+
+  // USA College data
+  const cmdPhases=typeof CMD_PHASES!=='undefined'?CMD_PHASES:[];
+  const cmdDone=Object.values(collegeProgress).filter(Boolean).length;
+  const cmdTotal=cmdPhases.reduce((a,p)=>a+(p.tasks||[]).length,0);
+  const cmdPct=cmdTotal?Math.round(cmdDone/cmdTotal*100):0;
+
+  // Daily missions
   let missions=[];
   if(generatedPlan){const day=generatedPlan.find(dd=>dd.date===today);if(day)missions=day.tasks.map((t,i)=>({id:`${today}_${i}`,label:t.label,meta:t.meta,done:!!(planTasks[`${today}_${i}`]&&planTasks[`${today}_${i}`].completed)}))}
   if(!missions.length)missions=[
-    {id:'s0',label:'Take a full Bluebook diagnostic test (timed)',meta:'~2h 14m · establishes your entire plan baseline',done:satTests.length>0},
-    {id:'s1',label:'Log 5 errors to the Elite Error Log',meta:'10 min · start your error intelligence database',done:satErrors.length>=5},
-    {id:'s2',label:'Generate your 15-week study plan',meta:'30 sec · Study Planner tab',done:!!generatedPlan},
-    {id:'s3',label:'Log your first daily reading session',meta:'15–20 min · dense article or editorial',done:!!readingLog[today]},
+    {id:'s0',label:'Log a Bluebook practice test',meta:'SAT · establishes baseline score',done:satTests.length>0},
+    {id:'s1',label:'Add errors to Error Log',meta:'SAT · 10 min',done:satErrors.length>=5},
+    {id:'s2',label:'Study 2 KUCAT chapters today',meta:'KUCAT · check off in checklist',done:kcDone>0},
+    {id:'s3',label:'Log daily reading session',meta:'SAT R&W · 15–20 min',done:!!readingLog[today]},
   ];
   const doneCount=missions.filter(m=>m.done).length;
 
-  // Reading this week
+  // Reading dots
   const dow=(new Date().getDay()+6)%7;
-  const weekDays=[...Array(7)].map((_,i)=>{const dd=new Date();dd.setDate(dd.getDate()-(dow)+i);return dd.toISOString().split('T')[0]});
+  const weekDays=[...Array(7)].map((_,i)=>{const dd=new Date();dd.setDate(dd.getDate()-dow+i);return dd.toISOString().split('T')[0]});
   const readingDots=weekDays.slice(0,dow+1).map((iso,i)=>{const done=!!readingLog[iso];const isT=iso===today;const lbl=['M','T','W','T','F','S','S'][i];return`<div class="reading-dot ${done?'done':''} ${isT&&!done?'today':''}" onclick="toggleReadingDay('${iso}')" title="${iso}">${done?'✓':lbl}</div>`}).join('');
-  const readTotal=Object.keys(readingLog).length;
-  const readWeek=weekDays.filter(d2=>readingLog[d2]).length;
 
-  // Burnout
-  const bl=getBurnoutLevel();
-  const burnoutColor=bl>=7?'var(--good)':bl>=5?'var(--warn)':'var(--bad)';
-  const burnoutLabel=bl>=7?`⚡ Energized (${bl}/10)`:bl>=5?`😐 OK (${bl}/10)`:`😩 Low energy (${bl}/10)`;
-
-  // Ring offset
-  const circ=2*Math.PI*50;
-  const ringOffset=current?circ*(1-Math.min(1,current/1600)):circ;
-
-  // AI Coach msg
-  let coachMsg='Log a practice test to activate personalized coaching.',coachBtns='';
-  const week10=getCurrentWeek();
-  if(!satTests.length){coachMsg='You haven\'t logged a practice test yet. <strong>Take a full Bluebook test first</strong> — every recommendation, score predictor, and adaptive branch activates from your baseline.';coachBtns=`<button class="btn btn-primary btn-sm" onclick="openModal('testModal')">Log test</button>`}
-  else if(satErrors.length<10){coachMsg=`${satTests.length} test${satTests.length>1?'s':''} logged. Now build your error intelligence: <strong>10+ errors with root causes</strong> transforms your weakness radar from generic to surgical.`;coachBtns=`<button class="btn btn-primary btn-sm" onclick="openModal('errorModal')">Add error</button>`}
-  else if(bl<=4){coachMsg='Your energy is low today. <strong>On low-energy days, do 30 min max</strong> — short sessions beat skipped ones, and sleep consolidates memory better than extra study hours.';coachBtns=`<button class="btn btn-secondary btn-sm" onclick="showPage('streak')">Log session</button>`}
-  else if(streak===0){coachMsg='Your streak reset. <strong>20 minutes today restarts it.</strong> Students with daily habits outscore marathon studiers by 80+ points by test day.';coachBtns=`<button class="btn btn-primary btn-sm" onclick="showPage('streak')">Log today</button>`}
-  else if(predicted&&predicted<target){const gap=target-predicted;coachMsg=`At current pace you\'re <strong>${gap} pts short of target.</strong> Fastest levers: close your top 2 weakness radar topics and eliminate trap errors.`;coachBtns=`<button class="btn btn-primary btn-sm" onclick="showPage('traps')">Trap DB</button><button class="btn btn-secondary btn-sm" onclick="showPage('weaknesses')">Radar</button>`}
-  else{coachMsg='You\'re <strong>on pace for your target.</strong> Consistency and sleep matter more than extra hours right now. Trust your system.';coachBtns=`<button class="btn btn-primary btn-sm" onclick="showPage('roadmap')">View roadmap</button>`}
-
-  // Smart recs
-  const weak=getWeakestTopics(2);
-  const recs=[];
-  if(!satTests.length)recs.push({icon:'📝',t:'Take your baseline test',d:'Every recommendation and score predictor activates from a real diagnostic score.',a:"openModal('testModal')",c:'Log test'});
-  if(weak.length&&weak[0])recs.push({icon:'🎯',t:`Drill ${weak[0].topic}`,d:`${weak[0].count} error${weak[0].count>1?'s':''} logged — your highest-leverage topic for points right now.`,a:"showPage('weaknesses')",c:'View radar'});
-  if(!generatedPlan)recs.push({icon:'🗺️',t:'Generate your elite plan',d:'Day-by-day, 15-week roadmap with hard-question emphasis, trap training, and adaptive branching.',a:"showPage('planner')",c:'Build plan'});
-  const trapStudied=TRAP_DB.filter(t=>hardQLog['trap_'+t.id]).length;
-  if(trapStudied<8)recs.push({icon:'🛡️',t:'Study the Trap Database',d:`${trapStudied}/16 traps studied. All 16 are worth an estimated 50–80 extra points.`,a:"showPage('traps')",c:'View traps'});
-  if(weeklyReviews.length<week-1)recs.push({icon:'📊',t:'Complete your weekly review',d:'Missing reviews block your analytics. Structured reflection drives ~30% of score improvement.',a:"openModal('weeklyModal')",c:'Review now'});
-  recs.push({icon:'📖',t:'Daily reading check',d:'15–20 min of complex text daily is the most underrated R&W score lever. No SAT book teaches this.',a:"showPage('today')",c:'Log reading'});
+  // Score track
+  const toP=v=>Math.max(0,Math.min(100,(v-400)/12));
 
   document.getElementById('page-today').innerHTML=`
-  <div class="card" style="background:linear-gradient(135deg,var(--accent),#7C3AED);border:none;color:#fff;margin-bottom:18px;position:relative;overflow:hidden">
-    <div style="position:absolute;inset:0;background:radial-gradient(120% 140% at 100% 0%,rgba(255,255,255,0.13),transparent 60%)"></div>
-    <div style="position:relative">
-      <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:rgba(255,255,255,0.75)">${greet}</div>
-      <div style="font-family:var(--font-display);font-weight:800;letter-spacing:-0.035em;font-size:clamp(1.25rem,3vw,1.75rem);color:#fff;margin-top:4px">${greet}, ${esc(name)}. Your 1500 awaits.</div>
-      <div style="font-size:0.81rem;color:rgba(255,255,255,0.8);margin-top:6px;max-width:52ch">Every session compounds. Consistent daily work beats marathon cramming — every single time.</div>
-      <div style="display:flex;align-items:baseline;gap:14px;margin-top:16px;flex-wrap:wrap">
-        <div style="display:flex;align-items:baseline;gap:2px"><span style="font-family:var(--font-num);font-weight:800;font-size:1.55rem;color:#fff">${d}</span><span style="font-size:0.7rem;color:rgba(255,255,255,0.7);margin-left:3px">days</span></div>
-        <div style="display:flex;align-items:baseline;gap:2px"><span style="font-family:var(--font-num);font-weight:800;font-size:1.55rem;color:#fff">${hrs}</span><span style="font-size:0.7rem;color:rgba(255,255,255,0.7);margin-left:3px">hrs</span></div>
-        <div style="display:flex;align-items:baseline;gap:2px"><span style="font-family:var(--font-num);font-weight:800;font-size:1.55rem;color:#fff">${mins}</span><span style="font-size:0.7rem;color:rgba(255,255,255,0.7);margin-left:3px">min</span></div>
-        <span style="font-size:0.72rem;color:rgba(255,255,255,0.65)">until exam · ${new Date((userProfile.examDate||'2026-10-03')+'T00:00:00').toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</span>
+  <!-- GREETING HEADER -->
+  <div style="margin-bottom:20px">
+    <div class="eyebrow" style="margin-bottom:4px">${greet}</div>
+    <div class="display-2" style="font-size:1.45rem;margin-bottom:4px">${esc(name)}, here's your full picture.</div>
+    <div style="font-size:0.8rem;color:var(--ink-3)">Study streak: <strong style="color:${streak>=7?'var(--good)':streak>=3?'var(--warn)':'var(--ink)'}">${streak} day${streak!==1?'s':''} 🔥</strong> · ${new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'})}</div>
+  </div>
+
+  <!-- 3 GOAL CARDS -->
+  <div class="grid grid-3" style="margin-bottom:20px;gap:12px">
+
+    <!-- SAT Card -->
+    <div class="card" style="padding:18px;border-top:3px solid var(--accent);cursor:pointer" onclick="showPage('tests')">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+        <div style="width:28px;height:28px;border-radius:7px;background:var(--accent-soft);display:grid;place-items:center">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <div>
+          <div style="font-size:0.8rem;font-weight:700;color:var(--accent)">SAT Prep</div>
+          <div style="font-size:0.65rem;color:var(--ink-3)">Week ${satWeek} · ${phaseLabel}</div>
+        </div>
+        <div style="margin-left:auto;font-family:var(--font-num);font-size:1.4rem;font-weight:800;color:var(--accent)">${satCurrent||'—'}</div>
       </div>
+      <div style="display:flex;gap:10px;margin-bottom:10px">
+        <div style="flex:1;text-align:center;padding:8px;background:var(--surface-2);border-radius:var(--r-sm)">
+          <div style="font-family:var(--font-num);font-weight:800;font-size:1.05rem">${satDays}</div>
+          <div style="font-size:0.63rem;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.05em">Days left</div>
+        </div>
+        <div style="flex:1;text-align:center;padding:8px;background:var(--surface-2);border-radius:var(--r-sm)">
+          <div style="font-family:var(--font-num);font-weight:800;font-size:1.05rem;color:${satPredicted&&satPredicted>=satTarget?'var(--good)':'var(--accent)'}">${satPredicted||'—'}</div>
+          <div style="font-size:0.63rem;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.05em">Predicted</div>
+        </div>
+        <div style="flex:1;text-align:center;padding:8px;background:var(--elite-soft);border-radius:var(--r-sm)">
+          <div style="font-family:var(--font-num);font-weight:800;font-size:1.05rem;color:var(--elite)">${satTarget}</div>
+          <div style="font-size:0.63rem;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.05em">Target</div>
+        </div>
+      </div>
+      <div class="bar-track"><div class="bar-fill" style="width:${satCurrent?toP(satCurrent)+'%':'0%'}"></div></div>
+      <div style="font-size:0.7rem;color:var(--ink-3);margin-top:5px">${satTests.length} test${satTests.length!==1?'s':''} · ${satErrors.length} errors logged</div>
+    </div>
+
+    <!-- KUCAT Card -->
+    <div class="card" style="padding:18px;border-top:3px solid var(--elite);cursor:pointer" onclick="showPage('kucat')">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+        <div style="width:28px;height:28px;border-radius:7px;background:var(--elite-soft);display:grid;place-items:center">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--elite)" stroke-width="2.5" stroke-linecap="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 0 6 1 6 3 0-2 3-3 6-3v-5"/></svg>
+        </div>
+        <div>
+          <div style="font-size:0.8rem;font-weight:700;color:var(--elite)">KUCAT Prep 🇳🇵</div>
+          <div style="font-size:0.65rem;color:var(--ink-3)">${kcPi.phase.name} · ${kcPi.progress}% done</div>
+        </div>
+        <div style="margin-left:auto;font-family:var(--font-num);font-size:1.4rem;font-weight:800;color:var(--elite)">${kcDays}d</div>
+      </div>
+      <div style="display:flex;gap:10px;margin-bottom:10px">
+        <div style="flex:1;text-align:center;padding:8px;background:var(--surface-2);border-radius:var(--r-sm)">
+          <div style="font-family:var(--font-num);font-weight:800;font-size:1.05rem">${kcDone}/${kcTotal}</div>
+          <div style="font-size:0.63rem;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.05em">Chapters</div>
+        </div>
+        <div style="flex:1;text-align:center;padding:8px;background:var(--surface-2);border-radius:var(--r-sm)">
+          <div style="font-family:var(--font-num);font-weight:800;font-size:1.05rem">${kcMocks}/8</div>
+          <div style="font-size:0.63rem;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.05em">Mocks</div>
+        </div>
+        <div style="flex:1;text-align:center;padding:8px;background:var(--elite-soft);border-radius:var(--r-sm)">
+          <div style="font-family:var(--font-num);font-weight:800;font-size:1.05rem;color:var(--elite)">${kcReady}%</div>
+          <div style="font-size:0.63rem;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.05em">Readiness</div>
+        </div>
+      </div>
+      <div class="bar-track"><div class="bar-fill" style="width:${kcReady}%;background:var(--elite)"></div></div>
+      <div style="font-size:0.7rem;color:var(--ink-3);margin-top:5px">KUCAT exam: ${new Date(kucatData.examDate+'T00:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>
+    </div>
+
+    <!-- USA 2027 Card -->
+    <div class="card" style="padding:18px;border-top:3px solid var(--good);cursor:pointer" onclick="showPage('college')">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+        <div style="width:28px;height:28px;border-radius:7px;background:var(--good-soft);display:grid;place-items:center">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--good)" stroke-width="2.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+        </div>
+        <div>
+          <div style="font-size:0.8rem;font-weight:700;color:var(--good)">USA 2027 🇺🇸</div>
+          <div style="font-size:0.65rem;color:var(--ink-3)">College application command</div>
+        </div>
+        <div style="margin-left:auto;font-family:var(--font-num);font-size:1.4rem;font-weight:800;color:var(--good)">${cmdPct}%</div>
+      </div>
+      <div style="display:flex;gap:10px;margin-bottom:10px">
+        <div style="flex:1;text-align:center;padding:8px;background:var(--surface-2);border-radius:var(--r-sm)">
+          <div style="font-family:var(--font-num);font-weight:800;font-size:1.05rem">${cmdDone}</div>
+          <div style="font-size:0.63rem;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.05em">Done</div>
+        </div>
+        <div style="flex:1;text-align:center;padding:8px;background:var(--surface-2);border-radius:var(--r-sm)">
+          <div style="font-family:var(--font-num);font-weight:800;font-size:1.05rem">${cmdTotal-cmdDone}</div>
+          <div style="font-size:0.63rem;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.05em">Remaining</div>
+        </div>
+        <div style="flex:1;text-align:center;padding:8px;background:var(--good-soft);border-radius:var(--r-sm)">
+          <div style="font-family:var(--font-num);font-weight:800;font-size:1.05rem;color:var(--good)">2027</div>
+          <div style="font-size:0.63rem;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.05em">Intake</div>
+        </div>
+      </div>
+      <div class="bar-track"><div class="bar-fill" style="width:${cmdPct}%;background:var(--good)"></div></div>
+      <div style="font-size:0.7rem;color:var(--ink-3);margin-top:5px">CommonApp · Essays · Rec Letters · Financials</div>
     </div>
   </div>
 
-  <div class="qstat-row" style="margin-bottom:18px">
-    <div class="qstat"><div class="qstat-val tabular">${doneCount}/${missions.length}</div><div class="qstat-lbl">Today</div></div>
-    <div class="qstat"><div class="qstat-val tabular" style="color:${streak>=7?'var(--good)':streak>=3?'var(--warn)':'inherit'}">${streak}🔥</div><div class="qstat-lbl">Streak</div></div>
-    <div class="qstat"><div class="qstat-val tabular">${current||'—'}</div><div class="qstat-lbl">Latest</div></div>
-    <div class="qstat"><div class="qstat-val tabular" style="font-size:0.88rem;color:var(--ink-3)">W${week}</div><div class="qstat-lbl">${phaseLabels[phase].split(' · ')[1]||'Phase'}</div></div>
-  </div>
-
-  <div class="card" style="margin-bottom:18px">
-    <div class="card-head" style="margin-bottom:10px">
-      <div><div class="card-title">📖 Daily Reading System</div><div class="card-sub">15–20 min of complex text daily → estimated +40–60 pts R&W over 15 weeks</div></div>
-      <button class="btn btn-secondary btn-sm" onclick="toggleReadingDay('${today}')">Log today</button>
-    </div>
-    <div style="margin-bottom:8px;font-size:0.76rem;color:var(--ink-3);font-weight:600">This week — tap any day to toggle</div>
-    <div class="reading-log">${readingDots}</div>
-    <div style="margin-top:10px;display:flex;gap:16px;font-size:0.76rem;color:var(--ink-3);flex-wrap:wrap">
-      <span>📗 Total days logged: <strong>${readTotal}</strong></span>
-      <span>📘 This week: <strong>${readWeek}/7</strong></span>
-      <span style="color:var(--rw);font-weight:600">Goal: 6+ days/week</span>
-    </div>
-    <div style="margin-top:8px;padding:8px 12px;background:var(--surface-2);border-radius:var(--r-sm);font-size:0.73rem;color:var(--ink-3);line-height:1.6"><strong>What to read:</strong> NY Times Op-Ed, The Atlantic, Scientific American, The Economist, Nature articles. Look for dense, argument-driven text. While reading, ask: "What is the author's central claim?" and "What evidence supports it?" This directly trains SAT R&W skills.</div>
-  </div>
-
-  <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:14px;margin-bottom:18px;align-items:start">
+  <!-- MAIN CONTENT GRID: left (missions + coach) + right (SAT score + reading) -->
+  <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:14px;margin-bottom:18px;align-items:start">
     <div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-        <div><div class="card-title">Today's missions</div><div class="card-sub">${new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'})}</div></div>
-        <button class="btn btn-secondary btn-sm" onclick="showPage('planner')">Full plan</button>
+      <!-- TODAY'S MISSIONS -->
+      <div class="card" style="margin-bottom:12px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <div><div class="card-title">Today's tasks</div><div class="card-sub">${doneCount}/${missions.length} complete</div></div>
+          <div style="display:flex;gap:5px">
+            <button class="btn btn-secondary btn-xs" onclick="showPage('planner')">SAT plan</button>
+            <button class="btn btn-secondary btn-xs" onclick="showPage('kucat')">KUCAT</button>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          ${missions.map(m=>m.id.startsWith('s')
+            ?`<div class="mission ${m.done?'done':''}"><div class="check ${m.done?'on':''}" style="cursor:default;flex-shrink:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div style="flex:1"><div class="mission-title">${esc(m.label)}</div><div class="mission-meta">${esc(m.meta||'')} · <span style="color:var(--accent);font-weight:700">auto-tracked</span></div></div></div>`
+            :`<div class="mission ${m.done?'done':''}"><button class="check ${m.done?'on':''}" onclick="toggleMission('${m.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></button><div style="flex:1"><div class="mission-title">${esc(m.label)}</div><div class="mission-meta">${esc(m.meta||'')}</div></div></div>`
+          ).join('')}
+        </div>
       </div>
-      <div style="display:flex;flex-direction:column;gap:6px">
-        ${missions.map(m=>m.id.startsWith('s')
-          ?`<div class="mission ${m.done?'done':''}"><div class="check ${m.done?'on':''}" style="cursor:default;flex-shrink:0" title="Auto-tracked based on your data"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div style="flex:1"><div class="mission-title">${esc(m.label)}</div><div class="mission-meta">${esc(m.meta||'')} · <span style="color:var(--accent);font-weight:700">auto-tracked</span></div></div></div>`
-          :`<div class="mission ${m.done?'done':''}"><button class="check ${m.done?'on':''}" onclick="toggleMission('${m.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></button><div style="flex:1"><div class="mission-title">${esc(m.label)}</div><div class="mission-meta">${esc(m.meta||'')}</div></div></div>`
-        ).join('')}
-      </div>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:12px">
+      <!-- AI COACH -->
       <div class="coach-card">
         <div class="coach-head">
           <div class="coach-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2a4 4 0 0 1 4 4c0 1.5-.8 2.8-2 3.5V12h2a4 4 0 0 1 4 4v1a2 2 0 0 1-2 2h-1v1a2 2 0 0 1-2 2h-6a2 2 0 0 1-2-2v-1H6a2 2 0 0 1-2-2v-1a4 4 0 0 1 4-4h2V9.5C8.8 8.8 8 7.5 8 6a4 4 0 0 1 4-4z"/></svg></div>
-          <div><div class="coach-name">AI Study Coach</div><div class="coach-status">Live analysis</div></div>
+          <div><div class="coach-name">Study Coach</div><div class="coach-status">All 3 goals tracked</div></div>
         </div>
-        <div class="coach-msg">${coachMsg}</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">${coachBtns}</div>
+        <div class="coach-msg">${!satTests.length?'Start by logging a Bluebook SAT diagnostic to activate score tracking. Meanwhile, use KUCAT Prep to begin chapter checklists.'
+          :satCurrent&&satPredicted&&satPredicted<satTarget?`SAT: <strong>${satTarget-satPredicted} pts from target</strong> — focus on trap elimination and weak topics. KUCAT: <strong>${kcDone}/${kcTotal} chapters</strong> done, ${kcDays} days to exam.`
+          :`You're making solid progress across all fronts. SAT predicted ${satPredicted||'—'}, KUCAT readiness ${kcReady}%, USA app ${cmdPct}% done.`}</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px">
+          <button class="btn btn-primary btn-sm" onclick="openModal('testModal')">Log SAT test</button>
+          <button class="btn btn-secondary btn-sm" onclick="showPage('kucat')">KUCAT checklist</button>
+        </div>
       </div>
-      <div class="burnout-meter">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px">
-          <div style="font-size:0.78rem;font-weight:700">🔋 Energy Meter</div>
-          <div style="font-size:0.7rem;color:var(--ink-3)">${burnoutLabel}</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <!-- SAT SCORE CARD -->
+      <div class="card">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px">
+          <div><div class="card-title">SAT Score Track</div><div class="card-sub">${satTests.length} test${satTests.length!==1?'s':''} logged</div></div>
+          <button class="btn btn-primary btn-sm" onclick="openModal('testModal')">+ Test</button>
         </div>
-        <div class="burnout-bar"><div class="burnout-fill" style="width:${bl*10}%;background:${burnoutColor}"></div></div>
-        <div style="display:flex;gap:5px;margin-top:8px;flex-wrap:wrap">
-          <button class="btn btn-secondary btn-xs" onclick="logBurnout(3)">😩 Drained</button>
-          <button class="btn btn-secondary btn-xs" onclick="logBurnout(5)">😐 OK</button>
-          <button class="btn btn-secondary btn-xs" onclick="logBurnout(7)">😊 Good</button>
-          <button class="btn btn-secondary btn-xs" onclick="logBurnout(9)">⚡ Energized</button>
+        <div class="score-zones" style="grid-template-columns:1fr 1fr 1fr">
+          <div class="score-zone" style="border-color:var(--line);background:var(--surface-2)">
+            <div class="score-zone-val tabular">${satCurrent||'—'}</div>
+            <div class="score-zone-lbl">Current</div>
+          </div>
+          <div class="score-zone" style="border-color:${satPredicted&&satPredicted>=satTarget?'var(--good)':'var(--accent)'};background:${satPredicted&&satPredicted>=satTarget?'var(--good-soft)':'var(--accent-soft)'}">
+            <div class="score-zone-val tabular" style="color:${satPredicted&&satPredicted>=satTarget?'var(--good)':'var(--accent)'}">${satPredicted||'—'}</div>
+            <div class="score-zone-lbl">Predicted</div>
+          </div>
+          <div class="score-zone" style="border-color:var(--elite);background:var(--elite-soft)">
+            <div class="score-zone-val tabular" style="color:var(--elite)">${satTarget}</div>
+            <div class="score-zone-lbl">Target</div>
+          </div>
         </div>
-        ${bl<=4?`<div style="margin-top:8px;font-size:0.73rem;color:var(--warn);font-weight:600">⚠️ Burnout risk — consider a lighter session today (30 min max). Sleep is your highest-ROI recovery tool.</div>`:''}
+        <div class="score-track-wrap" style="margin:10px 0 4px">
+          <div class="score-track-labels"><span>400</span><span>800</span><span>1200</span><span style="color:var(--accent);font-weight:700">1500</span><span>1600</span></div>
+          <div class="score-track" id="scoreTrack">
+            <div class="score-track-fill" id="scoreTrackFill" style="width:0%"></div>
+            ${satCurrent?`<div class="score-track-marker" id="markerCurrent" style="background:var(--accent);left:0%"><div class="score-track-tooltip">${satCurrent}</div></div>`:''}
+            ${satPredicted&&satPredicted!==satCurrent?`<div class="score-track-marker" id="markerPredicted" style="background:var(--good);left:0%"><div class="score-track-tooltip" style="background:var(--good)">${satPredicted}</div></div>`:''}
+            <div style="position:absolute;left:${toP(satTarget)}%;top:-4px;bottom:-4px;width:2px;background:var(--elite);border-radius:1px;opacity:0.7"></div>
+          </div>
+        </div>
+        ${satTests.length>=2?`<canvas id="miniScoreChart" height="60" style="width:100%;margin-top:8px"></canvas>`:'<div style="font-size:0.75rem;color:var(--ink-3);margin-top:6px">Log 2+ tests to see progression chart.</div>'}
+      </div>
+      <!-- READING + ENERGY -->
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+          <div class="card-title">📖 Daily reading</div>
+          <button class="btn btn-secondary btn-sm" onclick="toggleReadingDay('${today}')">Log today</button>
+        </div>
+        <div class="reading-log" style="margin-bottom:8px">${readingDots}</div>
+        <div style="font-size:0.72rem;color:var(--ink-3)">Total: ${Object.keys(readingLog).length} days · This week: ${weekDays.filter(d2=>readingLog[d2]).length}/7</div>
+        <div style="margin-top:12px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+            <span style="font-size:0.78rem;font-weight:600">🔋 Energy</span>
+            <span style="font-size:0.7rem;color:${burnoutColor};font-weight:600">${burnoutLabel}</span>
+          </div>
+          <div class="burnout-bar" style="margin-bottom:6px"><div class="burnout-fill" style="width:${bl*10}%;background:${burnoutColor}"></div></div>
+          <div style="display:flex;gap:4px;flex-wrap:wrap">
+            <button class="btn btn-secondary btn-xs" onclick="logBurnout(3)">😩 Low</button>
+            <button class="btn btn-secondary btn-xs" onclick="logBurnout(5)">😐 OK</button>
+            <button class="btn btn-secondary btn-xs" onclick="logBurnout(7)">😊 Good</button>
+            <button class="btn btn-secondary btn-xs" onclick="logBurnout(9)">⚡ High</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="card" style="margin-bottom:18px">
-    <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px">
-      <div>
-        <div class="card-title">Score Trajectory</div>
-        <div class="card-sub">${satTests.length?satTests.length+' test'+(satTests.length>1?'s':'')+' · '+satErrors.length+' errors tracked':'Log your first test to activate tracking'}</div>
-      </div>
-      <button class="btn btn-primary btn-sm" onclick="openModal('testModal')">+ Log test</button>
-    </div>
-
-    <!-- Score zones: Current / Predicted / Target -->
-    <div class="score-zones">
-      <div class="score-zone" style="border-color:var(--line);background:var(--surface-2)">
-        <div class="score-zone-val tabular">${current||'—'}</div>
-        <div class="score-zone-lbl">Current</div>
-        <div class="score-zone-sub">${current?'latest test':'none logged'}</div>
-      </div>
-      <div class="score-zone" style="border-color:${predicted&&predicted>=target?'var(--good)':'var(--accent)'};background:${predicted&&predicted>=target?'var(--good-soft)':'var(--accent-soft)'}">
-        <div class="score-zone-val tabular" style="color:${predicted&&predicted>=target?'var(--good)':'var(--accent)'}">${predicted||'—'}</div>
-        <div class="score-zone-lbl">Predicted</div>
-        <div class="score-zone-sub">${predicted&&current?`${predicted>current?'+':''}${predicted-current} vs now`:'needs data'}</div>
-      </div>
-      <div class="score-zone" style="border-color:var(--elite);background:var(--elite-soft)">
-        <div class="score-zone-val tabular" style="color:var(--elite)">${target}</div>
-        <div class="score-zone-lbl">Target</div>
-        <div class="score-zone-sub">${current?Math.max(0,target-current)+' to go':'your goal'}</div>
-      </div>
-    </div>
-
-    <!-- Score track: 400 → 1600 with markers -->
-    <div class="score-track-wrap">
-      <div class="score-track-labels">
-        <span>400</span><span>800</span><span>1200</span><span style="color:var(--accent);font-weight:700">1500</span><span>1600</span>
-      </div>
-      <div class="score-track" id="scoreTrack">
-        <div class="score-track-fill" id="scoreTrackFill" style="width:0%"></div>
-        ${current?`<div class="score-track-marker" id="markerCurrent" style="background:var(--accent);left:0%"><div class="score-track-tooltip">${current}</div></div>`:''}
-        ${predicted&&predicted!==current?`<div class="score-track-marker" id="markerPredicted" style="background:var(--good);left:0%"><div class="score-track-tooltip" style="background:var(--good)">${predicted}</div></div>`:''}
-        <!-- Target line -->
-        <div style="position:absolute;left:${(target-400)/12}%;top:-4px;bottom:-4px;width:2px;background:var(--elite);border-radius:1px;opacity:0.7"></div>
-      </div>
-      <div class="score-legend">
-        ${current?`<div class="score-legend-item"><div class="score-legend-dot" style="background:var(--accent)"></div><span>Current: ${current}</span></div>`:''}
-        ${predicted&&predicted!==current?`<div class="score-legend-item"><div class="score-legend-dot" style="background:var(--good)"></div><span>Predicted: ${predicted}</span></div>`:''}
-        <div class="score-legend-item"><div class="score-legend-dot" style="background:var(--elite)"></div><span>Target: ${target}</span></div>
-      </div>
-    </div>
-
-    ${predicted&&current?`<div style="margin-top:10px;padding:8px 12px;border-radius:var(--r-sm);font-size:0.76rem;font-weight:600;background:${predicted>=target?'var(--good-soft)':'var(--accent-soft)'};color:${predicted>=target?'var(--good)':'var(--accent)'}">${predicted>=target?`✓ On pace for ${target}+ — maintain your trajectory.`:`↑ ${target-predicted} pts to target — close your top 2 weakness topics & cut trap errors.`}</div>`:'<div style="margin-top:10px;font-size:0.76rem;color:var(--ink-3)">Log at least one test to see your trajectory.</div>'}
-    ${satTests.length>=2?`<div style="margin-top:14px"><div class="analytics-section-title">Score progression</div><canvas id="miniScoreChart" height="80" style="width:100%"></canvas></div>`:''}
-  </div>
-
-  <div style="font-size:0.88rem;font-weight:700;margin-bottom:12px">Smart Recommendations</div>
-  <div class="grid grid-3">${recs.slice(0,3).map(r=>`<div class="card" style="padding:16px"><div style="font-size:1.3rem;margin-bottom:8px">${r.icon}</div><div style="font-size:0.85rem;font-weight:700;margin-bottom:4px">${esc(r.t)}</div><div style="font-size:0.76rem;color:var(--ink-3);line-height:1.5;margin-bottom:12px">${esc(r.d)}</div><button class="btn btn-secondary btn-sm" onclick="${r.a}">${r.c}</button></div>`).join('')}</div>`;
+  <!-- BOTTOM: Quick-nav tiles -->
+  <div style="font-size:0.78rem;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px">Quick access</div>
+  <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px">
+    ${[
+      {icon:'🗺️',label:'SAT Roadmap',page:'roadmap',color:'var(--accent)'},
+      {icon:'🛡️',label:'Trap Database',page:'traps',color:'var(--accent)'},
+      {icon:'📊',label:'Score Analytics',page:'analytics',color:'var(--accent)'},
+      {icon:'🔬',label:'Weakness Radar',page:'weaknesses',color:'var(--accent)'},
+      {icon:'📚',label:'KUCAT Checklist',page:'kucat',color:'var(--elite)'},
+      {icon:'🏛️',label:'USA Colleges',page:'college',color:'var(--good)'},
+      {icon:'🏆',label:'Achievements',page:'achievements',color:'var(--warn)'},
+      {icon:'👥',label:'Community',page:'community',color:'var(--rw)'},
+    ].map(t=>`<button onclick="showPage('${t.page}')" style="display:flex;flex-direction:column;align-items:flex-start;gap:5px;padding:12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);text-align:left;transition:all var(--dur-1);cursor:pointer;border-left:3px solid ${t.color}" onmouseover="this.style.background='var(--surface-2)';this.style.boxShadow='var(--shadow-2)'" onmouseout="this.style.background='var(--surface)';this.style.boxShadow='none'">
+      <span style="font-size:1.1rem">${t.icon}</span>
+      <span style="font-size:0.75rem;font-weight:600;color:var(--ink-2)">${t.label}</span>
+    </button>`).join('')}
+  </div>`;
 
   if(satTests.length>=2){setTimeout(()=>{const c=document.getElementById('miniScoreChart');if(c)drawLineChart(c,[...satTests].sort((a,b)=>new Date(a.date)-new Date(b.date)).map(t=>t.total),[...satTests].sort((a,b)=>new Date(a.date)-new Date(b.date)).map(t=>fmtDate(t.date)),getCSSVar('--accent'))},80)}
-  // Animate score track markers
   setTimeout(()=>{
-    const trackEl=document.getElementById('scoreTrack');
-    const fillEl=document.getElementById('scoreTrackFill');
-    const mc=document.getElementById('markerCurrent');
-    const mp=document.getElementById('markerPredicted');
+    const trackEl=document.getElementById('scoreTrack');const fillEl=document.getElementById('scoreTrackFill');
+    const mc=document.getElementById('markerCurrent');const mp=document.getElementById('markerPredicted');
     if(!trackEl)return;
-    const toP=v=>Math.max(0,Math.min(100,(v-400)/12));
-    if(fillEl&&current){fillEl.style.width=toP(current)+'%'}
-    if(mc&&current){mc.style.left=toP(current)+'%'}
-    if(mp&&predicted){mp.style.left=toP(predicted)+'%'}
+    const toPx=v=>Math.max(0,Math.min(100,(v-400)/12));
+    if(fillEl&&satCurrent){fillEl.style.width=toPx(satCurrent)+'%'}
+    if(mc&&satCurrent){mc.style.left=toPx(satCurrent)+'%'}
+    if(mp&&satPredicted){mp.style.left=toPx(satPredicted)+'%'}
   },120);
 }
 
@@ -3005,6 +3083,370 @@ function openMyMemberModal(){
 }
 
 function closeMemberModal(){document.getElementById('memberModalOverlay').classList.remove('show')}
+
+/* ========== KUCAT PREP PAGE ========== */
+let kucatData={examDate:'2025-09-14',startDate:new Date().toISOString().split('T')[0],studyHours:0,streak:0,lastStudyDate:null,checklists:{},formulas:{},mockScores:[],weakTopics:{},dailyLog:[]};
+(function loadKucat(){try{const s=localStorage.getItem('kucat_v3');if(s){const d=JSON.parse(s);kucatData=Object.assign({},kucatData,d)}}catch(e){}})();
+function saveKucat(){try{localStorage.setItem('kucat_v3',JSON.stringify(kucatData))}catch(e){}}
+
+const KC_SUBJECTS={mathematics:{label:'Mathematics',color:'#4338CA',chapters:['Sets & Functions','Trigonometry','Complex Numbers','Quadratic Equations','Matrices & Determinants','Permutation & Combination','Binomial Theorem','Limits & Continuity','Derivatives','Integration','Conic Sections','Vectors','Statistics & Probability','Sequences & Series','Inverse Trigonometry','3D Geometry']},physics:{label:'Physics',color:'#0F766E',chapters:['Units & Measurements','Kinematics','Newton\'s Laws','Work, Energy & Power','Rotational Motion','Gravitation','Properties of Matter','Thermodynamics','Waves & Oscillations','Electrostatics','Current Electricity','Magnetism','Electromagnetic Induction','Optics','Modern Physics','Semiconductors']},chemistry:{label:'Chemistry',color:'#B45309',chapters:['Atomic Structure','Periodic Table','Chemical Bonding','States of Matter','Thermochemistry','Chemical Equilibrium','Ionic Equilibrium','Electrochemistry','Chemical Kinetics','Hydrocarbons','Functional Groups','Biomolecules','Metallurgy','Coordination Compounds']},english:{label:'English',color:'#0F766E',chapters:['Reading Comprehension','Grammar & Usage','Vocabulary','Essay Writing','Verbal Reasoning','Para Jumbles','Error Correction']},reasoning:{label:'Reasoning',color:'#6D28D9',chapters:['Number Series','Coding-Decoding','Analogy','Classification','Blood Relations','Direction Sense','Syllogisms','Data Interpretation','Venn Diagrams','Pattern Recognition']}};
+
+const KC_FORMULAS={mathematics:['Quadratic: x = (-b ± √(b²-4ac))/2a','sin²θ + cos²θ = 1','Distance = √((x₂-x₁)²+(y₂-y₁)²)','d/dx(xⁿ) = nxⁿ⁻¹','∫xⁿdx = xⁿ⁺¹/(n+1) + C','Binomial: (a+b)ⁿ = Σ C(n,r)aⁿ⁻ʳbʳ','Area of circle = πr²','tan θ = sin θ / cos θ'],physics:['F = ma','v² = u² + 2as','KE = ½mv²','V = IR (Ohm\'s Law)','F = kq₁q₂/r²','E = hν (Planck)','PV = nRT','P = VI = I²R']};
+
+const KC_RESOURCES=[{cat:'Mathematics',icon:'📐',items:[{name:'Khan Academy — Free Maths',url:'https://www.khanacademy.org/math',desc:'Full NEB syllabus coverage, free forever.'},{name:'Paul\'s Online Math Notes',url:'https://tutorial.math.lamar.edu',desc:'Calculus & algebra with worked examples.'},{name:'NCERT Textbooks (free PDF)',url:'https://ncert.nic.in/textbook.php',desc:'Grade 11 & 12 maths — official syllabus basis.'}]},{cat:'Physics',icon:'⚛️',items:[{name:'Khan Academy — Physics',url:'https://www.khanacademy.org/science/physics',desc:'All core topics, videos + exercises free.'},{name:'HyperPhysics',url:'http://hyperphysics.phy-astr.gsu.edu',desc:'Concise reference for all physics concepts.'},{name:'NCERT Physics PDFs',url:'https://ncert.nic.in/textbook.php',desc:'NEB-aligned grade 11 & 12 physics.'}]},{cat:'Chemistry',icon:'⚗️',items:[{name:'Khan Academy — Chemistry',url:'https://www.khanacademy.org/science/chemistry',desc:'Atomic, organic, equilibrium — all free.'},{name:'ChemLibreTexts',url:'https://chem.libretexts.org',desc:'Open-access chemistry textbook library.'},{name:'NCERT Chemistry PDFs',url:'https://ncert.nic.in/textbook.php',desc:'Chapters aligned with NEB Grade 11 & 12.'}]},{cat:'Previous Papers & Mock Tests',icon:'📄',items:[{name:'IOE Entrance Hub (Nepal)',url:'https://ioe.edu.np',desc:'Past KUCAT/IOE papers and solutions.'},{name:'Nepal Entrance Notes',url:'https://nepalentrancenotes.com',desc:'Free solved model sets for KUCAT.'},{name:'Entrance Preparation Nepal',url:'https://entrancepreparation.com.np',desc:'Chapter-wise MCQs and full mock sets.'}]},{cat:'English & Reasoning',icon:'🧠',items:[{name:'Quizlet SAT Vocab',url:'https://quizlet.com/subject/vocabulary',desc:'Vocabulary practice for entrance tests.'},{name:'IndiaBix — Reasoning',url:'https://www.indiabix.com/logical-reasoning/questions-and-answers',desc:'1000s of free reasoning MCQs.'}]}];
+
+const KC_DEADLINES=[{label:'KUCAT Application Opens',date:'2025-07-01',type:'good',note:'Fill form at entrance.ku.edu.np'},{label:'Application Deadline',date:'2025-08-15',type:'warn',note:'Last day to submit — do not miss'},{label:'Admit Card Download',date:'2025-09-05',type:'accent',note:'Download from KU portal'},{label:'KUCAT Exam Day',date:'2025-09-14',type:'bad',note:'BSc CS / BTech AI entrance exam'},{label:'Result Declaration',date:'2025-09-28',type:'elite',note:'Approx 2 weeks after exam'}];
+
+const KC_EXAM_FORMAT=[{subject:'Mathematics',marks:60,questions:60,time:'—',note:'Highest weightage — priority subject'},{subject:'Physics',marks:20,questions:20,time:'—',note:'Grade 11 & 12 NEB syllabus'},{subject:'Chemistry',marks:10,questions:10,time:'—',note:'Basic concepts'},{subject:'English',marks:5,questions:5,time:'—',note:'Reading & grammar'},{subject:'General Aptitude',marks:5,questions:5,time:'—',note:'Logical reasoning & IQ'}];
+
+const KC_PHASES=[{name:'Foundation',weeks:2,color:'#4338CA',desc:'Core concepts, Grade 11 topics, no tests yet'},{name:'Concept Building',weeks:3,color:'#0F766E',desc:'Grade 12 topics, chapter exercises, formula reviews'},{name:'Intensive Practice',weeks:2,color:'#B45309',desc:'Mock tests every weekend, weak-topic drills'},{name:'Final Revision',weeks:1,color:'#B91C1C',desc:'Full syllabus revision, last 5 years\' papers only'}];
+
+const KC_QUOTES=['Every expert was once a beginner. Keep going.','KU BSc CS is a plan with a deadline — not a dream.','Consistency beats intensity every single time.','One day you\'ll look back glad you didn\'t give up.','Focus on progress, not perfection.','Your future self is watching. Make them proud.'];
+
+function kcDaysLeft(){const exam=new Date(kucatData.examDate+'T00:00:00');const now=new Date();now.setHours(0,0,0,0);return Math.max(0,Math.round((exam-now)/86400000))}
+function kcTotalChapters(){return Object.values(KC_SUBJECTS).reduce((a,s)=>a+s.chapters.length,0)}
+function kcDoneChapters(){let d=0;Object.keys(KC_SUBJECTS).forEach(s=>{const cl=kucatData.checklists[s]||{};d+=Object.values(cl).filter(Boolean).length});return d}
+function kcAvgScore(){if(!kucatData.mockScores.length)return 0;return Math.round(kucatData.mockScores.reduce((a,m)=>a+(m.math+m.physics+m.chemistry+m.english+m.reasoning)/5,0)/kucatData.mockScores.length)}
+function kcReadiness(){const done=kcDoneChapters(),total=kcTotalChapters(),mocks=kucatData.mockScores.length,avg=kcAvgScore();return Math.min(100,Math.round((done/total)*40+(avg/100)*30+Math.min(mocks/8,1)*20+Math.min(kucatData.studyHours/200,1)*10))}
+function kcPhaseInfo(){const start=new Date(kucatData.startDate+'T00:00:00');const now=new Date();const daysDone=Math.max(0,Math.round((now-start)/86400000));const totalPhaseDays=KC_PHASES.reduce((a,p)=>a+p.weeks*7,0);let cum=0;for(let i=0;i<KC_PHASES.length;i++){const pd=KC_PHASES[i].weeks*7;if(daysDone<=cum+pd){const prog=Math.round(Math.max(0,(daysDone-cum))/pd*100);return{idx:i,phase:KC_PHASES[i],progress:Math.min(100,prog)}}cum+=pd}return{idx:3,phase:KC_PHASES[3],progress:100}}
+
+function renderKucatPage(){
+  const p=document.getElementById('page-kucat');if(!p)return;
+  const days=kcDaysLeft();
+  const done=kcDoneChapters();
+  const total=kcTotalChapters();
+  const mocks=kucatData.mockScores.length;
+  const avg=kcAvgScore();
+  const readiness=kcReadiness();
+  const pi=kcPhaseInfo();
+  const quote=KC_QUOTES[Math.floor(Date.now()/86400000)%KC_QUOTES.length];
+  const today=new Date().toISOString().split('T')[0];
+
+  // Subject progress bars
+  const subjBars=Object.keys(KC_SUBJECTS).map(s=>{
+    const cl=kucatData.checklists[s]||{};
+    const total=KC_SUBJECTS[s].chapters.length;
+    const done=Object.values(cl).filter(Boolean).length;
+    const pct=Math.round(done/total*100);
+    const col=KC_SUBJECTS[s].color;
+    return`<div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+        <span style="font-size:0.78rem;font-weight:600">${KC_SUBJECTS[s].label}</span>
+        <span style="font-size:0.7rem;color:var(--ink-3)">${done}/${total} · ${pct}%</span>
+      </div>
+      <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${col}"></div></div>
+    </div>`;
+  }).join('');
+
+  // Chapter checklist (per subject tabs)
+  const subjKeys=Object.keys(KC_SUBJECTS);
+  const chkTabs=subjKeys.map((s,i)=>`<button class="page-tab${i===0?' active':''}" onclick="kcSwitchSubj('${s}',this)">${KC_SUBJECTS[s].label}</button>`).join('');
+  const chkContent=subjKeys.map((s,i)=>{
+    const cl=kucatData.checklists[s]||{};
+    const items=KC_SUBJECTS[s].chapters.map(ch=>{
+      const done=!!cl[ch];
+      return`<div onclick="kcToggleChapter('${s}','${ch.replace(/'/g,"\\'")}',this)" style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:var(--r-sm);background:var(--surface-2);cursor:pointer;border:1px solid ${done?'var(--good)':'var(--line)'};transition:all var(--dur-1)">
+        <div style="width:18px;height:18px;border-radius:4px;border:1.5px solid ${done?'var(--good)':'var(--line-strong)'};background:${done?'var(--good)':'transparent'};display:grid;place-items:center;flex-shrink:0;transition:all var(--dur-1)">
+          ${done?'<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>':''}
+        </div>
+        <span style="font-size:0.8rem;font-weight:500;${done?'text-decoration:line-through;color:var(--ink-3)':''}">${ch}</span>
+      </div>`;
+    }).join('');
+    return`<div class="kc-subj-panel" id="kcpanel-${s}" style="display:${i===0?'grid':'none'};grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:6px">${items}</div>`;
+  }).join('');
+
+  // Formula tracker
+  const fmlContent=Object.keys(KC_FORMULAS).map(s=>{
+    const fl=kucatData.formulas[s]||{};
+    return`<div style="margin-bottom:16px">
+      <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-4);margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid var(--line-2)">${KC_SUBJECTS[s].label}</div>
+      ${KC_FORMULAS[s].map(f=>{const done=!!fl[f];return`<div onclick="kcToggleFormula('${s}','${f.replace(/'/g,"\\'").replace(/\//g,"\\/")}',this)" style="display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:var(--r-sm);cursor:pointer;background:${done?'var(--good-soft)':'var(--surface-2)'};border:1px solid ${done?'var(--good)':'var(--line)'};margin-bottom:5px;transition:all var(--dur-1)">
+        <div style="width:16px;height:16px;border-radius:50%;border:1.5px solid ${done?'var(--good)':'var(--line-strong)'};background:${done?'var(--good)':'transparent'};display:grid;place-items:center;flex-shrink:0">
+          ${done?'<svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>':''}
+        </div>
+        <span style="font-size:0.78rem;font-family:var(--font-num);${done?'color:var(--good)':''}">${f}</span>
+        ${done?'<span style="margin-left:auto;font-size:0.65rem;color:var(--good);font-weight:600">Memorized</span>':''}
+      </div>`}).join('')}
+    </div>`;
+  }).join('');
+
+  // Mock scores
+  const mockRows=kucatData.mockScores.map((m,i)=>{
+    const avg2=Math.round((m.math+m.physics+m.chemistry+m.english+m.reasoning)/5);
+    return`<tr style="border-bottom:1px solid var(--line-2)">
+      <td style="padding:7px 8px;font-size:0.75rem;font-weight:600;color:var(--ink-3)">M${i+1}</td>
+      <td style="padding:7px 8px;font-size:0.75rem">${m.label||'Mock Test'}</td>
+      <td style="padding:7px 4px;text-align:center"><span style="font-size:0.7rem;padding:2px 6px;border-radius:99px;background:${m.math<60?'var(--bad-soft)':m.math<75?'var(--warn-soft)':'var(--good-soft)'};color:${m.math<60?'var(--bad)':m.math<75?'var(--warn)':'var(--good)'}">${m.math}</span></td>
+      <td style="padding:7px 4px;text-align:center"><span style="font-size:0.7rem;padding:2px 6px;border-radius:99px;background:${m.physics<60?'var(--bad-soft)':m.physics<75?'var(--warn-soft)':'var(--good-soft)'};color:${m.physics<60?'var(--bad)':m.physics<75?'var(--warn)':'var(--good)'}">${m.physics}</span></td>
+      <td style="padding:7px 4px;text-align:center"><span style="font-size:0.7rem;padding:2px 6px;border-radius:99px;background:${m.chemistry<60?'var(--bad-soft)':m.chemistry<75?'var(--warn-soft)':'var(--good-soft)'};color:${m.chemistry<60?'var(--bad)':m.chemistry<75?'var(--warn)':'var(--good)'}">${m.chemistry}</span></td>
+      <td style="padding:7px 4px;text-align:center"><span style="font-size:0.7rem;padding:2px 6px;border-radius:99px;background:${m.english<60?'var(--bad-soft)':m.english<75?'var(--warn-soft)':'var(--good-soft)'};color:${m.english<60?'var(--bad)':m.english<75?'var(--warn)':'var(--good)'}">${m.english}</span></td>
+      <td style="padding:7px 4px;text-align:center"><span style="font-size:0.7rem;padding:2px 6px;border-radius:99px;background:${m.reasoning<60?'var(--bad-soft)':m.reasoning<75?'var(--warn-soft)':'var(--good-soft)'};color:${m.reasoning<60?'var(--bad)':m.reasoning<75?'var(--warn)':'var(--good)'}">${m.reasoning}</span></td>
+      <td style="padding:7px 8px;text-align:right;font-family:var(--font-num);font-size:0.8rem;font-weight:700;color:var(--accent)">${avg2}%</td>
+    </tr>`;
+  }).join('');
+
+  // Deadlines
+  const dlRows=KC_DEADLINES.map(d=>{
+    const dDate=new Date(d.date+'T00:00:00');
+    const now2=new Date();now2.setHours(0,0,0,0);
+    const diff=Math.round((dDate-now2)/86400000);
+    const past=diff<0;
+    const colorMap={good:'var(--good)',warn:'var(--warn)',bad:'var(--bad)',accent:'var(--accent)',elite:'var(--elite)'};
+    const col=colorMap[d.type]||'var(--accent)';
+    return`<div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line-2)">
+      <div style="width:4px;min-height:36px;border-radius:99px;background:${col};flex-shrink:0;margin-top:2px"></div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:0.82rem;font-weight:600;${past?'color:var(--ink-3);text-decoration:line-through':''}">${d.label}</div>
+        <div style="font-size:0.72rem;color:var(--ink-3);margin-top:1px">${d.note}</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0">
+        <div style="font-size:0.75rem;font-weight:700;color:${past?'var(--ink-4)':col}">${past?'Passed':diff===0?'TODAY':diff+'d left'}</div>
+        <div style="font-size:0.67rem;color:var(--ink-4)">${dDate.toLocaleDateString('en-NP',{day:'2-digit',month:'short',year:'numeric'})}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Exam format grid
+  const fmtRows=KC_EXAM_FORMAT.map(r=>`<tr style="border-bottom:1px solid var(--line-2)">
+    <td style="padding:8px;font-size:0.8rem;font-weight:600">${r.subject}</td>
+    <td style="padding:8px;text-align:center"><span style="font-size:1rem;font-weight:800;font-family:var(--font-num);color:var(--accent)">${r.marks}</span></td>
+    <td style="padding:8px;text-align:center;font-size:0.78rem;color:var(--ink-3)">${r.questions}</td>
+    <td style="padding:8px;font-size:0.73rem;color:var(--ink-3)">${r.note}</td>
+  </tr>`).join('');
+
+  // Resources
+  const resCards=KC_RESOURCES.map(cat=>`<div class="card" style="margin-bottom:0">
+    <div class="card-head" style="margin-bottom:12px">
+      <div><div class="card-title">${cat.icon} ${cat.cat}</div></div>
+    </div>
+    ${cat.items.map(item=>`<a href="${item.url}" target="_blank" rel="noopener" style="display:flex;align-items:flex-start;gap:10px;padding:9px 10px;border-radius:var(--r-sm);background:var(--surface-2);margin-bottom:6px;border:1px solid var(--line);transition:all var(--dur-1);text-decoration:none;color:inherit" onmouseover="this.style.borderColor='var(--accent)';this.style.background='var(--accent-soft)'" onmouseout="this.style.borderColor='var(--line)';this.style.background='var(--surface-2)'">
+      <div style="flex:1;min-width:0">
+        <div style="font-size:0.8rem;font-weight:600;color:var(--accent)">${item.name} ↗</div>
+        <div style="font-size:0.72rem;color:var(--ink-3);margin-top:2px">${item.desc}</div>
+      </div>
+    </a>`).join('')}
+  </div>`).join('');
+
+  // Weak topics from mocks
+  const weakMap={};kucatData.mockScores.forEach(m=>{if(m.math<60)weakMap.Mathematics=(weakMap.Mathematics||0)+1;if(m.physics<60)weakMap.Physics=(weakMap.Physics||0)+1;if(m.chemistry<60)weakMap.Chemistry=(weakMap.Chemistry||0)+1;if(m.english<60)weakMap.English=(weakMap.English||0)+1;if(m.reasoning<60)weakMap.Reasoning=(weakMap.Reasoning||0)+1});
+  const weakHtml=Object.entries(weakMap).length?Object.entries(weakMap).sort(([,a],[,b])=>b-a).map(([s,v])=>`<span class="chip chip-bad">${s} · ${v}x below 60%</span>`).join(' '):`<span style="font-size:0.78rem;color:var(--ink-3)">Complete mock tests to detect weak areas automatically.</span>`;
+
+  // Phase timeline
+  const phaseTimeline=KC_PHASES.map((ph,i)=>`<div style="flex:1;min-width:80px;background:${i===pi.idx?ph.color+'18':'var(--surface-2)'};border:1px solid ${i===pi.idx?ph.color:'var(--line)'};border-radius:var(--r-sm);padding:9px 10px">
+    <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:${ph.color};margin-bottom:2px">${ph.name}</div>
+    <div style="font-size:0.68rem;color:var(--ink-3)">${ph.weeks}w</div>
+    ${i===pi.idx?`<div style="font-size:0.63rem;color:var(--good);margin-top:3px;font-weight:600">● Active</div>`:''}
+  </div>`).join('');
+
+  p.innerHTML=`
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:20px;flex-wrap:wrap">
+    <div>
+      <div class="eyebrow" style="margin-bottom:4px">Kathmandu University</div>
+      <h1 class="display-2" style="font-size:1.4rem;margin-bottom:2px">KUCAT Study Planner</h1>
+      <div style="font-size:0.8rem;color:var(--ink-3)">BSc Computer Science · BTech AI Entrance Preparation</div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <div style="background:var(--elite-soft);border:1px solid var(--elite);border-radius:var(--r-sm);padding:7px 14px;text-align:center">
+        <div style="font-family:var(--font-num);font-size:1.5rem;font-weight:800;color:var(--elite)">${days}</div>
+        <div style="font-size:0.63rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-3)">Days Left</div>
+      </div>
+      <div>
+        <div style="font-size:0.72rem;font-weight:600;color:var(--ink-3);margin-bottom:4px">Exam date</div>
+        <input type="date" value="${kucatData.examDate}" onchange="kucatData.examDate=this.value;saveKucat();renderKucatPage()" style="padding:6px 10px;border:1px solid var(--line-strong);border-radius:var(--r-sm);background:var(--surface);font-size:0.78rem;font-family:var(--font-ui);color:var(--ink)">
+      </div>
+    </div>
+  </div>
+
+  <!-- Quote -->
+  <div style="background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:10px 14px;margin-bottom:20px;font-size:0.82rem;color:var(--ink-2);font-style:italic">"${quote}"</div>
+
+  <!-- KPI Row -->
+  <div class="qstat-row" style="margin-bottom:20px">
+    <div class="qstat"><div class="qstat-val" style="color:var(--elite)">${days}</div><div class="qstat-lbl">Days to KUCAT</div></div>
+    <div class="qstat"><div class="qstat-val">${kucatData.studyHours.toFixed(1)}h</div><div class="qstat-lbl">Study Hours</div></div>
+    <div class="qstat"><div class="qstat-val">${mocks}/8</div><div class="qstat-lbl">Mock Tests</div></div>
+    <div class="qstat"><div class="qstat-val">${avg}%</div><div class="qstat-lbl">Avg Score</div></div>
+    <div class="qstat"><div class="qstat-val" style="color:${readiness>=70?'var(--good)':readiness>=40?'var(--warn)':'var(--bad)'}">${readiness}%</div><div class="qstat-lbl">Readiness</div></div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 300px;gap:16px;align-items:start">
+  <div>
+
+  <!-- Exam Format -->
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-head">
+      <div><div class="card-title">KUCAT Exam Format</div><div class="card-sub">100 MCQ · 2 hours · Total 100 marks</div></div>
+      <span class="chip chip-accent">Official</span>
+    </div>
+    <div style="overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse">
+      <thead><tr style="border-bottom:1px solid var(--line)">
+        <th style="padding:6px 8px;text-align:left;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--ink-4)">Subject</th>
+        <th style="padding:6px 8px;text-align:center;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--ink-4)">Marks</th>
+        <th style="padding:6px 8px;text-align:center;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--ink-4)">Qs</th>
+        <th style="padding:6px 8px;text-align:left;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--ink-4)">Note</th>
+      </thead>
+      <tbody>${fmtRows}</tbody>
+      <tfoot><tr style="background:var(--surface-2)">
+        <td style="padding:8px;font-size:0.8rem;font-weight:800">Total</td>
+        <td style="padding:8px;text-align:center;font-size:0.9rem;font-weight:800;color:var(--accent);font-family:var(--font-num)">100</td>
+        <td style="padding:8px;text-align:center;font-size:0.8rem;font-weight:700">100</td>
+        <td style="padding:8px;font-size:0.73rem;color:var(--ink-3)">2 hours total · Negative marking: none</td>
+      </tr></tfoot>
+    </table>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:12px">
+      <span class="chip chip-accent">No negative marking</span>
+      <span class="chip chip-good">Math = 60%</span>
+      <span class="chip chip-warn">Computer Science questions possible</span>
+    </div>
+  </div>
+
+  <!-- Phases -->
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-head"><div><div class="card-title">8-Week Preparation Phases</div><div class="card-sub">Current: <strong style="color:${pi.phase.color}">${pi.phase.name}</strong> · ${pi.progress}% complete</div></div></div>
+    <div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap">${phaseTimeline}</div>
+    <div class="bar-track"><div class="bar-fill" style="width:${pi.progress}%;background:${pi.phase.color}"></div></div>
+    <div style="font-size:0.72rem;color:var(--ink-3);margin-top:8px">${pi.phase.desc}</div>
+    <div style="margin-top:12px;font-size:0.72rem;font-weight:600;color:var(--ink-3);margin-bottom:6px">SCHEDULE</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px">
+      ${[{d:'Mon',s:'Math 2h · Physics 1h'},{d:'Tue',s:'Chem 1.5h · English 45m'},{d:'Wed',s:'Math 2h · Physics 1.5h'},{d:'Thu',s:'Chem 1.5h · Reasoning 1h'},{d:'Fri',s:'Math 1.5h · Weak Topics 1h'},{d:'Sat',s:'Mock Test 3h + Analysis'},{d:'Sun',s:'Full Revision 2h'}].map(w=>`<div style="background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:8px 10px;border-top:2px solid ${w.d==='Sat'||w.d==='Sun'?'var(--warn)':'var(--accent)'}"><div style="font-size:0.72rem;font-weight:700;margin-bottom:3px;color:${w.d==='Sat'||w.d==='Sun'?'var(--warn)':'var(--ink)'}">${w.d}</div><div style="font-size:0.67rem;color:var(--ink-3)">${w.s}</div></div>`).join('')}
+    </div>
+  </div>
+
+  <!-- Chapter Checklist -->
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-head"><div><div class="card-title">Chapter Checklist</div><div class="card-sub">${done}/${total} chapters completed · NEB Grade 11 & 12 Syllabus</div></div></div>
+    <div class="page-tabs" style="margin-bottom:14px;flex-wrap:wrap">${chkTabs}</div>
+    ${chkContent}
+  </div>
+
+  <!-- Formula Tracker -->
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-head"><div><div class="card-title">Formula Sheet Tracker</div><div class="card-sub">Mark formulae as memorized</div></div></div>
+    ${fmlContent}
+  </div>
+
+  <!-- Mock Tests -->
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-head"><div><div class="card-title">Mock Test Scores</div><div class="card-sub">${mocks} of 8 weekend mocks completed · Average: ${avg}%</div></div>
+      <button class="btn btn-primary btn-sm" onclick="document.getElementById('kcMockPanel').style.display=document.getElementById('kcMockPanel').style.display==='none'?'block':'none'">+ Add Score</button>
+    </div>
+    <div id="kcMockPanel" style="display:none;background:var(--surface-2);border-radius:var(--r-sm);padding:14px;margin-bottom:14px;border:1px solid var(--line)">
+      <div style="font-size:0.72rem;font-weight:600;color:var(--ink-3);margin-bottom:10px">Enter scores out of 100 for each subject</div>
+      <div class="grid grid-3" style="gap:8px;margin-bottom:10px">
+        <div class="field" style="margin-bottom:0"><label class="field-label">Math /100</label><input type="number" id="kcm_math" min="0" max="100" class="field-input" placeholder="e.g. 72"></div>
+        <div class="field" style="margin-bottom:0"><label class="field-label">Physics /100</label><input type="number" id="kcm_physics" min="0" max="100" class="field-input" placeholder="e.g. 68"></div>
+        <div class="field" style="margin-bottom:0"><label class="field-label">Chemistry /100</label><input type="number" id="kcm_chemistry" min="0" max="100" class="field-input" placeholder="e.g. 55"></div>
+        <div class="field" style="margin-bottom:0"><label class="field-label">English /100</label><input type="number" id="kcm_english" min="0" max="100" class="field-input" placeholder="e.g. 80"></div>
+        <div class="field" style="margin-bottom:0"><label class="field-label">Reasoning /100</label><input type="number" id="kcm_reasoning" min="0" max="100" class="field-input" placeholder="e.g. 65"></div>
+      </div>
+      <button class="btn btn-primary btn-sm" onclick="kcSubmitMock()">Save Mock ${mocks+1} →</button>
+    </div>
+    ${mocks===0?`<div style="text-align:center;padding:24px;color:var(--ink-3);font-size:0.8rem">No mock scores yet — take your first mock test this weekend!</div>`:`<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse">
+      <thead><tr style="border-bottom:1px solid var(--line)">
+        <th style="padding:6px 8px;text-align:left;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-4)">#</th>
+        <th style="padding:6px 8px;text-align:left;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-4)">Test</th>
+        <th style="padding:6px 4px;text-align:center;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-4)">Math</th>
+        <th style="padding:6px 4px;text-align:center;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-4)">Phy</th>
+        <th style="padding:6px 4px;text-align:center;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-4)">Chem</th>
+        <th style="padding:6px 4px;text-align:center;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-4)">Eng</th>
+        <th style="padding:6px 4px;text-align:center;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-4)">Rsn</th>
+        <th style="padding:6px 8px;text-align:right;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-4)">Avg</th>
+      </tr></thead>
+      <tbody>${mockRows}</tbody>
+    </table></div>`}
+    ${mocks>0?`<div style="margin-top:12px"><div style="font-size:0.72rem;font-weight:700;color:var(--ink-3);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.07em">Auto-detected weak areas</div><div style="display:flex;gap:6px;flex-wrap:wrap">${weakHtml}</div></div>`:''}
+  </div>
+
+  <!-- Log Hours -->
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-head"><div><div class="card-title">Log Study Hours</div><div class="card-sub">Total: ${kucatData.studyHours.toFixed(1)}h logged · 🔥 Streak: ${kucatData.streak} days</div></div></div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <input type="number" id="kcHrInput" min="0" max="12" step="0.5" placeholder="e.g. 2.5" class="field-input" style="width:110px;margin-bottom:0">
+      <button class="btn btn-primary btn-sm" onclick="kcLogHours()">Add hours →</button>
+      <span style="font-size:0.78rem;color:var(--ink-3)">Daily target: <strong>3–4 hours</strong></span>
+    </div>
+  </div>
+
+  </div><!-- end main col -->
+  <div>
+
+  <!-- Subject Progress sidebar -->
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-head" style="margin-bottom:12px"><div class="card-title">Subject Progress</div></div>
+    ${subjBars}
+  </div>
+
+  <!-- Deadlines sidebar -->
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-head" style="margin-bottom:4px"><div><div class="card-title">Key Deadlines</div><div class="card-sub">KU Entrance 2025</div></div></div>
+    ${dlRows}
+  </div>
+
+  <!-- Free Resources sidebar -->
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-head" style="margin-bottom:12px"><div><div class="card-title">Free Resources</div><div class="card-sub">100% free · No signup required</div></div></div>
+    ${KC_RESOURCES.map(cat=>`<div style="margin-bottom:14px">
+      <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-4);margin-bottom:6px;padding-bottom:4px;border-bottom:1px solid var(--line-2)">${cat.icon} ${cat.cat}</div>
+      ${cat.items.map(item=>`<a href="${item.url}" target="_blank" rel="noopener" style="display:block;padding:6px 8px;border-radius:var(--r-xs);background:var(--surface-2);margin-bottom:4px;border:1px solid var(--line);font-size:0.75rem;font-weight:600;color:var(--accent);text-decoration:none;transition:all var(--dur-1)" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--line)'">${item.name} ↗<div style="font-size:0.67rem;color:var(--ink-3);font-weight:400;margin-top:1px">${item.desc}</div></a>`).join('')}
+    </div>`).join('')}
+  </div>
+
+  </div><!-- end sidebar col -->
+  </div><!-- end grid -->
+  `;
+}
+
+function kcSwitchSubj(s,btn){
+  document.querySelectorAll('.kc-subj-panel').forEach(el=>el.style.display='none');
+  const panel=document.getElementById('kcpanel-'+s);if(panel)panel.style.display='grid';
+  document.querySelectorAll('.page-tabs .page-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function kcToggleChapter(subj,ch,el){
+  if(!kucatData.checklists[subj])kucatData.checklists[subj]={};
+  kucatData.checklists[subj][ch]=!kucatData.checklists[subj][ch];
+  saveKucat();
+  const done=kucatData.checklists[subj][ch];
+  el.style.background=done?'var(--surface-2)':'var(--surface-2)';
+  el.style.borderColor=done?'var(--good)':'var(--line)';
+  const box=el.querySelector('div');
+  if(box){box.style.background=done?'var(--good)':'transparent';box.style.borderColor=done?'var(--good)':'var(--line-strong)';box.innerHTML=done?'<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>':'';}
+  const span=el.querySelector('span');if(span){span.style.textDecoration=done?'line-through':'none';span.style.color=done?'var(--ink-3)':'';}
+  // Update progress in sidebar without full re-render
+  const done2=kcDoneChapters(),total=kcTotalChapters();
+  const pct=Math.round(done2/total*100);
+}
+
+function kcToggleFormula(subj,f,el){
+  if(!kucatData.formulas[subj])kucatData.formulas[subj]={};
+  kucatData.formulas[subj][f]=!kucatData.formulas[subj][f];
+  saveKucat();renderKucatPage();
+}
+
+function kcSubmitMock(){
+  const math=parseInt(document.getElementById('kcm_math')?.value)||0;
+  const physics=parseInt(document.getElementById('kcm_physics')?.value)||0;
+  const chemistry=parseInt(document.getElementById('kcm_chemistry')?.value)||0;
+  const english=parseInt(document.getElementById('kcm_english')?.value)||0;
+  const reasoning=parseInt(document.getElementById('kcm_reasoning')?.value)||0;
+  const labels=['Full Mock 1','Maths & Physics Focus','Chemistry Focus','Full Mock 2','Reasoning Focus','Full Mock 3','Weak Areas Focus','Final Mock'];
+  kucatData.mockScores.push({math,physics,chemistry,english,reasoning,date:new Date().toISOString().split('T')[0],label:labels[kucatData.mockScores.length%8]});
+  saveKucat();renderKucatPage();showToast('Mock score saved!');
+}
+
+function kcLogHours(){
+  const h=parseFloat(document.getElementById('kcHrInput')?.value||0);
+  if(!h||h<=0){showToast('Enter valid hours');return;}
+  const today=new Date().toISOString().split('T')[0];
+  const isConsec=kucatData.lastStudyDate&&(()=>{const last=new Date(kucatData.lastStudyDate),td=new Date(today);return Math.round((td-last)/86400000)===1})();
+  kucatData.studyHours=parseFloat((kucatData.studyHours+h).toFixed(1));
+  kucatData.streak=kucatData.lastStudyDate===today?kucatData.streak:(isConsec?kucatData.streak+1:1);
+  kucatData.lastStudyDate=today;
+  saveKucat();renderKucatPage();showToast(`${h}h logged — total ${kucatData.studyHours.toFixed(1)}h!`);
+}
 
 /* ========== BOOT ========== */
 (function boot(){
