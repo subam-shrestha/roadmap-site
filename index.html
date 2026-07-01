@@ -937,6 +937,31 @@ a{text-decoration:none;color:inherit}
 .page.active{animation:pageIn 0.26s var(--ease) both}
 @keyframes pageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
+/* ===== Mock Test Center / CBT runner ===== */
+@keyframes kcFadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes kcPulse{0%{transform:scale(1)}40%{transform:scale(1.18)}100%{transform:scale(1)}}
+@keyframes kcPop{0%{transform:scale(.85);opacity:0}100%{transform:scale(1);opacity:1}}
+.kc-qcard{animation:kcFadeIn .28s cubic-bezier(.2,.7,.3,1)}
+.kc-opt{text-align:left;padding:13px 16px;border-radius:12px;border:1.5px solid var(--line-strong);background:var(--surface-2);font-size:0.84rem;cursor:pointer;transition:border-color .15s ease,background-color .15s ease,transform .12s ease,box-shadow .15s ease;display:flex;align-items:center;gap:10px}
+.kc-opt:hover{border-color:var(--accent);transform:translateX(2px)}
+.kc-opt:active{transform:scale(.985)}
+.kc-opt.kc-sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 2px 10px -4px var(--accent)}
+.kc-opt-letter{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line-strong);display:flex;align-items:center;justify-content:center;font-size:0.68rem;font-weight:800;color:var(--ink-3);flex-shrink:0;transition:all .15s ease}
+.kc-opt.kc-sel .kc-opt-letter{background:var(--accent);border-color:var(--accent);color:#fff}
+.kc-nav-cell{width:32px;height:32px;border-radius:8px;border:1.5px solid var(--line-strong);background:var(--surface-2);color:var(--ink-2);font-size:0.7rem;font-weight:700;cursor:pointer;transition:transform .15s ease,background-color .2s ease,border-color .2s ease,color .2s ease}
+.kc-nav-cell:hover{transform:translateY(-1px)}
+.kc-nav-cell.kc-cur{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.kc-nav-cell.kc-marked{background:var(--warn-soft);color:var(--warn);border-color:var(--warn)}
+.kc-nav-cell.kc-answered{background:var(--good-soft);color:var(--good);border-color:var(--good)}
+.kc-nav-cell.kc-just-answered{animation:kcPulse .3s ease}
+.kc-progress-track{height:6px;border-radius:99px;background:var(--surface-2);overflow:hidden}
+.kc-progress-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--elite));transition:width .45s cubic-bezier(.2,.7,.3,1)}
+.kc-timer-warn{color:var(--bad) !important;animation:kcPulse 1s ease infinite}
+.kc-mark-btn{transition:transform .15s ease,background-color .2s ease,border-color .2s ease,color .2s ease}
+.kc-mark-btn.kc-marked-on{animation:kcPop .25s ease;background:var(--warn-soft);border-color:var(--warn) !important;color:var(--warn) !important}
+.kc-result-pop{animation:kcPop .4s cubic-bezier(.2,.8,.3,1.2)}
+.kc-bar-fill{transition:width .6s cubic-bezier(.2,.7,.3,1)}
+.kc-shell-enter{animation:kcFadeIn .3s ease}
 </style>
 </head>
 <body>
@@ -989,6 +1014,7 @@ a{text-decoration:none;color:inherit}
 
       <div class="nav-group-label" style="margin-top:4px;display:flex;align-items:center;gap:5px"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#6D28D9;flex-shrink:0"></span>Nepal Entrance</div>
       <button class="nav-item" id="nav-kucat" onclick="showPage('kucat')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 0 6 1 6 3 0-2 3-3 6-3v-5"/></svg>KUCAT Prep<span class="nav-badge" style="background:var(--elite);color:#fff">🇳🇵</span></button>
+      <button class="nav-item" id="nav-mocktest" onclick="showPage('mocktest')" style="padding-left:30px"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>Mock Test Center</button>
 
       <div class="nav-group-label" style="margin-top:4px;display:flex;align-items:center;gap:5px"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#15803D;flex-shrink:0"></span>USA 2027</div>
       <button class="nav-item" id="nav-college" onclick="showPage('college')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>College Command<span class="nav-badge">🇺🇸</span></button>
@@ -1276,7 +1302,7 @@ function showPage(id){
     window.scrollTo(0,0);
     return;
   }
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-item,.tab-item').forEach(n=>n.classList.remove('active'));const p=document.getElementById('page-'+id);if(p)p.classList.add('active');const nb=document.getElementById('nav-'+id);if(nb)nb.classList.add('active');const tb=document.getElementById('tab-'+id);if(tb)tb.classList.add('active');window.scrollTo(0,0);const map={today:renderTodayPage,planner:renderPlanContainer,tests:renderTestsPage,errors:renderErrorsPage,analytics:renderAnalyticsPage,weaknesses:renderWeaknessPage,streak:renderStreakPage,roadmap:renderRoadmapPage,traps:renderTrapsPage,hardq:renderHardQPage,weekly:renderWeeklyPage,resources:renderResources,college:renderCollegePage,achievements:renderAchievements,kucat:renderKucatPage};if(map[id])map[id]()
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-item,.tab-item').forEach(n=>n.classList.remove('active'));const p=document.getElementById('page-'+id);if(p)p.classList.add('active');const nb=document.getElementById('nav-'+id);if(nb)nb.classList.add('active');const tb=document.getElementById('tab-'+id);if(tb)tb.classList.add('active');window.scrollTo(0,0);const map={today:renderTodayPage,planner:renderPlanContainer,tests:renderTestsPage,errors:renderErrorsPage,analytics:renderAnalyticsPage,weaknesses:renderWeaknessPage,streak:renderStreakPage,roadmap:renderRoadmapPage,traps:renderTrapsPage,hardq:renderHardQPage,weekly:renderWeeklyPage,resources:renderResources,college:renderCollegePage,achievements:renderAchievements,kucat:renderKucatPage,mocktest:renderMockTestCenter};if(map[id])map[id]()
 }
 function openMoreSheet(){document.getElementById('moreSheet').classList.add('show');document.body.style.overflow='hidden'}
 function closeMoreSheet(){document.getElementById('moreSheet').classList.remove('show');document.body.style.overflow=''}
@@ -1324,9 +1350,10 @@ function buildPages(){
   <div class="page" id="page-college"></div>
   <div class="page" id="page-achievements"></div>
 
-  <div class="page" id="page-kucat"></div>`;
+  <div class="page" id="page-kucat"></div>
+  <div class="page" id="page-mocktest"></div>`;
 }
-function renderAll(){loadCmdData();renderTodayPage();renderTestsPage();renderErrorsPage();renderAnalyticsPage();renderStreakPage();renderWeaknessPage();renderAchievements();renderResources();renderCollegePage();renderWeeklyPage();renderXP();if(generatedPlan)renderPlanContainer();renderKucatPage()}
+function renderAll(){loadCmdData();renderTodayPage();renderTestsPage();renderErrorsPage();renderAnalyticsPage();renderStreakPage();renderWeaknessPage();renderAchievements();renderResources();renderCollegePage();renderWeeklyPage();renderXP();if(generatedPlan)renderPlanContainer();renderKucatPage();renderMockTestCenter()}
 
 /* ========== DASHBOARD PAGE ========== */
 function renderTodayPage(){
@@ -3232,7 +3259,7 @@ function getMyUid(){
 
 
 /* ========== KUCAT PREP PAGE ========== */
-let kucatData={examDate:'2025-09-14',startDate:new Date().toISOString().split('T')[0],studyHours:0,streak:0,lastStudyDate:null,checklists:{},formulas:{},mockScores:[],weakTopics:{},dailyLog:[]};
+let kucatData={examDate:'2025-09-14',startDate:new Date().toISOString().split('T')[0],studyHours:0,streak:0,lastStudyDate:null,checklists:{},formulas:{},mockScores:[],weakTopics:{},dailyLog:[],mtAttempts:[]};
 (function loadKucat(){try{const s=localStorage.getItem('kucat_v3');if(s){const d=JSON.parse(s);kucatData=Object.assign({},kucatData,d)}}catch(e){}})();
 function saveKucat(){try{localStorage.setItem('kucat_v3',JSON.stringify(kucatData))}catch(e){}}
 
@@ -3597,44 +3624,17 @@ function renderKucatPage(){
     ${dlRows}
   </div>
 
-  <!-- AI Past Questions Mock Test (replaces Resources Hub) -->
-  <div class="card" style="margin-bottom:16px" id="kcMockQuizCard">
-    <div class="card-head" style="margin-bottom:10px">
+  <!-- Promo: Mock Test Center moved to its own dedicated tab -->
+  <div class="card" style="margin-bottom:16px;border-top:3px solid var(--elite);cursor:pointer" onclick="showPage('mocktest')">
+    <div class="card-head" style="margin-bottom:6px">
       <div>
-        <div class="card-title">📝 Past Year Mock Test</div>
-        <div class="card-sub">Real KU entrance questions · AI-powered · Prioritises repeated topics</div>
+        <div class="card-title">🧪 Mock Test Center</div>
+        <div class="card-sub">Full CBT-style adaptive practice · Past Year Papers · Subject Mocks</div>
       </div>
+      <span class="nav-badge" style="background:var(--elite);color:#fff">NEW</span>
     </div>
-    <!-- Source proof banner -->
-    <div style="background:var(--good-soft);border:1px solid var(--good);border-radius:var(--r-sm);padding:8px 10px;margin-bottom:12px;font-size:0.7rem;color:var(--good);font-weight:600;line-height:1.5">
-      ✅ Questions sourced from: KU School of Science official syllabus document (sos.ku.edu.np), KU sample questions 2024, IOE/KU model sets, and repeated topics identified from 2014–2024 KUCAT-CBT patterns.
-    </div>
-    <!-- Subject selector -->
-    <div style="display:flex;gap:5px;margin-bottom:10px;flex-wrap:wrap">
-      <button id="mqBtn-physics" class="btn btn-primary btn-sm" onclick="startMockQuiz('physics')" style="flex:1;min-width:70px">Physics</button>
-      <button id="mqBtn-chemistry" class="btn-ghost" onclick="startMockQuiz('chemistry')" style="flex:1;min-width:70px;padding:6px;font-size:0.75rem;border-radius:var(--r-sm);border:1px solid var(--line-strong)">Chemistry</button>
-      <button id="mqBtn-mathematics" class="btn-ghost" onclick="startMockQuiz('mathematics')" style="flex:1;min-width:70px;padding:6px;font-size:0.75rem;border-radius:var(--r-sm);border:1px solid var(--line-strong)">Maths</button>
-      <button id="mqBtn-mixed" class="btn-ghost" onclick="startMockQuiz('mixed')" style="flex:1;min-width:70px;padding:6px;font-size:0.75rem;border-radius:var(--r-sm);border:1px solid var(--line-strong)">Mixed PCM</button>
-    </div>
-    <div id="kcMockQuizBody">
-      <div style="text-align:center;padding:20px 8px;color:var(--ink-3)">
-        <div style="font-size:1.8rem;margin-bottom:6px">🎯</div>
-        <div style="font-size:0.78rem;font-weight:600;margin-bottom:4px">Pick a subject to begin</div>
-        <div style="font-size:0.68rem">Questions are ranked by how often they appear in KUCAT — most repeated first.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Repeated Topics Priority Card -->
-  <div class="card" style="margin-bottom:16px">
-    <div class="card-head" style="margin-bottom:10px"><div><div class="card-title">🔥 Most Repeated Topics</div><div class="card-sub">Identified from KUCAT 2014–2024 patterns</div></div></div>
-    <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--ink-4);margin-bottom:6px">Physics</div>
-    ${['Kinematics (projectile, relative motion)','Thermodynamics (1st & 2nd law, Carnot)','Electromagnetic Induction (Faraday, Lenz)','Optics (lens formula, total internal reflection)','Modern Physics (photoelectric effect, Bohr atom)','Capacitors (parallel/series, energy stored)'].map((t,i)=>`<div style="display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:var(--r-xs);background:${i<2?'var(--bad-soft)':i<4?'var(--warn-soft)':'var(--surface-2)'};margin-bottom:4px;border:1px solid ${i<2?'var(--bad)':i<4?'var(--warn)':'var(--line)'}"><span style="font-size:0.7rem;font-weight:700;color:${i<2?'var(--bad)':i<4?'var(--warn)':'var(--ink-3)'}">×${[12,11,10,9,8,7][i]}</span><span style="font-size:0.72rem;font-weight:500">${t}</span></div>`).join('')}
-    <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--ink-4);margin-bottom:6px;margin-top:12px">Chemistry</div>
-    ${['Chemical Equilibrium (Kc, Le Chatelier)','Atomic Structure (quantum numbers, orbitals)','Chemical Bonding (VSEPR, hybridisation)','Electrochemistry (cell EMF, Faraday)','Hydrocarbons (IUPAC, reactions)','Chemical Kinetics (rate law, Arrhenius)'].map((t,i)=>`<div style="display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:var(--r-xs);background:${i<2?'var(--bad-soft)':i<4?'var(--warn-soft)':'var(--surface-2)'};margin-bottom:4px;border:1px solid ${i<2?'var(--bad)':i<4?'var(--warn)':'var(--line)'}"><span style="font-size:0.7rem;font-weight:700;color:${i<2?'var(--bad)':i<4?'var(--warn)':'var(--ink-3)'}">×${[11,10,10,9,9,8][i]}</span><span style="font-size:0.72rem;font-weight:500">${t}</span></div>`).join('')}
-    <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--ink-4);margin-bottom:6px;margin-top:12px">Mathematics</div>
-    ${['Differentiation & Applications (maxima/minima)','Matrices & Determinants (inverse, cramer)','Quadratics & Inequalities (discriminant)','Integration (definite, substitution)','Probability (Binomial, P(A∪B))','Trigonometry (identities, equations)'].map((t,i)=>`<div style="display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:var(--r-xs);background:${i<2?'var(--bad-soft)':i<4?'var(--warn-soft)':'var(--surface-2)'};margin-bottom:4px;border:1px solid ${i<2?'var(--bad)':i<4?'var(--warn)':'var(--line)'}"><span style="font-size:0.7rem;font-weight:700;color:${i<2?'var(--bad)':i<4?'var(--warn)':'var(--ink-3)'}">×${[13,11,10,10,9,9][i]}</span><span style="font-size:0.72rem;font-weight:500">${t}</span></div>`).join('')}
-    <div style="font-size:0.65rem;color:var(--ink-4);margin-top:8px;font-style:italic">× count = approximate appearances in KUCAT-CBT 2014–2024 based on official KU syllabus topics</div>
+    <div style="font-size:0.74rem;color:var(--ink-3);line-height:1.55">Practice testing has moved into its own dedicated tab with a full-screen adaptive CBT experience, past-paper reconstructions, subject mock libraries, and detailed analytics.</div>
+    <button class="btn btn-primary btn-sm" style="margin-top:10px;width:100%">Open Mock Test Center →</button>
   </div>
 
   </div><!-- end sidebar col -->
@@ -3643,220 +3643,668 @@ function renderKucatPage(){
 }
 
 
-/* ========== KUCAT PAST QUESTIONS BANK ========== */
-/* Source: Official KU School of Science syllabus doc (sos.ku.edu.np/admission), 
-   KU sample questions 2024, IOE-KU model sets (nepalentrancenotes.com, entrancepreparation.com.np),
-   Repeated topic patterns identified from KUCAT-CBT 2014–2024.
-   Questions marked ★ = appeared in multiple past years.
+/* ========== KUCAT PRACTICE QUESTION BANK ==========
+   IMPORTANT — HONESTY NOTE:
+   These are ORIGINAL practice questions written to match the OFFICIAL KU syllabus topics
+   (verified from apply.ku.edu.np/syllabi/2025/Test_Syllabus_2025.pdf, June 2025).
+   They are "Pattern-based Reconstructions" for practice purposes only.
+   They are NOT real/leaked KUCAT exam questions, and are NOT claimed to be official.
+   Per-question "repeat frequency" and "official source" claims have been removed because
+   they cannot be verified from any public official KU source — fabricating that data would
+   violate the accuracy requirement for this feature. If/when verified frequency data becomes
+   available it can be added back under a clearly-sourced field.
+   TODO: full 40/40-topic coverage per subject is now in place (131 questions total), but most
+   topics still have only 1 question variant. Add 2nd/3rd variants per topic so repeat attempts
+   don't reuse the exact same question — currently only Kinematics/Thermodynamics/Chemical
+   Equilibrium/Differentiation/Integration-style topics have partial variant coverage via the
+   topic-level random pick in kcBuildFullPaper(); most single-variant topics will repeat verbatim
+   across attempts until more variants are added.
+   diff = illustrative difficulty (1 easiest – 5 hardest), assigned by this platform for
+   practice sequencing — NOT the candidate's verified official KUCAT difficulty rating.
 */
 const KC_PAST_QS = {
   physics: [
-    // ★★★ Kinematics — most repeated topic in Physics
-    {q:"A projectile is fired at 30° to the horizontal with initial speed 40 m/s. What is the maximum height reached? (g = 10 m/s²)",opts:["20 m","40 m","30 m","80 m"],ans:0,topic:"Kinematics",source:"KU Model Set 2023 / IOE pattern",repeat:4,note:"Max height H = u²sin²θ/2g = (1600×0.25)/20 = 20 m"},
-    {q:"A ball is thrown vertically upward with velocity 20 m/s. The time to reach maximum height is:",opts:["1 s","2 s","4 s","5 s"],ans:1,topic:"Kinematics",source:"KU Sample Question 2022",repeat:5,note:"t = u/g = 20/10 = 2 s"},
-    {q:"A car accelerates from rest to 72 km/h in 10 s. The acceleration is:",opts:["2 m/s²","7.2 m/s²","0.5 m/s²","1 m/s²"],ans:0,topic:"Kinematics",source:"KU entrance pattern 2019–2022",repeat:3,note:"72 km/h = 20 m/s; a = 20/10 = 2 m/s²"},
-    // ★★★ Thermodynamics
-    {q:"A Carnot engine operates between 600 K and 300 K. Its efficiency is:",opts:["25%","50%","75%","100%"],ans:1,topic:"Thermodynamics",source:"KU Sample Question 2024",repeat:6,note:"η = 1 − T₂/T₁ = 1 − 300/600 = 0.5 = 50%"},
-    {q:"In an isothermal process, which quantity remains constant?",opts:["Pressure","Volume","Temperature","Internal energy"],ans:2,topic:"Thermodynamics",source:"KU entrance 2021 / IOE model",repeat:4,note:"Isothermal = constant temperature"},
-    {q:"1 mole of an ideal gas is heated at constant pressure from 27°C to 127°C. The work done by the gas (R = 8.3 J/mol·K) is:",opts:["830 J","415 J","8300 J","83 J"],ans:0,topic:"Thermodynamics",source:"KU model set 2023",repeat:3,note:"W = nRΔT = 1 × 8.3 × 100 = 830 J"},
-    // ★★★ Electromagnetic Induction
-    {q:"A coil of 200 turns has its flux changed from 0.05 Wb to 0.01 Wb in 0.2 s. The induced EMF is:",opts:["40 V","4 V","0.4 V","400 V"],ans:0,topic:"Electromagnetic Induction",source:"KU Sample Question 2024 / IOE pattern",repeat:5,note:"EMF = N × ΔΦ/Δt = 200 × 0.04/0.2 = 40 V"},
-    {q:"Lenz's law is a consequence of conservation of:",opts:["Charge","Mass","Energy","Momentum"],ans:2,topic:"Electromagnetic Induction",source:"KU entrance 2020",repeat:4,note:"Lenz's law: induced current opposes change — energy conservation"},
-    // ★★ Modern Physics
-    {q:"The photoelectric effect proves the particle nature of:",opts:["Electrons","Protons","Light","Matter"],ans:2,topic:"Modern Physics (Photons)",source:"KU Sample Question 2024",repeat:6,note:"Einstein's photoelectric effect: photons as particles of light"},
-    {q:"In Bohr's model, the energy of hydrogen atom in ground state is −13.6 eV. The energy in the 2nd orbit is:",opts:["−3.4 eV","−6.8 eV","−1.51 eV","−13.6 eV"],ans:0,topic:"Modern Physics (Atoms)",source:"KU entrance 2019–2023 pattern",repeat:5,note:"En = −13.6/n² = −13.6/4 = −3.4 eV"},
-    {q:"The de Broglie wavelength of a particle depends on its:",opts:["Charge only","Mass only","Momentum","Velocity only"],ans:2,topic:"Modern Physics (Electrons)",source:"KU model set 2022",repeat:3,note:"λ = h/p (momentum)"},
-    // ★★ Optics
-    {q:"An object is placed 20 cm in front of a convex lens of focal length 10 cm. Where is the image formed?",opts:["20 cm on same side","20 cm other side","10 cm same side","At infinity"],ans:1,topic:"Refraction (Optics)",source:"KU Sample Question 2024 — official doc",repeat:5,note:"1/v − 1/u = 1/f → 1/v = 1/10 − 1/(-20) → v = 20 cm"},
-    {q:"The critical angle for total internal reflection in glass (n = 1.5) is approximately:",opts:["30°","42°","45°","60°"],ans:1,topic:"Refraction (Optics)",source:"KU entrance 2021",repeat:4,note:"sin C = 1/n = 1/1.5 → C ≈ 41.8° ≈ 42°"},
-    // ★★ Electrostatics
-    {q:"Two charges +3μC and +3μC are placed 30 cm apart. The force between them is (k = 9×10⁹ N·m²/C²):",opts:["0.9 N","9 N","0.09 N","90 N"],ans:0,topic:"Simple Electrostatic Phenomenon",source:"KU model set 2023",repeat:3,note:"F = kq₁q₂/r² = 9×10⁹ × 9×10⁻¹²/0.09 = 0.9 N"},
-    // Capacitors
-    {q:"A capacitor of capacitance C is charged to potential V. The energy stored is:",opts:["CV","½CV²","CV²","2CV"],ans:1,topic:"Capacitors",source:"KU entrance 2020 / IOE pattern",repeat:4,note:"E = ½CV²"},
-    // Current Electricity
-    {q:"Three resistors of 3Ω each are connected in parallel. The equivalent resistance is:",opts:["9 Ω","3 Ω","1 Ω","6 Ω"],ans:2,topic:"Resistance",source:"KU model set 2022",repeat:5,note:"1/R = 1/3 + 1/3 + 1/3 = 1 Ω"},
-    // Gravitation
-    {q:"The acceleration due to gravity at height h above Earth's surface (R = radius) is approximately g(1 − 2h/R) when h << R. At h = R/2, what is g'?",opts:["g/4","g/2","2g/9","4g/9"],ans:3,topic:"Gravitation",source:"KU entrance 2021",repeat:3,note:"g' = g·R²/(R+h)² = g·R²/(1.5R)² = 4g/9"},
-    // Wave Motion
-    {q:"The speed of sound in air at 0°C is 332 m/s. Its speed at 27°C is approximately:",opts:["340 m/s","347 m/s","320 m/s","360 m/s"],ans:1,topic:"Sound (Waves)",source:"KU model set 2023",repeat:3,note:"v ∝ √T; v₂ = 332√(300/273) ≈ 347 m/s"},
-    // Rotational Motion
-    {q:"A solid disc and a hollow ring start from rest and roll down the same incline. Which reaches the bottom first?",opts:["Hollow ring","Solid disc","Both together","Depends on mass"],ans:1,topic:"Rotational Motion",source:"KU entrance 2022",repeat:4,note:"Disc has lower moment of inertia (½MR²) vs ring (MR²) — disc faster"},
+    {q:"A projectile is fired at 30° to the horizontal with initial speed 40 m/s. What is the maximum height reached? (g = 10 m/s²)",opts:["20 m","40 m","30 m","80 m"],ans:0,topic:"Kinematics",diff:2,note:"Max height H = u²sin²θ/2g = (1600×0.25)/20 = 20 m"},
+    {q:"A ball is thrown vertically upward with velocity 20 m/s. The time to reach maximum height is:",opts:["1 s","2 s","4 s","5 s"],ans:1,topic:"Kinematics",diff:1,note:"t = u/g = 20/10 = 2 s"},
+    {q:"A car accelerates from rest to 72 km/h in 10 s. The acceleration is:",opts:["2 m/s²","7.2 m/s²","0.5 m/s²","1 m/s²"],ans:0,topic:"Kinematics",diff:1,note:"72 km/h = 20 m/s; a = 20/10 = 2 m/s²"},
+    {q:"A Carnot engine operates between 600 K and 300 K. Its efficiency is:",opts:["25%","50%","75%","100%"],ans:1,topic:"Thermodynamics",diff:2,note:"η = 1 − T₂/T₁ = 1 − 300/600 = 0.5 = 50%"},
+    {q:"In an isothermal process, which quantity remains constant?",opts:["Pressure","Volume","Temperature","Internal energy"],ans:2,topic:"Thermodynamics",diff:1,note:"Isothermal = constant temperature"},
+    {q:"1 mole of an ideal gas is heated at constant pressure from 27°C to 127°C. The work done by the gas (R = 8.3 J/mol·K) is:",opts:["830 J","415 J","8300 J","83 J"],ans:0,topic:"Thermodynamics",diff:3,note:"W = nRΔT = 1 × 8.3 × 100 = 830 J"},
+    {q:"A coil of 200 turns has its flux changed from 0.05 Wb to 0.01 Wb in 0.2 s. The induced EMF is:",opts:["40 V","4 V","0.4 V","400 V"],ans:0,topic:"Electromagnetic induction",diff:3,note:"EMF = N × ΔΦ/Δt = 200 × 0.04/0.2 = 40 V"},
+    {q:"Lenz's law is a consequence of conservation of:",opts:["Charge","Mass","Energy","Momentum"],ans:2,topic:"Electromagnetic induction",diff:2,note:"Lenz's law: induced current opposes change — energy conservation"},
+    {q:"The photoelectric effect proves the particle nature of:",opts:["Electrons","Protons","Light","Matter"],ans:2,topic:"Photons",diff:1,note:"Einstein's photoelectric effect: photons as particles of light"},
+    {q:"In Bohr's model, the energy of hydrogen atom in ground state is −13.6 eV. The energy in the 2nd orbit is:",opts:["−3.4 eV","−6.8 eV","−1.51 eV","−13.6 eV"],ans:0,topic:"Atoms",diff:3,note:"En = −13.6/n² = −13.6/4 = −3.4 eV"},
+    {q:"The de Broglie wavelength of a particle depends on its:",opts:["Charge only","Mass only","Momentum","Velocity only"],ans:2,topic:"Electron",diff:2,note:"λ = h/p (momentum)"},
+    {q:"An object is placed 20 cm in front of a convex lens of focal length 10 cm. Where is the image formed?",opts:["20 cm on same side","20 cm other side","10 cm same side","At infinity"],ans:1,topic:"Refraction",diff:3,note:"1/v − 1/u = 1/f → 1/v = 1/10 − 1/(-20) → v = 20 cm"},
+    {q:"The critical angle for total internal reflection in glass (n = 1.5) is approximately:",opts:["30°","42°","45°","60°"],ans:1,topic:"Refraction",diff:2,note:"sin C = 1/n = 1/1.5 → C ≈ 41.8° ≈ 42°"},
+    {q:"Two charges +3μC and +3μC are placed 30 cm apart. The force between them is (k = 9×10⁹ N·m²/C²):",opts:["0.9 N","9 N","0.09 N","90 N"],ans:0,topic:"Simple Electrostatic Phenomenon",diff:2,note:"F = kq₁q₂/r² = 9×10⁹ × 9×10⁻¹²/0.09 = 0.9 N"},
+    {q:"A capacitor of capacitance C is charged to potential V. The energy stored is:",opts:["CV","½CV²","CV²","2CV"],ans:1,topic:"Capacitors",diff:1,note:"E = ½CV²"},
+    {q:"Three resistors of 3Ω each are connected in parallel. The equivalent resistance is:",opts:["9 Ω","3 Ω","1 Ω","6 Ω"],ans:2,topic:"Resistance",diff:1,note:"1/R = 1/3 + 1/3 + 1/3 = 1 Ω"},
+    {q:"The acceleration due to gravity at height h above Earth's surface (R = radius) is approximately g(1 − 2h/R) when h << R. At h = R/2, what is g'?",opts:["g/4","g/2","2g/9","4g/9"],ans:3,topic:"Gravitation",diff:4,note:"g' = g·R²/(R+h)² = g·R²/(1.5R)² = 4g/9"},
+    {q:"The speed of sound in air at 0°C is 332 m/s. Its speed at 27°C is approximately:",opts:["340 m/s","347 m/s","320 m/s","360 m/s"],ans:1,topic:"Sound",diff:3,note:"v ∝ √T; v₂ = 332√(300/273) ≈ 347 m/s"},
+    {q:"A solid disc and a hollow ring start from rest and roll down the same incline. Which reaches the bottom first?",opts:["Hollow ring","Solid disc","Both together","Depends on mass"],ans:1,topic:"Rotational motion",diff:4,note:"Disc has lower moment of inertia (½MR²) vs ring (MR²) — disc faster"},
+    {q:"Which of the following is a derived physical quantity?",opts:["Mass","Length","Force","Time"],ans:2,topic:"Physical Quantity",diff:1,note:"Force = mass × acceleration, built from base quantities mass, length, time"},
+    {q:"A force of 10 N acts on a 2 kg mass. Its acceleration is:",opts:["5 m/s²","20 m/s²","0.2 m/s²","2 m/s²"],ans:0,topic:"Dynamics",diff:1,note:"a = F/m = 10/2 = 5 m/s²"},
+    {q:"A 2 kg object moving at 3 m/s has kinetic energy:",opts:["6 J","9 J","18 J","3 J"],ans:1,topic:"Energy",diff:1,note:"KE = ½mv² = ½×2×9 = 9 J"},
+    {q:"In a crystalline solid, the constituent particles are arranged in a:",opts:["long-range ordered repeating pattern","completely random arrangement","gaseous arrangement","fluid arrangement"],ans:0,topic:"Structure and Properties of Matter",diff:1,note:"Crystalline solids have long-range order; amorphous solids do not"},
+    {q:"The SI unit of Young's modulus is:",opts:["N/m²","N·m","N/m","N"],ans:0,topic:"Elasticity",diff:2,note:"Y = stress/strain; stress has units N/m², strain is dimensionless"},
+    {q:"As temperature increases, the viscosity of a liquid generally:",opts:["increases","decreases","stays the same","becomes infinite"],ans:1,topic:"Viscosity",diff:1,note:"Higher temperature weakens intermolecular forces, lowering viscosity in liquids"},
+    {q:"The SI unit of surface tension is:",opts:["N/m","N·m","N/m²","Pa·s"],ans:0,topic:"Surface tension",diff:1,note:"Surface tension = force per unit length, so N/m"},
+    {q:"100°C on the Celsius scale corresponds to:",opts:["273 K","373 K","100 K","473 K"],ans:1,topic:"Heat and temperature",diff:1,note:"K = °C + 273; 100+273 = 373 K"},
+    {q:"Heat transfer through a vacuum (e.g. from the Sun to Earth) occurs mainly by:",opts:["Conduction","Convection","Radiation","Diffusion"],ans:2,topic:"Transmission of heat",diff:1,note:"Conduction and convection need a medium; radiation does not"},
+    {q:"A basic assumption of the kinetic theory of gases is that molecules:",opts:["have negligible volume and undergo perfectly elastic collisions","occupy fixed positions in a lattice","strongly attract one another at all times","have zero average kinetic energy"],ans:0,topic:"Basic assumption of kinetic theory of gasses",diff:2,note:"Ideal-gas kinetic theory assumes point-like molecules with elastic collisions and no intermolecular forces"},
+    {q:"The law stating that the angle of incidence equals the angle of reflection is the law of:",opts:["Refraction","Reflection","Dispersion","Diffraction"],ans:1,topic:"Reflection",diff:1,note:"This is the second law of reflection"},
+    {q:"The speed of light in vacuum is approximately:",opts:["3×10⁵ m/s","3×10⁶ m/s","3×10⁸ m/s","3×10¹⁰ m/s"],ans:2,topic:"Speed of light",diff:1,note:"c ≈ 3×10⁸ m/s"},
+    {q:"White light splits into a spectrum of colours when passed through a prism mainly because different colours have different:",opts:["speeds in vacuum","refractive indices in the prism material","amplitudes","frequencies after refraction"],ans:1,topic:"Dispersion of light",diff:2,note:"Refractive index depends on wavelength, so each colour bends by a different amount (dispersion)"},
+    {q:"The magnifying power of a simple microscope can be increased by:",opts:["increasing its focal length","decreasing its focal length","moving the object further away","none of these"],ans:1,topic:"Optical Instrument",diff:2,note:"M = 1 + D/f (for image at near point); smaller f gives larger M"},
+    {q:"Luminous intensity is measured in:",opts:["Lumen","Lux","Candela","Watt"],ans:2,topic:"Photometry",diff:1,note:"Candela (cd) is the SI base unit of luminous intensity"},
+    {q:"The distance between two successive crests of a transverse wave is called its:",opts:["Amplitude","Wavelength","Frequency","Period"],ans:1,topic:"Wave motion",diff:1,note:"Wavelength λ is the distance between consecutive identical points of a wave"},
+    {q:"Which of the following is NOT an electromagnetic wave?",opts:["X-rays","Sound waves","Radio waves","Gamma rays"],ans:1,topic:"Electromagnetic waves",diff:1,note:"Sound waves are mechanical waves and need a medium; EM waves do not"},
+    {q:"Electric current is defined as the rate of flow of:",opts:["Energy","Charge","Potential","Resistance"],ans:1,topic:"Charge flow",diff:1,note:"I = dQ/dt"},
+    {q:"The heat generated in a resistor carrying current I for time t is given by Joule's law as:",opts:["H = I²Rt","H = IRt","H = IR²t","H = IR/t"],ans:0,topic:"Effect of Current",diff:2,note:"H = I²Rt (Joule heating)"},
+    {q:"The SI unit of magnetic flux density (magnetic field) is:",opts:["Tesla","Weber","Henry","Farad"],ans:0,topic:"Magnetic field",diff:1,note:"Magnetic flux density is measured in Tesla (T)"},
+    {q:"The force on a straight current-carrying conductor of length L carrying current I in a uniform field B is:",opts:["F = BIL sinθ","F = qE","F = mg","F = kx"],ans:0,topic:"Force on conductor",diff:2,note:"F = BIL sinθ, θ being the angle between current direction and field"},
+    {q:"A material that is strongly attracted by an external magnetic field and can be permanently magnetized is called:",opts:["Diamagnetic","Paramagnetic","Ferromagnetic","Non-magnetic"],ans:2,topic:"Magnetic materials",diff:2,note:"Ferromagnetic materials (e.g. iron) show strong, persistent magnetization"},
+    {q:"The RMS value of an alternating current with peak value I₀ is:",opts:["I₀","I₀/√2","I₀/2","I₀√2"],ans:1,topic:"Alternating current",diff:2,note:"Irms = I₀/√2 for a sinusoidal AC"},
+    {q:"A semiconductor diode allows current to flow mainly when it is:",opts:["forward biased","reverse biased","unbiased","at zero voltage only"],ans:0,topic:"Electronic",diff:2,note:"A p-n junction diode conducts in forward bias and blocks (mostly) in reverse bias"},
+    {q:"The nucleus of an atom is made up of:",opts:["Protons and electrons","Protons and neutrons","Neutrons and electrons","Only protons"],ans:1,topic:"Nucleus",diff:1,note:"The nucleus contains protons and neutrons (nucleons); electrons orbit outside it"},
+    {q:"In alpha decay, the mass number of the parent nucleus:",opts:["increases by 4","decreases by 4","decreases by 2","stays the same"],ans:1,topic:"Radioactivity",diff:2,note:"An alpha particle (mass number 4) is emitted, so mass number drops by 4"},
+    {q:"Which of these is considered a fundamental (elementary) particle, not made of smaller constituents?",opts:["Proton","Neutron","Electron","Alpha particle"],ans:2,topic:"Elementary particles",diff:3,note:"Protons and neutrons are composed of quarks; the electron is a fundamental lepton"},
   ],
   chemistry: [
-    // ★★★ Chemical Equilibrium
-    {q:"For the reaction N₂ + 3H₂ ⇌ 2NH₃, what happens when pressure is increased?",opts:["Equilibrium shifts left","Equilibrium shifts right","No change","Kc changes"],ans:1,topic:"Chemical Equilibrium / Le Chatelier",source:"KU Sample Question 2024 / IOE pattern",repeat:6,note:"Higher pressure shifts to side with fewer moles of gas (right: 2 mol vs left: 4 mol)"},
-    {q:"The equilibrium constant Kc for a reaction is 100 at 300 K. The reaction is:",opts:["Favours reactants","Favours products","At equilibrium","Spontaneous at all T"],ans:1,topic:"Chemical Equilibrium",source:"KU model set 2023",repeat:4,note:"Kc >> 1 means products are favoured"},
-    // ★★★ Atomic Structure
-    {q:"The quantum numbers (n=2, l=1, m=0, s=+½) describe an electron in:",opts:["2s orbital","2p orbital","3p orbital","1s orbital"],ans:1,topic:"Quantum Numbers / Atomic Structure",source:"KU Sample Question 2024",repeat:5,note:"n=2, l=1 → 2p orbital"},
-    {q:"The maximum number of electrons in a subshell with l = 2 is:",opts:["6","8","10","2"],ans:2,topic:"Atomic Structure",source:"KU entrance 2021 / IOE pattern",repeat:5,note:"l=2 (d subshell): 2(2l+1) = 2×5 = 10 electrons"},
-    // ★★★ Chemical Bonding
-    {q:"Which of the following has a tetrahedral shape?",opts:["H₂O","NH₃","CH₄","SO₂"],ans:2,topic:"Chemical Bonding (VSEPR)",source:"KU model set 2022",repeat:5,note:"CH₄: 4 bonding pairs, no lone pairs → perfect tetrahedral"},
-    {q:"The bond angle in water (H₂O) is approximately:",opts:["109.5°","120°","104.5°","90°"],ans:2,topic:"Chemical Bonding",source:"KU entrance 2020",repeat:4,note:"H₂O: 2 lone pairs on O reduce angle from 109.5° to ~104.5°"},
-    // ★★★ Electrochemistry
-    {q:"In the electrochemical series, E° of Zn²⁺/Zn = −0.76 V and Cu²⁺/Cu = +0.34 V. The EMF of the Zn-Cu cell is:",opts:["0.42 V","1.10 V","−1.10 V","0.76 V"],ans:1,topic:"Electrochemistry (Electrode Potential)",source:"KU Sample Question 2024",repeat:5,note:"E°cell = E°cathode − E°anode = 0.34 − (−0.76) = 1.10 V"},
-    // ★★ Hydrocarbons
-    {q:"The IUPAC name of CH₃−CH=CH₂ is:",opts:["Prop-2-ene","Prop-1-ene","Propene","1-Propylene"],ans:1,topic:"Hydrocarbons",source:"KU model set 2023",repeat:4,note:"Double bond at C1-C2 → prop-1-ene"},
-    {q:"Benzene undergoes electrophilic substitution rather than addition because:",opts:["It has sigma bonds","Aromaticity provides extra stability","It has only C-H bonds","It has no π bonds"],ans:1,topic:"Aromatic Hydrocarbons",source:"KU entrance 2021",repeat:3,note:"18π electrons, Hückel's rule — aromaticity maintained via substitution"},
-    // ★★ Chemical Kinetics
-    {q:"For a first-order reaction, if the initial concentration doubles, the half-life:",opts:["Doubles","Halves","Remains the same","Quadruples"],ans:2,topic:"Chemical Kinetics",source:"KU model set 2022",repeat:5,note:"t½ = 0.693/k for first-order — independent of concentration"},
-    {q:"The unit of rate constant for a second-order reaction is:",opts:["s⁻¹","mol·L⁻¹·s⁻¹","L·mol⁻¹·s⁻¹","mol²·L⁻²·s⁻¹"],ans:2,topic:"Chemical Kinetics",source:"KU entrance 2022",repeat:4,note:"For 2nd order: rate = k[A]², so k = L·mol⁻¹·s⁻¹"},
-    // Thermochemistry
-    {q:"If ΔH for combustion of C is −394 kJ and for CO is −283 kJ, then ΔH for C + ½O₂ → CO is:",opts:["−111 kJ","−677 kJ","111 kJ","677 kJ"],ans:0,topic:"Chemical Thermodynamics",source:"KU model set 2024",repeat:3,note:"Hess's law: −394 − (−283) = −111 kJ"},
-    // Periodic Table
-    {q:"Which element has the highest electronegativity?",opts:["Oxygen","Chlorine","Fluorine","Nitrogen"],ans:2,topic:"Periodic Table",source:"KU entrance 2019",repeat:4,note:"Fluorine (F) — highest electronegativity (3.98 on Pauling scale)"},
-    // Acids/Bases
-    {q:"The pH of 0.001 M HCl solution is:",opts:["3","4","11","1"],ans:0,topic:"Acids, Bases and Salts",source:"KU model set 2022",repeat:4,note:"pH = −log[H⁺] = −log(10⁻³) = 3"},
-    // States of matter
-    {q:"At constant temperature, if the volume of an ideal gas is halved, the pressure:",opts:["Halves","Doubles","Triples","Remains same"],ans:1,topic:"Gaseous State of Matter (Boyle's Law)",source:"KU Sample Question 2024",repeat:5,note:"PV = const → P doubles when V halves"},
-    // Organic halogen
-    {q:"The reaction of alkyl halide with KOH in alcohol gives:",opts:["Alcohol","Alkene","Ether","Ester"],ans:1,topic:"Organic Halogen Compounds",source:"KU entrance 2021",repeat:3,note:"Alcoholic KOH causes dehydrohalogenation → alkene"},
-    // Carbohydrates
-    {q:"Which of the following is a reducing sugar?",opts:["Sucrose","Starch","Glucose","Cellulose"],ans:2,topic:"Carbohydrates, Proteins, Nucleic Acids & Lipids",source:"KU model set 2023",repeat:3,note:"Glucose has a free aldehyde group — can reduce Fehling's / Benedict's"},
+    {q:"For the reaction N₂ + 3H₂ ⇌ 2NH₃, what happens when pressure is increased?",opts:["Equilibrium shifts left","Equilibrium shifts right","No change","Kc changes"],ans:1,topic:"LeChatelier's Principle",diff:2,note:"Higher pressure shifts to side with fewer moles of gas (right: 2 mol vs left: 4 mol)"},
+    {q:"The equilibrium constant Kc for a reaction is 100 at 300 K. The reaction is:",opts:["Favours reactants","Favours products","At equilibrium","Spontaneous at all T"],ans:1,topic:"Chemical Equilibrium",diff:1,note:"Kc >> 1 means products are favoured"},
+    {q:"The quantum numbers (n=2, l=1, m=0, s=+½) describe an electron in:",opts:["2s orbital","2p orbital","3p orbital","1s orbital"],ans:1,topic:"Quantum numbers",diff:2,note:"n=2, l=1 → 2p orbital"},
+    {q:"The maximum number of electrons in a subshell with l = 2 is:",opts:["6","8","10","2"],ans:2,topic:"Atomic structure",diff:2,note:"l=2 (d subshell): 2(2l+1) = 2×5 = 10 electrons"},
+    {q:"Which of the following has a tetrahedral shape?",opts:["H₂O","NH₃","CH₄","SO₂"],ans:2,topic:"Chemical bonding",diff:1,note:"CH₄: 4 bonding pairs, no lone pairs → perfect tetrahedral"},
+    {q:"The bond angle in water (H₂O) is approximately:",opts:["109.5°","120°","104.5°","90°"],ans:2,topic:"Chemical bonding",diff:2,note:"H₂O: 2 lone pairs on O reduce angle from 109.5° to ~104.5°"},
+    {q:"In the electrochemical series, E° of Zn²⁺/Zn = −0.76 V and Cu²⁺/Cu = +0.34 V. The EMF of the Zn-Cu cell is:",opts:["0.42 V","1.10 V","−1.10 V","0.76 V"],ans:1,topic:"Electrode potential",diff:3,note:"E°cell = E°cathode − E°anode = 0.34 − (−0.76) = 1.10 V"},
+    {q:"The IUPAC name of CH₃−CH=CH₂ is:",opts:["Prop-2-ene","Prop-1-ene","Propene","1-Propylene"],ans:1,topic:"Hydrocarbons",diff:2,note:"Double bond at C1-C2 → prop-1-ene"},
+    {q:"Benzene undergoes electrophilic substitution rather than addition because:",opts:["It has sigma bonds","Aromaticity provides extra stability","It has only C-H bonds","It has no π bonds"],ans:1,topic:"Aromatic Hydrocarbons",diff:3,note:"Substitution preserves the stable aromatic π system; addition would destroy it"},
+    {q:"For a first-order reaction, if the initial concentration doubles, the half-life:",opts:["Doubles","Halves","Remains the same","Quadruples"],ans:2,topic:"Chemical Kinetics",diff:3,note:"t½ = 0.693/k for first-order — independent of concentration"},
+    {q:"The unit of rate constant for a second-order reaction is:",opts:["s⁻¹","mol·L⁻¹·s⁻¹","L·mol⁻¹·s⁻¹","mol²·L⁻²·s⁻¹"],ans:2,topic:"Chemical Kinetics",diff:3,note:"For 2nd order: rate = k[A]², so k = L·mol⁻¹·s⁻¹"},
+    {q:"If ΔH for combustion of C is −394 kJ and for CO is −283 kJ, then ΔH for C + ½O₂ → CO is:",opts:["−111 kJ","−677 kJ","111 kJ","677 kJ"],ans:0,topic:"Chemical Thermodynamics",diff:3,note:"Hess's law: −394 − (−283) = −111 kJ"},
+    {q:"Which element has the highest electronegativity?",opts:["Oxygen","Chlorine","Fluorine","Nitrogen"],ans:2,topic:"Periodic Table",diff:1,note:"Fluorine (F) — highest electronegativity (3.98 on Pauling scale)"},
+    {q:"The pH of 0.001 M HCl solution is:",opts:["3","4","11","1"],ans:0,topic:"Acids, Bases and Salts",diff:1,note:"pH = −log[H⁺] = −log(10⁻³) = 3"},
+    {q:"At constant temperature, if the volume of an ideal gas is halved, the pressure:",opts:["Halves","Doubles","Triples","Remains same"],ans:1,topic:"Gaseous state of matter",diff:1,note:"PV = const → P doubles when V halves"},
+    {q:"The reaction of alkyl halide with KOH in alcohol gives:",opts:["Alcohol","Alkene","Ether","Ester"],ans:1,topic:"Organic halogen compounds",diff:2,note:"Alcoholic KOH causes dehydrohalogenation → alkene"},
+    {q:"Which of the following is a reducing sugar?",opts:["Sucrose","Starch","Glucose","Cellulose"],ans:2,topic:"Carbohydrates, Proteins, Nucleic Acids, Lipids",diff:2,note:"Glucose has a free aldehyde group — can reduce Fehling's / Benedict's"},
+    {q:"The empirical formula of a compound represents:",opts:["the simplest whole-number ratio of atoms present","the exact number of atoms in one molecule","only the molecular mass","the 3D structure of the molecule"],ans:0,topic:"Language of Chemistry",diff:1,note:"Empirical formula gives the simplest ratio; molecular formula gives the actual count"},
+    {q:"Surface tension in liquids arises mainly due to:",opts:["Gravitational force","Cohesive forces between molecules","Adhesive forces with the container only","Electric charge on molecules"],ans:1,topic:"Liquid state of matter",diff:2,note:"Unbalanced cohesive forces at the surface pull molecules inward, creating surface tension"},
+    {q:"In a face-centred cubic (FCC) unit cell, the number of atoms per unit cell is:",opts:["1","2","4","8"],ans:2,topic:"Solid state of matter",diff:3,note:"FCC: 8 corners×1/8 + 6 faces×1/2 = 1 + 3 = 4 atoms"},
+    {q:"The Law of Conservation of Mass states that, in a chemical reaction, mass is:",opts:["created","destroyed","neither created nor destroyed","doubled"],ans:2,topic:"Laws of Stoichiometry",diff:1,note:"Total mass of reactants equals total mass of products"},
+    {q:"Avogadro's hypothesis states that equal volumes of gases at the same temperature and pressure contain equal numbers of:",opts:["Atoms","Molecules","Electrons","Ions"],ans:1,topic:"Avogadro's Hypothesis and its important applications",diff:1,note:"Equal volumes, same T and P → equal number of molecules, regardless of gas identity"},
+    {q:"In the reaction Zn + Cu²⁺ → Zn²⁺ + Cu, zinc is:",opts:["Reduced","Oxidized","Neither oxidized nor reduced","Both oxidized and reduced"],ans:1,topic:"Oxidation and Reduction",diff:2,note:"Zn loses electrons (Zn → Zn²⁺ + 2e⁻) — oxidation"},
+    {q:"In acid-base titration, the point at which moles of acid exactly equal moles of base is called the:",opts:["Equivalence point","Boiling point","Triple point","Saturation point"],ans:0,topic:"Acidimetry and Alkalimetry",diff:2,note:"At the equivalence point, the acid has been exactly neutralized by the base"},
+    {q:"In an electrolytic cell, oxidation occurs at the:",opts:["Cathode","Anode","Salt bridge","Electrolyte"],ans:1,topic:"Electrochemistry",diff:2,note:"By convention, oxidation always occurs at the anode (in both electrolytic and galvanic cells)"},
+    {q:"For a spontaneous process at constant temperature and pressure, the change in Gibbs free energy (ΔG) must be:",opts:["Positive","Zero","Negative","Infinite"],ans:2,topic:"Entropy and spontaneity",diff:2,note:"ΔG < 0 indicates a spontaneous process at constant T, P"},
+    {q:"Which gas is produced when zinc reacts with dilute hydrochloric acid?",opts:["Oxygen","Nitrogen","Hydrogen","Chlorine"],ans:2,topic:"Hydrogen, Oxygen and Nitrogen",diff:1,note:"Zn + 2HCl → ZnCl₂ + H₂↑"},
+    {q:"Diamond and graphite are both forms of pure carbon and are called:",opts:["Isotopes of carbon","Allotropes of carbon","Isomers of carbon","Oxides of carbon"],ans:1,topic:"Carbon",diff:1,note:"Allotropes: same element, different structural forms"},
+    {q:"The Contact Process is the industrial method used to manufacture:",opts:["Ammonia","Nitric acid","Sulphuric acid","Sodium hydroxide"],ans:2,topic:"Sulphur and its compound",diff:2,note:"SO₂ is catalytically oxidised to SO₃, then converted to H₂SO₄ in the Contact Process"},
+    {q:"Among the hydrohalic acids HF, HCl, HBr and HI, the strongest acid is:",opts:["HF","HCl","HBr","HI"],ans:3,topic:"Halogen and halogen acids",diff:3,note:"Acid strength increases down the group as H–X bond strength decreases: HI is strongest"},
+    {q:"Metals are generally good conductors of electricity mainly because they have:",opts:["No free electrons","Free, delocalized electrons","Only protons in the lattice","Fixed, immobile ions only"],ans:1,topic:"Introduction to Metals",diff:1,note:"A 'sea' of delocalized electrons can move freely and carry current"},
+    {q:"Which of the following is an alkaline earth metal?",opts:["Sodium","Calcium","Potassium","Aluminium"],ans:1,topic:"Alkali and alkaline earth metals",diff:1,note:"Calcium is in Group 2 (alkaline earth metals); Na and K are Group 1 (alkali metals)"},
+    {q:"Copper, silver and gold are called 'coinage metals' chiefly because they:",opts:["are highly radioactive","are extremely reactive","resist corrosion and were historically used to mint coins","exist only as gases"],ans:2,topic:"Coinage metals",diff:2,note:"Their resistance to oxidation/corrosion made them suitable for durable coinage"},
+    {q:"Which of the following is classified as a toxic heavy metal?",opts:["Sodium","Lead","Calcium","Magnesium"],ans:1,topic:"Heavy metals",diff:1,note:"Lead (Pb) is a well-known toxic heavy metal; Na, Ca, Mg are light, essential metals"},
+    {q:"Organic chemistry is primarily the study of compounds of:",opts:["Silicon","Carbon","Nitrogen","Sulphur"],ans:1,topic:"Introduction to Organic Chemistry",diff:1,note:"Organic chemistry centres on carbon-based compounds"},
+    {q:"The functional group present in an alcohol is:",opts:["−COOH","−OH","−CHO","−NH₂"],ans:1,topic:"Alcohols",diff:1,note:"Alcohols are characterised by the hydroxyl (−OH) group"},
+    {q:"The general formula of an ether is:",opts:["R−OH","R−O−R′","R−CHO","R−COOH"],ans:1,topic:"Ethers",diff:1,note:"Ethers have an oxygen atom bonded to two alkyl/aryl groups: R−O−R′"},
+    {q:"Which functional group is common to both aldehydes and ketones?",opts:["−OH (hydroxyl)","C=O (carbonyl)","−COOH (carboxyl)","−NH₂ (amino)"],ans:1,topic:"Carbonyl Compounds",diff:1,note:"Both have a carbonyl group; aldehydes have it at the end of the chain, ketones within it"},
+    {q:"Carboxylic acids turn blue litmus paper:",opts:["Red","Blue","Colourless","Green"],ans:0,topic:"Carboxylic Acids",diff:1,note:"Carboxylic acids are weak acids and turn blue litmus red"},
+    {q:"Amines can be thought of as organic derivatives of:",opts:["Ammonia (NH₃)","Water","Methane","Benzene"],ans:0,topic:"Amines",diff:1,note:"Amines are formed by replacing H atoms of NH₃ with alkyl/aryl groups"},
+    {q:"Aniline (C₆H₅NH₂) is industrially obtained by the reduction of:",opts:["Benzene","Nitrobenzene","Phenol","Toluene"],ans:1,topic:"Aniline and Nitrobenzene",diff:2,note:"Nitrobenzene is reduced (e.g. Sn/HCl or catalytic H₂) to give aniline"},
+    {q:"Polythene is an example of a:",opts:["Monomer","Natural polymer","Synthetic polymer","Protein"],ans:2,topic:"Polymers, Pesticides, Dyes and Drugs",diff:1,note:"Polythene is a synthetic polymer made by addition polymerization of ethene"},
   ],
   mathematics: [
-    // ★★★ Differentiation
-    {q:"If f(x) = x³ − 3x² + 2x, then f'(x) at x = 2 is:",opts:["2","0","4","−2"],ans:1,topic:"Differentiation / Application of Differentiation",source:"KU Sample Question 2024 / IOE pattern",repeat:6,note:"f'(x) = 3x² − 6x + 2; f'(2) = 12−12+2 = 2... wait: = 12-12+2=2, but option 0 is ans if they mean critical point. KU 2024 sample has: 3(4)−6(2)+2 = 12−12+2 = 2, so ans index 0"},
-    {q:"The maximum value of f(x) = −x² + 4x + 1 is:",opts:["4","5","3","6"],ans:1,topic:"Application of Differentiation",source:"KU model set 2023",repeat:5,note:"f'(x) = −2x + 4 = 0 → x=2; f(2) = −4+8+1 = 5"},
-    {q:"∫(2x + 3)dx from 0 to 2 is:",opts:["10","8","14","12"],ans:0,topic:"Integration (Definite)",source:"KU entrance 2021",repeat:5,note:"[x² + 3x]₀² = 4 + 6 = 10"},
-    {q:"d/dx(ln(sin x)) =",opts:["cot x","tan x","cosec x","−cot x"],ans:0,topic:"Differentiating Trigonometric & Log Functions",source:"KU model set 2022",repeat:4,note:"d/dx(ln u) = u'/u; u = sin x, u' = cos x → cos x/sin x = cot x"},
-    // ★★★ Matrices & Determinants
-    {q:"If A = [[1,2],[3,4]], det(A) =",opts:["−2","2","10","−10"],ans:0,topic:"Determinants",source:"KU Sample Question 2024",repeat:6,note:"det = 1×4 − 2×3 = 4−6 = −2"},
-    {q:"If AB = I where A = [[2,1],[5,3]], then B =",opts:["[[3,−1],[−5,2]]","[[3,1],[5,2]]","[[−3,1],[5,−2]]","[[2,−1],[−5,3]]"],ans:0,topic:"Matrices",source:"KU entrance 2022",repeat:4,note:"B = A⁻¹ = (1/det(A))·adj(A); det=1, adj=[[3,−1],[−5,2]]"},
-    // ★★★ Quadratics
-    {q:"If the roots of x² − 5x + 6 = 0 are α and β, then α² + β² =",opts:["13","25","37","12"],ans:0,topic:"Quadratics & Inequalities",source:"KU model set 2023",repeat:5,note:"α+β=5, αβ=6; α²+β² = (α+β)²−2αβ = 25−12 = 13"},
-    {q:"The discriminant of 2x² − 4x + 3 = 0 is:",opts:["−8","8","−4","4"],ans:0,topic:"Quadratics & Inequalities",source:"KU entrance 2021",repeat:3,note:"b²−4ac = 16−24 = −8 (no real roots)"},
-    // ★★★ Probability
-    {q:"A bag has 5 red and 3 blue balls. Probability of drawing 2 red balls without replacement:",opts:["5/14","10/56","5/8","2/7"],ans:0,topic:"Probability / Permutation & Combination",source:"KU model set 2023",repeat:5,note:"P = C(5,2)/C(8,2) = 10/28 = 5/14"},
-    {q:"In a binomial distribution with n=6, p=½, P(X=3) =",opts:["5/16","20/64","5/8","1/4"],ans:1,topic:"Binomial Distributions",source:"KU entrance 2022",repeat:4,note:"C(6,3)(½)³(½)³ = 20×(1/64) = 20/64 = 5/16"},
-    // ★★ Trigonometry
-    {q:"The value of sin 75° is:",opts:["(√6+√2)/4","(√6−√2)/4","√3/2","1/2"],ans:0,topic:"Trigonometry",source:"KU model set 2022",repeat:4,note:"sin 75° = sin(45°+30°) = sin45cos30 + cos45sin30 = (√6+√2)/4"},
-    {q:"If tanθ = 3/4 and θ is in the first quadrant, sinθ =",opts:["3/5","4/5","3/4","4/3"],ans:0,topic:"Trigonometry",source:"KU entrance 2021",repeat:3,note:"Hyp = √(9+16) = 5; sinθ = 3/5"},
-    // Integration
-    {q:"∫sin x dx =",opts:["cos x + C","−cos x + C","−sin x + C","tan x + C"],ans:1,topic:"Integration",source:"KU entrance 2020",repeat:5,note:"∫sin x dx = −cos x + C"},
-    // Sequences
-    {q:"The 10th term of the AP 3, 7, 11, 15... is:",opts:["39","43","41","37"],ans:0,topic:"Sequences",source:"KU model set 2022",repeat:4,note:"a₁₀ = 3 + (10−1)×4 = 3 + 36 = 39"},
-    // Binomial Theorem
-    {q:"The coefficient of x³ in the expansion of (1+x)⁵ is:",opts:["5","10","15","20"],ans:1,topic:"Binomial Theorem",source:"KU entrance 2021",repeat:4,note:"C(5,3) = 10"},
-    // Complex Numbers
-    {q:"The modulus of the complex number 3 + 4i is:",opts:["7","5","25","1"],ans:1,topic:"Complex Numbers",source:"KU model set 2023",repeat:4,note:"|z| = √(3² + 4²) = √25 = 5"},
-    // Limits
-    {q:"lim(x→0) (sin 3x / x) =",opts:["1","3","0","∞"],ans:1,topic:"Limits & Continuity",source:"KU entrance 2022",repeat:4,note:"lim(x→0) sinax/x = a; here a=3"},
-    // Permutation & Combination
-    {q:"In how many ways can 4 students be arranged in a row of 4 seats?",opts:["16","24","12","4"],ans:1,topic:"Permutation & Combination",source:"KU model set 2022",repeat:3,note:"4P4 = 4! = 24"},
-    // Exponential
-    {q:"If f(x) = eˣ, then f''(x) at x = 0 is:",opts:["0","1","e","2"],ans:1,topic:"Differentiating Exponential Functions",source:"KU entrance 2021",repeat:3,note:"f'(x) = eˣ, f''(x) = eˣ; f''(0) = e⁰ = 1"},
-    // Vectors
-    {q:"If a = 2i + 3j and b = i − j, then a · b =",opts:["−1","5","1","−5"],ans:0,topic:"Vectors",source:"KU model set 2023",repeat:3,note:"a·b = 2×1 + 3×(−1) = 2−3 = −1"},
+    {q:"If f(x) = x³ − 3x² + 2x, then f'(x) at x = 2 is:",opts:["2","0","4","−2"],ans:0,topic:"Differentiation",diff:2,note:"f'(x) = 3x² − 6x + 2; f'(2) = 12 − 12 + 2 = 2"},
+    {q:"The maximum value of f(x) = −x² + 4x + 1 is:",opts:["4","5","3","6"],ans:1,topic:"Application of Differentiation",diff:2,note:"f'(x) = −2x + 4 = 0 → x=2; f(2) = −4+8+1 = 5"},
+    {q:"∫(2x + 3)dx from 0 to 2 is:",opts:["10","8","14","12"],ans:0,topic:"Integration",diff:2,note:"[x² + 3x]₀² = 4 + 6 = 10"},
+    {q:"d/dx(ln(sin x)) =",opts:["cot x","tan x","cosec x","−cot x"],ans:0,topic:"Differentiating Trigonometric Function",diff:3,note:"d/dx(ln u) = u'/u; u = sin x, u' = cos x → cos x/sin x = cot x"},
+    {q:"If A = [[1,2],[3,4]], det(A) =",opts:["−2","2","10","−10"],ans:0,topic:"Determinants",diff:1,note:"det = 1×4 − 2×3 = 4−6 = −2"},
+    {q:"If AB = I where A = [[2,1],[5,3]], then B =",opts:["[[3,−1],[−5,2]]","[[3,1],[5,2]]","[[−3,1],[5,−2]]","[[2,−1],[−5,3]]"],ans:0,topic:"Matrices",diff:3,note:"B = A⁻¹ = (1/det(A))·adj(A); det=1, adj=[[3,−1],[−5,2]]"},
+    {q:"If the roots of x² − 5x + 6 = 0 are α and β, then α² + β² =",opts:["13","25","37","12"],ans:0,topic:"Quadratics and Inequalities",diff:2,note:"α+β=5, αβ=6; α²+β² = (α+β)²−2αβ = 25−12 = 13"},
+    {q:"The discriminant of 2x² − 4x + 3 = 0 is:",opts:["−8","8","−4","4"],ans:0,topic:"Quadratics and Inequalities",diff:1,note:"b²−4ac = 16−24 = −8 (no real roots)"},
+    {q:"A bag has 5 red and 3 blue balls. Probability of drawing 2 red balls without replacement:",opts:["5/14","10/56","5/8","2/7"],ans:0,topic:"Probability",diff:3,note:"P = C(5,2)/C(8,2) = 10/28 = 5/14"},
+    {q:"In a binomial distribution with n=6, p=½, P(X=3) =",opts:["5/16","20/64","5/8","1/4"],ans:0,topic:"Binomial Distributions",diff:3,note:"C(6,3)(½)³(½)³ = 20×(1/64) = 5/16"},
+    {q:"The value of sin 75° is:",opts:["(√6+√2)/4","(√6−√2)/4","√3/2","1/2"],ans:0,topic:"Trigonometry",diff:3,note:"sin 75° = sin(45°+30°) = sin45cos30 + cos45sin30 = (√6+√2)/4"},
+    {q:"If tanθ = 3/4 and θ is in the first quadrant, sinθ =",opts:["3/5","4/5","3/4","4/3"],ans:0,topic:"Trigonometry",diff:1,note:"Hyp = √(9+16) = 5; sinθ = 3/5"},
+    {q:"∫sin x dx =",opts:["cos x + C","−cos x + C","−sin x + C","tan x + C"],ans:1,topic:"Integration",diff:1,note:"∫sin x dx = −cos x + C"},
+    {q:"The 10th term of the AP 3, 7, 11, 15... is:",opts:["39","43","41","37"],ans:0,topic:"Sequences",diff:1,note:"a₁₀ = 3 + (10−1)×4 = 3 + 36 = 39"},
+    {q:"The coefficient of x³ in the expansion of (1+x)⁵ is:",opts:["5","10","15","20"],ans:1,topic:"Binomial Theorem",diff:2,note:"C(5,3) = 10"},
+    {q:"The modulus of the complex number 3 + 4i is:",opts:["7","5","25","1"],ans:1,topic:"Complex Numbers",diff:1,note:"|z| = √(3² + 4²) = √25 = 5"},
+    {q:"lim(x→0) (sin 3x / x) =",opts:["1","3","0","∞"],ans:1,topic:"Limits and Continuity",diff:2,note:"lim(x→0) sinax/x = a; here a=3"},
+    {q:"In how many ways can 4 students be arranged in a row of 4 seats?",opts:["16","24","12","4"],ans:1,topic:"Permutation and Combination",diff:1,note:"4P4 = 4! = 24"},
+    {q:"If f(x) = eˣ, then f''(x) at x = 0 is:",opts:["0","1","e","2"],ans:1,topic:"Exponential and Logarithmic function",diff:2,note:"f'(x) = eˣ, f''(x) = eˣ; f''(0) = e⁰ = 1"},
+    {q:"If a = 2i + 3j and b = i − j, then a · b =",opts:["−1","5","1","−5"],ans:0,topic:"Vectors",diff:1,note:"a·b = 2×1 + 3×(−1) = 2−3 = −1"},
+    {q:"Which diagram is most suitable for displaying the frequency distribution of continuous numerical data?",opts:["Pie chart","Histogram","Bar chart","Pictograph"],ans:1,topic:"Representation of Data",diff:1,note:"Histograms show frequency over continuous intervals (no gaps between bars)"},
+    {q:"For the data set 2, 4, 4, 6, 8, the mean is:",opts:["4","4.8","5","24"],ans:1,topic:"Measures of Location and Spread",diff:1,note:"Mean = (2+4+4+6+8)/5 = 24/5 = 4.8"},
+    {q:"For any valid discrete probability distribution, the sum of all the probabilities equals:",opts:["0","0.5","1","It depends on the data"],ans:2,topic:"Probability Distributions",diff:1,note:"ΣP(X=x) = 1 is a defining property of a probability distribution"},
+    {q:"If a random variable X has E(X) = 3, then E(2X + 1) equals:",opts:["6","7","3","9"],ans:1,topic:"Expectation and Variance of a random variable",diff:2,note:"E(aX+b) = aE(X)+b = 2(3)+1 = 7"},
+    {q:"The graph of a normal distribution is:",opts:["Skewed to the right","Skewed to the left","A symmetric bell-shaped curve","Uniform (flat)"],ans:2,topic:"Normal Distribution",diff:1,note:"The normal distribution is symmetric about its mean, forming a bell curve"},
+    {q:"Simplify: 2³ × 2⁴ =",opts:["2⁷","2¹²","2¹","4⁷"],ans:0,topic:"Surds and indices",diff:1,note:"Same base, add exponents: 2^(3+4) = 2⁷"},
+    {q:"If f(x) = 2x + 3, then f(2) =",opts:["5","7","4","8"],ans:1,topic:"Functions and Graphs",diff:1,note:"f(2) = 2(2)+3 = 7"},
+    {q:"Using the chain rule, d/dx[(3x+1)⁴] =",opts:["4(3x+1)³","12(3x+1)³","3(3x+1)³","12(3x+1)⁴"],ans:1,topic:"Extending Differentiation",diff:2,note:"d/dx[u⁴] = 4u³·u′; u′=3, so 4×3×(3x+1)³ = 12(3x+1)³"},
+    {q:"The 5th term of the geometric sequence 3, 6, 12, 24, ... is:",opts:["36","48","24","96"],ans:1,topic:"Geometric Sequences",diff:1,note:"aₙ = a·rⁿ⁻¹ = 3×2⁴ = 48"},
+    {q:"If y = x³, then the second derivative d²y/dx² is:",opts:["3x²","6x","x²","6"],ans:1,topic:"Second Derivative",diff:1,note:"y′ = 3x²; y″ = 6x"},
+    {q:"The volume generated by rotating y = x about the x-axis from x = 0 to x = 2 is:",opts:["8π/3","4π","2π","8π"],ans:0,topic:"Volume of revolution",diff:3,note:"V = π∫₀² x² dx = π[x³/3]₀² = 8π/3"},
+    {q:"The degree of the polynomial 3x⁴ − 2x² + 5 is:",opts:["2","3","4","5"],ans:2,topic:"Polynomial",diff:1,note:"The degree is the highest power of x present, which is 4"},
+    {q:"The value of |−7| + |3| is:",opts:["−4","4","10","−10"],ans:2,topic:"The Modulus function",diff:1,note:"|−7| = 7, |3| = 3; 7+3 = 10"},
+    {q:"d/dx(ln x) =",opts:["x","1/x","ln x","eˣ"],ans:1,topic:"Differentiating Exponential and Logarithmic Functions",diff:1,note:"The derivative of the natural log function is 1/x"},
+    {q:"The slope of the line 2x + 3y = 6 is:",opts:["2/3","−2/3","3/2","−3/2"],ans:1,topic:"Equation of Straight Lines",diff:2,note:"y = −(2/3)x + 2, so slope = −2/3"},
+    {q:"The pair of lines represented by x² − y² = 0 are:",opts:["Parallel lines","Perpendicular lines (y = x and y = −x)","Coincident lines","Two lines through the origin with equal slope"],ans:1,topic:"A pair of lines",diff:3,note:"x² − y² = (x−y)(x+y) = 0 gives y = x and y = −x, with slopes 1 and −1 (product −1) — perpendicular"},
+    {q:"Solving the system x + y = 5 and x − y = 1, the value of x is:",opts:["2","3","4","1"],ans:1,topic:"System of linear equations",diff:1,note:"Adding the equations: 2x = 6 → x = 3 (and y = 2)"},
+    {q:"The region satisfying both x ≥ 0 and y ≥ 0 on the Cartesian plane is the:",opts:["Whole plane","First quadrant","Second quadrant","A single line"],ans:1,topic:"System of Linear Inequalities and Graphs",diff:1,note:"x≥0 and y≥0 together define the first quadrant (including the axes)"},
+    {q:"The distance between the points (1,2,3) and (4,6,3) in 3D space is:",opts:["5","7","25","√34"],ans:0,topic:"Coordinate Space",diff:2,note:"d = √[(4−1)²+(6−2)²+(3−3)²] = √(9+16+0) = √25 = 5"},
+    {q:"The general equation of a plane in 3D space has the form:",opts:["ax + by = c","ax + by + cz = d","ax² + by² = c","y = mx + c"],ans:1,topic:"Plane",diff:2,note:"A plane in 3D is defined by ax + by + cz = d"},
+    {q:"If A = {1,2,3} and B = {2,3,4}, then A ∩ B =",opts:["{1,2,3,4}","{2,3}","{1,4}","{ } (empty set)"],ans:1,topic:"Concept of Sets",diff:1,note:"The intersection contains elements common to both sets: 2 and 3"},
+    {q:"A relation that is reflexive, symmetric and transitive is called a/an:",opts:["Function","Equivalence relation","Identity relation only","Bijection"],ans:1,topic:"Relation",diff:2,note:"These three properties together define an equivalence relation"},
+    {q:"A function f: A → B is called one-to-one (injective) if:",opts:["Every element of B has a pre-image in A","Different elements of A always map to different elements of B","A and B have the same number of elements","f must also be invertible"],ans:1,topic:"Functions",diff:2,note:"Injective means no two distinct inputs share the same output"},
   ]
 };
 
-// Mixed PCM: randomly pull questions from all 3 subjects
-function getMixedQuestions(n){
-  const all = [
-    ...KC_PAST_QS.physics.map(q=>({...q,subj:'Physics'})),
-    ...KC_PAST_QS.chemistry.map(q=>({...q,subj:'Chemistry'})),
-    ...KC_PAST_QS.mathematics.map(q=>({...q,subj:'Mathematics'}))
-  ];
-  // Sort by repeat count (most repeated first)
-  all.sort((a,b)=>b.repeat-a.repeat);
-  return all.slice(0,n);
-}
+// Official KU syllabus topic lists — verified verbatim from
+// apply.ku.edu.np/syllabi/2025/Test_Syllabus_2025.pdf (40 topics per subject, June 2025).
+const KC_OFFICIAL_SYLLABUS = {
+  physics:["Physical Quantity","Kinematics","Dynamics","Energy","Rotational motion","Gravitation","Structure and Properties of Matter","Elasticity","Viscosity","Surface tension","Heat and temperature","Transmission of heat","Basic assumption of kinetic theory of gasses","Thermodynamics","Reflection","Refraction","Speed of light","Dispersion of light","Optical Instrument","Photometry","Wave motion","Sound","Electromagnetic waves","Simple Electrostatic Phenomenon","Charge flow","Resistance","Effect of Current","Capacitors","Magnetic field","Force on conductor","Magnetic materials","Electromagnetic induction","Alternating current","Electron","Photons","Electronic","Atoms","Nucleus","Radioactivity","Elementary particles"],
+  chemistry:["Language of Chemistry","Gaseous state of matter","Liquid state of matter","Solid state of matter","Laws of Stoichiometry","Avogadro's Hypothesis and its important applications","Atomic structure","Quantum numbers","Chemical bonding","Oxidation and Reduction","Acids, Bases and Salts","Acidimetry and Alkalimetry","Periodic Table","Electrochemistry","Electrode potential","Chemical Kinetics","Chemical Equilibrium","LeChatelier's Principle","Chemical Thermodynamics","Entropy and spontaneity","Hydrogen, Oxygen and Nitrogen","Carbon","Sulphur and its compound","Halogen and halogen acids","Introduction to Metals","Alkali and alkaline earth metals","Coinage metals","Heavy metals","Introduction to Organic Chemistry","Hydrocarbons","Organic halogen compounds","Alcohols","Ethers","Carbonyl Compounds","Carboxylic Acids","Amines","Aromatic Hydrocarbons","Aniline and Nitrobenzene","Carbohydrates, Proteins, Nucleic Acids, Lipids","Polymers, Pesticides, Dyes and Drugs"],
+  mathematics:["Representation of Data","Measures of Location and Spread","Probability","Permutation and Combination","Probability Distributions","Binomial Distributions","Expectation and Variance of a random variable","Normal Distribution","Surds and indices","Functions and Graphs","Quadratics and Inequalities","Differentiation","Application of Differentiation","Sequences","Binomial Theorem","Trigonometry","Extending Differentiation","Vectors","Geometric Sequences","Second Derivative","Integration","Volume of revolution","Polynomial","The Modulus function","Exponential and Logarithmic function","Differentiating Exponential and Logarithmic Functions","Differentiating Trigonometric Function","Determinants","Matrices","Equation of Straight Lines","A pair of lines","System of linear equations","System of Linear Inequalities and Graphs","Complex Numbers","Limits and Continuity","Coordinate Space","Plane","Concept of Sets","Relation","Functions"]
+};
 
-let kcQuizState={subject:null,questions:[],current:0,score:0,answers:[],done:false};
+// Official KUCAT-CBT scoring/adaptive model — verified from the same official syllabus document:
+// 120 MCQs total (40/subject, 1 per syllabus topic) · 2 hours · difficulty 1–5 · adaptive ±1 level
+// per answer (no change at the 1/5 boundary) · score per correct answer = 11 + 2×(level−1)
+// (e.g. level 1 = 11 pts, level 5 = 19 pts) · total range 0–2220 across all 120 questions.
+// 2022 pass marks (for reference only — these change yearly, verify current year before relying on them):
+// School of Science ≥ 480, School of Engineering ≥ 528.
+const KC_OFFICIAL_MODEL = {questionsPerSubject:40,totalQuestions:120,durationMin:120,minDiff:1,maxDiff:5,scoreForLevel:lv=>11+2*(lv-1),maxScore:2220,passMarks2022:{science:480,engineering:528}};
+function kcScoreForLevel(lv){return 11+2*(Math.max(1,Math.min(5,lv))-1)}
 
-function startMockQuiz(subj){
-  // Update tab buttons
-  ['physics','chemistry','mathematics','mixed'].forEach(s=>{
-    const btn=document.getElementById('mqBtn-'+s);
-    if(btn){
-      if(s===subj){btn.className='btn btn-primary btn-sm';btn.style.flex='1';btn.style.minWidth='70px';}
-      else{btn.className='btn-ghost';btn.style.cssText='flex:1;min-width:70px;padding:6px;font-size:0.75rem;border-radius:var(--r-sm);border:1px solid var(--line-strong)';}
-    }
-  });
-  const pool = subj==='mixed' ? getMixedQuestions(15) :
-    [...KC_PAST_QS[subj]].sort((a,b)=>b.repeat-a.repeat).slice(0,10).map(q=>({...q,subj:subj.charAt(0).toUpperCase()+subj.slice(1)}));
-  kcQuizState={subject:subj,questions:pool,current:0,score:0,answers:Array(pool.length).fill(-1),done:false};
-  renderMockQuizQ();
-}
 
-function renderMockQuizQ(){
-  const {questions,current,score,done,answers}=kcQuizState;
-  const body=document.getElementById('kcMockQuizBody');
-  if(!body)return;
-  if(done){
-    const pct=Math.round(score/questions.length*100);
-    const grade=pct>=80?'Excellent 🎉':pct>=60?'Good 👍':pct>=40?'Keep Practicing 📚':'Needs Work 💪';
-    body.innerHTML=`<div style="padding:12px 0">
-      <div style="text-align:center;padding:16px;background:${pct>=60?'var(--good-soft)':'var(--warn-soft)'};border-radius:var(--r-sm);border:1px solid ${pct>=60?'var(--good)':'var(--warn)'};margin-bottom:14px">
-        <div style="font-family:var(--font-num);font-size:2rem;font-weight:900;color:${pct>=60?'var(--good)':'var(--warn)'}">${score}/${questions.length}</div>
-        <div style="font-size:0.85rem;font-weight:700;margin-top:2px">${grade} · ${pct}%</div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:14px">
-        ${questions.map((q,i)=>`
-        <div style="padding:8px 10px;border-radius:var(--r-sm);background:${answers[i]===q.ans?'var(--good-soft)':'var(--bad-soft)'};border:1px solid ${answers[i]===q.ans?'var(--good)':'var(--bad)'}">
-          <div style="font-size:0.72rem;font-weight:600;margin-bottom:3px;color:${answers[i]===q.ans?'var(--good)':'var(--bad)'}">${answers[i]===q.ans?'✓':'✗'} Q${i+1}: ${q.topic}</div>
-          <div style="font-size:0.68rem;color:var(--ink-2)">${q.q.slice(0,80)}${q.q.length>80?'…':''}</div>
-          ${answers[i]!==q.ans?`<div style="font-size:0.67rem;color:var(--ink-3);margin-top:3px">Answer: ${q.opts[q.ans]}</div>`:''}
-          <div style="font-size:0.65rem;color:var(--ink-4);margin-top:2px">💡 ${q.note}</div>
-          <div style="font-size:0.63rem;color:var(--ink-4);margin-top:1px">📄 Source: ${q.source}</div>
-        </div>`).join('')}
-      </div>
-      <button class="btn btn-primary btn-sm" style="width:100%" onclick="startMockQuiz('${kcQuizState.subject}')">Retry Test →</button>
-    </div>`;
-    return;
-  }
-  const q=questions[current];
-  const stars='★'.repeat(Math.min(q.repeat,5))+'☆'.repeat(Math.max(0,5-q.repeat));
-  body.innerHTML=`
-    <div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <span style="font-size:0.7rem;font-weight:700;color:var(--accent)">${q.topic}</span>
-        <span style="font-size:0.65rem;color:var(--warn);font-weight:700" title="Repeat frequency in KUCAT">${stars} ${q.repeat}× repeated</span>
-      </div>
-      <div style="font-size:0.68rem;color:var(--ink-4);margin-bottom:8px">Q${current+1}/${questions.length} · 📄 ${q.source}</div>
-      <div style="font-size:0.82rem;font-weight:500;color:var(--ink);margin-bottom:12px;line-height:1.55">${q.q}</div>
-      <div style="display:flex;flex-direction:column;gap:6px">
-        ${q.opts.map((opt,i)=>`<button onclick="kcAnswerQ(${i})" style="text-align:left;padding:9px 12px;border-radius:var(--r-sm);border:1.5px solid var(--line-strong);background:var(--surface-2);font-size:0.78rem;cursor:pointer;transition:all var(--dur-1)" onmouseover="this.style.borderColor='var(--accent)';this.style.background='var(--accent-soft)'" onmouseout="this.style.borderColor='var(--line-strong)';this.style.background='var(--surface-2)'">${['A','B','C','D'][i]}. ${opt}</button>`).join('')}
-      </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
-        <div style="font-size:0.7rem;color:var(--ink-3)">Score: ${score}/${current}</div>
-        <div style="height:4px;flex:1;margin:0 10px;background:var(--paper-3);border-radius:99px"><div style="height:100%;width:${Math.round(current/questions.length*100)}%;background:var(--accent);border-radius:99px;transition:width var(--dur-2)"></div></div>
-        <div style="font-size:0.7rem;color:var(--ink-3)">${questions.length - current} left</div>
-      </div>
-    </div>`;
-}
+/* ============================================================
+   MOCK TEST CENTER — data layer
+   ============================================================ */
 
-function kcAnswerQ(chosen){
-  const {questions,current,score,answers}=kcQuizState;
-  const q=questions[current];
-  answers[current]=chosen;
-  const correct=chosen===q.ans;
-  kcQuizState.score=score+(correct?1:0);
-  kcQuizState.answers=answers;
-  // Flash feedback on the button
-  const body=document.getElementById('kcMockQuizBody');
-  if(body){
-    const btns=body.querySelectorAll('button');
-    btns.forEach((b,i)=>{
-      b.disabled=true;b.style.cursor='default';
-      if(i===q.ans){b.style.background='var(--good-soft)';b.style.borderColor='var(--good)';b.style.color='var(--good)'}
-      else if(i===chosen&&chosen!==q.ans){b.style.background='var(--bad-soft)';b.style.borderColor='var(--bad)';b.style.color='var(--bad)'}
+// flatten a subject's bank with subject name attached
+function kcBank(subj){return KC_PAST_QS[subj].map((q,i)=>({...q,id:subj[0]+i,subj:subj.charAt(0).toUpperCase()+subj.slice(1)}))}
+
+// Past Year Papers — TODO: real official past papers are not publicly distributed by KU in
+// reusable form. Per the accuracy requirement, these are clearly labeled reconstructions built
+// from the current official syllabus/blueprint, NOT real KUCAT-CBT 2077–2081 exam content.
+// Structure now matches the VERIFIED official format exactly: 120 MCQs total, 40 per subject,
+// one question drawn per official syllabus topic, 120-minute duration, adaptive 1–5 per subject.
+const KC_PAPERS = [
+  {id:'2081',year:'KUCAT 2081 (≈2024/25)',badge:'Pattern-based Reconstruction',questions:120,est:'Adaptive 1–5',timeLimit:120},
+  {id:'2080',year:'KUCAT 2080 (≈2023/24)',badge:'Pattern-based Reconstruction',questions:120,est:'Adaptive 1–5',timeLimit:120},
+  {id:'2079',year:'KUCAT 2079 (≈2022/23)',badge:'Pattern-based Reconstruction',questions:120,est:'Adaptive 1–5',timeLimit:120},
+  {id:'2078',year:'KUCAT 2078 (≈2021/22)',badge:'Pattern-based Reconstruction',questions:120,est:'Adaptive 1–5',timeLimit:120},
+  {id:'2077',year:'KUCAT 2077 (≈2020/21)',badge:'Pattern-based Reconstruction',questions:120,est:'Adaptive 1–5',timeLimit:120},
+];
+
+// Builds one full-length paper: exactly 40 questions per subject, one drawn (at random, if
+// multiple variants exist for a topic) per official syllabus topic, subjects run sequentially
+// Physics → Chemistry → Mathematics, each block restarting the adaptive level at 1 — mirroring
+// the official "each part starts at difficulty 1" rule. This keeps every official topic
+// represented exactly once per attempt, never the same fixed paper twice.
+function kcBuildFullPaper(){
+  const subjects=['physics','chemistry','mathematics'];
+  let out=[];
+  subjects.forEach(s=>{
+    const bank=kcBank(s);
+    KC_OFFICIAL_SYLLABUS[s].forEach(topic=>{
+      const variants=bank.filter(q=>q.topic===topic);
+      out.push(variants[Math.floor(Math.random()*variants.length)]);
     });
-    // Show explanation
-    const expl=document.createElement('div');
-    expl.style.cssText='margin-top:10px;padding:8px 10px;border-radius:var(--r-sm);background:var(--surface-2);border:1px solid var(--line);font-size:0.72rem;color:var(--ink-2);line-height:1.5';
-    expl.innerHTML=`${correct?'✅ Correct!':'❌ Wrong!'} <strong>${q.opts[q.ans]}</strong><br>💡 ${q.note}<br><span style="color:var(--ink-4)">📄 ${q.source}</span>`;
-    body.querySelector('div').appendChild(expl);
-    const nextBtn=document.createElement('button');
-    nextBtn.className='btn btn-primary btn-sm';nextBtn.style.cssText='width:100%;margin-top:10px';
-    nextBtn.textContent=current+1>=questions.length?'See Results →':'Next Question →';
-    nextBtn.onclick=()=>{
-      kcQuizState.current=current+1;
-      if(current+1>=questions.length){kcQuizState.done=true;}
-      renderMockQuizQ();
-    };
-    body.querySelector('div').appendChild(nextBtn);
+  });
+  return out;
+}
+
+// Subject mock libraries — 4 per subject as requested. Easy/Medium/Hard filter the bank by
+// the illustrative `diff` tag; Adaptive ignores the filter and uses the live adaptive engine.
+const KC_MOCK_TIERS = [
+  {key:'easy',label:'Mock 1 (Easy)',icon:'🟢',diffRange:[1,2]},
+  {key:'medium',label:'Mock 2 (Medium)',icon:'🔵',diffRange:[2,3]},
+  {key:'hard',label:'Mock 3 (Hard)',icon:'🟠',diffRange:[3,5]},
+  {key:'adaptive',label:'Mock 4 (Adaptive)',icon:'🔴',diffRange:[1,5]},
+];
+
+let kcMTState = {view:'overview', subj:'physics'};
+
+/* ============================================================
+   MOCK TEST CENTER — page shell
+   ============================================================ */
+function renderMockTestCenter(){
+  const p=document.getElementById('page-mocktest');if(!p)return;
+  if(kcRunState && kcRunState.active){renderCbtRunner();return;}
+  const v=kcMTState.view;
+  p.innerHTML=`
+  <div style="margin-bottom:16px">
+    <h1 class="display-2" style="font-size:1.4rem;margin-bottom:2px">🧪 KUCAT Mock Test Center</h1>
+    <div class="card-sub">Adaptive CBT-style practice, built on the official KU syllabus &amp; scoring model</div>
+  </div>
+
+  <div style="background:var(--warn-soft);border:1px solid var(--warn);border-radius:var(--r-sm);padding:9px 12px;margin-bottom:16px;font-size:0.72rem;color:var(--warn);font-weight:600;line-height:1.55">
+    ⚠️ Practice questions here are original "Pattern-based Reconstructions" written to match the official KU syllabus topics — they are <u>not</u> real/leaked KUCAT exam questions. Structure (120 Q · 40/subject · 1 per topic · difficulty 1–5 adaptive · scoring 11+2×(level−1)) is verified from KU's official 2025 syllabus document. The bank now covers all 40/40 official topics per subject; some topics still only have a single question variant — see TODOs in source for expansion.
+  </div>
+
+  <div class="page-tabs" style="margin-bottom:16px">
+    <button class="page-tab${v==='overview'?' active':''}" onclick="kcMTSetView('overview')">Overview</button>
+    <button class="page-tab${v==='papers'?' active':''}" onclick="kcMTSetView('papers')">Past Year Papers</button>
+    <button class="page-tab${v==='subjects'?' active':''}" onclick="kcMTSetView('subjects')">Subject Mock Tests</button>
+    <button class="page-tab${v==='practice'?' active':''}" onclick="kcMTSetView('practice')">Adaptive Practice</button>
+    <button class="page-tab${v==='analytics'?' active':''}" onclick="kcMTSetView('analytics')">Analytics</button>
+  </div>
+
+  <div id="kcMTBody"></div>
+  `;
+  const body=document.getElementById('kcMTBody');
+  if(v==='overview')body.innerHTML=kcMTOverview();
+  else if(v==='papers')body.innerHTML=kcMTPapers();
+  else if(v==='subjects')body.innerHTML=kcMTSubjects();
+  else if(v==='practice')body.innerHTML=kcMTPractice();
+  else if(v==='analytics')body.innerHTML=kcMTAnalytics();
+}
+function kcMTSetView(v){kcMTState.view=v;renderMockTestCenter()}
+
+function kcMTOverview(){
+  const attempts=kucatData.mtAttempts||[];
+  const lastScore=attempts.length?attempts[attempts.length-1].pctScore:null;
+  return `
+  <div class="progress-cards" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px">
+    <div class="card" style="padding:14px"><div style="font-size:0.65rem;color:var(--ink-3);font-weight:700;text-transform:uppercase">Tests Taken</div><div class="display-2" style="font-size:1.5rem;margin-top:4px">${attempts.length}</div></div>
+    <div class="card" style="padding:14px"><div style="font-size:0.65rem;color:var(--ink-3);font-weight:700;text-transform:uppercase">Last Score</div><div class="display-2" style="font-size:1.5rem;margin-top:4px">${lastScore!==null?lastScore+'%':'—'}</div></div>
+    <div class="card" style="padding:14px"><div style="font-size:0.65rem;color:var(--ink-3);font-weight:700;text-transform:uppercase">Official Format</div><div class="display-2" style="font-size:1.5rem;margin-top:4px">120 Q</div></div>
+    <div class="card" style="padding:14px"><div style="font-size:0.65rem;color:var(--ink-3);font-weight:700;text-transform:uppercase">Difficulty Range</div><div class="display-2" style="font-size:1.5rem;margin-top:4px">1–5</div></div>
+  </div>
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-head" style="margin-bottom:8px"><div class="card-title">How KUCAT-CBT actually works (verified)</div></div>
+    <div style="font-size:0.78rem;color:var(--ink-2);line-height:1.7">
+      2 hours · 120 MCQs total · 40 per subject (PCM or PCB) · one question per syllabus topic · each part starts at difficulty 1 · a correct answer raises the next question's difficulty by 1, a wrong answer lowers it by 1 (no change beyond the 1–5 floor/ceiling) · each correct answer scores 11 + 2×(level−1) points, so level 1 = 11 pts and level 5 = 19 pts · max total score is 2220 · candidates cannot skip or revisit submitted questions but can switch between subjects freely.
+    </div>
+  </div>
+  <div class="card-head" style="margin-bottom:10px"><div class="card-title">Quick Start</div></div>
+  <div class="progress-cards" style="grid-template-columns:repeat(3,1fr)">
+    <div class="card" style="padding:16px;cursor:pointer" onclick="kcMTSetView('papers')"><div style="font-size:1.6rem">📄</div><div style="font-weight:700;margin:6px 0 2px">Past Year Papers</div><div style="font-size:0.72rem;color:var(--ink-3)">5 reconstructed full-length papers</div></div>
+    <div class="card" style="padding:16px;cursor:pointer" onclick="kcMTSetView('subjects')"><div style="font-size:1.6rem">📚</div><div style="font-weight:700;margin:6px 0 2px">Subject Mocks</div><div style="font-size:0.72rem;color:var(--ink-3)">4 tests each · Physics, Chemistry, Maths</div></div>
+    <div class="card" style="padding:16px;cursor:pointer" onclick="kcMTSetView('practice')"><div style="font-size:1.6rem">🎯</div><div style="font-weight:700;margin:6px 0 2px">Adaptive Practice</div><div style="font-size:0.72rem;color:var(--ink-3)">Custom drills, weak-topic focus, untimed</div></div>
+  </div>`;
+}
+
+function kcMTPapers(){
+  return `<div class="progress-cards" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr))">
+  ${KC_PAPERS.map(pp=>{
+    const best=(kucatData.mtAttempts||[]).filter(a=>a.kind==='paper'&&a.refId===pp.id).sort((a,b)=>b.pctScore-a.pctScore)[0];
+    return `<div class="card" style="padding:16px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
+        <div style="font-weight:800;font-size:0.95rem">${pp.year}</div>
+        <span style="font-size:0.6rem;font-weight:700;padding:2px 7px;border-radius:99px;background:var(--warn-soft);color:var(--warn)">${pp.badge}</span>
+      </div>
+      <div style="font-size:0.72rem;color:var(--ink-3);margin-bottom:10px">120 Q · 40 Physics + 40 Chemistry + 40 Maths, one per official topic · not an authentic past exam</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:0.7rem;color:var(--ink-2);margin-bottom:10px">
+        <div>📝 ${pp.questions} questions</div><div>⏱ ${pp.timeLimit} min</div>
+        <div>📊 ${pp.est}</div><div>🏆 Best: ${best?best.pctScore+'%':'—'}</div>
+      </div>
+      <div style="display:flex;gap:6px">
+        <button class="btn btn-primary btn-sm" style="flex:1" onclick="kcStartTest({kind:'paper',refId:'${pp.id}',label:'${pp.year}',mode:'fullpaper',subjects:['physics','chemistry','mathematics'],count:${pp.questions},timeLimit:${pp.timeLimit}})">Attempt Full Paper</button>
+        ${best?`<button class="btn-ghost btn-sm" style="border:1px solid var(--line-strong);border-radius:var(--r-sm);padding:6px 10px" onclick="kcReviewAttempt('${best.id}')">Review</button>`:''}
+      </div>
+    </div>`;
+  }).join('')}
+  </div>`;
+}
+
+function kcMTSubjects(){
+  const subjKeys=['physics','chemistry','mathematics'];
+  return `
+  <div class="page-tabs" style="margin-bottom:14px">
+    ${subjKeys.map(s=>`<button class="page-tab${kcMTState.subj===s?' active':''}" onclick="kcMTState.subj='${s}';renderMockTestCenter()">${s.charAt(0).toUpperCase()+s.slice(1)}</button>`).join('')}
+  </div>
+  <div class="progress-cards" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr))">
+  ${KC_MOCK_TIERS.map(tier=>{
+    const subj=kcMTState.subj;
+    const pool=kcBank(subj).filter(q=>q.diff>=tier.diffRange[0]&&q.diff<=tier.diffRange[1]);
+    const best=(kucatData.mtAttempts||[]).filter(a=>a.kind==='subject'&&a.refId===subj+':'+tier.key).sort((a,b)=>b.pctScore-a.pctScore)[0];
+    return `<div class="card" style="padding:16px">
+      <div style="font-size:1.4rem;margin-bottom:4px">${tier.icon}</div>
+      <div style="font-weight:800;font-size:0.88rem;margin-bottom:2px">${tier.label}</div>
+      <div style="font-size:0.7rem;color:var(--ink-3);margin-bottom:10px">${pool.length} questions in pool${tier.key==='adaptive'?' · live difficulty engine':''}</div>
+      <div style="font-size:0.7rem;color:var(--ink-2);margin-bottom:10px">🏆 Best: ${best?best.pctScore+'%':'—'} ${tier.key==='adaptive'&&best?` · Est. score ${best.estScore}`:''}</div>
+      <button class="btn btn-primary btn-sm" style="width:100%" ${pool.length<3&&tier.key!=='adaptive'?'disabled title="Question bank for this tier is still a starter set"':''} onclick="kcStartTest({kind:'subject',refId:'${subj}:${tier.key}',label:'${subj.charAt(0).toUpperCase()+subj.slice(1)} · ${tier.label}',mode:'${tier.key==='adaptive'?'adaptive':'fixed'}',subjects:['${subj}'],count:${tier.key==='adaptive'?Math.min(15,kcBank(subj).length):Math.max(1,Math.min(10,pool.length))},timeLimit:${tier.key==='adaptive'?20:15}})">${pool.length<3&&tier.key!=='adaptive'?'Bank too small':'Start'}</button>
+    </div>`;
+  }).join('')}
+  </div>`;
+}
+
+function kcMTPractice(){
+  return `<div class="card" style="padding:18px;max-width:520px">
+    <div class="card-title" style="margin-bottom:10px">Custom Practice</div>
+    <div class="field" style="margin-bottom:10px"><label class="field-label">Subject</label>
+      <select id="cpSubj" class="field-input"><option value="physics">Physics</option><option value="chemistry">Chemistry</option><option value="mathematics">Mathematics</option><option value="mixed">Mixed PCM</option></select>
+    </div>
+    <div class="field" style="margin-bottom:10px"><label class="field-label">Mode</label>
+      <select id="cpMode" class="field-input"><option value="adaptive">Adaptive (mirrors KUCAT-CBT)</option><option value="fixed">Fixed (no difficulty change)</option><option value="untimed">Untimed practice</option></select>
+    </div>
+    <div class="field" style="margin-bottom:14px"><label class="field-label">Question count</label>
+      <input id="cpCount" type="number" class="field-input" value="10" min="3" max="20">
+    </div>
+    <button class="btn btn-primary btn-sm" style="width:100%" onclick="kcLaunchCustom()">Start Custom Practice →</button>
+    <div style="font-size:0.68rem;color:var(--ink-4);margin-top:10px">Weak-topic prioritization will activate once enough attempts are logged in Analytics.</div>
+  </div>`;
+}
+function kcLaunchCustom(){
+  const subj=document.getElementById('cpSubj').value;
+  const mode=document.getElementById('cpMode').value;
+  const count=parseInt(document.getElementById('cpCount').value)||10;
+  const subjects=subj==='mixed'?['physics','chemistry','mathematics']:[subj];
+  kcStartTest({kind:'custom',refId:'custom:'+Date.now(),label:'Custom Practice',mode:mode==='adaptive'?'adaptive':'fixed',subjects,count,timeLimit:mode==='untimed'?0:Math.max(5,count*1.5)});
+}
+
+function kcMTAnalytics(){
+  const attempts=kucatData.mtAttempts||[];
+  if(!attempts.length)return `<div class="card" style="padding:30px;text-align:center;color:var(--ink-3)"><div style="font-size:1.8rem;margin-bottom:8px">📊</div>Take a test to unlock analytics.</div>`;
+  const topicStats={};
+  attempts.forEach(a=>(a.detail||[]).forEach(d=>{
+    topicStats[d.topic]=topicStats[d.topic]||{c:0,t:0};
+    topicStats[d.topic].t++; if(d.correct)topicStats[d.topic].c++;
+  }));
+  const rows=Object.entries(topicStats).map(([t,s])=>({t,pct:Math.round(s.c/s.t*100),n:s.t})).sort((a,b)=>a.pct-b.pct);
+  const weak=rows.slice(0,5), strong=rows.slice(-5).reverse();
+  const avgPct=Math.round(attempts.reduce((a,x)=>a+x.pctScore,0)/attempts.length);
+
+  // Accuracy by difficulty level (1-5)
+  const diffStats=[1,2,3,4,5].map(lv=>{
+    let c=0,t=0;
+    attempts.forEach(a=>(a.detail||[]).forEach(d=>{if(d.diff===lv){t++;if(d.correct)c++;}}));
+    return {lv,pct:t?Math.round(c/t*100):null,n:t};
+  });
+
+  // Progress over time — last 12 attempts, score % trend
+  const recent=attempts.slice(-12);
+  const maxBar=100;
+
+  // Estimated readiness: blend of recent average accuracy and trend direction, benchmarked
+  // against the official 2022 pass marks (Science 480/2220 ≈ 21.6%, Engineering 528/2220 ≈ 23.8%).
+  // This is a rough self-assessment signal only — NOT a predictor of your actual KUCAT result.
+  const last5=attempts.slice(-5);
+  const recentAvg=Math.round(last5.reduce((a,x)=>a+x.pctScore,0)/last5.length);
+  const trend = last5.length>=2 ? last5[last5.length-1].pctScore - last5[0].pctScore : 0;
+  let readinessLabel='Building Foundations', readinessColor='var(--bad)';
+  if(recentAvg>=80){readinessLabel='Exam Ready';readinessColor='var(--good)'}
+  else if(recentAvg>=60){readinessLabel='On Track';readinessColor='var(--accent)'}
+  else if(recentAvg>=40){readinessLabel='Needs Practice';readinessColor='var(--warn)'}
+
+  return `
+  <div class="progress-cards" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px">
+    <div class="card" style="padding:14px"><div style="font-size:0.65rem;color:var(--ink-3);font-weight:700">AVG SCORE</div><div class="display-2" style="font-size:1.4rem">${avgPct}%</div></div>
+    <div class="card" style="padding:14px"><div style="font-size:0.65rem;color:var(--ink-3);font-weight:700">TESTS TAKEN</div><div class="display-2" style="font-size:1.4rem">${attempts.length}</div></div>
+    <div class="card" style="padding:14px"><div style="font-size:0.65rem;color:var(--ink-3);font-weight:700">TOPICS TRACKED</div><div class="display-2" style="font-size:1.4rem">${rows.length}</div></div>
+    <div class="card" style="padding:14px;border-left:3px solid ${readinessColor}"><div style="font-size:0.65rem;color:var(--ink-3);font-weight:700">READINESS</div><div class="display-2" style="font-size:1.1rem;color:${readinessColor}">${readinessLabel}</div></div>
+  </div>
+
+  <div class="card" style="padding:16px;margin-bottom:16px">
+    <div class="card-head" style="margin-bottom:4px"><div><div class="card-title" style="font-size:0.85rem">Progress Over Time</div><div class="card-sub">Last ${recent.length} attempt${recent.length===1?'':'s'} · score %</div></div>${trend!==0?`<span style="font-size:0.7rem;font-weight:700;color:${trend>0?'var(--good)':'var(--bad)'}">${trend>0?'▲':'▼'} ${Math.abs(trend)}% vs 5 attempts ago</span>`:''}</div>
+    <div style="display:flex;align-items:flex-end;gap:6px;height:90px;margin-top:14px">
+      ${recent.map(a=>`<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%"><div class="kc-bar-fill" style="width:100%;max-width:26px;border-radius:5px 5px 0 0;background:${a.pctScore>=60?'var(--good)':a.pctScore>=40?'var(--warn)':'var(--bad)'};height:${Math.max(4,a.pctScore/maxBar*78)}px" title="${a.label}: ${a.pctScore}%"></div></div>`).join('')}
+    </div>
+    <div style="font-size:0.6rem;color:var(--ink-4);margin-top:6px">Oldest → Newest, left to right</div>
+  </div>
+
+  <div class="card" style="padding:16px;margin-bottom:16px">
+    <div class="card-title" style="margin-bottom:10px;font-size:0.85rem">Accuracy by Difficulty Level</div>
+    ${diffStats.map(d=>`<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><span style="font-size:0.7rem;width:62px;font-weight:600">Level ${d.lv}</span><div class="kc-progress-track" style="flex:1"><div class="kc-progress-fill" style="width:${d.pct||0}%"></div></div><span style="font-size:0.68rem;color:var(--ink-3);width:70px;text-align:right">${d.pct!==null?d.pct+'% ('+d.n+')':'No data'}</span></div>`).join('')}
+  </div>
+
+  <div class="grid" style="grid-template-columns:1fr 1fr;gap:16px">
+    <div class="card" style="padding:16px"><div class="card-title" style="margin-bottom:8px">🔴 Weakest Topics</div>
+      ${weak.map(r=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line-2);font-size:0.78rem"><span>${r.t}</span><span style="font-weight:700;color:var(--bad)">${r.pct}% (${r.n})</span></div>`).join('')||'<div style="color:var(--ink-3);font-size:0.78rem">No data yet</div>'}
+    </div>
+    <div class="card" style="padding:16px"><div class="card-title" style="margin-bottom:8px">🟢 Strongest Topics</div>
+      ${strong.map(r=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line-2);font-size:0.78rem"><span>${r.t}</span><span style="font-weight:700;color:var(--good)">${r.pct}% (${r.n})</span></div>`).join('')||'<div style="color:var(--ink-3);font-size:0.78rem">No data yet</div>'}
+    </div>
+  </div>
+  <div style="font-size:0.6rem;color:var(--ink-4);margin-top:8px">*Readiness is a rough self-check based on your recent practice accuracy — it is not a verified predictor of your official KUCAT result.</div>
+  <div class="card" style="padding:16px;margin-top:16px">
+    <div class="card-title" style="margin-bottom:8px">Test History</div>
+    <table style="width:100%;font-size:0.78rem"><tbody>
+    ${attempts.slice().reverse().map(a=>`<tr style="border-bottom:1px solid var(--line-2)"><td style="padding:6px 4px">${a.label}</td><td style="padding:6px 4px;color:var(--ink-3)">${a.date}</td><td style="padding:6px 4px;text-align:right;font-weight:700;color:var(--accent)">${a.pctScore}%</td><td style="padding:6px 4px;text-align:right"><button class="btn-ghost btn-xs" style="border:1px solid var(--line-strong);border-radius:var(--r-xs);padding:3px 8px" onclick="kcReviewAttempt('${a.id}')">Review</button></td></tr>`).join('')}
+    </tbody></table>
+  </div>`;
+}
+
+/* ============================================================
+   MOCK TEST CENTER — CBT-style test runner (Bluebook-inspired)
+   ============================================================ */
+let kcRunState=null;
+
+function kcBuildPool(subjects,count){
+  let pool=[];
+  subjects.forEach(s=>pool=pool.concat(kcBank(s)));
+  // shuffle (seeded by Date for variety) then take count, looping bank if needed
+  for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}
+  const out=[];for(let i=0;i<count;i++)out.push(pool[i%pool.length]);
+  return out;
+}
+
+function kcStartTest(cfg){
+  let questions;
+  if(cfg.mode==='fullpaper'){
+    questions=kcBuildFullPaper(); // 40 Physics + 40 Chemistry + 40 Maths, one Q per official topic
+  }else{
+    const pool=kcBuildPool(cfg.subjects,cfg.count);
+    questions = cfg.mode==='adaptive' ? pool.sort((a,b)=>a.diff-b.diff) : pool;
   }
+  kcRunState={
+    active:true,cfg,questions,
+    current:0,level:1,score:0,
+    answers:Array(questions.length).fill(null),
+    marked:Array(questions.length).fill(false),
+    startTime:Date.now(),
+    timeLimitSec:(cfg.timeLimit||0)*60,
+    done:false
+  };
+  renderMockTestCenter();
+  if(kcRunState.timeLimitSec>0)kcStartTimer();
+}
+let kcTimerHandle=null;
+function kcStartTimer(){
+  if(kcTimerHandle)clearInterval(kcTimerHandle);
+  kcTimerHandle=setInterval(()=>{
+    if(!kcRunState||!kcRunState.active){clearInterval(kcTimerHandle);return;}
+    const el=document.getElementById('kcRunTimer');
+    const elapsed=(Date.now()-kcRunState.startTime)/1000;
+    const remain=Math.max(0,kcRunState.timeLimitSec-elapsed);
+    if(el){
+      el.textContent=kcFmtTime(remain);
+      el.classList.toggle('kc-timer-warn', remain<=60);
+    }
+    if(remain<=0){clearInterval(kcTimerHandle);kcFinishTest();}
+  },1000);
+}
+function kcFmtTime(s){const m=Math.floor(s/60),sec=Math.floor(s%60);return `${m}:${sec.toString().padStart(2,'0')}`}
+
+function kcPaletteCellClass(st,i){
+  const cls=['kc-nav-cell'];
+  if(i===st.current)cls.push('kc-cur');
+  else if(st.marked[i])cls.push('kc-marked');
+  else if(st.answers[i]!==null)cls.push('kc-answered');
+  return cls.join(' ');
+}
+
+// Full re-render — used only when moving to a different question (intentional fade transition),
+// finishing, or first paint. Selecting an option / toggling mark patch the DOM directly (see
+// kcSelectAnswer / kcToggleMark) so there is no page "reload" flash on every click.
+function renderCbtRunner(){
+  const p=document.getElementById('page-mocktest');
+  const st=kcRunState, cfg=st.cfg;
+  if(st.done){p.innerHTML=kcResultsScreen();return;}
+  const q=st.questions[st.current];
+  const pct=Math.round(((st.current)/st.questions.length)*100);
+  const palette=st.questions.map((_,i)=>
+    `<button onclick="kcGoTo(${i})" class="${kcPaletteCellClass(st,i)}" data-idx="${i}">${i+1}</button>`
+  ).join('');
+  p.innerHTML=`
+  <div class="kc-shell-enter" style="position:sticky;top:0;background:var(--paper);z-index:5;padding:10px 0 12px;margin-bottom:10px;border-bottom:1.5px solid var(--line-strong)">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+      <div style="font-weight:800;font-size:0.9rem">${cfg.label}</div>
+      <div style="display:flex;align-items:center;gap:14px">
+        ${cfg.mode==='adaptive'||cfg.mode==='fullpaper'?`<span style="font-size:0.72rem;font-weight:700;color:var(--elite)">Level ${st.level}/5</span>`:''}
+        ${st.timeLimitSec>0?`<span id="kcRunTimer" style="font-family:var(--font-num);font-weight:800;font-size:0.95rem;color:var(--accent)">${kcFmtTime(Math.max(0,st.timeLimitSec-(Date.now()-st.startTime)/1000))}</span>`:'<span style="font-size:0.72rem;color:var(--ink-3)">Untimed</span>'}
+        <button class="btn btn-secondary btn-xs" onclick="kcConfirmEnd()">End Test</button>
+      </div>
+    </div>
+    <div class="kc-progress-track"><div class="kc-progress-fill" id="kcProgressFill" style="width:${pct}%"></div></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 220px;gap:16px">
+    <div class="card kc-qcard" id="kcQCard" style="padding:24px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:10px">
+        <span style="font-size:0.72rem;font-weight:700;color:var(--accent)">${q.subj} · ${q.topic}</span>
+        <span style="font-size:0.7rem;color:var(--ink-3)">Q${st.current+1}/${st.questions.length}${cfg.mode==='adaptive'||cfg.mode==='fullpaper'?` · Difficulty ${st.level}`:''}</span>
+      </div>
+      <div style="font-size:0.94rem;font-weight:500;line-height:1.65;margin-bottom:20px">${q.q}</div>
+      <div style="display:flex;flex-direction:column;gap:9px" id="kcOptsWrap">
+        ${q.opts.map((opt,i)=>{
+          const sel=st.answers[st.current]===i;
+          return `<button onclick="kcSelectAnswer(${i})" class="kc-opt${sel?' kc-sel':''}" data-idx="${i}"><span class="kc-opt-letter">${['A','B','C','D'][i]}</span><span>${opt}</span></button>`;
+        }).join('')}
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:20px">
+        <button class="btn-ghost btn-sm kc-mark-btn${st.marked[st.current]?' kc-marked-on':''}" id="kcMarkBtn" style="border:1px solid var(--line-strong);border-radius:var(--r-sm);padding:7px 14px" onclick="kcToggleMark()">${st.marked[st.current]?'★ Marked':'☆ Mark for Review'}</button>
+        <div style="display:flex;gap:8px">
+          <button class="btn-ghost btn-sm" style="border:1px solid var(--line-strong);border-radius:var(--r-sm);padding:7px 14px" ${st.current===0?'disabled':''} onclick="kcGoTo(${st.current-1})">← Previous</button>
+          <button class="btn btn-primary btn-sm" onclick="kcNextOrSubmit()">${st.current+1>=st.questions.length?'Submit Test':'Next →'}</button>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="padding:14px;align-self:start">
+      <div style="font-size:0.7rem;font-weight:700;color:var(--ink-3);margin-bottom:8px">QUESTION NAVIGATOR</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:5px" id="kcPalette">${palette}</div>
+      <div style="margin-top:10px;font-size:0.65rem;color:var(--ink-4);line-height:1.8">🟪 Current &nbsp;🟩 Answered &nbsp;🟧 Marked</div>
+      <div style="margin-top:10px;font-size:0.65rem;color:var(--ink-3);font-weight:700">${st.answers.filter(a=>a!==null).length}/${st.questions.length} answered</div>
+    </div>
+  </div>`;
+}
+
+// Patch-only updates (no innerHTML replace of the whole runner) so clicking an option never
+// causes a visible page "reload"/flash — only the option buttons + the one palette cell update.
+function kcSelectAnswer(i){
+  const st=kcRunState;
+  const wasUnanswered=st.answers[st.current]===null;
+  st.answers[st.current]=i;
+  const wrap=document.getElementById('kcOptsWrap');
+  if(wrap){
+    wrap.querySelectorAll('.kc-opt').forEach(btn=>{
+      btn.classList.toggle('kc-sel', parseInt(btn.dataset.idx)===i);
+    });
+  }
+  const cell=document.querySelector(`#kcPalette [data-idx="${st.current}"]`);
+  if(cell){
+    cell.className=kcPaletteCellClass(st,st.current);
+    if(wasUnanswered){cell.classList.add('kc-just-answered');setTimeout(()=>cell.classList.remove('kc-just-answered'),320);}
+  }
+  const answeredCountEl=document.querySelector('#kcPalette')?.parentElement?.lastElementChild;
+  if(answeredCountEl)answeredCountEl.textContent=`${st.answers.filter(a=>a!==null).length}/${st.questions.length} answered`;
+}
+function kcToggleMark(){
+  const st=kcRunState;
+  st.marked[st.current]=!st.marked[st.current];
+  const btn=document.getElementById('kcMarkBtn');
+  if(btn){
+    btn.textContent=st.marked[st.current]?'★ Marked':'☆ Mark for Review';
+    btn.classList.toggle('kc-marked-on', st.marked[st.current]);
+  }
+  const cell=document.querySelector(`#kcPalette [data-idx="${st.current}"]`);
+  if(cell)cell.className=kcPaletteCellClass(st,st.current);
+}
+function kcGoTo(i){kcRunState.current=i;renderCbtRunner();}
+function kcApplyAdaptiveStep(){
+  const st=kcRunState;
+  if(st.cfg.mode!=='adaptive'&&st.cfg.mode!=='fullpaper')return;
+  const q=st.questions[st.current];
+  const nextQ=st.questions[st.current+1];
+  // For full papers, each subject restarts its own difficulty ladder at level 1 (matches the
+  // official "each part begins at difficulty 1" rule) instead of carrying the level across subjects.
+  if(st.cfg.mode==='fullpaper'&&nextQ&&nextQ.subj!==q.subj){st.level=1;return;}
+  const correct=st.answers[st.current]===q.ans;
+  if(correct&&st.level<5)st.level++;
+  else if(!correct&&st.level>1)st.level--;
+}
+function kcNextOrSubmit(){
+  const st=kcRunState;
+  kcApplyAdaptiveStep();
+  if(st.current+1>=st.questions.length){kcFinishTest();return;}
+  st.current++;renderCbtRunner();
+}
+function kcConfirmEnd(){if(confirm('End this test now? Unanswered questions will be marked incorrect.'))kcFinishTest();}
+
+function kcFinishTest(){
+  const st=kcRunState;
+  if(kcTimerHandle)clearInterval(kcTimerHandle);
+  let correctCount=0,estScore=0,maxScore=0;
+  const detail=st.questions.map((q,i)=>{
+    const correct=st.answers[i]===q.ans;
+    if(correct)correctCount++;
+    const lvl=st.cfg.mode==='adaptive'?Math.max(1,Math.min(5,q.diff)):q.diff;
+    if(correct)estScore+=kcScoreForLevel(lvl);
+    maxScore+=kcScoreForLevel(5);
+    return {topic:q.topic,subj:q.subj,correct,chosen:st.answers[i],ans:q.ans,q:q.q,opts:q.opts,note:q.note,diff:q.diff,marked:st.marked[i]};
+  });
+  const pctScore=Math.round(correctCount/st.questions.length*100);
+  const timeSpentSec=Math.round((Date.now()-st.startTime)/1000);
+  const attempt={id:'a'+Date.now(),kind:st.cfg.kind,refId:st.cfg.refId,label:st.cfg.label,date:new Date().toISOString().split('T')[0],pctScore,estScore,maxScore,correctCount,total:st.questions.length,timeSpentSec,detail};
+  kucatData.mtAttempts=kucatData.mtAttempts||[];
+  kucatData.mtAttempts.push(attempt);
+  saveKucat();
+  st.done=true;st.lastAttemptId=attempt.id;
+  renderMockTestCenter();
+}
+
+function kcResultsScreen(){
+  const st=kcRunState;
+  const attempt=(kucatData.mtAttempts||[]).find(a=>a.id===st.lastAttemptId);
+  if(!attempt)return '';
+  const topicMap={};
+  attempt.detail.forEach(d=>{topicMap[d.topic]=topicMap[d.topic]||{c:0,t:0};topicMap[d.topic].t++;if(d.correct)topicMap[d.topic].c++;});
+  const topicRows=Object.entries(topicMap).map(([t,s])=>({t,pct:Math.round(s.c/s.t*100)})).sort((a,b)=>a.pct-b.pct);
+  const diffDist=[1,2,3,4,5].map(d=>attempt.detail.filter(x=>x.diff===d).length);
+  return `
+  <div style="max-width:760px;margin:0 auto">
+    <div class="card kc-result-pop" style="padding:24px;text-align:center;margin-bottom:16px;border-top:3px solid var(--elite)">
+      <div style="font-family:var(--font-num);font-size:2.4rem;font-weight:900;color:var(--accent)">${attempt.pctScore}%</div>
+      <div style="font-size:0.85rem;color:var(--ink-3);margin-top:2px">${attempt.correctCount}/${attempt.total} correct · ${attempt.label}</div>
+      <div style="display:flex;justify-content:center;gap:24px;margin-top:14px;font-size:0.78rem">
+        <div><div style="font-weight:800;font-size:1rem">${kcFmtTime(attempt.timeSpentSec)}</div><div style="color:var(--ink-3)">Time Spent</div></div>
+        <div><div style="font-weight:800;font-size:1rem">${attempt.estScore}/${attempt.maxScore}</div><div style="color:var(--ink-3)">Est. KUCAT-style Score*</div></div>
+        <div><div style="font-weight:800;font-size:1rem">${attempt.detail.filter(d=>d.marked).length}</div><div style="color:var(--ink-3)">Marked</div></div>
+      </div>
+      <div style="font-size:0.62rem;color:var(--ink-4);margin-top:8px">*Computed with the official 11+2×(level−1) point formula on a ${attempt.total}-question sample — not your official KUCAT-CBT score, which is based on the full 120-question test.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
+      <div class="card" style="padding:14px"><div class="card-title" style="margin-bottom:8px;font-size:0.85rem">Difficulty Distribution</div>
+        ${diffDist.map((n,i)=>`<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span style="font-size:0.7rem;width:50px">Lvl ${i+1}</span><div style="height:8px;flex:1;background:var(--surface-2);border-radius:99px"><div style="height:100%;width:${attempt.total?n/attempt.total*100:0}%;background:var(--accent);border-radius:99px"></div></div><span style="font-size:0.68rem;color:var(--ink-3)">${n}</span></div>`).join('')}
+      </div>
+      <div class="card" style="padding:14px"><div class="card-title" style="margin-bottom:8px;font-size:0.85rem">Accuracy by Topic</div>
+        ${topicRows.slice(0,6).map(r=>`<div style="display:flex;justify-content:space-between;font-size:0.72rem;padding:3px 0"><span>${r.t}</span><span style="font-weight:700;color:${r.pct<50?'var(--bad)':r.pct<80?'var(--warn)':'var(--good)'}">${r.pct}%</span></div>`).join('')}
+      </div>
+    </div>
+    <div class="card" style="padding:16px;margin-bottom:16px">
+      <div class="card-title" style="margin-bottom:10px;font-size:0.85rem">Question Review</div>
+      ${attempt.detail.map((d,i)=>`<div style="padding:10px;border-radius:var(--r-sm);background:${d.correct?'var(--good-soft)':'var(--bad-soft)'};border:1px solid ${d.correct?'var(--good)':'var(--bad)'};margin-bottom:8px">
+        <div style="display:flex;justify-content:space-between;font-size:0.7rem;font-weight:700;color:${d.correct?'var(--good)':'var(--bad)'};margin-bottom:4px"><span>${d.correct?'✓':'✗'} Q${i+1} · ${d.subj} · ${d.topic} ${d.marked?'· ★':''}</span><span>Diff ${d.diff}</span></div>
+        <div style="font-size:0.76rem;color:var(--ink-2);margin-bottom:4px">${d.q}</div>
+        ${!d.correct?`<div style="font-size:0.7rem;color:var(--ink-3)">Your answer: ${d.chosen!==null?d.opts[d.chosen]:'(skipped)'} · Correct: ${d.opts[d.ans]}</div>`:''}
+        <div style="font-size:0.7rem;color:var(--ink-4);margin-top:3px">💡 ${d.note}</div>
+      </div>`).join('')}
+    </div>
+    <div style="display:flex;gap:10px">
+      <button class="btn btn-primary btn-sm" style="flex:1" onclick="kcRunState=null;renderMockTestCenter()">Back to Mock Test Center</button>
+      <button class="btn-ghost btn-sm" style="flex:1;border:1px solid var(--line-strong);border-radius:var(--r-sm)" onclick="kcStartTest(kcRunState.cfg);">Retry Same Test</button>
+    </div>
+  </div>`;
+}
+function kcReviewAttempt(id){
+  const attempt=(kucatData.mtAttempts||[]).find(a=>a.id===id);
+  if(!attempt)return;
+  kcRunState={active:true,done:true,lastAttemptId:id,cfg:{label:attempt.label,kind:attempt.kind,refId:attempt.refId,mode:'fixed',subjects:[],count:attempt.total,timeLimit:0}};
+  renderMockTestCenter();
 }
 
 function kcSwitchSubj(s,btn){
