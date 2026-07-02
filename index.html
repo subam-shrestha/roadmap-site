@@ -677,7 +677,7 @@ a{text-decoration:none;color:inherit}
 .cmd-check:hover:not(.cmd-checked){border-color:var(--accent);background:var(--accent-soft)}
 
 /* ══════════════════════════════════════════════════════
-   🔥 FIRE STREAK ANIMATION
+   FIRE STREAK ANIMATION
 ══════════════════════════════════════════════════════ */
 @keyframes flicker1{
   0%,100%{transform:scaleX(1) scaleY(1) rotate(-1deg);opacity:1}
@@ -781,7 +781,7 @@ a{text-decoration:none;color:inherit}
 }
 
 /* ══════════════════════════════════════════════════════
-   ✅ SATISFYING CHECK ANIMATION
+   SATISFYING CHECK ANIMATION
 ══════════════════════════════════════════════════════ */
 /* ── CHECK ANIMATIONS ── graffiti-minimal ── */
 @keyframes checkPop{
@@ -853,7 +853,7 @@ a{text-decoration:none;color:inherit}
 .mission.completing{animation:missionDone 0.4s ease both}
 
 /* ══════════════════════════════════════════════════════
-   ✨ QUALITY MICRO-INTERACTIONS
+   QUALITY MICRO-INTERACTIONS
 ══════════════════════════════════════════════════════ */
 @keyframes cardSlideIn{
   from{opacity:0;transform:translateY(14px)}
@@ -962,6 +962,66 @@ a{text-decoration:none;color:inherit}
 .kc-result-pop{animation:kcPop .4s cubic-bezier(.2,.8,.3,1.2)}
 .kc-bar-fill{transition:width .6s cubic-bezier(.2,.7,.3,1)}
 .kc-shell-enter{animation:kcFadeIn .3s ease}
+
+/* ── TASKS FAB & PANEL ─────────────────────────── */
+.tasks-fab{position:fixed;top:14px;right:18px;z-index:60;display:flex;align-items:center;gap:7px;height:38px;padding:0 14px 0 12px;border-radius:var(--r-full);background:var(--surface);border:1px solid var(--line-strong);box-shadow:var(--shadow-2);color:var(--ink);font-family:var(--font-ui);font-weight:700;font-size:0.78rem;letter-spacing:-0.01em;transition:transform var(--dur-2) var(--ease),box-shadow var(--dur-2) var(--ease),background var(--dur-2) var(--ease),border-color var(--dur-2) var(--ease)}
+.tasks-fab:hover{transform:translateY(-1px);box-shadow:var(--shadow-3);border-color:var(--accent)}
+.tasks-fab:active{transform:translateY(0) scale(0.97)}
+.tasks-fab svg{width:15px;height:15px;color:var(--accent);flex-shrink:0}
+.tasks-fab-count{display:inline-flex;align-items:center;justify-content:center;min-width:17px;height:17px;padding:0 4px;border-radius:var(--r-full);background:var(--accent);color:#fff;font-size:0.65rem;font-weight:800;font-family:var(--font-num)}
+.tasks-fab-count[data-zero="true"]{display:none}
+@media(max-width:900px){.tasks-fab{top:auto;bottom:calc(var(--tabbar-h) + 14px);right:14px;height:44px;padding:0 16px 0 13px;box-shadow:var(--shadow-3)}}
+/* ── GOALS FAB & PANEL ─────────────────────────── */
+.goals-fab{position:fixed;top:14px;right:18px;z-index:60;display:flex;align-items:center;gap:7px;height:38px;padding:0 14px 0 12px;border-radius:var(--r-full);background:var(--surface);border:1px solid var(--line-strong);box-shadow:var(--shadow-2);color:var(--ink);font-family:var(--font-ui);font-weight:700;font-size:0.78rem;letter-spacing:-0.01em;transition:transform var(--dur-2) var(--ease),box-shadow var(--dur-2) var(--ease),background var(--dur-2) var(--ease),border-color var(--dur-2) var(--ease)}
+.goals-fab:hover{transform:translateY(-1px);box-shadow:var(--shadow-3);border-color:var(--accent)}
+.goals-fab:active{transform:translateY(0) scale(0.97)}
+.goals-fab svg{width:15px;height:15px;color:var(--accent);flex-shrink:0}
+.goals-fab-count{display:inline-flex;align-items:center;justify-content:center;min-width:17px;height:17px;padding:0 4px;border-radius:var(--r-full);background:var(--accent);color:#fff;font-size:0.65rem;font-weight:800;font-family:var(--font-num)}
+.goals-fab-count[data-zero="true"]{display:none}
+@media(max-width:900px){.goals-fab{top:auto;bottom:calc(var(--tabbar-h) + 14px);right:14px;height:44px;padding:0 16px 0 13px;box-shadow:var(--shadow-3)}}
+
+.goal-header{display:flex;align-items:center;gap:16px;margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.goal-ring-wrap{position:relative;flex-shrink:0;width:64px;height:64px}
+.goal-ring-wrap svg{transform:rotate(-90deg)}
+.goal-ring-track{fill:none;stroke:var(--line-2);stroke-width:6}
+.goal-ring-fill{fill:none;stroke:url(#goalRingGrad);stroke-width:6;stroke-linecap:round;transition:stroke-dashoffset .6s cubic-bezier(.4,0,.2,1)}
+.goal-ring-label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:0.82rem;font-weight:800;font-family:var(--font-num);color:var(--ink)}
+.goal-header-text .t{font-weight:800;font-size:1rem;letter-spacing:-0.01em;margin-bottom:2px}
+.goal-header-text .s{font-size:0.78rem;color:var(--ink-3);line-height:1.4}
+@keyframes goalCelebrate{0%,100%{transform:scale(1) rotate(0)}25%{transform:scale(1.15) rotate(-6deg)}75%{transform:scale(1.15) rotate(6deg)}}
+.goal-header.all-done .goal-ring-wrap{animation:goalCelebrate .6s var(--ease)}
+
+.goal-add-row{display:flex;gap:8px;margin-bottom:16px}
+.goal-add-row .field-input{flex:1}
+.goal-add-btn{flex-shrink:0;width:42px;height:42px;border-radius:var(--r);background:var(--accent);color:#fff;display:grid;place-items:center;transition:transform var(--dur-1) var(--ease),background var(--dur-1) var(--ease);box-shadow:var(--shadow-accent)}
+.goal-add-btn:hover{background:var(--accent-2);transform:scale(1.05) rotate(90deg)}
+.goal-add-btn:active{transform:scale(0.94) rotate(90deg)}
+
+.goal-list{display:flex;flex-direction:column;gap:7px;max-height:48vh;overflow-y:auto;padding-right:2px}
+.goal-item{position:relative;display:flex;align-items:center;gap:10px;padding:11px 10px 11px 14px;border-radius:var(--r);border:1px solid var(--line);background:var(--surface-2);transition:background var(--dur-2) var(--ease),border-color var(--dur-2) var(--ease),transform var(--dur-2) var(--ease),opacity var(--dur-2) var(--ease);overflow:hidden;animation:goalRowIn .35s var(--ease) backwards}
+.goal-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--goal-c,var(--accent));transition:background var(--dur-2) var(--ease)}
+.goal-item:hover{border-color:var(--line-strong);transform:translateX(1px)}
+.goal-item.removing{transform:translateX(24px) scale(0.97);opacity:0}
+@keyframes goalRowIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.goal-check{flex-shrink:0;width:22px;height:22px;border-radius:7px;border:1.7px solid var(--line-strong);display:grid;place-items:center;transition:background var(--dur-1) var(--ease),border-color var(--dur-1) var(--ease),transform var(--dur-1) var(--ease)}
+.goal-check:hover{border-color:var(--goal-c,var(--accent));transform:scale(1.1)}
+.goal-check svg{width:12px;height:12px;color:#fff;opacity:0;transform:scale(0.5);transition:opacity var(--dur-1) var(--ease),transform var(--dur-1) var(--ease)}
+.goal-item.done .goal-check{background:var(--goal-c,var(--accent));border-color:var(--goal-c,var(--accent))}
+.goal-item.done .goal-check svg{opacity:1;transform:scale(1)}
+.goal-text{flex:1;min-width:0;font-size:0.85rem;font-weight:600;line-height:1.4;word-break:break-word;outline:none;transition:color var(--dur-2) var(--ease)}
+.goal-item.done .goal-text{color:var(--ink-3);text-decoration:line-through;text-decoration-color:var(--ink-4)}
+.goal-text[contenteditable="true"]:focus{color:var(--ink)}
+.goal-item-actions{display:flex;align-items:center;gap:2px;flex-shrink:0;opacity:0;transition:opacity var(--dur-1) var(--ease)}
+.goal-item:hover .goal-item-actions,.goal-item:focus-within .goal-item-actions{opacity:1}
+.goal-item-actions .icon-btn{width:28px;height:28px}
+.goal-item-actions .icon-btn svg{width:13px;height:13px}
+.goal-panel-empty{text-align:center;padding:36px 18px;color:var(--ink-3)}
+.goal-panel-empty .icon-wrap{display:flex;justify-content:center;margin-bottom:12px;color:var(--accent)}
+.goal-panel-empty .t{font-weight:700;font-size:0.9rem;color:var(--ink-2);margin-bottom:3px}
+.goal-panel-empty .s{font-size:0.78rem}
+@keyframes goalPop{0%{transform:scale(1)}40%{transform:scale(1.05)}100%{transform:scale(1)}}
+.goal-item.just-added{animation:goalPop .3s var(--ease)}
+.goal-celebrate-banner{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:var(--r);background:linear-gradient(90deg,var(--accent-soft),var(--elite-soft,var(--accent-soft)));border:1px solid var(--accent);margin-bottom:14px;font-size:0.8rem;font-weight:700;color:var(--accent);animation:goalRowIn .4s var(--ease)}
 </style>
 </head>
 <body>
@@ -981,6 +1041,11 @@ a{text-decoration:none;color:inherit}
 </div>
 
 <div id="mainApp" style="display:none">
+  <button class="goals-fab" id="goalsFab" onclick="openGoalsPanel()" aria-label="Open my goals">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg>
+    <span>Goals</span>
+    <span class="goals-fab-count" id="goalsFabCount" data-zero="true">0</span>
+  </button>
   <div class="mtopbar">
     <div class="mtopbar-brand">
       <div class="brand-mark" style="width:26px;height:26px;border-radius:7px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;color:#fff"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
@@ -1013,11 +1078,11 @@ a{text-decoration:none;color:inherit}
       <button class="nav-item" id="nav-resources" onclick="showPage('resources')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>SAT Resources</button>
 
       <div class="nav-group-label" style="margin-top:4px;display:flex;align-items:center;gap:5px"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#6D28D9;flex-shrink:0"></span>Nepal Entrance</div>
-      <button class="nav-item" id="nav-kucat" onclick="showPage('kucat')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 0 6 1 6 3 0-2 3-3 6-3v-5"/></svg>KUCAT Prep<span class="nav-badge" style="background:var(--elite);color:#fff">🇳🇵</span></button>
+      <button class="nav-item" id="nav-kucat" onclick="showPage('kucat')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 0 6 1 6 3 0-2 3-3 6-3v-5"/></svg>KUCAT Prep<span class="nav-badge" style="background:var(--elite);color:#fff">NP</span></button>
       <button class="nav-item" id="nav-mocktest" onclick="showPage('mocktest')" style="padding-left:30px"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>Mock Test Center</button>
 
       <div class="nav-group-label" style="margin-top:4px;display:flex;align-items:center;gap:5px"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#15803D;flex-shrink:0"></span>USA 2027</div>
-      <button class="nav-item" id="nav-college" onclick="showPage('college')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>College Command<span class="nav-badge">🇺🇸</span></button>
+      <button class="nav-item" id="nav-college" onclick="showPage('college')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>College Command<span class="nav-badge">US</span></button>
       <div class="sidebar-foot">
         <div class="xp-strip">
           <div class="xp-strip-top"><span class="xp-level-chip"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Lv.<span id="xpLevel">1</span></span><span style="color:var(--ink-4);font-weight:600" id="xpCount">0 XP</span></div>
@@ -1060,6 +1125,37 @@ a{text-decoration:none;color:inherit}
   </div>
 </div>
 <div id="toast" role="status" aria-live="polite"></div>
+<!-- GOALS PANEL -->
+<div class="modal-overlay" id="goalsModal" role="dialog" aria-modal="true">
+  <div class="modal" style="max-width:460px">
+    <div class="modal-head">
+      <span class="modal-title" style="display:flex;align-items:center;gap:7px"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg>My Goals</span>
+      <button class="icon-btn" onclick="closeModal('goalsModal')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="goal-header" id="goalHeader">
+        <div class="goal-ring-wrap">
+          <svg viewBox="0 0 64 64" width="64" height="64">
+            <defs><linearGradient id="goalRingGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="var(--accent)"/><stop offset="100%" stop-color="var(--accent-2)"/></linearGradient></defs>
+            <circle class="goal-ring-track" cx="32" cy="32" r="26"/>
+            <circle class="goal-ring-fill" id="goalRingFill" cx="32" cy="32" r="26" stroke-dasharray="163.36" stroke-dashoffset="163.36"/>
+          </svg>
+          <div class="goal-ring-label" id="goalRingLabel">0%</div>
+        </div>
+        <div class="goal-header-text">
+          <div class="t" id="goalHeaderCount">0 of 0 achieved</div>
+          <div class="s" id="goalHeaderSub">Set your sights on what it takes to get there.</div>
+        </div>
+      </div>
+      <div id="goalCelebrateBanner" style="display:none"></div>
+      <div class="goal-add-row">
+        <input class="field-input" id="goalNewInput" placeholder="Add a goal you want to achieve…" maxlength="200" onkeydown="if(event.key==='Enter'){event.preventDefault();addGoal()}">
+        <button class="goal-add-btn" onclick="addGoal()" aria-label="Add goal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      </div>
+      <div class="goal-list" id="goalListEl"></div>
+    </div>
+  </div>
+</div>
 <!-- MODALS -->
 <div class="modal-overlay" id="testModal" role="dialog" aria-modal="true">
   <div class="modal"><div class="modal-head"><span class="modal-title">Log a practice test</span><button class="icon-btn" onclick="closeModal('testModal')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
@@ -1087,7 +1183,7 @@ a{text-decoration:none;color:inherit}
       </select>
     </div>
     <div class="grid grid-2"><div class="field"><label class="field-label">My answer</label><input type="text" class="field-input" id="errMyAnswer" placeholder="A/B/C/D or value"></div><div class="field"><label class="field-label">Correct answer</label><input type="text" class="field-input" id="errCorrectAnswer" placeholder="A/B/C/D or value"></div></div>
-    <div class="field"><label class="field-label">Error type</label><select class="field-input" id="errType"><option value="trap">🪤 TRAP — I fell for a deliberate distractor</option><option value="gap">📚 GAP — I didn't know the concept</option><option value="timing">⏱️ TIMING — I rushed or ran out of time</option><option value="careless">😤 CARELESS — Silly mistake I shouldn't make</option></select></div>
+    <div class="field"><label class="field-label">Error type</label><select class="field-input" id="errType"><option value="trap">TRAP — I fell for a deliberate distractor</option><option value="gap">GAP — I didn't know the concept</option><option value="timing">TIMING — I rushed or ran out of time</option><option value="careless">CARELESS — Silly mistake I shouldn't make</option></select></div>
     <div class="field"><label class="field-label">Root cause (be specific)</label><textarea class="field-input" id="errReason" rows="2" placeholder="e.g. Assumed diagram was to scale — checked nothing. Next time read the text, not the figure."></textarea></div>
     <div class="field"><label class="field-label">Prevention rule (your personal rule to never repeat this)</label><textarea class="field-input" id="errFix" rows="2" placeholder="e.g. Always substitute quadratic roots back into the original equation before selecting answer."></textarea></div>
     <div class="field"><label class="field-label">Schedule next review</label><input type="date" class="field-input" id="errReviewDate"></div>
@@ -1105,10 +1201,10 @@ a{text-decoration:none;color:inherit}
   </div></div>
 </div>
 <div class="modal-overlay" id="weeklyModal" role="dialog" aria-modal="true">
-  <div class="modal" style="max-width:600px"><div class="modal-head"><span class="modal-title">📊 Weekly Analytics Review</span><button class="icon-btn" onclick="closeModal('weeklyModal')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+  <div class="modal" style="max-width:600px"><div class="modal-head"><span class="modal-title">Weekly Analytics Review</span><button class="icon-btn" onclick="closeModal('weeklyModal')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
   <div class="modal-body">
     <div class="review-section">
-      <div class="review-label">📈 This week's test scores</div>
+      <div class="review-label" style="display:flex;align-items:center;gap:5px"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;vertical-align:-2px;display:inline-block"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg> This week's test scores</div>
       <div class="grid grid-3" style="gap:8px">
         <div class="field" style="margin-bottom:0"><label class="field-label">Math</label><input type="number" class="field-input" id="wr_math" placeholder="720" min="200" max="800"></div>
         <div class="field" style="margin-bottom:0"><label class="field-label">R&amp;W</label><input type="number" class="field-input" id="wr_rw" placeholder="740" min="200" max="800"></div>
@@ -1116,24 +1212,24 @@ a{text-decoration:none;color:inherit}
       </div>
     </div>
     <div class="review-section">
-      <div class="review-label">🎯 Accuracy gate check (% correct)</div>
+      <div class="review-label" style="display:flex;align-items:center;gap:5px"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;vertical-align:-2px;display:inline-block"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg> Accuracy gate check (% correct)</div>
       <div class="grid grid-3" style="gap:8px">
         <div class="field" style="margin-bottom:0"><label class="field-label">Easy %</label><input type="number" class="field-input" id="wr_easy_acc" placeholder="96" min="0" max="100"></div>
         <div class="field" style="margin-bottom:0"><label class="field-label">Medium %</label><input type="number" class="field-input" id="wr_med_acc" placeholder="88" min="0" max="100"></div>
         <div class="field" style="margin-bottom:0"><label class="field-label">Hard %</label><input type="number" class="field-input" id="wr_hard_acc" placeholder="74" min="0" max="100"></div>
       </div>
     </div>
-    <div class="review-section"><div class="review-label">🪤 Top traps you fell for this week</div><textarea class="review-textarea" id="wr_traps" placeholder="e.g. Fell for 'too narrow' main idea trap twice; mistook mean for median in stats question..."></textarea></div>
-    <div class="review-section"><div class="review-label">✅ What worked this week</div><textarea class="review-textarea" id="wr_worked" placeholder="Strategies or habits that helped your score..."></textarea></div>
-    <div class="review-section"><div class="review-label">⚠️ What to fix next week</div><textarea class="review-textarea" id="wr_fix" placeholder="Specific topics, timing patterns, or habits to address..."></textarea></div>
+    <div class="review-section"><div class="review-label" style="display:flex;align-items:center;gap:5px"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;vertical-align:-2px;display:inline-block"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg> Top traps you fell for this week</div><textarea class="review-textarea" id="wr_traps" placeholder="e.g. Fell for 'too narrow' main idea trap twice; mistook mean for median in stats question..."></textarea></div>
+    <div class="review-section"><div class="review-label" style="display:flex;align-items:center;gap:5px"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8.5 12.5 11 15 16 9.5"/></svg> What worked this week</div><textarea class="review-textarea" id="wr_worked" placeholder="Strategies or habits that helped your score..."></textarea></div>
+    <div class="review-section"><div class="review-label" style="display:flex;align-items:center;gap:5px"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;vertical-align:-2px;display:inline-block"><path d="M12 3 2 20h20Z"/><line x1="12" y1="9" x2="12" y2="14"/><line x1="12" y1="17" x2="12" y2="17.01"/></svg> What to fix next week</div><textarea class="review-textarea" id="wr_fix" placeholder="Specific topics, timing patterns, or habits to address..."></textarea></div>
     <div class="review-section">
-      <div class="review-label">🔋 Burnout check (1 = exhausted, 10 = energized)</div>
+      <div class="review-label" style="display:flex;align-items:center;gap:5px"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;vertical-align:-2px;display:inline-block"><polygon points="13 2 3 14 11 14 10 22 21 10 13 10"/></svg> Burnout check (1 = exhausted, 10 = energized)</div>
       <div class="grid grid-2" style="gap:8px">
         <div class="field" style="margin-bottom:0"><label class="field-label">Energy level</label><input type="number" class="field-input" id="wr_energy" placeholder="7" min="1" max="10"></div>
         <div class="field" style="margin-bottom:0"><label class="field-label">Motivation level</label><input type="number" class="field-input" id="wr_motivation" placeholder="7" min="1" max="10"></div>
       </div>
     </div>
-    <div class="review-section"><div class="review-label">🏆 Next week's single most important priority</div><textarea class="review-textarea" id="wr_priority" placeholder="e.g. Master quadratic word problems — currently 60% accuracy, need 85%+"></textarea></div>
+    <div class="review-section"><div class="review-label" style="display:flex;align-items:center;gap:5px"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;vertical-align:-2px;display:inline-block"><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M17 5h2.5A1.5 1.5 0 0 1 21 6.5v0A3.5 3.5 0 0 1 17.5 10H17"/><path d="M7 5H4.5A1.5 1.5 0 0 0 3 6.5v0A3.5 3.5 0 0 0 6.5 10H7"/></svg> Next week's single most important priority</div><textarea class="review-textarea" id="wr_priority" placeholder="e.g. Master quadratic word problems — currently 60% accuracy, need 85%+"></textarea></div>
     <button class="btn btn-primary" style="width:100%;margin-top:6px" onclick="saveWeeklyReview()">Save weekly review →</button>
   </div></div>
 </div>
@@ -1143,8 +1239,103 @@ let currentUser=null,satTests=[],satErrors=[],planTasks={},studyLog={},collegePr
 function uk(k){return'smE_'+(currentUser?currentUser.email:'x')+'_'+k}
 function sv(k,v){try{localStorage.setItem(uk(k),JSON.stringify(v))}catch(e){}}
 function lv(k,d){try{const v=localStorage.getItem(uk(k));return v!==null?JSON.parse(v):d}catch(e){return d}}
-function saveAll(){sv('tests',satTests);sv('errors',satErrors);sv('planTasks',planTasks);sv('studyLog',studyLog);sv('collegeProgress',collegeProgress);if(generatedPlan)sv('planMeta',{days:generatedPlan});sv('xpEvents',xpEvents);sv('profile',userProfile);sv('weeklyReviews',weeklyReviews);sv('readingLog',readingLog);sv('hardQLog',hardQLog);sv('burnoutLog',burnoutLog)}
-function loadAll(){satTests=lv('tests',[]);satErrors=lv('errors',[]);planTasks=lv('planTasks',{});studyLog=lv('studyLog',{});collegeProgress=lv('collegeProgress',{});xpEvents=lv('xpEvents',[]);userProfile=lv('profile',{target:1500,examDate:'2026-10-03',dailyGoal:2});const pm=lv('planMeta',null);generatedPlan=pm?(pm.days||pm):null;weeklyReviews=lv('weeklyReviews',[]);readingLog=lv('readingLog',{});hardQLog=lv('hardQLog',{});burnoutLog=lv('burnoutLog',{})}
+function saveAll(){sv('tests',satTests);sv('errors',satErrors);sv('planTasks',planTasks);sv('studyLog',studyLog);sv('collegeProgress',collegeProgress);if(generatedPlan)sv('planMeta',{days:generatedPlan});sv('xpEvents',xpEvents);sv('profile',userProfile);sv('weeklyReviews',weeklyReviews);sv('readingLog',readingLog);sv('hardQLog',hardQLog);sv('burnoutLog',burnoutLog);sv('myGoals',myGoals)}
+function loadAll(){satTests=lv('tests',[]);satErrors=lv('errors',[]);planTasks=lv('planTasks',{});studyLog=lv('studyLog',{});collegeProgress=lv('collegeProgress',{});xpEvents=lv('xpEvents',[]);userProfile=lv('profile',{target:1500,examDate:'2026-10-03',dailyGoal:2});const pm=lv('planMeta',null);generatedPlan=pm?(pm.days||pm):null;weeklyReviews=lv('weeklyReviews',[]);readingLog=lv('readingLog',{});hardQLog=lv('hardQLog',{});burnoutLog=lv('burnoutLog',{});myGoals=lv('myGoals',null);if(!myGoals)myGoals=DEFAULT_MY_GOALS.map(t=>({id:'g_'+Math.random().toString(36).slice(2,9),text:t,done:false}))}
+
+/* ========== MY GOALS (top-right achievement tracker) ========== */
+const DEFAULT_MY_GOALS=['SAT 1500+','IELTS 8.0','Excellent grades','6–10 impressive software/AI projects','Strong GitHub profile','Portfolio website','Leadership experience','Hackathon participation (or wins if possible)','Good recommendation letters','Well-crafted personal statement'];
+const GOAL_PALETTE=['#4F46E5','#7C3AED','#0EA5E9','#16A34A','#D97706','#DB2777','#0891B2','#EA580C','#65A30D','#9333EA'];
+let myGoals=[];
+const GOAL_RING_C=2*Math.PI*26;
+function goalColor(idx){return GOAL_PALETTE[idx%GOAL_PALETTE.length]}
+function goalMotivation(done,total){
+  if(!total)return"Set your sights on what it takes to get there.";
+  const pct=done/total;
+  if(pct>=1)return"Every target hit. This is what elite prep looks like.";
+  if(pct>=0.75)return"Almost there — the finish line is in sight.";
+  if(pct>=0.5)return"Past the halfway point. Strong, steady momentum.";
+  if(pct>=0.25)return"Solid progress. Keep stacking wins.";
+  if(pct>0)return"Just getting started — the first steps count most.";
+  return"Set your sights on what it takes to get there.";
+}
+function renderGoalFabCount(){const left=myGoals.filter(t=>!t.done).length;const el=document.getElementById('goalsFabCount');if(!el)return;el.textContent=left;el.setAttribute('data-zero',left===0?'true':'false')}
+function renderGoalList(){
+  const wrap=document.getElementById('goalListEl');if(!wrap)return;
+  const total=myGoals.length,done=myGoals.filter(t=>t.done).length,pct=total?Math.round(done/total*100):0;
+  const hc=document.getElementById('goalHeaderCount');if(hc)hc.textContent=`${done} of ${total} achieved`;
+  const sub=document.getElementById('goalHeaderSub');if(sub)sub.textContent=goalMotivation(done,total);
+  const rf=document.getElementById('goalRingFill');if(rf)rf.style.strokeDashoffset=(GOAL_RING_C-(pct/100)*GOAL_RING_C).toFixed(2);
+  const rl=document.getElementById('goalRingLabel');if(rl)rl.textContent=pct+'%';
+  const header=document.getElementById('goalHeader');if(header)header.classList.toggle('all-done',total>0&&done===total);
+  const banner=document.getElementById('goalCelebrateBanner');
+  if(banner){
+    if(total>0&&done===total){banner.style.display='flex';banner.className='goal-celebrate-banner';banner.innerHTML=`${ic('trophy',18)} All goals achieved — you're building something real.`}
+    else{banner.style.display='none'}
+  }
+  if(!myGoals.length){wrap.innerHTML=`<div class="goal-panel-empty"><div class="icon-wrap">${ic('target',30)}</div><div class="t">No goals yet</div><div class="s">Add your first goal above — it's saved automatically.</div></div>`;renderGoalFabCount();return}
+  wrap.innerHTML=myGoals.map((t,i)=>`
+    <div class="goal-item${t.done?' done':''}" id="goalrow-${t.id}" style="--goal-c:${goalColor(i)};animation-delay:${Math.min(i*30,300)}ms">
+      <button class="goal-check" onclick="toggleGoal('${t.id}')" aria-label="Mark achieved"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button>
+      <div class="goal-text" contenteditable="true" spellcheck="false" onblur="editGoal('${t.id}',this.textContent)" onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}">${escHtml(t.text)}</div>
+      <div class="goal-item-actions">
+        <button class="icon-btn" onclick="deleteGoal('${t.id}')" aria-label="Delete goal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></button>
+      </div>
+    </div>`).join('');
+  renderGoalFabCount();
+}
+function escHtml(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+/* ========== SHARED SVG ICON LIBRARY (replaces emoji glyphs app-wide) ========== */
+const ICONS={
+ target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/>',
+ trophy:'<path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M17 5h2.5A1.5 1.5 0 0 1 21 6.5v0A3.5 3.5 0 0 1 17.5 10H17"/><path d="M7 5H4.5A1.5 1.5 0 0 0 3 6.5v0A3.5 3.5 0 0 0 6.5 10H7"/>',
+ flame:'<path d="M8.6 14.5c0 1.5 1.2 2.6 2.7 2.6 1.6 0 2.7-1.3 2.7-2.7 0-1.3-.5-2-1-2.9-1-2-.2-3.9 1.9-5.7.5 2.4 1.9 4.6 3.7 6.1 1.9 1.5 2.9 3.3 2.9 5.2a6.6 6.6 0 1 1-13.2 0c0-1.1.4-2.2 1-2.9.4.9-.7.6-.7.3z"/>',
+ star:'<polygon points="12 3 14.7 9.1 21.3 9.7 16.3 13.9 17.8 20.4 12 16.9 6.2 20.4 7.7 13.9 2.7 9.7 9.3 9.1"/>',
+ crown:'<path d="m3 19 1.7-9 4.6 3.6L12 6l2.7 7.6 4.6-3.6L21 19z"/><path d="M5 19h14"/>',
+ gem:'<path d="M6.5 3h11l3.5 5.5L12 21 2 8.5z"/><path d="M8.5 3 12 8.5 15.5 3"/><path d="M2 8.5h20"/><path d="M9 8.5 12 21l3-12.5"/>',
+ sparkle:'<path d="M12 3l1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7z"/>',
+ shield:'<path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6z"/><path d="m9 12 2 2 4-4.5"/>',
+ plane:'<path d="m21.5 2.5-9.4 18.9-2.2-8.3-8.3-2.2z"/><path d="M21.5 2.5 11 13"/>',
+ pencil:'<path d="M17 3.5a2.5 2.5 0 1 1 3.5 3.5L8 19.5 3 21l1.5-5z"/><path d="m15.5 5 3 3"/>',
+ notebook:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 3v18"/><path d="M12 8h4"/><path d="M12 13h4"/>',
+ globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.5 4 5.7 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.7-4-9s1.5-6.5 4-9z"/>',
+ graduation:'<path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.4 2.7 3 6 3s6-1.6 6-3v-5"/><path d="M22 10v6"/>',
+ building:'<rect x="4" y="2" width="16" height="20" rx="1"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/>',
+ book:'<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
+ bookopen:'<path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/>',
+ dollar:'<line x1="12" y1="1" x2="12" y2="23"/><path d="M17.5 5.5H9.7a3.3 3.3 0 0 0 0 6.6h4.6a3.3 3.3 0 0 1 0 6.6H6"/>',
+ laptop:'<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/>',
+ trending:'<polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>',
+ chartbar:'<line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/>',
+ clipboard:'<rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-3"/>',
+ ruler:'<path d="M3 16.9 16.9 3a1.5 1.5 0 0 1 2.1 0l1 1a1.5 1.5 0 0 1 0 2.1L6.1 20a1.5 1.5 0 0 1-2.1 0l-1-1a1.5 1.5 0 0 1 0-2.1z"/><path d="m14.5 5.5 2 2M11.5 8.5l2 2M8.5 11.5l2 2M5.5 14.5l2 2"/>',
+ calculator:'<rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="8" y2="10.01"/><line x1="12" y1="10" x2="12" y2="10.01"/><line x1="16" y1="10" x2="16" y2="10.01"/><line x1="8" y1="14" x2="8" y2="14.01"/><line x1="12" y1="14" x2="12" y2="14.01"/><line x1="16" y1="14" x2="16" y2="17"/><line x1="8" y1="18" x2="12" y2="18"/>',
+ folder:'<path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9L9.6 3.9A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/>',
+ map:'<polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/>',
+ passport:'<rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M8 18h8"/>',
+ flask:'<path d="M9 2v6.4L4.3 19.3A1.5 1.5 0 0 0 5.7 21.5h12.6a1.5 1.5 0 0 0 1.4-2.2L15 8.4V2"/><path d="M9 2h6"/><path d="M7.5 15h9"/>',
+ microscope:'<path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 22a7 7 0 1 0-6-11"/><path d="M9 14h2"/><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"/><path d="M12 6V3.5a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1V6"/>',
+ users:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+ bulb:'<path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5.9 1.2.9 2.05V17h6.2v-.25c0-.85.3-1.55.9-2.05A7 7 0 0 0 12 2Z"/>',
+ warning:'<path d="M12 3 2 20h20Z"/><line x1="12" y1="9" x2="12" y2="14"/><line x1="12" y1="17" x2="12" y2="17.01"/>',
+ flag:'<path d="M4 22V4"/><path d="M4 4h13l-2.5 4L17 12H4"/>',
+ bolt:'<polygon points="13 2 3 14 11 14 10 22 21 10 13 10"/>',
+ clock:'<circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/>',
+ lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+ file:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>',
+ send:'<path d="m22 2-11 11"/><path d="M22 2 15 22l-4-9-9-4z"/>',
+ rocket:'<path d="M4.5 16.5c-1.5 1.5-2 5-2 5s3.5-.5 5-2c.8-.8 1-2.3.2-3.1a2.4 2.4 0 0 0-3.2.1Z"/><path d="M12 15l-3-3a22 22 0 0 1 8.6-9.6c2.3-1.3 5.3-.9 7 .8s2.1 4.7.8 7A22 22 0 0 1 15 18l-3-3"/><path d="m9 12-3-1-2 2 4 4 2-2z"/>',
+ search:'<circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/>',
+ pin:'<path d="M12 21s7-6.5 7-11.5a7 7 0 0 0-14 0C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+ wrench:'<path d="M14.7 6.3a4 4 0 1 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-3 3-2-2z"/>',
+ checkcircle:'<circle cx="12" cy="12" r="9"/><polyline points="8.5 12.5 11 15 16 9.5"/>',
+};
+function ic(key,size){size=size||16;return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0">${ICONS[key]||ICONS.star}</svg>`}
+function openGoalsPanel(){renderGoalList();openModal('goalsModal');setTimeout(()=>{const i=document.getElementById('goalNewInput');if(i)i.focus()},250)}
+function addGoal(){const inp=document.getElementById('goalNewInput');const v=(inp.value||'').trim();if(!v)return;const t={id:'g_'+Date.now().toString(36)+Math.random().toString(36).slice(2,7),text:v,done:false};myGoals.push(t);sv('myGoals',myGoals);inp.value='';renderGoalList();requestAnimationFrame(()=>{const row=document.getElementById('goalrow-'+t.id);if(row)row.classList.add('just-added')})}
+function toggleGoal(id){const t=myGoals.find(x=>x.id===id);if(!t)return;t.done=!t.done;sv('myGoals',myGoals);renderGoalList()}
+function editGoal(id,text){const t=myGoals.find(x=>x.id===id);if(!t)return;const v=(text||'').trim();if(!v){deleteGoal(id);return}if(v!==t.text){t.text=v;sv('myGoals',myGoals);renderGoalFabCount()}}
+function deleteGoal(id){const row=document.getElementById('goalrow-'+id);if(row){row.classList.add('removing');setTimeout(()=>{myGoals=myGoals.filter(x=>x.id!==id);sv('myGoals',myGoals);renderGoalList()},180)}else{myGoals=myGoals.filter(x=>x.id!==id);sv('myGoals',myGoals);renderGoalList()}}
 
 /* ========== CONSTANTS ========== */
 const MATH_TOPICS=['Linear equations','Systems of equations','Quadratics','Functions','Exponential models','Statistics','Geometry','Trigonometry','Complex numbers','Polynomials','Ratios & rates','Word problems'];
@@ -1182,114 +1373,114 @@ const TRAP_DB=[
   {id:'rw8',s:'R&W',type:'Comma Splice',color:'#0D9488',name:'Comma Splice (Always Wrong)',desc:'Two independent clauses joined by only a comma. This is ALWAYS wrong on SAT, even if it sounds fluent.',cue:'If both sides of a comma can stand alone as complete sentences → you need a semicolon, period, or FANBOYS conjunction.',diff:'Easy'},
 ];
 const HARD_Q_CERTS=[
-  {id:'hq1',name:'Quadratic Destroyer',icon:'🔥',req:'Score 90%+ on 20 hard quadratic questions in a single session',threshold:0.90,count:20},
-  {id:'hq2',name:'Statistics Master',icon:'📊',req:'Score 90%+ on 20 hard statistics questions in a single session',threshold:0.90,count:20},
-  {id:'hq3',name:'Geometry Ace',icon:'📐',req:'Score 85%+ on 20 hard geometry + trig questions',threshold:0.85,count:20},
-  {id:'hq4',name:'Exponential Expert',icon:'📈',req:'Score 90%+ on 15 hard exponential/log questions',threshold:0.90,count:15},
-  {id:'hq5',name:'Inference Ninja',icon:'🎯',req:'Score 90%+ on 20 hard reading inference questions',threshold:0.90,count:20},
-  {id:'hq6',name:'Rhetoric Ace',icon:'✍️',req:'Score 85%+ on 20 hard rhetorical goal + synthesis questions',threshold:0.85,count:20},
-  {id:'hq7',name:'Trap Immune',icon:'🛡️',req:'Study all 16 traps in the Trap Database',threshold:1.0,count:16},
-  {id:'hq8',name:'1500 Elite',icon:'💎',req:'Score 1500+ on any timed Bluebook practice test',threshold:null,count:1},
+  {id:'hq1',name:'Quadratic Destroyer',icon:'flame',req:'Score 90%+ on 20 hard quadratic questions in a single session',threshold:0.90,count:20},
+  {id:'hq2',name:'Statistics Master',icon:'chartbar',req:'Score 90%+ on 20 hard statistics questions in a single session',threshold:0.90,count:20},
+  {id:'hq3',name:'Geometry Ace',icon:'ruler',req:'Score 85%+ on 20 hard geometry + trig questions',threshold:0.85,count:20},
+  {id:'hq4',name:'Exponential Expert',icon:'trending',req:'Score 90%+ on 15 hard exponential/log questions',threshold:0.90,count:15},
+  {id:'hq5',name:'Inference Ninja',icon:'target',req:'Score 90%+ on 20 hard reading inference questions',threshold:0.90,count:20},
+  {id:'hq6',name:'Rhetoric Ace',icon:'pencil',req:'Score 85%+ on 20 hard rhetorical goal + synthesis questions',threshold:0.85,count:20},
+  {id:'hq7',name:'Trap Immune',icon:'shield',req:'Study all 16 traps in the Trap Database',threshold:1.0,count:16},
+  {id:'hq8',name:'1500 Elite',icon:'gem',req:'Score 1500+ on any timed Bluebook practice test',threshold:null,count:1},
 ];
 const WEEK_DATA=[
   {w:1,phase:'Phase 1 · Foundation',color:'#4F46E5',obj:'Diagnostic baseline + error log launch + daily reading system',time:'2–3 hrs/day',target:null,note:'Diagnostic only — no target score yet',
-    days:['Diagnostic (untimed) + profile + launch reading log','🧪 FULL TEST — Bluebook #1 (timed)','Deep error review — classify every error: TRAP/GAP/TIMING/CARELESS','Math: Linear equations 30q | R&W: Central idea + main purpose 20q','Math: Systems 25q | R&W: Textual evidence 20q','Math: Ratios & rates 30q | R&W: Inference 20q','Math: Percentages 20q | R&W: Vocab in context 25q | Error log review'],
+    days:['Diagnostic (untimed) + profile + launch reading log','FULL TEST — Bluebook #1 (timed)','Deep error review — classify every error: TRAP/GAP/TIMING/CARELESS','Math: Linear equations 30q | R&W: Central idea + main purpose 20q','Math: Systems 25q | R&W: Textual evidence 20q','Math: Ratios & rates 30q | R&W: Inference 20q','Math: Percentages 20q | R&W: Vocab in context 25q | Error log review'],
     metrics:['Test logged with full error classification','≥10 error log entries with root causes','Daily reading started (15 min/day minimum)','Every error classified as TRAP/GAP/TIMING/CARELESS'],
     mistakes:['Reviewing errors too fast — spend 90+ min on post-test analysis','Skipping the "prevention rule" field in error log','Not classifying errors by type'],
     recovery:'If score < 1100: add 30 min/day on your 2 most-missed topic categories. Do not panic — the baseline is data, not a verdict.'},
   {w:2,phase:'Phase 1 · Foundation',color:'#4F46E5',obj:'Statistics + data interpretation + close all easy-question gaps (target: zero easy errors)',time:'2–3 hrs/day',target:null,note:'Accuracy gate: Easy ≥ 95%',
-    days:['🧪 FULL TEST — Bluebook #2 (timed)','Error review — redo ALL hard questions cold from memory','Math: Statistics (mean/median/mode) 25q | R&W: Function of paragraph 20q','Math: Standard deviation 20q | R&W: Cross-text connections 20q','Math: Linear functions & graphs 25q | R&W: Data interpretation 20q','Math: Scatterplots 20q | R&W: Transitions 25q | Error log review','REST — light error log scan; 30 min on 2 weakest topics only'],
+    days:['FULL TEST — Bluebook #2 (timed)','Error review — redo ALL hard questions cold from memory','Math: Statistics (mean/median/mode) 25q | R&W: Function of paragraph 20q','Math: Standard deviation 20q | R&W: Cross-text connections 20q','Math: Linear functions & graphs 25q | R&W: Data interpretation 20q','Math: Scatterplots 20q | R&W: Transitions 25q | Error log review','REST — light error log scan; 30 min on 2 weakest topics only'],
     metrics:['Easy accuracy ≥ 95%','Error log ≥ 20 entries total','Zero gap errors in topics already covered in Week 1','Reading log: 6/7 days'],
     mistakes:['Skipping the rest day','Not revisiting Week 1 gap errors before moving on'],
     recovery:'If easy accuracy < 90%: 30 min/day foundation drills only. Fix the floor before raising the ceiling.'},
   {w:3,phase:'Phase 1 · Foundation',color:'#4F46E5',obj:'Quadratics mastery + punctuation — the two highest-ROI pillars for crossing 1400',time:'2–3 hrs/day',target:null,note:'Gate: Zero easy errors on most recent test',
-    days:['🧪 FULL TEST — Bluebook #3 (timed)','Error review — analyze timing patterns; document skip-and-return rule','Math: Quadratic equations 30q (factoring, quad formula, vertex form)','Math: Quadratic graphs + parabolas 25q | R&W: Sentence boundaries 20q','Math: Polynomial operations 20q | R&W: Comma usage & punctuation 25q','Math: Word problems (linear + quad) 25q | R&W: Subject-verb agreement 20q','⚡ Hard Focus: 20 Hard Math + 20 Hard R&W (Weeks 1–3, no scaffolding)'],
+    days:['FULL TEST — Bluebook #3 (timed)','Error review — analyze timing patterns; document skip-and-return rule','Math: Quadratic equations 30q (factoring, quad formula, vertex form)','Math: Quadratic graphs + parabolas 25q | R&W: Sentence boundaries 20q','Math: Polynomial operations 20q | R&W: Comma usage & punctuation 25q','Math: Word problems (linear + quad) 25q | R&W: Subject-verb agreement 20q','Hard Focus: 20 Hard Math + 20 Hard R&W (Weeks 1–3, no scaffolding)'],
     metrics:['Skip-and-return strategy documented','Quadratic hard-question accuracy ≥ 80%','Punctuation accuracy ≥ 85%','Error log ≥ 30 entries'],
     mistakes:['Ignoring timing strategy — pacing gains are often bigger than knowledge gains','Treating hard questions as unanswerable — they follow patterns'],
     recovery:'If quadratics < 75%: Add 20 extra quadratic warm-up questions before every session for one week.'},
-  {w:4,phase:'Phase 1 · Foundation',color:'#4F46E5',obj:'🚨 CHECKPOINT W4 — Foundation Gate (1300+). Exponentials + modifiers + weekly review.',time:'2–3 hrs/day',target:1300,note:'TARGET: 1300+ | Gate: Easy 95%, Med 85%, Hard 65%',
-    days:['🧪 FULL TEST — Bluebook #4 — CHECKPOINT TEST','Error review — find single weakest Math + R&W topic; 30 targeted q each','Math: Exponential functions 25q | R&W: Pronoun agreement 20q','Math: Radicals & rational exponents 25q | R&W: Modifiers & parallelism 20q','Math: Absolute value 20q | R&W: Verb tense & mood 20q','Math: Exponential vs. linear models 20q | R&W: Concision 25q','⚡ Hard Marathon: 30 Hard Math + 20 Hard R&W, timed | Weekly review form'],
+  {w:4,phase:'Phase 1 · Foundation',color:'#4F46E5',obj:'CHECKPOINT W4 — Foundation Gate (1300+). Exponentials + modifiers + weekly review.',time:'2–3 hrs/day',target:1300,note:'TARGET: 1300+ | Gate: Easy 95%, Med 85%, Hard 65%',
+    days:['FULL TEST — Bluebook #4 — CHECKPOINT TEST','Error review — find single weakest Math + R&W topic; 30 targeted q each','Math: Exponential functions 25q | R&W: Pronoun agreement 20q','Math: Radicals & rational exponents 25q | R&W: Modifiers & parallelism 20q','Math: Absolute value 20q | R&W: Verb tense & mood 20q','Math: Exponential vs. linear models 20q | R&W: Concision 25q','Hard Marathon: 30 Hard Math + 20 Hard R&W, timed | Weekly review form'],
     metrics:['Score ≥ 1300','Easy ≥ 95%, Medium ≥ 85%, Hard ≥ 65%','Weekly review completed','Weakest topics scheduled for Week 5'],
     mistakes:['Panicking if score < 1300 — adjust the plan, not the attitude','Skipping the weekly review — analytics depend on it'],
     recovery:'If score < 1280: Replace 50% of Week 5 advanced sessions with targeted foundation repair on the 3 most-missed topics. Add 30 min/day for 1 week.'},
   {w:5,phase:'Phase 2 · Skill Build',color:'#0D9488',obj:'Geometry sprint + rhetorical goal mastery — the biggest 1400→1500 score separators',time:'2.5–3.5 hrs/day',target:null,note:'Gate: Easy 97%, Med 90%, Hard 75%',
-    days:['🧪 FULL TEST — Bluebook #5 (timed)','Error review — update weakness radar; plan +20 min/day on weakest types','Math: Geometry — lines, angles, triangles 25q | R&W: Rhetorical goal 20q','Math: Circles — arc length, sector area 25q | R&W: Rhetorical synthesis 20q','Math: Coordinate geometry 20q | R&W: Notes-based writing 20q','Math: Right triangle trig (SOHCAHTOA) 20q | R&W: Command of evidence 20q','⚡ 1500 Focus: 15 Hard coord geometry + 10 synthesis + 10 notes-based'],
+    days:['FULL TEST — Bluebook #5 (timed)','Error review — update weakness radar; plan +20 min/day on weakest types','Math: Geometry — lines, angles, triangles 25q | R&W: Rhetorical goal 20q','Math: Circles — arc length, sector area 25q | R&W: Rhetorical synthesis 20q','Math: Coordinate geometry 20q | R&W: Notes-based writing 20q','Math: Right triangle trig (SOHCAHTOA) 20q | R&W: Command of evidence 20q','1500 Focus: 15 Hard coord geometry + 10 synthesis + 10 notes-based'],
     metrics:['Rhetorical goal accuracy ≥ 80%','Geometry accuracy ≥ 75% on medium questions','Notes-based writing ≥ 70%','Reading log 7/7 days'],
     mistakes:['Treating synthesis questions as essays — they are logic puzzles','Rushing geometry without drawing a diagram'],
     recovery:'If rhetorical goal < 70%: Read 5 passages annotating each paragraph\'s PURPOSE before answering any questions this week.'},
   {w:6,phase:'Phase 2 · Skill Build',color:'#0D9488',obj:'Advanced trig + complex numbers + cross-text — the elite question cluster',time:'2.5–3.5 hrs/day',target:null,note:'Gate: Med 90%, Hard 75%',
-    days:['🧪 FULL TEST — Bluebook #6 (timed)','Error review — list top 5 missed topics across all tests; drill top 2 today','Math: Trig identities + unit circle 20q | R&W: Advanced inference 20q','Math: Complex numbers 20q + Trig in non-right triangles 15q','Math: Mixed hard set (no topic labels) 30q | R&W: Cross-text advanced 20q','Math: Hard word problems 20q | R&W: Timed R&W section sim (27q / 32 min)','⚡ Math Blitz: 10 complex + 10 trig + 10 exp modeling + 10 hard geometry'],
+    days:['FULL TEST — Bluebook #6 (timed)','Error review — list top 5 missed topics across all tests; drill top 2 today','Math: Trig identities + unit circle 20q | R&W: Advanced inference 20q','Math: Complex numbers 20q + Trig in non-right triangles 15q','Math: Mixed hard set (no topic labels) 30q | R&W: Cross-text advanced 20q','Math: Hard word problems 20q | R&W: Timed R&W section sim (27q / 32 min)','Math Blitz: 10 complex + 10 trig + 10 exp modeling + 10 hard geometry'],
     metrics:['Complex numbers ≥ 75%','Cross-text ≥ 75%','First timed R&W section sim completed','Cumulative error log ≥ 45 entries'],
     mistakes:['Skipping complex numbers because they seem rare — they appear on hard Module 2','Not timing the R&W section simulation strictly'],
     recovery:'If complex numbers < 65%: SAT only tests 6 complex number patterns. Make a reference card of all 6 patterns and drill each.'},
   {w:7,phase:'Phase 2 · Skill Build',color:'#0D9488',obj:'Phase 2 benchmark debrief — hard-only drills — confirm mastery before Trap Mastery phase',time:'2.5–3 hrs/day',target:null,note:'Phase 2 Benchmark — target ≥ 1380',
-    days:['🧪 FULL TEST — Bluebook #7 — PHASE 2 BENCHMARK','Full debrief 2hr — classify every error; update weakness radar','Comprehensive Math review: 5q per topic from all Phase 2 topics','Comprehensive R&W review: 5q per topic from all Phase 2 topics','⚡ Hard-Only Math: 40 hard questions, 70 min','⚡ Hard-Only R&W: 27 hard questions, 32 min — log all errors','REST + identify Final 3 Math weaknesses + Final 3 R&W weaknesses for Phase 3'],
+    days:['FULL TEST — Bluebook #7 — PHASE 2 BENCHMARK','Full debrief 2hr — classify every error; update weakness radar','Comprehensive Math review: 5q per topic from all Phase 2 topics','Comprehensive R&W review: 5q per topic from all Phase 2 topics','Hard-Only Math: 40 hard questions, 70 min','Hard-Only R&W: 27 hard questions, 32 min — log all errors','REST + identify Final 3 Math weaknesses + Final 3 R&W weaknesses for Phase 3'],
     metrics:['Hard Math accuracy ≥ 70%','Hard R&W accuracy ≥ 72%','Phase 3 target weaknesses identified','All Phase 2 topics reviewed'],
     mistakes:['Rushing the 2hr debrief — it\'s the most valuable session of Phase 2','Not updating the weakness radar — analytics depend on it'],
     recovery:'If Phase 2 benchmark < 1350: Extend Phase 2 by one week. Insert a Recovery Week before Phase 3. Do not enter trap training without a solid skill base.'},
-  {w:8,phase:'Phase 3 · Trap Mastery',color:'#7C3AED',obj:'🚨 CHECKPOINT W8 — Mid-Point (1400+). Launch systematic trap training.',time:'2.5–3.5 hrs/day',target:1400,note:'TARGET: 1400+ | Adaptive branching activates if < 1350',
-    days:['🧪 FULL TEST — Bluebook #8 — MID-POINT CHECKPOINT','Error analysis: classify each wrong answer as TRAP / GAP / TIMING — build trap inventory','⚡ Math Trap Training: 20 quad word problems (extraneous roots) + 10 diagram traps + 10 stats traps','⚡ R&W Trap Training: 15 main idea (too narrow) + 10 transition traps + 10 vocab traps','Math: Systems with no/infinite solutions 20q | Quad discriminant 15q','R&W: Rhetorical goal advanced 20q | Command of evidence hard 20q','⚡ Timed Pressure: 44 Math / 70 min + 54 R&W / 64 min'],
+  {w:8,phase:'Phase 3 · Trap Mastery',color:'#7C3AED',obj:'CHECKPOINT W8 — Mid-Point (1400+). Launch systematic trap training.',time:'2.5–3.5 hrs/day',target:1400,note:'TARGET: 1400+ | Adaptive branching activates if < 1350',
+    days:['FULL TEST — Bluebook #8 — MID-POINT CHECKPOINT','Error analysis: classify each wrong answer as TRAP / GAP / TIMING — build trap inventory','Math Trap Training: 20 quad word problems (extraneous roots) + 10 diagram traps + 10 stats traps','R&W Trap Training: 15 main idea (too narrow) + 10 transition traps + 10 vocab traps','Math: Systems with no/infinite solutions 20q | Quad discriminant 15q','R&W: Rhetorical goal advanced 20q | Command of evidence hard 20q','Timed Pressure: 44 Math / 70 min + 54 R&W / 64 min'],
     metrics:['Total score ≥ 1400','Trap error rate falling vs. Week 4','Can name all 8 Math and 8 R&W traps','All Trap Database entries read'],
     mistakes:['Confusing trap errors with gap errors — they require different fixes','Not documenting new trap patterns in the Trap Database'],
     recovery:'If score < 1350: Two extra days of foundation repair before continuing trap training. Do not skip to advanced traps before closing knowledge gaps.'},
   {w:9,phase:'Phase 3 · Trap Mastery',color:'#7C3AED',obj:'Advanced stats + exponential modeling + verb mastery — close the last knowledge gaps',time:'3 hrs/day',target:null,note:'Gate: Med 93%, Hard 82%',
-    days:['🧪 FULL TEST — Bluebook #9 (timed)','Error review — analyze Module 1 vs Module 2 separately; Module 2 ceiling is key','⚡ Advanced Math — Exponential/Log: 25q growth/decay + 10q interpreting e^x','⚡ Advanced Math — Stats: 20q distributions + 10q probability + 10q margin of error','⚡ Advanced Math — Geometry+Trig: 15q circles + 10q similar triangles + 10q trig algebraic','⚡ Advanced R&W: 20 notes-based + 15 rhetorical synthesis + 10 cross-text comparison','⚡ Hard-Only Timed: 30 Hard Math (weakest) + 20 Hard R&W (weakest) — target 80%+'],
+    days:['FULL TEST — Bluebook #9 (timed)','Error review — analyze Module 1 vs Module 2 separately; Module 2 ceiling is key','Advanced Math — Exponential/Log: 25q growth/decay + 10q interpreting e^x','Advanced Math — Stats: 20q distributions + 10q probability + 10q margin of error','Advanced Math — Geometry+Trig: 15q circles + 10q similar triangles + 10q trig algebraic','Advanced R&W: 20 notes-based + 15 rhetorical synthesis + 10 cross-text comparison','Hard-Only Timed: 30 Hard Math (weakest) + 20 Hard R&W (weakest) — target 80%+'],
     metrics:['Module 1 accuracy ≥ 95% (to unlock hard Module 2)','Module 2 hard accuracy ≥ 75%','Margin of error questions ≥ 80%','Synthesis questions ≥ 82%'],
     mistakes:['Neglecting Module 1 — errors there prevent hard questions in Module 2','Drilling complex numbers while statistics gaps remain open'],
     recovery:'If Module 2 accuracy < 70%: The problem is usually Module 1 errors. Drill Module 1 topics to 97%+ before attempting Module 2 simulations.'},
   {w:10,phase:'Phase 3 · Trap Mastery',color:'#7C3AED',obj:'Timing mastery + pacing drills + 800-Math strategy — push toward peak efficiency',time:'3 hrs/day',target:null,note:'Gate: Med 93%, Hard 82%',
-    days:['🧪 FULL TEST — Bluebook #10 (timed)','Error review — timing analysis: Math Q22 at 35 min, R&W Q27 at 32 min benchmark','Math Pacing Drill: Q1–22 in 33 min + Q23–44 in 37 min | R&W Pacing: 27q in 30 min','⚡ 800 Math Strategy: top 5 hard question types — 10q each = 50 total, target 0 errors','⚡ Fresh hard Math set (unseen): 40q timed 70 min — log all errors with root cause','⚡ Fresh hard R&W (unseen): 27q timed 32 min — drill 10 worst error-log questions','REST — review timing notes; trap cues; skip-and-return rules'],
+    days:['FULL TEST — Bluebook #10 (timed)','Error review — timing analysis: Math Q22 at 35 min, R&W Q27 at 32 min benchmark','Math Pacing Drill: Q1–22 in 33 min + Q23–44 in 37 min | R&W Pacing: 27q in 30 min','800 Math Strategy: top 5 hard question types — 10q each = 50 total, target 0 errors','Fresh hard Math set (unseen): 40q timed 70 min — log all errors with root cause','Fresh hard R&W (unseen): 27q timed 32 min — drill 10 worst error-log questions','REST — review timing notes; trap cues; skip-and-return rules'],
     metrics:['Finishing Math with ≥ 3 min to check','Finishing R&W with ≥ 2 min to check','Skip rate < 3 questions per section','Zero timing errors in review'],
     mistakes:['Going too fast on easy questions and making careless errors','Spending 4+ min on any single hard question — skip and return'],
     recovery:'If timing still poor: Practice 15-question sprints daily with a phone timer. Speed on medium questions is where most time is lost.'},
-  {w:11,phase:'Phase 3 · Trap Mastery',color:'#7C3AED',obj:'🚨 CHECKPOINT W11 — Pre-Peak (1450+). Build Final 15 Question Types list.',time:'2.5–3 hrs/day',target:1450,note:'TARGET: 1450+ | Recovery week follows if < 1420',
-    days:['🧪 FULL TEST — Bluebook #11 — PHASE 3 FINAL','Full debrief 2.5hr — compare Test 1 vs Test 11; build Final 15 Question Types list','⚡ Drill Final 15 Question Types: 5 fresh questions each = 75 total','⚡ Math: 44 mixed hard, 70 min — target 40+ correct','⚡ R&W: 27 mixed hard, 32 min — target 24+ correct','⚡ Module 2 Pressure Sim: Hard Math Mod 2 (27q/35min) + R&W Mod 2 (27q/32min)','Light review — redo 20 error log questions you got right; confirm mastery'],
+  {w:11,phase:'Phase 3 · Trap Mastery',color:'#7C3AED',obj:'CHECKPOINT W11 — Pre-Peak (1450+). Build Final 15 Question Types list.',time:'2.5–3 hrs/day',target:1450,note:'TARGET: 1450+ | Recovery week follows if < 1420',
+    days:['FULL TEST — Bluebook #11 — PHASE 3 FINAL','Full debrief 2.5hr — compare Test 1 vs Test 11; build Final 15 Question Types list','Drill Final 15 Question Types: 5 fresh questions each = 75 total','Math: 44 mixed hard, 70 min — target 40+ correct','R&W: 27 mixed hard, 32 min — target 24+ correct','Module 2 Pressure Sim: Hard Math Mod 2 (27q/35min) + R&W Mod 2 (27q/32min)','Light review — redo 20 error log questions you got right; confirm mastery'],
     metrics:['Total score ≥ 1450','Final 15 list documented','Hard Math ≥ 40/44','Hard R&W ≥ 24/27','Daily warm-up routine established'],
     mistakes:['Making the Final 15 list too vague — be specific ("extraneous roots in word problems", not "hard math")','Skipping the Test 1 vs Test 11 comparison — progress visibility is motivating and diagnostic'],
     recovery:'If score < 1420: Insert Recovery Week before Phase 4. Cut intensity, add sleep, review your top 15 error log entries. Do not add new material.'},
   {w:12,phase:'Phase 4 · Peak Performance',color:'#DC2626',obj:'Phase 4 launch — real-test conditions every day + daily warm-up + surgical drilling',time:'2.5–3 hrs/day',target:null,note:'Gate: Med 95%, Hard 88%',
-    days:['🧪 FULL TEST — Bluebook #12 — PHASE 4 BEGINS','Error review — every wrong answer gets root cause; should be only trap/timing by now','Daily Warm-Up: 5q Final 15 (5/5 required) | Math: 25 hard q weakest 3 topics | R&W: 15 hard q weakest 2 topics','Daily Warm-Up: 5q Final 15 | ⚡ Trap Review: all trap error entries → 20 trap-style drills','Daily Warm-Up: 5q Final 15 | Math: 44q / 68 min (faster than pace) | R&W: 27q / 30 min (faster)','Daily Warm-Up: 5q Final 15 | ⚡ Module 2 Sim: 27 Hard Math + 27 Hard R&W back-to-back','Daily Warm-Up: 5q Final 15 | Light error review | Sleep 8+ hrs'],
+    days:['FULL TEST — Bluebook #12 — PHASE 4 BEGINS','Error review — every wrong answer gets root cause; should be only trap/timing by now','Daily Warm-Up: 5q Final 15 (5/5 required) | Math: 25 hard q weakest 3 topics | R&W: 15 hard q weakest 2 topics','Daily Warm-Up: 5q Final 15 | Trap Review: all trap error entries → 20 trap-style drills','Daily Warm-Up: 5q Final 15 | Math: 44q / 68 min (faster than pace) | R&W: 27q / 30 min (faster)','Daily Warm-Up: 5q Final 15 | Module 2 Sim: 27 Hard Math + 27 Hard R&W back-to-back','Daily Warm-Up: 5q Final 15 | Light error review | Sleep 8+ hrs'],
     metrics:['Daily warm-up 5/5 every day','Hard accuracy ≥ 85%','Zero gap errors (only trap/timing allowed)','Burnout energy ≥ 6/10'],
     mistakes:['Skipping daily warm-up — non-negotiable in Phase 4','Introducing new topics — only drill known weaknesses'],
     recovery:'If burnout < 5/10: Cut to 2 hrs/day for 3 days. Sleep ≥ 7.5 hrs is non-negotiable. Short-term intensity reduction protects long-term peak performance.'},
   {w:13,phase:'Phase 4 · Peak Performance',color:'#DC2626',obj:'Endurance + ceiling breaker + consistency test — simulate exact test-day conditions',time:'2–3 hrs/day',target:null,note:'Target: ≥ 1470 on practice test',
-    days:['🧪 FULL TEST — Bluebook #13 (timed)','Error review — gap errors: 45-min targeted drill; trap errors: review trap catalog','Daily Warm-Up: 5q Final 15 | Math: Polynomial + exponential hard 20q | R&W: Synthesis + notes 15q','Daily Warm-Up: 5q Final 15 | Math: Geometry + trig hard 20q | R&W: Transitions + evidence 15q','Daily Warm-Up: 5q Final 15 | ⚡ Endurance: Full R&W (54q/64min) → Full Math (44q/70min) immediately after','Daily Warm-Up: 5q Final 15 | Ceiling analysis: find exact question types limiting you; 30 targeted q','Light day (30 min only): 10q Final 15, must score 10/10'],
+    days:['FULL TEST — Bluebook #13 (timed)','Error review — gap errors: 45-min targeted drill; trap errors: review trap catalog','Daily Warm-Up: 5q Final 15 | Math: Polynomial + exponential hard 20q | R&W: Synthesis + notes 15q','Daily Warm-Up: 5q Final 15 | Math: Geometry + trig hard 20q | R&W: Transitions + evidence 15q','Daily Warm-Up: 5q Final 15 | Endurance: Full R&W (54q/64min) → Full Math (44q/70min) immediately after','Daily Warm-Up: 5q Final 15 | Ceiling analysis: find exact question types limiting you; 30 targeted q','Light day (30 min only): 10q Final 15, must score 10/10'],
     metrics:['Endurance drill completed without accuracy drop in second section','Ceiling analysis: 2–3 remaining question types identified','Light day: 10/10 on Final 15'],
     mistakes:['Not starting with R&W before Math in endurance drill — simulates real test order','Ignoring ceiling analysis — most near-1500 students have 2–3 very specific question types blocking them'],
     recovery:'Score < 1460: Focused 20-min ceiling-breaker sessions targeting only 2 question types. Surgical drilling beats broad review at this stage.'},
   {w:14,phase:'Phase 4 · Peak Performance',color:'#DC2626',obj:'Polish + consistency + perfection drills + test-day logistics locked in',time:'2–2.5 hrs/day',target:null,note:'Goal: ≤ 6 Math errors, ≤ 8 R&W errors',
-    days:['🧪 FULL TEST — Bluebook #14 — PENULTIMATE PRACTICE','Final debrief — wrong answers should be < 6 Math, < 8 R&W; list ceiling questions','Daily Warm-Up: 5q Final 15 | Math: Top 3 hardest topics 10q each | R&W: Top 2 hardest 10q each','Daily Warm-Up: 5q Final 15 | ⚡ Module ×2: Hard Math module twice with 5-min break (consistency test)','Daily Warm-Up: 5q Final 15 | R&W Perfection: 27q / 28 min | Math: 20 hard mixed — must score ≥ 18/20','Daily Warm-Up: 5q Final 15 | Light review — note biggest improvements since Week 1','REST — review timing strategy; trap cues; plan test-day logistics'],
+    days:['FULL TEST — Bluebook #14 — PENULTIMATE PRACTICE','Final debrief — wrong answers should be < 6 Math, < 8 R&W; list ceiling questions','Daily Warm-Up: 5q Final 15 | Math: Top 3 hardest topics 10q each | R&W: Top 2 hardest 10q each','Daily Warm-Up: 5q Final 15 | Module ×2: Hard Math module twice with 5-min break (consistency test)','Daily Warm-Up: 5q Final 15 | R&W Perfection: 27q / 28 min | Math: 20 hard mixed — must score ≥ 18/20','Daily Warm-Up: 5q Final 15 | Light review — note biggest improvements since Week 1','REST — review timing strategy; trap cues; plan test-day logistics'],
     metrics:['Math errors ≤ 6','R&W errors ≤ 8','R&W perfection drill: 26–27/27','Consistency test: second run within ±2 of first','Test-day logistics fully planned'],
     mistakes:['Cramming new material in Week 14 — this erodes confidence and confuses pattern recognition','Not sleeping 8+ hours every night this week'],
     recovery:'Any score dip in Week 14 is almost always burnout or anxiety, not knowledge. Reduce study time, increase sleep, review your score progression chart from Week 1.'},
-  {w:15,phase:'Final Optimization',color:'#16A34A',obj:'🎯 FINAL SPRINT — Last practice test + taper + test-day strategy execution',time:'1–2 hrs/day (tapering)',target:1500,note:'TARGET: 1500+ on Oct 3 | 750+ Math + 760+ R&W',
-    days:['🧪 FULL TEST — Bluebook #15 — FINAL PRACTICE (real conditions)','Light review (≤ 90 min) — only questions you were unsure on; confirm timing strategy','Final Warm-Up Day 1: 10q Final 15 (10/10) + 10 Hard Math weakest + 10 Hard R&W weakest | No new material','Final Warm-Up Day 2: 10q Final 15 (10/10) + 20 mixed hard (no timer) — reinforce correct thinking','Final Warm-Up Day 3: 10q Final 15 (10/10) + 20 medium (confidence builder) | Review test strategy','🌙 NIGHT BEFORE: No math. Light error log scan only. Pack bag (ID, pencils, calculator, snacks). Sleep by 10 PM.','🎯 SAT TEST DAY — Target: 750+ Math + 760+ R&W = 1500+'],
+  {w:15,phase:'Final Optimization',color:'#16A34A',obj:'FINAL SPRINT — Last practice test + taper + test-day strategy execution',time:'1–2 hrs/day (tapering)',target:1500,note:'TARGET: 1500+ on Oct 3 | 750+ Math + 760+ R&W',
+    days:['FULL TEST — Bluebook #15 — FINAL PRACTICE (real conditions)','Light review (≤ 90 min) — only questions you were unsure on; confirm timing strategy','Final Warm-Up Day 1: 10q Final 15 (10/10) + 10 Hard Math weakest + 10 Hard R&W weakest | No new material','Final Warm-Up Day 2: 10q Final 15 (10/10) + 20 mixed hard (no timer) — reinforce correct thinking','Final Warm-Up Day 3: 10q Final 15 (10/10) + 20 medium (confidence builder) | Review test strategy','NIGHT BEFORE: No math. Light error log scan only. Pack bag (ID, pencils, calculator, snacks). Sleep by 10 PM.','SAT TEST DAY — Target: 750+ Math + 760+ R&W = 1500+'],
     metrics:['Final practice ≥ 1500','10/10 on Final 15 warm-up every day','Bag packed by Friday evening','In bed by 10 PM the night before exam'],
     mistakes:['Studying hard the night before — the preparation is complete; extra studying now only creates anxiety','Skipping the taper — intensity must drop in the final week for peak performance'],
     recovery:'If final practice < 1480: Do NOT add more studying. Trust your preparation. Execute your strategy. The gap between practice and real test day is real and in your favor.'},
 ];
 // College milestones are now tracked via CMD_PHASES in the USA 2027 Command Center
-const MATH_RES=[{name:'Khan Academy SAT',icon:'📚',desc:'Official College Board partner — free, adaptive, linked to PSAT data.',url:'https://www.khanacademy.org/sat'},{name:'Bluebook (Official)',icon:'🧪',desc:'The only official digital SAT practice platform. Use this for all full-length tests.',url:'https://bluebook.collegeboard.org'},{name:'Desmos Calculator',icon:'🔢',desc:'The exact calculator built into the SAT. Master it before test day.',url:'https://www.desmos.com/scientific'},{name:'Art of Problem Solving',icon:'💡',desc:'Advanced math training for the hardest SAT question clusters.',url:'https://artofproblemsolving.com'}];
-const RW_RES=[{name:'College Board Practice',icon:'📖',desc:'Official R&W question bank sorted by difficulty and topic.',url:'https://collegeboard.org/sat/practice'},{name:'Quizlet SAT Vocab',icon:'🗂️',desc:'Top 500 SAT vocabulary words studied in context.',url:'https://quizlet.com/subject/sat-vocabulary/'},{name:'No Red Ink',icon:'✍️',desc:'Grammar and writing mechanics practice with instant feedback.',url:'https://www.noredink.com'}];
-const STRAT_RES=[{name:'College Panda Math',icon:'🐼',desc:'Targeted SAT math prep focused on the hardest question types.',url:'https://thecollegepanda.com'},{name:'PrepScholar Blog',icon:'🎓',desc:'Data-driven SAT strategy guides and score improvement roadmaps.',url:'https://blog.prepscholar.com/category/sat'},{name:'UWorld SAT',icon:'⚡',desc:'High-quality practice questions with elite-level explanations.',url:'https://sat.uworld.com'}];
+const MATH_RES=[{name:'Khan Academy SAT',icon:'book',desc:'Official College Board partner — free, adaptive, linked to PSAT data.',url:'https://www.khanacademy.org/sat'},{name:'Bluebook (Official)',icon:'flask',desc:'The only official digital SAT practice platform. Use this for all full-length tests.',url:'https://bluebook.collegeboard.org'},{name:'Desmos Calculator',icon:'calculator',desc:'The exact calculator built into the SAT. Master it before test day.',url:'https://www.desmos.com/scientific'},{name:'Art of Problem Solving',icon:'bulb',desc:'Advanced math training for the hardest SAT question clusters.',url:'https://artofproblemsolving.com'}];
+const RW_RES=[{name:'College Board Practice',icon:'bookopen',desc:'Official R&W question bank sorted by difficulty and topic.',url:'https://collegeboard.org/sat/practice'},{name:'Quizlet SAT Vocab',icon:'folder',desc:'Top 500 SAT vocabulary words studied in context.',url:'https://quizlet.com/subject/sat-vocabulary/'},{name:'No Red Ink',icon:'pencil',desc:'Grammar and writing mechanics practice with instant feedback.',url:'https://www.noredink.com'}];
+const STRAT_RES=[{name:'College Panda Math',icon:'book',desc:'Targeted SAT math prep focused on the hardest question types.',url:'https://thecollegepanda.com'},{name:'PrepScholar Blog',icon:'graduation',desc:'Data-driven SAT strategy guides and score improvement roadmaps.',url:'https://blog.prepscholar.com/category/sat'},{name:'UWorld SAT',icon:'bolt',desc:'High-quality practice questions with elite-level explanations.',url:'https://sat.uworld.com'}];
 const BADGES=[
-  {icon:'🔥',name:'First Test',cond:'Log your first practice test',check:()=>satTests.length>=1},
-  {icon:'📚',name:'Error Logger',cond:'Log 10 errors with root causes',check:()=>satErrors.filter(e=>e.reason).length>=10},
-  {icon:'🏆',name:'1300 Club',cond:'Score 1300+ on a practice test',check:()=>satTests.some(t=>t.total>=1300)},
-  {icon:'⚡',name:'1400 Milestone',cond:'Score 1400+ on a practice test',check:()=>satTests.some(t=>t.total>=1400)},
-  {icon:'🎯',name:'1450 Elite',cond:'Score 1450+ on a practice test',check:()=>satTests.some(t=>t.total>=1450)},
-  {icon:'💎',name:'1500 Master',cond:'Score 1500+ on a practice test',check:()=>satTests.some(t=>t.total>=1500)},
-  {icon:'🔮',name:'Streak Legend',cond:'14-day study streak',check:()=>calcBestStreak()>=14},
-  {icon:'🛡️',name:'Trap Hunter',cond:'Log 5 trap-type errors',check:()=>satErrors.filter(e=>e.errType==='trap').length>=5},
-  {icon:'📊',name:'Analytics Pro',cond:'Complete 3 weekly reviews',check:()=>weeklyReviews.length>=3},
-  {icon:'📖',name:'Daily Reader',cond:'Log 21 days of reading',check:()=>Object.keys(readingLog).length>=21},
-  {icon:'👑',name:'1580 Dreamer',cond:'Score 1580+ on any test',check:()=>satTests.some(t=>t.total>=1580)},
-  {icon:'🌟',name:'Plan Complete',cond:'Complete all 15 weeks of plan tasks',check:()=>Object.values(planTasks).filter(t=>t.completed).length>=50},
+  {icon:'flame',name:'First Test',cond:'Log your first practice test',check:()=>satTests.length>=1},
+  {icon:'book',name:'Error Logger',cond:'Log 10 errors with root causes',check:()=>satErrors.filter(e=>e.reason).length>=10},
+  {icon:'trophy',name:'1300 Club',cond:'Score 1300+ on a practice test',check:()=>satTests.some(t=>t.total>=1300)},
+  {icon:'bolt',name:'1400 Milestone',cond:'Score 1400+ on a practice test',check:()=>satTests.some(t=>t.total>=1400)},
+  {icon:'target',name:'1450 Elite',cond:'Score 1450+ on a practice test',check:()=>satTests.some(t=>t.total>=1450)},
+  {icon:'gem',name:'1500 Master',cond:'Score 1500+ on a practice test',check:()=>satTests.some(t=>t.total>=1500)},
+  {icon:'sparkle',name:'Streak Legend',cond:'14-day study streak',check:()=>calcBestStreak()>=14},
+  {icon:'shield',name:'Trap Hunter',cond:'Log 5 trap-type errors',check:()=>satErrors.filter(e=>e.errType==='trap').length>=5},
+  {icon:'chartbar',name:'Analytics Pro',cond:'Complete 3 weekly reviews',check:()=>weeklyReviews.length>=3},
+  {icon:'bookopen',name:'Daily Reader',cond:'Log 21 days of reading',check:()=>Object.keys(readingLog).length>=21},
+  {icon:'crown',name:'1580 Dreamer',cond:'Score 1580+ on any test',check:()=>satTests.some(t=>t.total>=1580)},
+  {icon:'star',name:'Plan Complete',cond:'Complete all 15 weeks of plan tasks',check:()=>Object.values(planTasks).filter(t=>t.completed).length>=50},
 ];
 /* ========== AUTH ========== */
 function login(){const n=(document.getElementById('authName').value||'').trim(),e=(document.getElementById('authEmail').value||'').trim();if(!n||!e){showToast('Enter name and email');return}currentUser={name:n,email:e};try{localStorage.setItem('sm_elite_user',JSON.stringify(currentUser))}catch(ex){}initApp()}
 function logout(){try{localStorage.removeItem('sm_elite_user')}catch(ex){}location.reload()}
-function initApp(){loadAll();buildPages();renderAll();document.getElementById('authScreen').style.display='none';document.getElementById('mainApp').style.display='flex';document.getElementById('mainApp').style.flexDirection='column';const av=document.getElementById('profileAvatar');if(av)av.src=`https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(currentUser.name)}&backgroundColor=4F46E5&fontColor=ffffff`;document.getElementById('profileName').textContent=currentUser.name;document.getElementById('profileEmail').textContent=currentUser.email;const td=document.getElementById('testDate');if(td)td.value=todayISO();const ed=document.getElementById('errReviewDate');if(ed)ed.value=new Date(Date.now()+3*86400000).toISOString().split('T')[0]}
+function initApp(){loadAll();buildPages();renderAll();renderGoalFabCount();document.getElementById('authScreen').style.display='none';document.getElementById('mainApp').style.display='flex';document.getElementById('mainApp').style.flexDirection='column';const av=document.getElementById('profileAvatar');if(av)av.src=`https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(currentUser.name)}&backgroundColor=4F46E5&fontColor=ffffff`;document.getElementById('profileName').textContent=currentUser.name;document.getElementById('profileEmail').textContent=currentUser.email;const td=document.getElementById('testDate');if(td)td.value=todayISO();const ed=document.getElementById('errReviewDate');if(ed)ed.value=new Date(Date.now()+3*86400000).toISOString().split('T')[0]}
 
 /* ========== NAV ========== */
 function showPage(id){
@@ -1298,7 +1489,7 @@ function showPage(id){
     const mc=document.getElementById('contentInner');
     document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
     document.querySelectorAll('.nav-item,.tab-item').forEach(n=>n.classList.remove('active'));
-    if(mc)mc.innerHTML=`<div style="text-align:center;padding:4rem 2rem"><div style="font-size:2rem">🚧</div><h2 style="margin:.5rem 0">Community — Coming Soon</h2><p style="color:var(--ink-3)">Join the waitlist to be notified when it launches.</p><input type="email" id="waitlist-email" placeholder="your@email.com" style="margin-top:1rem;padding:.5rem 1rem;border-radius:8px;border:1px solid var(--border);font-size:0.9rem"><button onclick="localStorage.setItem('sm_waitlist_email',document.getElementById('waitlist-email').value);alert('You\\'re on the list!')" style="margin-left:.5rem;padding:.5rem 1rem;background:var(--accent);color:white;border:none;border-radius:8px;cursor:pointer">Join Waitlist</button></div>`;
+    if(mc)mc.innerHTML=`<div style="text-align:center;padding:4rem 2rem"><div style="color:var(--ink-4);display:flex;justify-content:center">${ic('wrench',30)}</div><h2 style="margin:.5rem 0">Community — Coming Soon</h2><p style="color:var(--ink-3)">Join the waitlist to be notified when it launches.</p><input type="email" id="waitlist-email" placeholder="your@email.com" style="margin-top:1rem;padding:.5rem 1rem;border-radius:8px;border:1px solid var(--border);font-size:0.9rem"><button onclick="localStorage.setItem('sm_waitlist_email',document.getElementById('waitlist-email').value);alert('You\\'re on the list!')" style="margin-left:.5rem;padding:.5rem 1rem;background:var(--accent);color:white;border:none;border-radius:8px;cursor:pointer">Join Waitlist</button></div>`;
     window.scrollTo(0,0);
     return;
   }
@@ -1325,7 +1516,7 @@ function getCurrentWeek(){const start=new Date('2026-06-20T00:00:00');return Mat
 function getBurnoutLevel(){const last7=Object.keys(burnoutLog).sort().slice(-7);if(!last7.length)return 5;return Math.round(last7.reduce((a,k)=>a+(burnoutLog[k].energy||5),0)/last7.length)}
 function getWeakestTopics(n){const c={};satErrors.forEach(e=>{c[e.topic]=(c[e.topic]||0)+1});return Object.entries(c).sort((a,b)=>b[1]-a[1]).slice(0,n).map(([topic,count])=>({topic,count}))}
 function exportData(){const blob=new Blob([JSON.stringify({user:currentUser,tests:satTests,errors:satErrors,studyLog,profile:userProfile,weeklyReviews,readingLog,hardQLog},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`scoremax-elite-${todayISO()}.json`;a.click();showToast('Data exported')}
-function emptyState(icon,title,sub,modal){return`<div class="card" style="text-align:center;padding:48px 24px"><div style="font-size:2rem;margin-bottom:10px">${icon}</div><div style="font-weight:700;font-size:0.95rem;margin-bottom:4px">${title}</div><div style="font-size:0.8rem;color:var(--ink-3);margin-bottom:16px">${sub}</div>${modal?`<button class="btn btn-primary btn-sm" onclick="openModal('${modal}')">Get started</button>`:''}</div>`}
+function emptyState(icon,title,sub,modal){return`<div class="card" style="text-align:center;padding:48px 24px"><div style="margin-bottom:12px;color:var(--ink-4);display:flex;justify-content:center">${ic(icon,34)}</div><div style="font-weight:700;font-size:0.95rem;margin-bottom:4px">${title}</div><div style="font-size:0.8rem;color:var(--ink-3);margin-bottom:16px">${sub}</div>${modal?`<button class="btn btn-primary btn-sm" onclick="openModal('${modal}')">Get started</button>`:''}</div>`}
 let _toastTimer;
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_toastTimer);_toastTimer=setTimeout(()=>t.classList.remove('show'),2800)}
 function renderXP(){const xp=(satTests.length*100)+(satErrors.length*10)+(weeklyReviews.length*50)+(Object.keys(studyLog).length*20)+(Object.keys(readingLog).length*5);const lv=Math.floor(xp/500)+1;const pct=(xp%500)/500*100;const l=document.getElementById('xpLevel');if(l)l.textContent=lv;const x=document.getElementById('xpCount');if(x)x.textContent=xp+' XP';const b=document.getElementById('xpBarFill');if(b)b.style.width=pct+'%'}
@@ -1364,7 +1555,7 @@ function renderTodayPage(){
   const streak=calcStreak();
   const bl=getBurnoutLevel();
   const burnoutColor=bl>=7?'var(--good)':bl>=5?'var(--warn)':'var(--bad)';
-  const burnoutLabel=bl>=7?`⚡ ${bl}/10`:bl>=5?`😐 ${bl}/10`:`😩 ${bl}/10`;
+  const burnoutLabel=bl>=7?`${bl}/10`:bl>=5?`${bl}/10`:`${bl}/10`;
 
   // SAT data
   const satSorted=[...satTests].sort((a,b)=>new Date(a.date)-new Date(b.date));
@@ -1417,7 +1608,7 @@ function renderTodayPage(){
   <div style="margin-bottom:20px">
     <div class="eyebrow" style="margin-bottom:4px">${greet}</div>
     <div class="display-2" style="font-size:1.45rem;margin-bottom:4px">${esc(name)}, here's your full picture.</div>
-    <div style="font-size:0.8rem;color:var(--ink-3)">Study streak: <strong style="color:${streak>=7?'var(--good)':streak>=3?'var(--warn)':'var(--ink)'}">${streak} day${streak!==1?'s':''} 🔥</strong> · ${new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'})}</div>
+    <div style="font-size:0.8rem;color:var(--ink-3)">Study streak: <strong style="color:${streak>=7?'var(--good)':streak>=3?'var(--warn)':'var(--ink)'}">${streak} day${streak!==1?'s':''}</strong> · ${new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'})}</div>
   </div>
 
   <!-- 3 GOAL CARDS -->
@@ -1460,7 +1651,7 @@ function renderTodayPage(){
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--elite)" stroke-width="2.5" stroke-linecap="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 0 6 1 6 3 0-2 3-3 6-3v-5"/></svg>
         </div>
         <div>
-          <div style="font-size:0.8rem;font-weight:700;color:var(--elite)">KUCAT Prep 🇳🇵</div>
+          <div style="font-size:0.8rem;font-weight:700;color:var(--elite)">KUCAT Prep</div>
           <div style="font-size:0.65rem;color:var(--ink-3)">${kcPi.phase.name} · ${kcPi.progress}% done</div>
         </div>
         <div style="margin-left:auto;font-family:var(--font-num);font-size:1.4rem;font-weight:800;color:var(--elite)">${kcDays}d</div>
@@ -1490,7 +1681,7 @@ function renderTodayPage(){
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--good)" stroke-width="2.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
         </div>
         <div>
-          <div style="font-size:0.8rem;font-weight:700;color:var(--good)">USA 2027 🇺🇸</div>
+          <div style="font-size:0.8rem;font-weight:700;color:var(--good)">USA 2027</div>
           <div style="font-size:0.65rem;color:var(--ink-3)">College application command</div>
         </div>
         <div style="margin-left:auto;font-family:var(--font-num);font-size:1.4rem;font-weight:800;color:var(--good)">${cmdPct}%</div>
@@ -1583,22 +1774,22 @@ function renderTodayPage(){
       <!-- READING + ENERGY -->
       <div class="card">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-          <div class="card-title">📖 Daily reading</div>
+          <div class="card-title" style="display:flex;align-items:center;gap:6px">${ic('bookopen',15)} Daily reading</div>
           <button class="btn btn-secondary btn-sm" onclick="toggleReadingDay('${today}')">Log today</button>
         </div>
         <div class="reading-log" style="margin-bottom:8px">${readingDots}</div>
         <div style="font-size:0.72rem;color:var(--ink-3)">Total: ${Object.keys(readingLog).length} days · This week: ${weekDays.filter(d2=>readingLog[d2]).length}/7</div>
         <div style="margin-top:12px">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
-            <span style="font-size:0.78rem;font-weight:600">🔋 Energy</span>
+            <span style="font-size:0.78rem;font-weight:600;display:flex;align-items:center;gap:5px">${ic('bolt',13)} Energy</span>
             <span style="font-size:0.7rem;color:${burnoutColor};font-weight:600">${burnoutLabel}</span>
           </div>
           <div class="burnout-bar" style="margin-bottom:6px"><div class="burnout-fill" style="width:${bl*10}%;background:${burnoutColor}"></div></div>
           <div style="display:flex;gap:4px;flex-wrap:wrap">
-            <button class="btn btn-secondary btn-xs" onclick="logBurnout(3)">😩 Low</button>
-            <button class="btn btn-secondary btn-xs" onclick="logBurnout(5)">😐 OK</button>
-            <button class="btn btn-secondary btn-xs" onclick="logBurnout(7)">😊 Good</button>
-            <button class="btn btn-secondary btn-xs" onclick="logBurnout(9)">⚡ High</button>
+            <button class="btn btn-secondary btn-xs" onclick="logBurnout(3)">Low</button>
+            <button class="btn btn-secondary btn-xs" onclick="logBurnout(5)">OK</button>
+            <button class="btn btn-secondary btn-xs" onclick="logBurnout(7)">Good</button>
+            <button class="btn btn-secondary btn-xs" onclick="logBurnout(9)">High</button>
           </div>
         </div>
       </div>
@@ -1609,16 +1800,16 @@ function renderTodayPage(){
   <div style="font-size:0.78rem;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px">Quick access</div>
   <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px">
     ${[
-      {icon:'🗺️',label:'SAT Roadmap',page:'roadmap',color:'var(--accent)'},
-      {icon:'🛡️',label:'Trap Database',page:'traps',color:'var(--accent)'},
-      {icon:'📊',label:'Score Analytics',page:'analytics',color:'var(--accent)'},
-      {icon:'🔬',label:'Weakness Radar',page:'weaknesses',color:'var(--accent)'},
-      {icon:'📚',label:'KUCAT Checklist',page:'kucat',color:'var(--elite)'},
-      {icon:'🏛️',label:'USA Colleges',page:'college',color:'var(--good)'},
-      {icon:'🏆',label:'Achievements',page:'achievements',color:'var(--warn)'},
-      {icon:'👥',label:'Community',page:'community',color:'var(--rw)'},
+      {icon:'map',label:'SAT Roadmap',page:'roadmap',color:'var(--accent)'},
+      {icon:'shield',label:'Trap Database',page:'traps',color:'var(--accent)'},
+      {icon:'chartbar',label:'Score Analytics',page:'analytics',color:'var(--accent)'},
+      {icon:'microscope',label:'Weakness Radar',page:'weaknesses',color:'var(--accent)'},
+      {icon:'book',label:'KUCAT Checklist',page:'kucat',color:'var(--elite)'},
+      {icon:'building',label:'USA Colleges',page:'college',color:'var(--good)'},
+      {icon:'trophy',label:'Achievements',page:'achievements',color:'var(--warn)'},
+      {icon:'users',label:'Community',page:'community',color:'var(--rw)'},
     ].map(t=>`<button onclick="showPage('${t.page}')" style="display:flex;flex-direction:column;align-items:flex-start;gap:5px;padding:12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);text-align:left;transition:all var(--dur-1);cursor:pointer;border-left:3px solid ${t.color}" onmouseover="this.style.background='var(--surface-2)';this.style.boxShadow='var(--shadow-2)'" onmouseout="this.style.background='var(--surface)';this.style.boxShadow='none'">
-      <span style="font-size:1.1rem">${t.icon}</span>
+      <span style="color:${t.color}">${ic(t.icon,18)}</span>
       <span style="font-size:0.75rem;font-weight:600;color:var(--ink-2)">${t.label}</span>
     </button>`).join('')}
   </div>`;
@@ -1769,7 +1960,7 @@ function renderRoadmapPage(){
             </div>
           </div>
           <div class="recovery-card">
-            <div class="recovery-title">🔄 Recovery Recommendation</div>
+            <div class="recovery-title" style="display:flex;align-items:center;gap:6px">${ic('trending',14)} Recovery Recommendation</div>
             <div style="font-size:0.77rem;color:var(--ink-2);line-height:1.6">${esc(wk.recovery)}</div>
           </div>
         </div>
@@ -1788,10 +1979,10 @@ function renderRoadmapPage(){
     </div>
     <div class="card" style="margin-bottom:18px">
       <div style="font-size:0.9rem;font-weight:700;margin-bottom:12px">Adaptive Branching System</div>
-      <div class="branch-card good"><div class="branch-title">🟢 On Track (at or above checkpoint target)</div><div class="branch-action">Continue the standard plan. Add 15 extra min/day drilling your 2 weakest topics. You're building a buffer — keep accumulating it.</div></div>
-      <div class="branch-card warn"><div class="branch-title">🟡 Slightly Behind (20–50 pts below checkpoint)</div><div class="branch-action">Protocol B: Replace 50% of next week's new-topic sessions with targeted drilling on the 3 topics with the most error log entries. Do not rush to new material before closing open gaps.</div></div>
-      <div class="branch-card bad"><div class="branch-title">🔴 Significantly Behind (50+ pts below checkpoint)</div><div class="branch-action">Recovery Week: One full week (2 hrs/day) of ONLY your top 5 error log topics. No new material. Sleep ≥ 8 hrs. Most students recover 30–50 pts in one focused recovery week.</div></div>
-      <div style="margin-top:10px;padding:10px 14px;background:var(--accent-soft);border-radius:var(--r);font-size:0.78rem;color:var(--ink-2)"><strong style="color:var(--accent)">Current status:</strong> ${latest?`Latest score ${latest} — ${latest>=(userProfile.target||1500)?'✅ At or above target':'⚡ '+(( userProfile.target||1500)-latest)+' pts to target'}`:' Log your first test to activate adaptive branching.'}</div>
+      <div class="branch-card good"><div class="branch-title"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--good);margin-right:6px"></span>On Track (at or above checkpoint target)</div><div class="branch-action">Continue the standard plan. Add 15 extra min/day drilling your 2 weakest topics. You're building a buffer — keep accumulating it.</div></div>
+      <div class="branch-card warn"><div class="branch-title"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--warn);margin-right:6px"></span>Slightly Behind (20–50 pts below checkpoint)</div><div class="branch-action">Protocol B: Replace 50% of next week's new-topic sessions with targeted drilling on the 3 topics with the most error log entries. Do not rush to new material before closing open gaps.</div></div>
+      <div class="branch-card bad"><div class="branch-title"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--bad);margin-right:6px"></span>Significantly Behind (50+ pts below checkpoint)</div><div class="branch-action">Recovery Week: One full week (2 hrs/day) of ONLY your top 5 error log topics. No new material. Sleep ≥ 8 hrs. Most students recover 30–50 pts in one focused recovery week.</div></div>
+      <div style="margin-top:10px;padding:10px 14px;background:var(--accent-soft);border-radius:var(--r);font-size:0.78rem;color:var(--ink-2)"><strong style="color:var(--accent)">Current status:</strong> ${latest?`Latest score ${latest} — ${latest>=(userProfile.target||1500)?'At or above target':(( userProfile.target||1500)-latest)+' pts to target'}`:' Log your first test to activate adaptive branching.'}</div>
     </div>
     <div class="eyebrow" style="margin-bottom:12px">Week-by-Week Curriculum — tap any week to expand</div>
     ${weekHtml}`;
@@ -1905,7 +2096,7 @@ function renderTestsPage(){
           <div style="text-align:center"><div class="num-hero tabular" style="font-size:1.3rem">${t.total}</div><div style="font-size:0.64rem;color:var(--ink-3)">Total</div></div>
         </div>
         <button class="icon-btn" style="width:28px;height:28px" onclick="deleteTest('${t.id}')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></button>
-      </div>`;}).join(''):emptyState('📝','No tests logged','Log your first Bluebook practice test to start tracking your score trajectory.','testModal')}</div>`;
+      </div>`;}).join(''):emptyState('notebook','No tests logged','Log your first Bluebook practice test to start tracking your score trajectory.','testModal')}</div>`;
   if(satTests.length>=2){setTimeout(()=>{const c=document.getElementById('testScoreChart');if(c)drawLineChart(c,[...satTests].sort((a,b)=>new Date(a.date)-new Date(b.date)).map(t=>t.total),[...satTests].sort((a,b)=>new Date(a.date)-new Date(b.date)).map(t=>fmtDate(t.date)),getCSSVar('--accent'))},80)}
 }
 /* ========== ERROR LOG ========== */
@@ -1926,7 +2117,7 @@ function renderErrorsPage(){
   else if(errFilter!=='all')filtered=satErrors.filter(e=>e.errType===errFilter);
   const sorted=[...filtered].sort((a,b)=>new Date(b.created)-new Date(a.created));
   const tColor={trap:'var(--bad)',gap:'var(--accent)',timing:'var(--warn)',careless:'var(--ink-3)'};
-  const tIcon={trap:'🪤',gap:'📚',timing:'⏱️',careless:'😤'};
+  const tIcon={trap:'target',gap:'book',timing:'clock',careless:'warning'};
   pg.innerHTML=`
     <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px">
       <div><div class="display-2" style="font-size:1.3rem">Elite Error Log</div><div class="card-sub">Every error has a root cause. No root cause = no improvement.</div></div>
@@ -1934,18 +2125,18 @@ function renderErrorsPage(){
     </div>
     <div class="grid grid-4" style="margin-bottom:14px">
       <div class="stat"><div class="stat-label">Total errors</div><div class="stat-value tabular">${satErrors.length}</div></div>
-      <div class="stat"><div class="stat-label">🪤 Trap</div><div class="stat-value tabular" style="color:var(--bad)">${tc.trap}</div></div>
-      <div class="stat"><div class="stat-label">📚 Gap</div><div class="stat-value tabular" style="color:var(--accent)">${tc.gap}</div></div>
-      <div class="stat"><div class="stat-label">⏱️ Timing</div><div class="stat-value tabular" style="color:var(--warn)">${tc.timing}</div></div>
+      <div class="stat"><div class="stat-label">Trap</div><div class="stat-value tabular" style="color:var(--bad)">${tc.trap}</div></div>
+      <div class="stat"><div class="stat-label">Gap</div><div class="stat-value tabular" style="color:var(--accent)">${tc.gap}</div></div>
+      <div class="stat"><div class="stat-label">Timing</div><div class="stat-value tabular" style="color:var(--warn)">${tc.timing}</div></div>
     </div>
     <div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap">
-      ${['all','trap','gap','timing','careless','review'].map(f=>`<button class="btn ${errFilter===f?'btn-primary':'btn-secondary'} btn-xs" onclick="filterErrors('${f}')">${f==='all'?'All':f==='trap'?'🪤 Trap':f==='gap'?'📚 Gap':f==='timing'?'⏱️ Timing':f==='careless'?'😤 Careless':'⏰ Due review'}</button>`).join('')}
+      ${['all','trap','gap','timing','careless','review'].map(f=>`<button class="btn ${errFilter===f?'btn-primary':'btn-secondary'} btn-xs" onclick="filterErrors('${f}')">${f==='all'?'All':f==='trap'?'Trap':f==='gap'?'Gap':f==='timing'?'Timing':f==='careless'?'Careless':'Due review'}</button>`).join('')}
     </div>
     <div>${sorted.length?sorted.map(e=>`<div class="card" style="margin-bottom:10px;border-left:4px solid ${tColor[e.errType]||'var(--line)'}">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px">
         <div style="flex:1"><div style="font-size:0.82rem;font-weight:700">${esc(e.question.slice(0,100))}${e.question.length>100?'…':''}</div>
         <div style="display:flex;gap:5px;margin-top:4px;flex-wrap:wrap">
-          <span class="chip" style="background:${tColor[e.errType]}22;color:${tColor[e.errType]}">${tIcon[e.errType]||'?'} ${esc(e.errType)}</span>
+          <span class="chip" style="background:${tColor[e.errType]}22;color:${tColor[e.errType]}">${tIcon[e.errType]?ic(tIcon[e.errType],12):''} ${esc(e.errType)}</span>
           <span class="chip chip-accent">${esc(e.section)}</span>
           <span style="font-size:0.68rem;color:var(--ink-3);font-weight:600">${esc(e.topic)}</span>
           <span style="font-size:0.68rem;color:var(--ink-4)">${esc(e.difficulty)}</span>
@@ -1955,10 +2146,10 @@ function renderErrorsPage(){
           <button class="icon-btn" style="width:26px;height:26px" onclick="deleteError('${e.id}')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></button>
         </div>
       </div>
-      ${e.reason?`<div style="font-size:0.76rem;color:var(--ink-3);margin-bottom:3px">📍 Root cause: ${esc(e.reason)}</div>`:''}
-      ${e.fix?`<div style="font-size:0.76rem;color:var(--accent)">🛠️ Prevention rule: ${esc(e.fix)}</div>`:''}
+      ${e.reason?`<div style="font-size:0.76rem;color:var(--ink-3);margin-bottom:3px">Root cause: ${esc(e.reason)}</div>`:''}
+      ${e.fix?`<div style="font-size:0.76rem;color:var(--accent)">Prevention rule: ${esc(e.fix)}</div>`:''}
       ${e.reviewDate?`<div style="font-size:0.7rem;color:var(--ink-4);margin-top:3px">Next review: ${fmtDate(e.reviewDate)}</div>`:''}
-    </div>`).join(''):emptyState('✅','No errors match this filter','All matching errors will appear here.','errorModal')}</div>`;
+    </div>`).join(''):emptyState('checkcircle','No errors match this filter','All matching errors will appear here.','errorModal')}</div>`;
 }
 
 /* ========== TRAP DATABASE ========== */
@@ -1976,7 +2167,7 @@ function renderTrapsPage(){
     <div class="trap-body">
       <div class="trap-name">${esc(t.name)}</div>
       <div class="trap-desc">${esc(t.desc)}</div>
-      <div class="trap-cue">💡 ${esc(t.cue)}</div>
+      <div class="trap-cue">${ic('bulb',13)} ${esc(t.cue)}</div>
       <button class="btn btn-secondary btn-xs" style="margin-top:10px" onclick="markTrapStudied('${t.id}')">${hardQLog['trap_'+t.id]?'✓ Studied — review again':'Mark as studied'}</button>
     </div>
   </div>`;
@@ -2010,11 +2201,11 @@ function renderHardQPage(){
     </div>
     <div class="grid grid-auto" style="gap:12px;margin-bottom:22px">
       ${HARD_Q_CERTS.map(c=>{const log=hardQLog[c.id];const isEarned=log&&log.earned;const last=log&&log.sessions&&log.sessions.length?log.sessions[log.sessions.length-1]:null;return`<div class="cert-card ${isEarned?'earned':'locked'}">
-        <div class="cert-icon">${c.icon}</div>
+        <div class="cert-icon">${ic(c.icon,20)}</div>
         <div class="cert-name">${esc(c.name)}</div>
         <div class="cert-req" style="margin-top:4px">${esc(c.req)}</div>
         ${last?`<div style="margin-top:8px;font-size:0.72rem;color:var(--ink-3)">Last: ${Math.round(last.accuracy*100)}% (${last.correct}/${last.total})</div>`:''}
-        ${isEarned?`<div class="chip chip-good" style="margin-top:8px">🏆 Certified ${fmtDate(log.earnedDate)}</div>`:log&&log.sessions&&log.sessions.length?`<div style="margin-top:8px;font-size:0.7rem;color:var(--ink-3)">${log.sessions.length} session${log.sessions.length>1?'s':''}</div>`:'<div style="margin-top:8px;font-size:0.7rem;color:var(--ink-4)">Not started</div>'}
+        ${isEarned?`<div class="chip chip-good" style="margin-top:8px">Certified ${fmtDate(log.earnedDate)}</div>`:log&&log.sessions&&log.sessions.length?`<div style="margin-top:8px;font-size:0.7rem;color:var(--ink-3)">${log.sessions.length} session${log.sessions.length>1?'s':''}</div>`:'<div style="margin-top:8px;font-size:0.7rem;color:var(--ink-4)">Not started</div>'}
       </div>`;}).join('')}
     </div>
     <div class="card" style="margin-bottom:18px">
@@ -2027,7 +2218,7 @@ function renderHardQPage(){
     </div>
     ${histItems.length?`<div style="font-size:0.88rem;font-weight:700;margin-bottom:10px">Recent Sessions</div>
     ${histItems.map(s=>`<div class="card" style="margin-bottom:8px;display:flex;align-items:center;gap:12px;padding:12px 14px">
-      <div style="font-size:1.2rem">${s.icon}</div>
+      <div>${ic(s.icon,18)}</div>
       <div style="flex:1"><div style="font-size:0.82rem;font-weight:600">${esc(s.cert)}</div><div style="font-size:0.72rem;color:var(--ink-3)">${fmtDate(s.date)}</div></div>
       <div style="text-align:right"><div class="tabular" style="font-size:0.95rem;font-weight:800;color:${s.accuracy>=0.88?'var(--good)':s.accuracy>=0.75?'var(--warn)':'var(--bad)'}">${Math.round(s.accuracy*100)}%</div><div style="font-size:0.7rem;color:var(--ink-3)">${s.correct}/${s.total}</div></div>
     </div>`).join('')}`:''}`;
@@ -2041,11 +2232,11 @@ function logHardQ(){
   if(!hardQLog[certId])hardQLog[certId]={sessions:[],earned:false};
   hardQLog[certId].sessions.push({date:todayISO(),correct,total,accuracy});
   const recent=hardQLog[certId].sessions.slice(-3);const avg=recent.reduce((a,s)=>a+s.accuracy,0)/recent.length;
-  if(cert.threshold&&avg>=cert.threshold&&!hardQLog[certId].earned){hardQLog[certId].earned=true;hardQLog[certId].earnedDate=todayISO();showToast('🏆 '+cert.name+' EARNED!')}
+  if(cert.threshold&&avg>=cert.threshold&&!hardQLog[certId].earned){hardQLog[certId].earned=true;hardQLog[certId].earnedDate=todayISO();showToast(cert.name+' certification earned!')}
   else{showToast('Session logged: '+correct+'/'+total+' ('+Math.round(accuracy*100)+'%)')}
   res.value='';saveAll();renderHardQPage();renderAchievements();renderXP();
   // auto-check hq8 (1500+)
-  if(satTests.some(t=>t.total>=1500)&&!hardQLog['hq8']){hardQLog['hq8']={earned:true,earnedDate:todayISO(),sessions:[]};saveAll();renderHardQPage();renderAchievements();showToast('💎 1500 Elite certification EARNED!')}}
+  if(satTests.some(t=>t.total>=1500)&&!hardQLog['hq8']){hardQLog['hq8']={earned:true,earnedDate:todayISO(),sessions:[]};saveAll();renderHardQPage();renderAchievements();showToast('1500 Elite certification earned!')}}
 /* ========== ANALYTICS ========== */
 function getCSSVar(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim()||'#4F46E5'}
 function renderAnalyticsPage(){
@@ -2114,10 +2305,10 @@ function renderAnalyticsPage(){
           <div style="display:flex;gap:5px;flex-wrap:wrap">
             ${r.mathScore?`<span class="chip chip-accent">Math ${r.mathScore}</span>`:''}${r.rwScore?`<span class="chip" style="background:rgba(13,148,136,0.1);color:var(--rw)">R&W ${r.rwScore}</span>`:''}
             ${r.mathScore&&r.rwScore?`<span class="chip chip-elite">Total ${r.mathScore+r.rwScore}</span>`:''}
-            ${r.energy?`<span class="chip" style="background:${r.energy>=7?'var(--good-soft)':r.energy>=5?'var(--warn-soft)':'var(--bad-soft)'};color:${r.energy>=7?'var(--good)':r.energy>=5?'var(--warn)':'var(--bad)'}">⚡ ${r.energy}/10</span>`:''}
+            ${r.energy?`<span class="chip" style="background:${r.energy>=7?'var(--good-soft)':r.energy>=5?'var(--warn-soft)':'var(--bad-soft)'};color:${r.energy>=7?'var(--good)':r.energy>=5?'var(--warn)':'var(--bad)'}">${r.energy}/10 energy</span>`:''}
           </div>
         </div>
-        ${r.priority?`<div style="font-size:0.77rem;color:var(--ink-2);margin-top:6px">🏆 ${esc(r.priority)}</div>`:''}
+        ${r.priority?`<div style="font-size:0.77rem;color:var(--ink-2);margin-top:6px">Priority: ${esc(r.priority)}</div>`:''}
       </div>`).join(''):`<div style="color:var(--ink-3);font-size:0.82rem;padding:8px 0">Complete your first weekly review to start building review history.</div>`}
     </div>`;
 }
@@ -2130,7 +2321,7 @@ function renderWeaknessPage(){
   const bySection={Math:0,Reading:0,Writing:0};satErrors.forEach(e=>{bySection[e.section]=(bySection[e.section]||0)+1});const maxS=Math.max(...Object.values(bySection),1);
   pg.innerHTML=`
     <div style="margin-bottom:18px"><div class="display-2" style="font-size:1.3rem">Weakness Radar</div><div class="card-sub">Based on error log — highest error count = highest priority for drilling.</div></div>
-    ${!satErrors.length?emptyState('🎯','No errors logged yet','Add errors to your log to see your weakness radar.','errorModal'):`
+    ${!satErrors.length?emptyState('target','No errors logged yet','Add errors to your log to see your weakness radar.','errorModal'):`
     <div class="grid grid-2" style="margin-bottom:14px">
       <div class="card"><div style="font-size:0.88rem;font-weight:700;margin-bottom:12px">Math mastery</div>${topicBars2(MATH_TOPICS)}</div>
       <div class="card"><div style="font-size:0.88rem;font-weight:700;margin-bottom:12px">R&W mastery</div>${topicBars2(RW_TOPICS)}</div>
@@ -2181,11 +2372,11 @@ function renderWeeklyPage(){
         ${r.medAcc!==null?`<div class="accuracy-gate ${r.medAcc>=85?'pass':'fail'}"><div class="gate-label">Medium</div><div class="gate-pct" style="color:var(--warn)">${r.medAcc}%</div></div>`:''}
         ${r.hardAcc!==null?`<div class="accuracy-gate ${r.hardAcc>=65?'pass':'fail'}"><div class="gate-label">Hard</div><div class="gate-pct" style="color:var(--bad)">${r.hardAcc}%</div></div>`:''}
       </div>
-      ${r.priority?`<div class="review-section"><div class="review-label">🏆 Priority</div><div style="font-size:0.82rem">${esc(r.priority)}</div></div>`:''}
-      ${r.traps?`<div class="review-section"><div class="review-label">🪤 Traps identified</div><div style="font-size:0.78rem;color:var(--ink-2)">${esc(r.traps)}</div></div>`:''}
-      ${r.worked?`<div class="review-section"><div class="review-label">✅ What worked</div><div style="font-size:0.78rem;color:var(--ink-2)">${esc(r.worked)}</div></div>`:''}
-      ${r.fix?`<div class="review-section"><div class="review-label">⚠️ To fix next week</div><div style="font-size:0.78rem;color:var(--ink-2)">${esc(r.fix)}</div></div>`:''}
-    </div>`).join(''):emptyState('📊','No weekly reviews yet','Complete your first weekly review to build your analytics history.','weeklyModal')}`;
+      ${r.priority?`<div class="review-section"><div class="review-label">${ic('trophy',13)} Priority</div><div style="font-size:0.82rem">${esc(r.priority)}</div></div>`:''}
+      ${r.traps?`<div class="review-section"><div class="review-label">${ic('target',13)} Traps identified</div><div style="font-size:0.78rem;color:var(--ink-2)">${esc(r.traps)}</div></div>`:''}
+      ${r.worked?`<div class="review-section"><div class="review-label">What worked</div><div style="font-size:0.78rem;color:var(--ink-2)">${esc(r.worked)}</div></div>`:''}
+      ${r.fix?`<div class="review-section"><div class="review-label">${ic('warning',13)} To fix next week</div><div style="font-size:0.78rem;color:var(--ink-2)">${esc(r.fix)}</div></div>`:''}
+    </div>`).join(''):emptyState('chartbar','No weekly reviews yet','Complete your first weekly review to build your analytics history.','weeklyModal')}`;
 }
 /* ========== STREAKS ========== */
 function logStudyDay(){
@@ -2206,7 +2397,7 @@ function logStudyDay(){
       spawnConfettiBurst(cx,cy);
       setTimeout(()=>spawnConfettiBurst(cx,cy),160);
     }
-    showToast(`🔥 ${newStreak} day streak — keep it burning!`);
+    showToast(`${newStreak} day streak — keep it burning!`);
   } else {
     showToast('Session logged ✓');
   }
@@ -2222,10 +2413,10 @@ function renderStreakPage(){
   const embers=streak>0?[...Array(6)].map((_,i)=>`<div class="ember" style="bottom:${4+i*3}px;left:calc(50% + ${(i%2===0?1:-1)*(8+i*5)}px);width:${2+i%3}px;height:${2+i%3}px;animation-delay:${i*0.27}s;animation-duration:${1.2+i*0.22}s;--tx:${(i%2===0?1:-1)*(6+i*4)}px"></div>`).join(''):'';
 
   const streakMotivation=streak===0?'Start today — one session ignites the chain.'
-    :streak<3?`${streak} day${streak>1?'s':''} in — keep the ember alive! 🌱`
-    :streak<7?`${streak} days blazing — you're building something real 🔥`
-    :streak<14?`${streak}-day inferno 🔥 You're in the zone. Don't break it.`
-    :`${streak} days — elite consistency. You're built different. 🏆🔥`;
+    :streak<3?`${streak} day${streak>1?'s':''} in — keep the momentum alive`
+    :streak<7?`${streak} days strong — you're building something real`
+    :streak<14?`${streak}-day streak. You're in the zone — don't break it.`
+    :`${streak} days — elite consistency. You're built different.`;
 
   pg.innerHTML=`
   <div style="margin-bottom:22px"><div class="display-2" style="font-size:1.3rem">Streaks & Habits</div><div class="card-sub">Consistency is the compound interest of studying.</div></div>
@@ -2237,7 +2428,7 @@ function renderStreakPage(){
       <div class="streak-flames">
         ${streak>0?`<div class="flame-layer flame-outer"></div><div class="flame-layer flame-mid"></div><div class="flame-layer flame-inner"></div>${embers}`:''}
       </div>
-      <div style="font-size:0.68rem;font-weight:700;color:var(--ink-3);margin-bottom:2px;position:relative;z-index:2">${streak>0?'🔥':''}</div>
+      <div style="font-size:0.68rem;font-weight:700;color:var(--ink-3);margin-bottom:2px;position:relative;z-index:2"></div>
       <div class="streak-fire-number" style="position:relative;z-index:3">${streak}</div>
       <div class="streak-fire-label">day${streak!==1?'s':''}</div>
     </div>
@@ -2279,7 +2470,7 @@ function renderHeatmap(){
 /* ========== RESOURCES ========== */
 function renderResources(){
   const pg=document.getElementById('page-resources');if(!pg)return;
-  const resCard=r=>`<a href="${r.url}" target="_blank" rel="noopener" class="card" style="text-decoration:none;display:block;transition:transform var(--dur-1),box-shadow var(--dur-1)" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='var(--shadow-2)'" onmouseout="this.style.transform='';this.style.boxShadow=''"><div style="font-size:1.3rem;margin-bottom:6px">${r.icon}</div><div style="font-size:0.85rem;font-weight:700;margin-bottom:4px">${esc(r.name)}</div><div style="font-size:0.75rem;color:var(--ink-3);line-height:1.5">${esc(r.desc)}</div><div style="font-size:0.7rem;color:var(--accent);margin-top:6px;font-weight:600">Open →</div></a>`;
+  const resCard=r=>`<a href="${r.url}" target="_blank" rel="noopener" class="card" style="text-decoration:none;display:block;transition:transform var(--dur-1),box-shadow var(--dur-1)" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='var(--shadow-2)'" onmouseout="this.style.transform='';this.style.boxShadow=''"><div style="margin-bottom:6px;color:var(--accent)">${ic(r.icon,20)}</div><div style="font-size:0.85rem;font-weight:700;margin-bottom:4px">${esc(r.name)}</div><div style="font-size:0.75rem;color:var(--ink-3);line-height:1.5">${esc(r.desc)}</div><div style="font-size:0.7rem;color:var(--accent);margin-top:6px;font-weight:600">Open →</div></a>`;
   pg.innerHTML=`
     <div style="margin-bottom:18px"><div class="display-2" style="font-size:1.3rem">Resources</div><div class="card-sub">Curated elite-level prep materials for 1500+ preparation</div></div>
     <div class="eyebrow" style="margin-bottom:10px">Math</div>
@@ -2292,7 +2483,7 @@ function renderResources(){
 
 /* ========== USA 2027 COMMAND CENTER ========== */
 const CMD_PHASES=[
-  {id:'ph1',phase:'Phase 1',title:'SAT Preparation',period:'Jun 2026 – Oct 2026',icon:'📝',color:'#4F46E5',
+  {id:'ph1',phase:'Phase 1',title:'SAT Preparation',period:'Jun 2026 – Oct 2026',icon:'notebook',color:'#4F46E5',
    gantt:{start:0,len:5},dep:null,
    tasks:[
     {id:'p1t1',label:'Diagnostic Test',sub:'Establish your baseline score'},
@@ -2302,7 +2493,7 @@ const CMD_PHASES=[
     {id:'p1t5',label:'August SAT',sub:'First official attempt — Aug 22, 2026'},
     {id:'p1t6',label:'October SAT Retake',sub:'Final attempt if needed — target 1500+'},
   ],target:'Target: 1500+'},
-  {id:'ph2',phase:'Phase 2',title:'IELTS',period:'Aug 2026 – Nov 2026',icon:'🌍',color:'#0D9488',
+  {id:'ph2',phase:'Phase 2',title:'IELTS',period:'Aug 2026 – Nov 2026',icon:'globe',color:'#0D9488',
    gantt:{start:2,len:4},dep:null,
    tasks:[
     {id:'p2t1',label:'Listening Practice',sub:'IELTS listening practice sets — daily'},
@@ -2312,7 +2503,7 @@ const CMD_PHASES=[
     {id:'p2t5',label:'Full Mock Tests',sub:'3+ full timed practice exams'},
     {id:'p2t6',label:'Official IELTS Exam',sub:'Register and sit — Nov 15, 2026'},
   ],target:'Target: 7.5+'},
-  {id:'ph25',phase:'Phase 2.5',title:'Portfolio & Extracurriculars',period:'Jul 2026 – Dec 2026',icon:'💻',color:'#8B5CF6',
+  {id:'ph25',phase:'Phase 2.5',title:'Portfolio & Extracurriculars',period:'Jul 2026 – Dec 2026',icon:'laptop',color:'#8B5CF6',
    gantt:{start:1,len:7},dep:null,
    tasks:[
     {id:'p25t1',label:'Portfolio Website V2',sub:'Professional CS/AI portfolio with project showcases'},
@@ -2327,7 +2518,7 @@ const CMD_PHASES=[
     {id:'p25t10',label:'Leadership Activity',sub:'Club president, team lead, or organized an event'},
     {id:'p25t11',label:'Community Service',sub:'Teach coding, volunteer — document impact and hours'},
   ],target:'15+ GitHub Repos · Strong CS Profile'},
-  {id:'ph3',phase:'Phase 3',title:'University Research',period:'Sep 2026 – Nov 2026',icon:'🔬',color:'#7C3AED',
+  {id:'ph3',phase:'Phase 3',title:'University Research',period:'Sep 2026 – Nov 2026',icon:'microscope',color:'#7C3AED',
    gantt:{start:3,len:3},dep:'ph1',
    tasks:[
     {id:'p3t1',label:'Research SAT Ranges',sub:'Check Common Data Sets for each school'},
@@ -2337,7 +2528,7 @@ const CMD_PHASES=[
     {id:'p3t5',label:'Compare Scholarships',sub:'Merit aid, international aid, need-based'},
     {id:'p3t6',label:'Finalize 12–15 Schools',sub:'Confirm full list — lock by Dec 1'},
   ],target:'12–15 Schools Finalized'},
-  {id:'ph4',phase:'Phase 4',title:'Applications & Essays',period:'Oct 2026 – Jan 2027',icon:'📋',color:'#D97706',
+  {id:'ph4',phase:'Phase 4',title:'Applications & Essays',period:'Oct 2026 – Jan 2027',icon:'clipboard',color:'#D97706',
    gantt:{start:4,len:4},dep:'ph3',
    tasks:[
     {id:'p4t1',label:'Common App Account',sub:'Set up profile, schools, and basic info'},
@@ -2351,7 +2542,7 @@ const CMD_PHASES=[
     {id:'p4t9',label:'Transcript Verified',sub:'Official transcripts ordered + translated if needed'},
     {id:'p4t10',label:'Submit All Applications',sub:'Early Action by Nov 1 · Regular by Jan 1'},
   ],target:'Jan 1, 2027 Deadline'},
-  {id:'ph5',phase:'Phase 5',title:'Financial Aid & Scholarships',period:'Oct 2026 – Feb 2027',icon:'💰',color:'#16A34A',
+  {id:'ph5',phase:'Phase 5',title:'Financial Aid & Scholarships',period:'Oct 2026 – Feb 2027',icon:'dollar',color:'#16A34A',
    gantt:{start:4,len:5},dep:'ph4',
    tasks:[
     {id:'p5t1',label:'School Scholarship Research',sub:'Merit, need-based, country-specific per school'},
@@ -2362,7 +2553,7 @@ const CMD_PHASES=[
     {id:'p5t6',label:'Submit All Aid Forms',sub:'Before each school\'s financial aid deadline'},
     {id:'p5t7',label:'Contact Financial Aid Offices',sub:'Email FA officers to advocate for better packages'},
   ],target:'Maximize Aid'},
-  {id:'ph6',phase:'Phase 6',title:'Admissions Decisions',period:'Mar 2027 – May 2027',icon:'🎉',color:'#EC4899',
+  {id:'ph6',phase:'Phase 6',title:'Admissions Decisions',period:'Mar 2027 – May 2027',icon:'trophy',color:'#EC4899',
    gantt:{start:9,len:3},dep:'ph4',
    tasks:[
     {id:'p6t1',label:'Receive Acceptance Letters',sub:'Check portals daily — EA by Dec, RD by Apr'},
@@ -2371,7 +2562,7 @@ const CMD_PHASES=[
     {id:'p6t4',label:'Select Final University',sub:'Make your decision — gut + numbers'},
     {id:'p6t5',label:'Pay Enrollment Deposit',sub:'Secure your spot by May 1, 2027'},
   ],target:'May 1, 2027'},
-  {id:'ph65',phase:'Phase 6.5',title:'Post-Acceptance Prep',period:'May 2027 – Jul 2027',icon:'🏫',color:'#F59E0B',
+  {id:'ph65',phase:'Phase 6.5',title:'Post-Acceptance Prep',period:'May 2027 – Jul 2027',icon:'graduation',color:'#F59E0B',
    gantt:{start:11,len:3},dep:'ph6',
    tasks:[
     {id:'p65t1',label:'Accept Offer Officially',sub:'Log into portal and confirm enrollment'},
@@ -2384,7 +2575,7 @@ const CMD_PHASES=[
     {id:'p65t8',label:'Request I-20',sub:'Submit I-20 request form to international office'},
     {id:'p65t9',label:'Financial Verification',sub:'Confirm funds meet I-20 requirements'},
   ],target:'Jul 2027 Visa-Ready'},
-  {id:'ph7',phase:'Phase 7',title:'Visa Process',period:'Apr 2027 – Jul 2027',icon:'🛂',color:'#0EA5E9',
+  {id:'ph7',phase:'Phase 7',title:'Visa Process',period:'Apr 2027 – Jul 2027',icon:'passport',color:'#0EA5E9',
    gantt:{start:10,len:4},dep:'ph65',
    tasks:[
     {id:'p7t1',label:'Receive I-20',sub:'Official I-20 from your university'},
@@ -2395,7 +2586,7 @@ const CMD_PHASES=[
     {id:'p7t6',label:'Attend Visa Interview',sub:'Show ties to Nepal + intent to study, not immigrate'},
     {id:'p7t7',label:'F-1 Visa Approved',sub:'Passport stamped — you\'re in!'},
   ],target:'F-1 Visa · Jul 2027'},
-  {id:'ph8',phase:'Phase 8',title:'Departure Prep',period:'Jul 2027 – Aug 2027',icon:'✈️',color:'#F97316',
+  {id:'ph8',phase:'Phase 8',title:'Departure Prep',period:'Jul 2027 – Aug 2027',icon:'plane',color:'#F97316',
    gantt:{start:13,len:2},dep:'ph7',
    tasks:[
     {id:'p8t1',label:'Book Flight',sub:'Book early for best prices — direct or 1 stop'},
@@ -2403,8 +2594,8 @@ const CMD_PHASES=[
     {id:'p8t3',label:'Health Insurance',sub:'University-mandated + travel insurance'},
     {id:'p8t4',label:'Pack Essentials',sub:'Documents folder: I-20, passport, offer letter, SEVIS'},
     {id:'p8t5',label:'Orientation Registration',sub:'Confirm international orientation attendance'},
-    {id:'p8t6',label:'Travel to USA 🇺🇸',sub:'Fall 2027 — you made it!'},
-  ],target:'Fall 2027 🇺🇸'},
+    {id:'p8t6',label:'Travel to USA',sub:'Fall 2027 — you made it!'},
+  ],target:'Fall 2027'},
 ];
 
 const DEADLINES=[
@@ -2556,7 +2747,7 @@ function launchConfetti(){
       {transform:`translateY(110vh) rotate(${720+Math.random()*360}deg)`,opacity:0}
     ],{duration:2000+Math.random()*2000,delay:Math.random()*1000,easing:'cubic-bezier(0.25,0.46,0.45,0.94)',fill:'forwards'}).onfinish=()=>{el.remove();window._confettiLaunched=false}
   }
-  showToast('🎉 All phases complete — USA bound!');
+  showToast('All phases complete — USA bound!');
 }
 
 function daysUntil(dateStr){const d=new Date(dateStr+'T00:00:00');return Math.ceil((d-new Date())/86400000)}
@@ -2573,14 +2764,14 @@ function getPhaseStatus(ph){
   const {done,total}=getPhaseTasksDone(ph);
   const pct=done/total;
   const deadlineStr=PHASE_DEADLINES[ph.id];
-  if(!deadlineStr)return{label:'On Track',color:'var(--good)',emoji:'🟢'};
+  if(!deadlineStr)return{label:'On Track',color:'var(--good)'};
   const totalDays=(new Date(deadlineStr+'T00:00:00')-new Date('2026-06-01T00:00:00'))/86400000;
   const elapsedDays=(new Date()-new Date('2026-06-01T00:00:00'))/86400000;
   const expectedPct=Math.min(1,Math.max(0,elapsedDays/totalDays));
-  if(pct>=1)return{label:'Complete',color:'var(--accent)',emoji:'✅'};
-  if(pct>=expectedPct+0.05)return{label:'Ahead',color:'var(--good)',emoji:'🟢'};
-  if(pct>=expectedPct-0.1)return{label:'On Track',color:'var(--warn)',emoji:'🟡'};
-  return{label:'Behind',color:'var(--bad)',emoji:'🔴'};
+  if(pct>=1)return{label:'Complete',color:'var(--accent)'};
+  if(pct>=expectedPct+0.05)return{label:'Ahead',color:'var(--good)'};
+  if(pct>=expectedPct-0.1)return{label:'On Track',color:'var(--warn)'};
+  return{label:'Behind',color:'var(--bad)'};
 }
 
 // ── DEPENDENCY CHAIN ──────────────────────────────────────────
@@ -2624,7 +2815,7 @@ function updateRecName(id,val){
 
 // ── PROJECT STATUS CYCLE ───────────────────────────────────────
 const PROJ_STATUSES=['idea','in-progress','testing','completed','published'];
-const PROJ_STATUS_LABELS={idea:'💡 Idea','in-progress':'🔧 In Progress',testing:'🧪 Testing',completed:'✅ Completed',published:'🚀 Published'};
+const PROJ_STATUS_LABELS={idea:'Idea','in-progress':'In Progress',testing:'Testing',completed:'Completed',published:'Published'};
 const PROJ_STATUS_COLORS={idea:'var(--ink-4)','in-progress':'var(--warn)',testing:'var(--accent)',completed:'var(--good)',published:'#EC4899'};
 function cycleProjStatus(id){
   loadCmdData();
@@ -2682,7 +2873,7 @@ function renderGantt(){
   });
   return`<div style="overflow-x:auto;margin-bottom:20px">
   <div class="card" style="min-width:560px">
-    <div class="cmd-section-head"><div class="cmd-section-title">📊 Gantt Timeline · Jun 2026 → Aug 2027</div></div>
+    <div class="cmd-section-head"><div class="cmd-section-title" style="display:flex;align-items:center;gap:6px">${ic('chartbar',15)} Gantt Timeline · Jun 2026 → Aug 2027</div></div>
     <!-- Month headers -->
     <div style="display:grid;grid-template-columns:110px repeat(${TOTAL},1fr);gap:0;margin-bottom:6px">
       <div></div>
@@ -2704,7 +2895,7 @@ function renderGantt(){
       }
       const validCells=cells.filter(c=>c!==null);
       return`<div style="display:grid;grid-template-columns:110px repeat(${TOTAL},1fr);gap:0;margin-bottom:4px;align-items:center">
-        <div style="font-size:0.68rem;font-weight:700;color:var(--ink-2);padding-right:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${ph.icon} ${ph.title.replace('Portfolio & Extracurriculars','Portfolio').replace('Admissions Decisions','Decisions').replace('Post-Acceptance Prep','Post-Accept')}</div>
+        <div style="font-size:0.68rem;font-weight:700;color:var(--ink-2);padding-right:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${ic(ph.icon,12)} ${ph.title.replace('Portfolio & Extracurriculars','Portfolio').replace('Admissions Decisions','Decisions').replace('Post-Acceptance Prep','Post-Accept')}</div>
         <div style="grid-column:2/${TOTAL+2};position:relative;height:20px">
           <div style="position:absolute;left:${(g.start/TOTAL)*100}%;width:${(g.len/TOTAL)*100}%;height:100%;background:${ph.color}28;border:1.5px solid ${ph.color}60;border-radius:4px;overflow:hidden">
             <div style="height:100%;width:${pct}%;background:${ph.color};opacity:0.7;transition:width 0.8s var(--ease-out)"></div>
@@ -2726,8 +2917,8 @@ function renderPortfolioSection(){
   const aiProjs=projs.filter(p=>p.tech&&/ai|ml|tensor|pytorch|sklearn|neural/i.test(p.tech)).length;
   return`<div class="card" style="margin-bottom:20px">
   <div class="cmd-section-head">
-    <div class="cmd-section-title">💻 Portfolio Command Center</div>
-    <button class="btn-ghost" style="font-size:0.72rem;padding:5px 10px" onclick="updateGithubStats()">✏️ GitHub Stats</button>
+    <div class="cmd-section-title" style="display:flex;align-items:center;gap:6px">${ic('laptop',15)} Portfolio Command Center</div>
+    <button class="btn-ghost" style="font-size:0.72rem;padding:5px 10px" onclick="updateGithubStats()">GitHub Stats</button>
   </div>
   <!-- Stats row -->
   <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px">
@@ -2745,7 +2936,7 @@ function renderPortfolioSection(){
   </div>
   <!-- GitHub streak -->
   <div style="display:flex;align-items:center;gap:12px;padding:10px 12px;background:var(--surface-2);border:1px solid var(--line-strong);border-radius:var(--r-sm);margin-bottom:14px">
-    <span style="font-size:1.4rem">🔥</span>
+    <span style="color:var(--warn)">${ic('flame',20)}</span>
     <div>
       <div style="font-size:0.82rem;font-weight:700">GitHub Streak</div>
       <div style="font-size:0.7rem;color:var(--ink-3)">Code every day — no zero days</div>
@@ -2786,8 +2977,8 @@ function renderRecLettersSection(){
   const warning=oct>0&&!allRequested;
   return`<div class="card" style="margin-bottom:20px">
   <div class="cmd-section-head">
-    <div class="cmd-section-title">📨 Recommendation Letters</div>
-    ${warning?`<span style="font-size:0.68rem;font-weight:700;color:var(--warn);background:var(--warn-soft);padding:2px 8px;border-radius:var(--r-full)">⚠️ Request by Oct 1</span>`:''}
+    <div class="cmd-section-title" style="display:flex;align-items:center;gap:6px">${ic('send',15)} Recommendation Letters</div>
+    ${warning?`<span style="font-size:0.68rem;font-weight:700;color:var(--warn);background:var(--warn-soft);padding:2px 8px;border-radius:var(--r-full)">Request by Oct 1</span>`:''}
   </div>
   <div style="display:flex;flex-direction:column;gap:6px">
     ${recs.map(r=>{
@@ -2834,13 +3025,13 @@ function renderCollegePage(){
   const portPct=Math.round(portStats.completed/Math.max(portStats.total,1)*100);
   // Kanban cols
   const kanbanCols=[
-    {id:'dream',label:'Dream Schools',color:'var(--elite)',emoji:'⭐'},
-    {id:'applying',label:'Applying',color:'var(--accent)',emoji:'✍️'},
-    {id:'submitted',label:'Submitted',color:'var(--warn)',emoji:'📤'},
-    {id:'accepted',label:'Accepted',color:'var(--good)',emoji:'🎉'},
-    {id:'rejected',label:'Rejected',color:'var(--bad)',emoji:'❌'},
-    {id:'committed',label:'Committed',color:'#EC4899',emoji:'🏆'},
-    {id:'research',label:'Researching',color:'var(--ink-3)',emoji:'🔍'},
+    {id:'dream',label:'Dream Schools',color:'var(--elite)'},
+    {id:'applying',label:'Applying',color:'var(--accent)'},
+    {id:'submitted',label:'Submitted',color:'var(--warn)'},
+    {id:'accepted',label:'Accepted',color:'var(--good)'},
+    {id:'rejected',label:'Rejected',color:'var(--bad)'},
+    {id:'committed',label:'Committed',color:'#EC4899'},
+    {id:'research',label:'Researching',color:'var(--ink-3)'},
   ];
 
   pg.innerHTML=`
@@ -2856,7 +3047,7 @@ function renderCollegePage(){
       <div class="progress-card-bar"><div class="progress-card-fill" style="width:${satPct}%;background:linear-gradient(90deg,var(--accent),var(--accent-2))"></div></div>
     </div>
     <div class="progress-card" onclick="promptIELTS()" style="cursor:pointer" title="Click to update IELTS score">
-      <div class="progress-card-label">IELTS Progress ✏️</div>
+      <div class="progress-card-label">IELTS Progress</div>
       <div class="progress-card-val">${ieltsScore||'—'}</div>
       <div class="progress-card-sub">${ieltsScore?'Target: 7.5+':'Tap to log score'}</div>
       <div class="progress-card-bar"><div class="progress-card-fill" style="width:${ieltsPct}%;background:linear-gradient(90deg,#0D9488,#34D399)"></div></div>
@@ -2880,9 +3071,9 @@ function renderCollegePage(){
       <div class="progress-card-bar"><div class="progress-card-fill" style="width:${visaPct}%;background:linear-gradient(90deg,#0EA5E9,#38BDF8)"></div></div>
     </div>
     <div class="progress-card" onclick="document.getElementById('portfolio-section').scrollIntoView({behavior:'smooth'})" style="cursor:pointer">
-      <div class="progress-card-label">Portfolio 💻</div>
+      <div class="progress-card-label">Portfolio</div>
       <div class="progress-card-val" id="cmd-portfolio-val">${portStats.completed}/${portStats.total}</div>
-      <div class="progress-card-sub">${portStats.repos} repos · 🔥${portStats.streak} streak</div>
+      <div class="progress-card-sub">${portStats.repos} repos · ${portStats.streak} day streak</div>
       <div class="progress-card-bar"><div class="progress-card-fill" style="width:${portPct}%;background:linear-gradient(90deg,#8B5CF6,#A78BFA)"></div></div>
     </div>
   </div>
@@ -2909,10 +3100,10 @@ function renderCollegePage(){
     <div style="display:flex;flex-wrap:wrap;gap:8px">
       ${CMD_PHASES.map(ph=>{const {done:pd,total:pt}=getPhaseTasksDone(ph);const pPct=Math.round(pd/pt*100);const st=getPhaseStatus(ph);
       return`<div style="display:flex;align-items:center;gap:5px;font-size:0.72rem;font-weight:600">
-        <span style="color:${ph.color}">${ph.icon}</span>
+        <span style="color:${ph.color}">${ic(ph.icon,16)}</span>
         <span style="color:var(--ink-3)">${ph.title.split(' ')[0]}</span>
         <span style="color:${pPct===100?'var(--good)':'var(--ink-2)'}">${pPct}%</span>
-        <span>${st.emoji}</span>
+        <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:${st.color}"></span>
       </div>`}).join('')}
     </div>
   </div>
@@ -2922,7 +3113,7 @@ function renderCollegePage(){
 ${renderGantt()}
 
 <!-- TIMELINE PHASES -->
-<div class="cmd-section-head"><div class="cmd-section-title">🗺️ Journey Roadmap</div><div class="eyebrow">${CMD_PHASES.length} Phases · Jun 2026 → Fall 2027</div></div>
+<div class="cmd-section-head"><div class="cmd-section-title" style="display:flex;align-items:center;gap:6px">${ic('map',15)} Journey Roadmap</div><div class="eyebrow">${CMD_PHASES.length} Phases · Jun 2026 → Fall 2027</div></div>
 <div class="phases-grid" id="phasesGrid">
   ${CMD_PHASES.map((ph,idx)=>{
     const {done:pd,total:pt}=getPhaseTasksDone(ph);
@@ -2933,11 +3124,11 @@ ${renderGantt()}
     const dep=getDepStatus(ph.dep);
     return`<div class="phase-card">
       <div class="phase-header" onclick="togglePhase('${ph.id}')">
-        <div class="phase-icon-wrap" style="background:${ph.color}22">${ph.icon}</div>
+        <div class="phase-icon-wrap" style="background:${ph.color}22;color:${ph.color}">${ic(ph.icon,20)}</div>
         <div class="phase-header-text">
           <div class="phase-label" style="display:flex;align-items:center;gap:6px">
             ${ph.phase}
-            <span style="font-size:0.6rem;font-weight:700;color:${status.color};background:${status.color}18;padding:1px 6px;border-radius:var(--r-full)">${status.emoji} ${status.label}</span>
+            <span style="font-size:0.6rem;font-weight:700;color:${status.color};background:${status.color}18;padding:1px 6px;border-radius:var(--r-full)">${status.label}</span>
             ${dep?`<span style="font-size:0.6rem;color:var(--ink-3)" title="Depends on: ${dep.title} (${dep.pct}% done)">→ ${dep.title.split(' ')[0]}${dep.done?' ✓':' '+dep.pct+'%'}</span>`:''}
           </div>
           <div class="phase-title-row">
@@ -2971,20 +3162,20 @@ ${renderGantt()}
             </div>`;
           }).join('')}
         </div>
-        <span class="phase-target" style="background:${ph.color}18;color:${ph.color}">🎯 ${esc(ph.target)}</span>
+        <span class="phase-target" style="background:${ph.color}18;color:${ph.color}">${esc(ph.target)}</span>
       </div>
     </div>`;
   }).join('')}
 </div>
 
 <!-- KANBAN PIPELINE -->
-<div class="cmd-section-head" style="margin-top:8px"><div class="cmd-section-title">🏫 University Pipeline</div><div style="font-size:0.75rem;color:var(--ink-3)">${cmdData.unis.length} universities</div></div>
+<div class="cmd-section-head" style="margin-top:8px"><div class="cmd-section-title" style="display:flex;align-items:center;gap:6px">${ic('graduation',15)} University Pipeline</div><div style="font-size:0.75rem;color:var(--ink-3)">${cmdData.unis.length} universities</div></div>
 <div class="kanban-board" id="kanbanBoard">
   ${kanbanCols.map(col=>{
     const unis=cmdData.unis.filter(u=>u.col===col.id);
     return`<div class="kanban-col" id="kcol-${col.id}" ondragover="event.preventDefault()" ondrop="kanbanDrop('${col.id}',event)">
       <div class="kanban-col-header">
-        <span>${col.emoji}</span>
+        <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${col.color}"></span>
         <span class="kanban-col-label" style="color:${col.color}">${col.label}</span>
         <span class="kanban-col-count" id="kcol-count-${col.id}">${unis.length}</span>
       </div>
@@ -3004,7 +3195,7 @@ ${renderRecLettersSection()}
 
 <!-- SCHOLARSHIP TRACKER -->
 <div class="card" style="margin-bottom:20px">
-  <div class="cmd-section-head"><div class="cmd-section-title">💰 Scholarship Tracker</div>
+  <div class="cmd-section-head"><div class="cmd-section-title" style="display:flex;align-items:center;gap:6px">${ic('dollar',15)} Scholarship Tracker</div>
     <div style="font-size:0.88rem;font-weight:800;color:var(--good)">$${schlTotal.toLocaleString()} potential</div>
   </div>
   <div style="overflow-x:auto">
@@ -3027,7 +3218,7 @@ ${renderRecLettersSection()}
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
   <!-- VISA -->
   <div class="card">
-    <div class="cmd-section-head"><div class="cmd-section-title">🛂 Visa Command Center</div><div style="font-size:0.8rem;font-weight:700;color:var(--accent)">${visaPct}%</div></div>
+    <div class="cmd-section-head"><div class="cmd-section-title" style="display:flex;align-items:center;gap:6px">${ic('passport',15)} Visa Command Center</div><div style="font-size:0.8rem;font-weight:700;color:var(--accent)">${visaPct}%</div></div>
     <div class="bar-track" style="height:5px;margin-bottom:14px"><div class="bar-fill" style="width:${visaPct}%;background:linear-gradient(90deg,#0EA5E9,#38BDF8)"></div></div>
     <div class="visa-steps">
       ${[
@@ -3052,7 +3243,7 @@ ${renderRecLettersSection()}
 
   <!-- DEADLINES -->
   <div class="card">
-    <div class="cmd-section-head"><div class="cmd-section-title">📅 Deadline Calendar</div><div style="font-size:0.72rem;color:var(--ink-3)">${DEADLINES.filter(dl=>daysUntil(dl.date)>=0).length} upcoming</div></div>
+    <div class="cmd-section-head"><div class="cmd-section-title" style="display:flex;align-items:center;gap:6px">${ic('clock',15)} Deadline Calendar</div><div style="font-size:0.72rem;color:var(--ink-3)">${DEADLINES.filter(dl=>daysUntil(dl.date)>=0).length} upcoming</div></div>
     <div>
       ${[...DEADLINES].sort((a,b)=>new Date(a.date)-new Date(b.date)).map(dl=>{
         const days=daysUntil(dl.date);
@@ -3082,18 +3273,18 @@ ${renderRecLettersSection()}
 </div>
 
 <!-- ACHIEVEMENT BADGES -->
-<div class="cmd-section-head"><div class="cmd-section-title">🏆 Milestone Badges</div></div>
+<div class="cmd-section-head"><div class="cmd-section-title" style="display:flex;align-items:center;gap:6px">${ic('trophy',15)} Milestone Badges</div></div>
 <div class="cmd-badge-grid" style="margin-bottom:24px">
   ${[
-    {icon:'⚔️',name:'SAT Warrior',cond:'Score 1400+',earned:satTests.some(t=>t.total>=1400)},
-    {icon:'🌍',name:'IELTS Master',cond:'Complete IELTS phase',earned:CMD_PHASES[1].tasks.every(t=>cmdData.phases[t.id])},
-    {icon:'✍️',name:'Essay Complete',cond:'Finish final essay',earned:!!cmdData.phases['p4t4']},
-    {icon:'🎉',name:'First Acceptance',cond:'University accepts you',earned:cmdData.unis.some(u=>u.col==='accepted')},
-    {icon:'💰',name:'Scholarship Won',cond:'Win any scholarship',earned:cmdData.scholarships.some(s=>s.status==='won')},
-    {icon:'🛂',name:'Visa Approved',cond:'Get F-1 Visa',earned:!!cmdData.visa['visaAppt']&&getVisaDone()===7},
-    {icon:'✈️',name:'USA Bound',cond:'Complete all phases',earned:getAllTasksDone().done===getAllTasksDone().total&&getAllTasksDone().total>0},
+    {icon:'flame',name:'SAT Warrior',cond:'Score 1400+',earned:satTests.some(t=>t.total>=1400)},
+    {icon:'globe',name:'IELTS Master',cond:'Complete IELTS phase',earned:CMD_PHASES[1].tasks.every(t=>cmdData.phases[t.id])},
+    {icon:'pencil',name:'Essay Complete',cond:'Finish final essay',earned:!!cmdData.phases['p4t4']},
+    {icon:'trophy',name:'First Acceptance',cond:'University accepts you',earned:cmdData.unis.some(u=>u.col==='accepted')},
+    {icon:'dollar',name:'Scholarship Won',cond:'Win any scholarship',earned:cmdData.scholarships.some(s=>s.status==='won')},
+    {icon:'passport',name:'Visa Approved',cond:'Get F-1 Visa',earned:!!cmdData.visa['visaAppt']&&getVisaDone()===7},
+    {icon:'plane',name:'USA Bound',cond:'Complete all phases',earned:getAllTasksDone().done===getAllTasksDone().total&&getAllTasksDone().total>0},
   ].map(b=>`<div class="cmd-badge ${b.earned?'earned':'locked'}">
-    <div class="cmd-badge-icon">${b.icon}</div>
+    <div class="cmd-badge-icon">${ic(b.icon,22)}</div>
     <div class="cmd-badge-name">${esc(b.name)}</div>
     <div style="font-size:0.63rem;color:var(--ink-3);margin-top:3px">${esc(b.cond)}</div>
   </div>`).join('')}
@@ -3118,7 +3309,7 @@ function renderKanbanCard(u){
   return`<div class="kanban-card" draggable="true" ondragstart="kanbanDragStart('${u.id}',event)" id="kcard-${u.id}">
     <div class="kanban-card-name">${esc(u.name)}</div>
     <div class="kanban-card-sat">SAT ${esc(u.sat)}</div>
-    <div class="kanban-card-deadline">📅 ${esc(u.deadline)}</div>
+    <div class="kanban-card-deadline">${esc(u.deadline)}</div>
     <div class="kanban-card-badge" style="background:${c}18;color:${c}">${esc(u.scholarship)}</div>
   </div>`;
 }
@@ -3185,11 +3376,11 @@ function renderAchievements(){
   // Auto-check hq8
   if(satTests.some(t=>t.total>=1500)&&(!hardQLog['hq8']||!hardQLog['hq8'].earned)){hardQLog['hq8']={earned:true,earnedDate:todayISO(),sessions:[]};saveAll()}
   const earned=BADGES.filter(b=>b.check());const locked=BADGES.filter(b=>!b.check());
-  const card=(b,e)=>`<div class="badge-card ${e?'earned':'locked'}"><div class="badge-icon">${b.icon}</div><div class="badge-name">${esc(b.name)}</div><div class="badge-cond">${esc(b.cond)}</div></div>`;
+  const card=(b,e)=>`<div class="badge-card ${e?'earned':'locked'}"><div class="badge-icon">${ic(b.icon,22)}</div><div class="badge-name">${esc(b.name)}</div><div class="badge-cond">${esc(b.cond)}</div></div>`;
   pg.innerHTML=`
     <div style="margin-bottom:18px"><div class="display-2" style="font-size:1.3rem">Achievements</div><div class="card-sub">${earned.length}/${BADGES.length} earned · ${HARD_Q_CERTS.filter(c=>hardQLog[c.id]&&hardQLog[c.id].earned).length} Hard-Q certs</div></div>
-    ${earned.length?`<div class="eyebrow" style="margin-bottom:10px">🏆 Earned (${earned.length})</div><div class="grid grid-auto" style="margin-bottom:22px">${earned.map(b=>card(b,true)).join('')}</div>`:''}
-    <div class="eyebrow" style="margin-bottom:10px">🔒 Locked (${locked.length})</div>
+    ${earned.length?`<div class="eyebrow" style="margin-bottom:10px">Earned (${earned.length})</div><div class="grid grid-auto" style="margin-bottom:22px">${earned.map(b=>card(b,true)).join('')}</div>`:''}
+    <div class="eyebrow" style="margin-bottom:10px">Locked (${locked.length})</div>
     <div class="grid grid-auto">${locked.map(b=>card(b,false)).join('')}</div>`;
 }
 
@@ -3601,7 +3792,7 @@ function renderKucatPage(){
 
   <!-- Log Hours -->
   <div class="card" style="margin-bottom:16px">
-    <div class="card-head"><div><div class="card-title">Log Study Hours</div><div class="card-sub">Total: ${kucatData.studyHours.toFixed(1)}h logged · 🔥 Streak: ${kucatData.streak} days</div></div></div>
+    <div class="card-head"><div><div class="card-title">Log Study Hours</div><div class="card-sub">Total: ${kucatData.studyHours.toFixed(1)}h logged · Streak: ${kucatData.streak} days</div></div></div>
     <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
       <input type="number" id="kcHrInput" min="0" max="12" step="0.5" placeholder="e.g. 2.5" class="field-input" style="width:110px;margin-bottom:0">
       <button class="btn btn-primary btn-sm" onclick="kcLogHours()">Add hours →</button>
@@ -3628,7 +3819,7 @@ function renderKucatPage(){
   <div class="card" style="margin-bottom:16px;border-top:3px solid var(--elite);cursor:pointer" onclick="showPage('mocktest')">
     <div class="card-head" style="margin-bottom:6px">
       <div>
-        <div class="card-title">🧪 Mock Test Center</div>
+        <div class="card-title" style="display:flex;align-items:center;gap:6px">${ic('flask',15)} Mock Test Center</div>
         <div class="card-sub">Full CBT-style adaptive practice · Past Year Papers · Subject Mocks</div>
       </div>
       <span class="nav-badge" style="background:var(--elite);color:#fff">NEW</span>
@@ -3861,10 +4052,10 @@ function kcBuildFullPaper(){
 // Subject mock libraries — 4 per subject as requested. Easy/Medium/Hard filter the bank by
 // the illustrative `diff` tag; Adaptive ignores the filter and uses the live adaptive engine.
 const KC_MOCK_TIERS = [
-  {key:'easy',label:'Mock 1 (Easy)',icon:'🟢',diffRange:[1,2]},
-  {key:'medium',label:'Mock 2 (Medium)',icon:'🔵',diffRange:[2,3]},
-  {key:'hard',label:'Mock 3 (Hard)',icon:'🟠',diffRange:[3,5]},
-  {key:'adaptive',label:'Mock 4 (Adaptive)',icon:'🔴',diffRange:[1,5]},
+  {key:'easy',label:'Mock 1 (Easy)',dot:'var(--good)',diffRange:[1,2]},
+  {key:'medium',label:'Mock 2 (Medium)',dot:'var(--accent)',diffRange:[2,3]},
+  {key:'hard',label:'Mock 3 (Hard)',dot:'var(--warn)',diffRange:[3,5]},
+  {key:'adaptive',label:'Mock 4 (Adaptive)',dot:'var(--bad)',diffRange:[1,5]},
 ];
 
 let kcMTState = {view:'overview', subj:'physics'};
@@ -3878,12 +4069,12 @@ function renderMockTestCenter(){
   const v=kcMTState.view;
   p.innerHTML=`
   <div style="margin-bottom:16px">
-    <h1 class="display-2" style="font-size:1.4rem;margin-bottom:2px">🧪 KUCAT Mock Test Center</h1>
+    <h1 class="display-2" style="font-size:1.4rem;margin-bottom:2px;display:flex;align-items:center;gap:8px">${ic('flask',20)} KUCAT Mock Test Center</h1>
     <div class="card-sub">Adaptive CBT-style practice, built on the official KU syllabus &amp; scoring model</div>
   </div>
 
   <div style="background:var(--warn-soft);border:1px solid var(--warn);border-radius:var(--r-sm);padding:9px 12px;margin-bottom:16px;font-size:0.72rem;color:var(--warn);font-weight:600;line-height:1.55">
-    ⚠️ Practice questions here are original "Pattern-based Reconstructions" written to match the official KU syllabus topics — they are <u>not</u> real/leaked KUCAT exam questions. Structure (120 Q · 40/subject · 1 per topic · difficulty 1–5 adaptive · scoring 11+2×(level−1)) is verified from KU's official 2025 syllabus document. The bank now covers all 40/40 official topics per subject; some topics still only have a single question variant — see TODOs in source for expansion.
+    ${ic('warning',13)} Practice questions here are original "Pattern-based Reconstructions" written to match the official KU syllabus topics — they are <u>not</u> real/leaked KUCAT exam questions. Structure (120 Q · 40/subject · 1 per topic · difficulty 1–5 adaptive · scoring 11+2×(level−1)) is verified from KU's official 2025 syllabus document. The bank now covers all 40/40 official topics per subject; some topics still only have a single question variant — see TODOs in source for expansion.
   </div>
 
   <div class="page-tabs" style="margin-bottom:16px">
@@ -3923,9 +4114,9 @@ function kcMTOverview(){
   </div>
   <div class="card-head" style="margin-bottom:10px"><div class="card-title">Quick Start</div></div>
   <div class="progress-cards" style="grid-template-columns:repeat(3,1fr)">
-    <div class="card" style="padding:16px;cursor:pointer" onclick="kcMTSetView('papers')"><div style="font-size:1.6rem">📄</div><div style="font-weight:700;margin:6px 0 2px">Past Year Papers</div><div style="font-size:0.72rem;color:var(--ink-3)">5 reconstructed full-length papers</div></div>
-    <div class="card" style="padding:16px;cursor:pointer" onclick="kcMTSetView('subjects')"><div style="font-size:1.6rem">📚</div><div style="font-weight:700;margin:6px 0 2px">Subject Mocks</div><div style="font-size:0.72rem;color:var(--ink-3)">4 tests each · Physics, Chemistry, Maths</div></div>
-    <div class="card" style="padding:16px;cursor:pointer" onclick="kcMTSetView('practice')"><div style="font-size:1.6rem">🎯</div><div style="font-weight:700;margin:6px 0 2px">Adaptive Practice</div><div style="font-size:0.72rem;color:var(--ink-3)">Custom drills, weak-topic focus, untimed</div></div>
+    <div class="card" style="padding:16px;cursor:pointer" onclick="kcMTSetView('papers')"><div style="color:var(--accent)">${ic('file',26)}</div><div style="font-weight:700;margin:6px 0 2px">Past Year Papers</div><div style="font-size:0.72rem;color:var(--ink-3)">5 reconstructed full-length papers</div></div>
+    <div class="card" style="padding:16px;cursor:pointer" onclick="kcMTSetView('subjects')"><div style="color:var(--accent)">${ic('book',26)}</div><div style="font-weight:700;margin:6px 0 2px">Subject Mocks</div><div style="font-size:0.72rem;color:var(--ink-3)">4 tests each · Physics, Chemistry, Maths</div></div>
+    <div class="card" style="padding:16px;cursor:pointer" onclick="kcMTSetView('practice')"><div style="color:var(--accent)">${ic('target',26)}</div><div style="font-weight:700;margin:6px 0 2px">Adaptive Practice</div><div style="font-size:0.72rem;color:var(--ink-3)">Custom drills, weak-topic focus, untimed</div></div>
   </div>`;
 }
 
@@ -3940,8 +4131,8 @@ function kcMTPapers(){
       </div>
       <div style="font-size:0.72rem;color:var(--ink-3);margin-bottom:10px">120 Q · 40 Physics + 40 Chemistry + 40 Maths, one per official topic · not an authentic past exam</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:0.7rem;color:var(--ink-2);margin-bottom:10px">
-        <div>📝 ${pp.questions} questions</div><div>⏱ ${pp.timeLimit} min</div>
-        <div>📊 ${pp.est}</div><div>🏆 Best: ${best?best.pctScore+'%':'—'}</div>
+        <div>${pp.questions} questions</div><div>${pp.timeLimit} min</div>
+        <div>${pp.est}</div><div>Best: ${best?best.pctScore+'%':'—'}</div>
       </div>
       <div style="display:flex;gap:6px">
         <button class="btn btn-primary btn-sm" style="flex:1" onclick="kcStartTest({kind:'paper',refId:'${pp.id}',label:'${pp.year}',mode:'fullpaper',subjects:['physics','chemistry','mathematics'],count:${pp.questions},timeLimit:${pp.timeLimit}})">Attempt Full Paper</button>
@@ -3964,10 +4155,10 @@ function kcMTSubjects(){
     const pool=kcBank(subj).filter(q=>q.diff>=tier.diffRange[0]&&q.diff<=tier.diffRange[1]);
     const best=(kucatData.mtAttempts||[]).filter(a=>a.kind==='subject'&&a.refId===subj+':'+tier.key).sort((a,b)=>b.pctScore-a.pctScore)[0];
     return `<div class="card" style="padding:16px">
-      <div style="font-size:1.4rem;margin-bottom:4px">${tier.icon}</div>
+      <div style="width:12px;height:12px;border-radius:50%;background:${tier.dot};margin-bottom:8px;box-shadow:0 0 0 4px ${tier.dot}22"></div>
       <div style="font-weight:800;font-size:0.88rem;margin-bottom:2px">${tier.label}</div>
       <div style="font-size:0.7rem;color:var(--ink-3);margin-bottom:10px">${pool.length} questions in pool${tier.key==='adaptive'?' · live difficulty engine':''}</div>
-      <div style="font-size:0.7rem;color:var(--ink-2);margin-bottom:10px">🏆 Best: ${best?best.pctScore+'%':'—'} ${tier.key==='adaptive'&&best?` · Est. score ${best.estScore}`:''}</div>
+      <div style="font-size:0.7rem;color:var(--ink-2);margin-bottom:10px">Best: ${best?best.pctScore+'%':'—'} ${tier.key==='adaptive'&&best?` · Est. score ${best.estScore}`:''}</div>
       <button class="btn btn-primary btn-sm" style="width:100%" ${pool.length<3&&tier.key!=='adaptive'?'disabled title="Question bank for this tier is still a starter set"':''} onclick="kcStartTest({kind:'subject',refId:'${subj}:${tier.key}',label:'${subj.charAt(0).toUpperCase()+subj.slice(1)} · ${tier.label}',mode:'${tier.key==='adaptive'?'adaptive':'fixed'}',subjects:['${subj}'],count:${tier.key==='adaptive'?Math.min(15,kcBank(subj).length):Math.max(1,Math.min(10,pool.length))},timeLimit:${tier.key==='adaptive'?20:15}})">${pool.length<3&&tier.key!=='adaptive'?'Bank too small':'Start'}</button>
     </div>`;
   }).join('')}
@@ -4000,7 +4191,7 @@ function kcLaunchCustom(){
 
 function kcMTAnalytics(){
   const attempts=kucatData.mtAttempts||[];
-  if(!attempts.length)return `<div class="card" style="padding:30px;text-align:center;color:var(--ink-3)"><div style="font-size:1.8rem;margin-bottom:8px">📊</div>Take a test to unlock analytics.</div>`;
+  if(!attempts.length)return `<div class="card" style="padding:30px;text-align:center;color:var(--ink-3)"><div style="margin-bottom:8px;display:flex;justify-content:center">${ic('chartbar',26)}</div>Take a test to unlock analytics.</div>`;
   const topicStats={};
   attempts.forEach(a=>(a.detail||[]).forEach(d=>{
     topicStats[d.topic]=topicStats[d.topic]||{c:0,t:0};
@@ -4054,10 +4245,10 @@ function kcMTAnalytics(){
   </div>
 
   <div class="grid" style="grid-template-columns:1fr 1fr;gap:16px">
-    <div class="card" style="padding:16px"><div class="card-title" style="margin-bottom:8px">🔴 Weakest Topics</div>
+    <div class="card" style="padding:16px"><div class="card-title" style="margin-bottom:8px;display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:var(--bad);display:inline-block"></span>Weakest Topics</div>
       ${weak.map(r=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line-2);font-size:0.78rem"><span>${r.t}</span><span style="font-weight:700;color:var(--bad)">${r.pct}% (${r.n})</span></div>`).join('')||'<div style="color:var(--ink-3);font-size:0.78rem">No data yet</div>'}
     </div>
-    <div class="card" style="padding:16px"><div class="card-title" style="margin-bottom:8px">🟢 Strongest Topics</div>
+    <div class="card" style="padding:16px"><div class="card-title" style="margin-bottom:8px;display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:var(--good);display:inline-block"></span>Strongest Topics</div>
       ${strong.map(r=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line-2);font-size:0.78rem"><span>${r.t}</span><span style="font-weight:700;color:var(--good)">${r.pct}% (${r.n})</span></div>`).join('')||'<div style="color:var(--ink-3);font-size:0.78rem">No data yet</div>'}
     </div>
   </div>
@@ -4177,7 +4368,7 @@ function renderCbtRunner(){
     <div class="card" style="padding:14px;align-self:start">
       <div style="font-size:0.7rem;font-weight:700;color:var(--ink-3);margin-bottom:8px">QUESTION NAVIGATOR</div>
       <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:5px" id="kcPalette">${palette}</div>
-      <div style="margin-top:10px;font-size:0.65rem;color:var(--ink-4);line-height:1.8">🟪 Current &nbsp;🟩 Answered &nbsp;🟧 Marked</div>
+      <div style="margin-top:10px;font-size:0.65rem;color:var(--ink-4);line-height:1.8;display:flex;gap:10px;align-items:center"><span style="display:inline-flex;align-items:center;gap:3px"><span style="width:8px;height:8px;border-radius:2px;background:var(--accent);display:inline-block"></span>Current</span><span style="display:inline-flex;align-items:center;gap:3px"><span style="width:8px;height:8px;border-radius:2px;background:var(--good);display:inline-block"></span>Answered</span><span style="display:inline-flex;align-items:center;gap:3px"><span style="width:8px;height:8px;border-radius:2px;background:var(--warn);display:inline-block"></span>Marked</span></div>
       <div style="margin-top:10px;font-size:0.65rem;color:var(--ink-3);font-weight:700">${st.answers.filter(a=>a!==null).length}/${st.questions.length} answered</div>
     </div>
   </div>`;
@@ -4291,7 +4482,7 @@ function kcResultsScreen(){
         <div style="display:flex;justify-content:space-between;font-size:0.7rem;font-weight:700;color:${d.correct?'var(--good)':'var(--bad)'};margin-bottom:4px"><span>${d.correct?'✓':'✗'} Q${i+1} · ${d.subj} · ${d.topic} ${d.marked?'· ★':''}</span><span>Diff ${d.diff}</span></div>
         <div style="font-size:0.76rem;color:var(--ink-2);margin-bottom:4px">${d.q}</div>
         ${!d.correct?`<div style="font-size:0.7rem;color:var(--ink-3)">Your answer: ${d.chosen!==null?d.opts[d.chosen]:'(skipped)'} · Correct: ${d.opts[d.ans]}</div>`:''}
-        <div style="font-size:0.7rem;color:var(--ink-4);margin-top:3px">💡 ${d.note}</div>
+        <div style="font-size:0.7rem;color:var(--ink-4);margin-top:3px">Tip: ${d.note}</div>
       </div>`).join('')}
     </div>
     <div style="display:flex;gap:10px">
