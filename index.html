@@ -1022,6 +1022,37 @@ a{text-decoration:none;color:inherit}
 @keyframes goalPop{0%{transform:scale(1)}40%{transform:scale(1.05)}100%{transform:scale(1)}}
 .goal-item.just-added{animation:goalPop .3s var(--ease)}
 .goal-celebrate-banner{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:var(--r);background:linear-gradient(90deg,var(--accent-soft),var(--elite-soft,var(--accent-soft)));border:1px solid var(--accent);margin-bottom:14px;font-size:0.8rem;font-weight:700;color:var(--accent);animation:goalRowIn .4s var(--ease)}
+/* ── LIVE STUDY TRACKER ─────────────────────────── */
+.lt-master{background:linear-gradient(135deg,var(--accent-soft),transparent);border:1.5px solid var(--line-strong)}
+.lt-master-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:14px}
+@media(max-width:700px){.lt-master-grid{grid-template-columns:repeat(2,1fr)}}
+.lt-task-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1.5px solid var(--line);border-radius:var(--r);margin-bottom:8px;transition:border-color var(--dur-2),background var(--dur-2)}
+.lt-task-row.done{border-color:var(--good);background:var(--good-soft)}
+.lt-task-check{width:20px;height:20px;border-radius:6px;border:2px solid var(--line-strong);flex-shrink:0;display:grid;place-items:center;cursor:pointer;transition:all var(--dur-2)}
+.lt-task-row.done .lt-task-check{background:var(--good);border-color:var(--good);color:#fff}
+.lt-task-label{flex:1;font-size:0.85rem;font-weight:600}
+.lt-task-row.done .lt-task-label{text-decoration:line-through;color:var(--ink-3)}
+.lt-task-mins{font-size:0.7rem;color:var(--ink-3);font-family:var(--font-num)}
+.lt-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:12px}
+.lt-cal-dow{font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--ink-3);text-align:center;padding-bottom:4px}
+.lt-cal-day{aspect-ratio:1;border-radius:var(--r-sm);border:1.5px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:0.78rem;font-weight:700;cursor:pointer;position:relative;transition:transform var(--dur-2),box-shadow var(--dur-2);background:var(--surface)}
+.lt-cal-day:hover{transform:translateY(-2px);box-shadow:var(--shadow-2)}
+.lt-cal-day.empty{visibility:hidden;cursor:default}
+.lt-cal-day.status-current{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-ring)}
+.lt-cal-day.status-perfect{background:var(--good);border-color:var(--good);color:#fff}
+.lt-cal-day.status-completed{background:var(--good-soft);border-color:var(--good)}
+.lt-cal-day.status-missed{background:var(--bad-soft);border-color:var(--bad);color:var(--bad)}
+.lt-cal-day.status-upcoming{color:var(--ink-3)}
+.lt-cal-day.status-before{color:var(--ink-4);opacity:0.5}
+.lt-cal-day.selected{outline:2px solid var(--elite);outline-offset:2px}
+.lt-deadline-row{display:flex;align-items:center;gap:12px;padding:12px;border:1.5px solid var(--line);border-radius:var(--r);margin-bottom:8px}
+.lt-deadline-row.soon{border-color:var(--warn);background:var(--warn-soft)}
+.lt-deadline-row.overdue{border-color:var(--bad);background:var(--bad-soft)}
+.lt-deadline-badge{font-size:0.68rem;font-weight:800;padding:3px 9px;border-radius:var(--r-full);white-space:nowrap}
+.lt-deadline-row.ok .lt-deadline-badge{background:var(--paper-3);color:var(--ink-3)}
+.lt-deadline-row.soon .lt-deadline-badge{background:var(--warn);color:#fff}
+.lt-deadline-row.overdue .lt-deadline-badge{background:var(--bad);color:#fff}
+@media(max-width:860px){.lt-two-col{grid-template-columns:1fr!important}}
 </style>
 </head>
 <body>
@@ -1062,6 +1093,7 @@ a{text-decoration:none;color:inherit}
 
       <div class="nav-group-label">Home</div>
       <button class="nav-item active" id="nav-today" onclick="showPage('today')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>Dashboard</button>
+      <button class="nav-item" id="nav-livetracker" onclick="showPage('livetracker')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14l2.5 2.5L16 11"/></svg>Live Tracker</button>
       <button class="nav-item" id="nav-streak" onclick="showPage('streak')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Streaks</button>
       <button class="nav-item" id="nav-achievements" onclick="showPage('achievements')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>Achievements</button>
 
@@ -1110,6 +1142,7 @@ a{text-decoration:none;color:inherit}
   </nav>
   <div class="sheet-overlay" id="moreSheet" onclick="if(event.target===this)closeMoreSheet()">
     <div class="sheet"><div class="sheet-handle"></div><div class="sheet-grid">
+      <button class="sheet-item" onclick="showPage('livetracker');closeMoreSheet()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Live Tracker</span></button>
       <button class="sheet-item" onclick="showPage('planner');closeMoreSheet()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Planner</span></button>
       <button class="sheet-item" onclick="showPage('errors');closeMoreSheet()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg><span>Error Log</span></button>
       <button class="sheet-item" onclick="showPage('traps');closeMoreSheet()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Trap DB</span></button>
@@ -1183,6 +1216,7 @@ a{text-decoration:none;color:inherit}
       </select>
     </div>
     <div class="grid grid-2"><div class="field"><label class="field-label">My answer</label><input type="text" class="field-input" id="errMyAnswer" placeholder="A/B/C/D or value"></div><div class="field"><label class="field-label">Correct answer</label><input type="text" class="field-input" id="errCorrectAnswer" placeholder="A/B/C/D or value"></div></div>
+    <div class="field"><label class="field-label">How confident were you?</label><select class="field-input" id="errConfidence"><option value="guess">Guess</option><option value="unsure" selected>Unsure</option><option value="confident">Confident</option></select></div>
     <div class="field"><label class="field-label">Error type</label><select class="field-input" id="errType"><option value="trap">TRAP — I fell for a deliberate distractor</option><option value="gap">GAP — I didn't know the concept</option><option value="timing">TIMING — I rushed or ran out of time</option><option value="careless">CARELESS — Silly mistake I shouldn't make</option></select></div>
     <div class="field"><label class="field-label">Root cause (be specific)</label><textarea class="field-input" id="errReason" rows="2" placeholder="e.g. Assumed diagram was to scale — checked nothing. Next time read the text, not the figure."></textarea></div>
     <div class="field"><label class="field-label">Prevention rule (your personal rule to never repeat this)</label><textarea class="field-input" id="errFix" rows="2" placeholder="e.g. Always substitute quadratic roots back into the original equation before selecting answer."></textarea></div>
@@ -1236,14 +1270,43 @@ a{text-decoration:none;color:inherit}
 <script>
 /* ========== DATA ========== */
 let currentUser=null,satTests=[],satErrors=[],planTasks={},studyLog={},collegeProgress={},generatedPlan=null,xpEvents=[],userProfile={target:1500,examDate:'2026-10-03',dailyGoal:2},weeklyReviews=[],readingLog={},hardQLog={},burnoutLog={};
+let dailyTracker={},deadlines=null;
 function uk(k){return'smE_'+(currentUser?currentUser.email:'x')+'_'+k}
 function sv(k,v){try{localStorage.setItem(uk(k),JSON.stringify(v))}catch(e){}}
 function lv(k,d){try{const v=localStorage.getItem(uk(k));return v!==null?JSON.parse(v):d}catch(e){return d}}
-function saveAll(){sv('tests',satTests);sv('errors',satErrors);sv('planTasks',planTasks);sv('studyLog',studyLog);sv('collegeProgress',collegeProgress);if(generatedPlan)sv('planMeta',{days:generatedPlan});sv('xpEvents',xpEvents);sv('profile',userProfile);sv('weeklyReviews',weeklyReviews);sv('readingLog',readingLog);sv('hardQLog',hardQLog);sv('burnoutLog',burnoutLog);sv('myGoals',myGoals)}
-function loadAll(){satTests=lv('tests',[]);satErrors=lv('errors',[]);planTasks=lv('planTasks',{});studyLog=lv('studyLog',{});collegeProgress=lv('collegeProgress',{});xpEvents=lv('xpEvents',[]);userProfile=lv('profile',{target:1500,examDate:'2026-10-03',dailyGoal:2});const pm=lv('planMeta',null);generatedPlan=pm?(pm.days||pm):null;weeklyReviews=lv('weeklyReviews',[]);readingLog=lv('readingLog',{});hardQLog=lv('hardQLog',{});burnoutLog=lv('burnoutLog',{});myGoals=lv('myGoals',null);if(!myGoals)myGoals=DEFAULT_MY_GOALS.map(t=>({id:'g_'+Math.random().toString(36).slice(2,9),text:t,done:false}))}
+function saveAll(){sv('tests',satTests);sv('errors',satErrors);sv('planTasks',planTasks);sv('studyLog',studyLog);sv('collegeProgress',collegeProgress);if(generatedPlan)sv('planMeta',{days:generatedPlan});sv('xpEvents',xpEvents);sv('profile',userProfile);sv('weeklyReviews',weeklyReviews);sv('readingLog',readingLog);sv('hardQLog',hardQLog);sv('burnoutLog',burnoutLog);sv('myGoals',myGoals);sv('dailyTracker',dailyTracker);sv('deadlines',deadlines)}
+function loadAll(){satTests=lv('tests',[]);satErrors=lv('errors',[]);planTasks=lv('planTasks',{});studyLog=lv('studyLog',{});collegeProgress=lv('collegeProgress',{});xpEvents=lv('xpEvents',[]);userProfile=lv('profile',{target:1500,examDate:'2026-10-03',dailyGoal:2});const pm=lv('planMeta',null);generatedPlan=pm?(pm.days||pm):null;weeklyReviews=lv('weeklyReviews',[]);readingLog=lv('readingLog',{});hardQLog=lv('hardQLog',{});burnoutLog=lv('burnoutLog',{});myGoals=lv('myGoals',null);if(!myGoals)myGoals=DEFAULT_MY_GOALS.map(t=>({id:'g_'+Math.random().toString(36).slice(2,9),text:t,done:false}));dailyTracker=lv('dailyTracker',{});deadlines=lv('deadlines',null);if(!deadlines)deadlines=DEFAULT_DEADLINES.map(d=>({...d}));runCycleResetIfNeeded()}
+
+/* ========== NEW STUDY CYCLE — one-time reset (fresh start July 3) ========== */
+const CYCLE_START='2026-07-03';
+const CYCLE_LENGTH_DAYS=120;
+function runCycleResetIfNeeded(){
+  if(lv('cycleResetDone_v1',false))return;
+  try{sv('archive_pre_july3_cycle',{tests:satTests,errors:satErrors,studyLog,planTasks,xpEvents,weeklyReviews,readingLog,hardQLog,burnoutLog,dailyTracker,archivedAt:new Date().toISOString()})}catch(e){}
+  satTests=[];satErrors=[];planTasks={};studyLog={};xpEvents=[];weeklyReviews=[];readingLog={};hardQLog={};burnoutLog={};dailyTracker={};
+  sv('cycleResetDone_v1',true);
+  saveAll();
+}
+function cycleDayNumber(iso){return Math.floor((new Date(iso+'T00:00:00')-new Date(CYCLE_START+'T00:00:00'))/86400000)+1}
+function cycleDaysCompleted(){const today=todayISO();const n=cycleDayNumber(today<CYCLE_START?CYCLE_START:today);return Math.max(0,Math.min(CYCLE_LENGTH_DAYS,n))}
+function cycleCurrentWeek(){return Math.max(1,Math.min(Math.ceil(CYCLE_LENGTH_DAYS/7),Math.ceil(cycleDaysCompleted()/7)))}
+function cyclePhaseInfo(){const d=cycleDaysCompleted();const phases=[{name:'Foundation',end:20},{name:'Skill Building',end:55},{name:'Score Building',end:90},{name:'Peak Performance',end:120}];for(const p of phases)if(d<=p.end)return p.name;return'Peak Performance'}
 
 /* ========== MY GOALS (top-right achievement tracker) ========== */
 const DEFAULT_MY_GOALS=['SAT 1500+','IELTS 8.0','Excellent grades','6–10 impressive software/AI projects','Strong GitHub profile','Portfolio website','Leadership experience','Hackathon participation (or wins if possible)','Good recommendation letters','Well-crafted personal statement'];
+/* ========== LIVE STUDY TRACKER — defaults ========== */
+const LT_TASK_TEMPLATE=[{key:'vocab',label:'Vocabulary',mins:20,icon:'book'},{key:'algebra',label:'Algebra',mins:30,icon:'calculator'},{key:'reading',label:'Reading',mins:25,icon:'bookopen'},{key:'grammar',label:'Grammar',mins:20,icon:'pencil'}];
+const DEFAULT_DEADLINES=[
+  {id:'dl_reg',title:'SAT Registration',date:'2026-08-22',icon:'clipboard'},
+  {id:'dl_essay',title:'College Essay',date:'2026-09-15',icon:'pencil'},
+  {id:'dl_ielts',title:'IELTS',date:'2026-08-30',icon:'globe'},
+  {id:'dl_rec',title:'Recommendation Letters',date:'2026-09-20',icon:'file'},
+  {id:'dl_fin',title:'Financial Documents',date:'2026-10-01',icon:'dollar'},
+  {id:'dl_pass',title:'Passport',date:'2026-07-31',icon:'passport'},
+  {id:'dl_visa',title:'Visa',date:'2026-11-15',icon:'plane'},
+  {id:'dl_schol',title:'Scholarship Applications',date:'2026-11-01',icon:'gem'},
+  {id:'dl_app',title:'Application Submission',date:'2026-12-01',icon:'send'},
+];
 const GOAL_PALETTE=['#4F46E5','#7C3AED','#0EA5E9','#16A34A','#D97706','#DB2777','#0891B2','#EA580C','#65A30D','#9333EA'];
 let myGoals=[];
 const GOAL_RING_C=2*Math.PI*26;
@@ -1329,6 +1392,7 @@ const ICONS={
  pin:'<path d="M12 21s7-6.5 7-11.5a7 7 0 0 0-14 0C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
  wrench:'<path d="M14.7 6.3a4 4 0 1 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-3 3-2-2z"/>',
  checkcircle:'<circle cx="12" cy="12" r="9"/><polyline points="8.5 12.5 11 15 16 9.5"/>',
+ calendar:'<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
 };
 function ic(key,size){size=size||16;return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0">${ICONS[key]||ICONS.star}</svg>`}
 function openGoalsPanel(){renderGoalList();openModal('goalsModal');setTimeout(()=>{const i=document.getElementById('goalNewInput');if(i)i.focus()},250)}
@@ -1340,6 +1404,34 @@ function deleteGoal(id){const row=document.getElementById('goalrow-'+id);if(row)
 /* ========== CONSTANTS ========== */
 const MATH_TOPICS=['Linear equations','Systems of equations','Quadratics','Functions','Exponential models','Statistics','Geometry','Trigonometry','Complex numbers','Polynomials','Ratios & rates','Word problems'];
 const RW_TOPICS=['Central idea','Textual evidence','Vocabulary in context','Inference','Cross-text connections','Rhetorical goal','Command of evidence','Notes-based writing','Transitions','Sentence boundaries','Punctuation','Subject-verb agreement','Modifiers','Parallelism','Verb tense','Concision'];
+const READING_TOPICS=['Central idea','Textual evidence','Inference','Cross-text connections','Rhetorical goal','Command of evidence','Notes-based writing'];
+const VOCAB_TOPICS=['Vocabulary in context'];
+const GRAMMAR_TOPICS=['Transitions','Sentence boundaries','Punctuation','Subject-verb agreement','Modifiers','Parallelism','Verb tense','Concision'];
+/* ========== SKILL XP — grounded in tasks you actually complete, not fabricated counters ==========
+   Grammar and Writing are combined into one skill since the app tracks one Grammar checklist
+   task and one grammar/writing error-topic group — keeping a 5th, untracked "Writing" counter
+   would just duplicate this one with fake numbers. */
+function skillXP(){
+  const skills={math:0,reading:0,grammar:0,vocabulary:0};
+  Object.keys(planTasks).forEach(k=>{
+    if(!planTasks[k].completed)return;
+    if(k.endsWith('_b_algebra'))skills.math+=10;
+    else if(k.endsWith('_b_reading'))skills.reading+=10;
+    else if(k.endsWith('_b_grammar'))skills.grammar+=10;
+    else if(k.endsWith('_b_vocab'))skills.vocabulary+=10;
+  });
+  satErrors.forEach(e=>{
+    let cat=null;
+    if(MATH_TOPICS.includes(e.topic))cat='math';
+    else if(READING_TOPICS.includes(e.topic))cat='reading';
+    else if(GRAMMAR_TOPICS.includes(e.topic))cat='grammar';
+    else if(VOCAB_TOPICS.includes(e.topic))cat='vocabulary';
+    if(cat){skills[cat]+=5;if(e.reviewed)skills[cat]+=10}
+  });
+  const out={};
+  Object.keys(skills).forEach(k=>{const xp=skills[k];out[k]={xp,level:Math.floor(xp/300)+1,pct:(xp%300)/300*100}});
+  return out;
+}
 
 const SCORE_CHECKPOINTS=[
   {week:1,label:'Diagnostic Baseline',target:null,color:'#6B6F7B',desc:'Establish your true starting score. No prep, no guessing — this is your baseline map.'},
@@ -1476,6 +1568,11 @@ const BADGES=[
   {icon:'bookopen',name:'Daily Reader',cond:'Log 21 days of reading',check:()=>Object.keys(readingLog).length>=21},
   {icon:'crown',name:'1580 Dreamer',cond:'Score 1580+ on any test',check:()=>satTests.some(t=>t.total>=1580)},
   {icon:'star',name:'Plan Complete',cond:'Complete all 15 weeks of plan tasks',check:()=>Object.values(planTasks).filter(t=>t.completed).length>=50},
+  {icon:'sparkle',name:'Perfect Week',cond:'7-day study streak',check:()=>calcBestStreak()>=7},
+  {icon:'calculator',name:'Algebra Master',cond:'Reach Math skill level 5',check:()=>skillXP().math.level>=5},
+  {icon:'bookopen',name:'Reading Champion',cond:'Reach Reading skill level 5',check:()=>skillXP().reading.level>=5},
+  {icon:'gem',name:'Vocabulary King',cond:'Reach Vocabulary skill level 5',check:()=>skillXP().vocabulary.level>=5},
+  {icon:'trophy',name:'Mock Test Beast',cond:'Log 8 practice tests',check:()=>satTests.length>=8},
 ];
 /* ========== AUTH ========== */
 function login(){const n=(document.getElementById('authName').value||'').trim(),e=(document.getElementById('authEmail').value||'').trim();if(!n||!e){showToast('Enter name and email');return}currentUser={name:n,email:e};try{localStorage.setItem('sm_elite_user',JSON.stringify(currentUser))}catch(ex){}initApp()}
@@ -1493,7 +1590,7 @@ function showPage(id){
     window.scrollTo(0,0);
     return;
   }
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-item,.tab-item').forEach(n=>n.classList.remove('active'));const p=document.getElementById('page-'+id);if(p)p.classList.add('active');const nb=document.getElementById('nav-'+id);if(nb)nb.classList.add('active');const tb=document.getElementById('tab-'+id);if(tb)tb.classList.add('active');window.scrollTo(0,0);const map={today:renderTodayPage,planner:renderPlanContainer,tests:renderTestsPage,errors:renderErrorsPage,analytics:renderAnalyticsPage,weaknesses:renderWeaknessPage,streak:renderStreakPage,roadmap:renderRoadmapPage,traps:renderTrapsPage,hardq:renderHardQPage,weekly:renderWeeklyPage,resources:renderResources,college:renderCollegePage,achievements:renderAchievements,kucat:renderKucatPage,mocktest:renderMockTestCenter};if(map[id])map[id]()
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-item,.tab-item').forEach(n=>n.classList.remove('active'));const p=document.getElementById('page-'+id);if(p)p.classList.add('active');const nb=document.getElementById('nav-'+id);if(nb)nb.classList.add('active');const tb=document.getElementById('tab-'+id);if(tb)tb.classList.add('active');window.scrollTo(0,0);const map={today:renderTodayPage,livetracker:renderLiveTrackerPage,planner:renderPlanContainer,tests:renderTestsPage,errors:renderErrorsPage,analytics:renderAnalyticsPage,weaknesses:renderWeaknessPage,streak:renderStreakPage,roadmap:renderRoadmapPage,traps:renderTrapsPage,hardq:renderHardQPage,weekly:renderWeeklyPage,resources:renderResources,college:renderCollegePage,achievements:renderAchievements,kucat:renderKucatPage,mocktest:renderMockTestCenter};if(map[id])map[id]()
 }
 function openMoreSheet(){document.getElementById('moreSheet').classList.add('show');document.body.style.overflow='hidden'}
 function closeMoreSheet(){document.getElementById('moreSheet').classList.remove('show');document.body.style.overflow=''}
@@ -1519,14 +1616,162 @@ function exportData(){const blob=new Blob([JSON.stringify({user:currentUser,test
 function emptyState(icon,title,sub,modal){return`<div class="card" style="text-align:center;padding:48px 24px"><div style="margin-bottom:12px;color:var(--ink-4);display:flex;justify-content:center">${ic(icon,34)}</div><div style="font-weight:700;font-size:0.95rem;margin-bottom:4px">${title}</div><div style="font-size:0.8rem;color:var(--ink-3);margin-bottom:16px">${sub}</div>${modal?`<button class="btn btn-primary btn-sm" onclick="openModal('${modal}')">Get started</button>`:''}</div>`}
 let _toastTimer;
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_toastTimer);_toastTimer=setTimeout(()=>t.classList.remove('show'),2800)}
+
+/* ========== LIVE STUDY TRACKER — data logic ========== */
+/* Unified with the existing planTasks system: the curriculum task (from the Study
+   Planner's generatedPlan, if present) and the 4 basic subject checkboxes are all
+   stored in planTasks — the same store Study Planner/Roadmap/XP already read from —
+   so there is one single source of truth for "did I do today's work", not two. */
+function ltDayData(iso){const raw=dailyTracker[iso];return{custom:(raw&&raw.custom)||[],note:(raw&&raw.note)||''}}
+function ltEnsureDay(iso){if(!dailyTracker[iso])dailyTracker[iso]={custom:[],note:''};return dailyTracker[iso]}
+function ltPlanTaskForDay(iso){return generatedPlan?generatedPlan.find(dd=>dd.date===iso):null}
+function ltBasicKey(iso,subjectKey){return`${iso}_b_${subjectKey}`}
+function ltToggleTask(iso,planKey){planTasks[planKey]=planTasks[planKey]||{};planTasks[planKey].completed=!planTasks[planKey].completed;studyLog[iso]=true;saveAll();renderLiveTrackerPage();renderXP();renderAnalyticsPage()}
+function ltAddCustomTask(iso){const inp=document.getElementById('lt_new_task');const label=inp&&inp.value.trim();if(!label){showToast('Enter a task name');return}const d=ltEnsureDay(iso);d.custom.push({id:'ct_'+Math.random().toString(36).slice(2,8),label,done:false,mins:15});if(inp)inp.value='';saveAll();renderLiveTrackerPage()}
+function ltToggleCustom(iso,id){const d=ltEnsureDay(iso);const t=d.custom.find(c=>c.id===id);if(t){t.done=!t.done;studyLog[iso]=true;saveAll();renderLiveTrackerPage();renderXP()}}
+function ltDeleteCustom(iso,id){const d=ltEnsureDay(iso);d.custom=d.custom.filter(c=>c.id!==id);saveAll();renderLiveTrackerPage()}
+function ltDayStats(iso){
+  const d=ltDayData(iso);
+  const items=[];
+  const planDay=ltPlanTaskForDay(iso);
+  if(planDay){
+    planDay.tasks.forEach((t,i)=>{
+      const key=`${iso}_${i}`;
+      items.push({key,label:t.label,mins:30,icon:'flag',done:!!(planTasks[key]&&planTasks[key].completed),plan:true});
+    });
+  }
+  LT_TASK_TEMPLATE.forEach(t=>{
+    const key=ltBasicKey(iso,t.key);
+    items.push({key,label:t.label,mins:t.mins,icon:t.icon,done:!!(planTasks[key]&&planTasks[key].completed)});
+  });
+  d.custom.forEach(c=>items.push({key:c.id,label:c.label,mins:c.mins||15,icon:'star',done:!!c.done,custom:true}));
+  const total=items.length,done=items.filter(t=>t.done).length;
+  const pct=total?Math.round(done/total*100):0;
+  const minsLeft=items.filter(t=>!t.done).reduce((a,t)=>a+t.mins,0);
+  return{items,total,done,pct,minsLeft};
+}
+function ltFmtMins(m){if(m<=0)return'0 min';const h=Math.floor(m/60),r=m%60;return h?`${h} hr${r?' '+r+' min':''}`:`${r} min`}
+function ltStatusForDay(iso){
+  const today=todayISO();
+  if(iso<CYCLE_START)return'before';
+  const stats=ltDayStats(iso);
+  if(iso===today)return stats.total&&stats.done===stats.total?'perfect':'current';
+  if(iso>today)return'upcoming';
+  // past day within cycle
+  if(stats.total===0)return'missed';
+  if(stats.done===stats.total)return'perfect';
+  if(stats.done>0)return'completed';
+  return'missed';
+}
+function ltOverallPct(){
+  const today=todayISO();
+  const start=new Date(CYCLE_START+'T00:00:00');
+  const end=new Date(today+'T00:00:00');
+  if(end<start)return 0;
+  let totalDone=0,totalAll=0,d=new Date(start);
+  while(d<=end){
+    const iso=d.toISOString().split('T')[0];
+    const st=ltDayStats(iso);
+    totalDone+=st.done;totalAll+=Math.max(st.total,LT_TASK_TEMPLATE.length);
+    d.setDate(d.getDate()+1);
+  }
+  return totalAll?Math.round(totalDone/totalAll*100):0;
+}
+function deadlineStatus(dateStr){
+  const days=Math.floor((new Date(dateStr+'T00:00:00')-new Date(todayISO()+'T00:00:00'))/86400000);
+  if(days<0)return{state:'overdue',days,label:'OVERDUE'};
+  if(days<=7)return{state:'soon',days,label:days===0?'Due today':`Due in ${days} day${days===1?'':'s'}`};
+  return{state:'ok',days,label:`${days} days left`};
+}
+function ltAddDeadline(){
+  const t=document.getElementById('lt_dl_title'),dte=document.getElementById('lt_dl_date');
+  const title=t&&t.value.trim(),date=dte&&dte.value;
+  if(!title||!date){showToast('Enter a title and date');return}
+  deadlines.push({id:'dl_'+Math.random().toString(36).slice(2,8),title,date,icon:'flag'});
+  t.value='';dte.value='';
+  saveAll();renderLiveTrackerPage();showToast('Deadline added');
+}
+function ltDeleteDeadline(id){deadlines=deadlines.filter(d=>d.id!==id);saveAll();renderLiveTrackerPage()}
+function ltUpdateDeadlineDate(id,val){const d=deadlines.find(x=>x.id===id);if(d){d.date=val;saveAll();renderLiveTrackerPage()}}
+let ltCalMonth=null;
+/* ---- Weekly / Monthly goals — computed only from data we actually track ---- */
+function ltWeekRange(baseIso){
+  const d=new Date((baseIso||todayISO())+'T00:00:00');
+  const dow=(d.getDay()+6)%7; // Monday=0
+  const start=new Date(d);start.setDate(d.getDate()-dow);
+  const end=new Date(start);end.setDate(start.getDate()+6);
+  return{start:start.toISOString().split('T')[0],end:end.toISOString().split('T')[0]};
+}
+function ltInRange(iso,start,end){return iso>=start&&iso<=end}
+function ltWeeklyGoals(){
+  const{start,end}=ltWeekRange();
+  const studyDays=Object.keys(studyLog).filter(k=>ltInRange(k,start,end)).length;
+  const readingDays=Object.keys(readingLog).filter(k=>readingLog[k]&&ltInRange(k,start,end)).length;
+  const errorsLogged=satErrors.filter(e=>e.created&&ltInRange(e.created,start,end)).length;
+  const mocksTaken=satTests.filter(t=>t.date&&ltInRange(t.date,start,end)).length;
+  return[
+    {label:'Study Days',done:studyDays,target:7,icon:'flag'},
+    {label:'Reading Sessions',done:readingDays,target:5,icon:'bookopen'},
+    {label:'Errors Reviewed',done:errorsLogged,target:10,icon:'warning'},
+    {label:'Mock Test Completed',done:Math.min(mocksTaken,1),target:1,icon:'clipboard'},
+  ];
+}
+function ltMonthRange(){
+  const end=todayISO();
+  const d=new Date(end+'T00:00:00');d.setDate(d.getDate()-29);
+  return{start:d.toISOString().split('T')[0],end};
+}
+function ltMonthlyGoals(){
+  const{start,end}=ltMonthRange();
+  const studyDays=Object.keys(studyLog).filter(k=>ltInRange(k,start,end)).length;
+  const readingSessions=Object.keys(readingLog).filter(k=>readingLog[k]&&ltInRange(k,start,end)).length;
+  const mocks=satTests.filter(t=>t.date&&ltInRange(t.date,start,end)).length;
+  const reviewed=satErrors.filter(e=>e.reviewed&&e.created&&ltInRange(e.created,start,end)).length;
+  const predicted=predictedScore();
+  return{
+    targetScore:{label:'Target Score',current:predicted||'—',target:userProfile.target||1500},
+    practiceHours:{label:'Est. Practice Hours',current:studyDays*2,target:60},
+    readingSessions:{label:'Reading Sessions',current:readingSessions,target:20},
+    mockTests:{label:'Mock Tests',current:mocks,target:4},
+    errorsReviewed:{label:'Errors Reviewed',current:reviewed,target:15},
+  };
+}
+/* ---- Smart recommendation — built only from real logged data, never generic ---- */
+function ltJoinList(arr){if(arr.length<=1)return arr.join('');if(arr.length===2)return arr.join(' and ');return arr.slice(0,-1).join(', ')+', and '+arr[arr.length-1]}
+function ltRecommendation(){
+  const today=todayISO();
+  const yest=new Date(today+'T00:00:00');yest.setDate(yest.getDate()-1);
+  const yestIso=yest.toISOString().split('T')[0];
+  const yestStats=ltDayStats(yestIso);
+  const skipped=yestStats.items.filter(i=>!i.custom&&!i.done).map(i=>i.label);
+  const topicCounts={};satErrors.forEach(e=>{if(e.topic)topicCounts[e.topic]=(topicCounts[e.topic]||0)+1});
+  const weakest=Object.entries(topicCounts).sort((a,b)=>b[1]-a[1])[0];
+  const todayStats=ltDayStats(today);
+  const remaining=todayStats.items.filter(i=>!i.done);
+  const lines=[];
+  if(skipped.length)lines.push(`Yesterday you skipped ${ltJoinList(skipped)}.`);
+  if(weakest)lines.push(`Your most error-prone topic is ${esc(weakest[0])} (${weakest[1]} logged mistake${weakest[1]===1?'':'s'}).`);
+  if(!skipped.length&&!weakest)lines.push(`No study history yet — starting fresh today.`);
+  return{summary:lines,focus:remaining.slice(0,4)};
+}
+function ltCalShift(delta){
+  if(!ltCalMonth)ltCalMonth=todayISO().slice(0,7);
+  const[y,m]=ltCalMonth.split('-').map(Number);
+  const nd=new Date(y,m-1+delta,1);
+  ltCalMonth=`${nd.getFullYear()}-${String(nd.getMonth()+1).padStart(2,'0')}`;
+  renderLiveTrackerPage();
+}
+let ltSelectedDay=null;
+function ltSelectDay(iso){ltSelectedDay=iso;renderLiveTrackerPage()}
 function renderXP(){const xp=(satTests.length*100)+(satErrors.length*10)+(weeklyReviews.length*50)+(Object.keys(studyLog).length*20)+(Object.keys(readingLog).length*5);const lv=Math.floor(xp/500)+1;const pct=(xp%500)/500*100;const l=document.getElementById('xpLevel');if(l)l.textContent=lv;const x=document.getElementById('xpCount');if(x)x.textContent=xp+' XP';const b=document.getElementById('xpBarFill');if(b)b.style.width=pct+'%'}
 function openProfileModal(){const pt=document.getElementById('profileTarget');const ped=document.getElementById('profileExamDate');const pg=document.getElementById('profileGoal');if(pt)pt.value=userProfile.target||1500;if(ped)ped.value=userProfile.examDate||'2026-10-03';if(pg)pg.value=userProfile.dailyGoal||2;openModal('profileModal')}
 function saveProfile(){const pt=document.getElementById('profileTarget');const ped=document.getElementById('profileExamDate');const pg=document.getElementById('profileGoal');userProfile.target=parseInt(pt&&pt.value)||1500;userProfile.examDate=(ped&&ped.value)||'2026-10-03';userProfile.dailyGoal=parseFloat(pg&&pg.value)||2;saveAll();closeModal('profileModal');renderTodayPage();showToast('Profile saved')}
-function resetAll(){satTests=[];satErrors=[];planTasks={};studyLog={};collegeProgress={};generatedPlan=null;xpEvents=[];weeklyReviews=[];readingLog={};hardQLog={};burnoutLog={};saveAll();renderAll();closeModal('profileModal');showToast('All data reset')}
+function resetAll(){satTests=[];satErrors=[];planTasks={};studyLog={};collegeProgress={};generatedPlan=null;xpEvents=[];weeklyReviews=[];readingLog={};hardQLog={};burnoutLog={};dailyTracker={};saveAll();renderAll();closeModal('profileModal');showToast('All data reset')}
 /* ========== BUILD PAGES ========== */
 function buildPages(){
   document.getElementById('contentInner').innerHTML=`
   <div class="page active" id="page-today"></div>
+  <div class="page" id="page-livetracker"></div>
   <div class="page" id="page-roadmap"></div>
   <div class="page" id="page-planner"></div>
   <div class="page" id="page-tests"></div>
@@ -1544,7 +1789,7 @@ function buildPages(){
   <div class="page" id="page-kucat"></div>
   <div class="page" id="page-mocktest"></div>`;
 }
-function renderAll(){loadCmdData();renderTodayPage();renderTestsPage();renderErrorsPage();renderAnalyticsPage();renderStreakPage();renderWeaknessPage();renderAchievements();renderResources();renderCollegePage();renderWeeklyPage();renderXP();if(generatedPlan)renderPlanContainer();renderKucatPage();renderMockTestCenter()}
+function renderAll(){loadCmdData();renderTodayPage();renderLiveTrackerPage();renderTestsPage();renderErrorsPage();renderAnalyticsPage();renderStreakPage();renderWeaknessPage();renderAchievements();renderResources();renderCollegePage();renderWeeklyPage();renderXP();if(generatedPlan)renderPlanContainer();renderKucatPage();renderMockTestCenter()}
 
 /* ========== DASHBOARD PAGE ========== */
 function renderTodayPage(){
@@ -1584,10 +1829,8 @@ function renderTodayPage(){
   const cmdTotal=cmdPhases.reduce((a,p)=>a+(p.tasks||[]).length,0);
   const cmdPct=cmdTotal?Math.round(cmdDone/cmdTotal*100):0;
 
-  // Daily missions
-  let missions=[];
-  if(generatedPlan){const day=generatedPlan.find(dd=>dd.date===today);if(day)missions=day.tasks.map((t,i)=>({id:`${today}_${i}`,label:t.label,meta:t.meta,done:!!(planTasks[`${today}_${i}`]&&planTasks[`${today}_${i}`].completed)}))}
-  if(!missions.length)missions=[
+  // Daily missions — cross-domain nudges (SAT plan/subject checklist now lives in Live Tracker, not duplicated here)
+  let missions=[
     {id:'s0',label:'Log a Bluebook practice test',meta:'SAT · establishes baseline score',done:satTests.length>0},
     {id:'s1',label:'Add errors to Error Log',meta:'SAT · 10 min',done:satErrors.length>=5},
     {id:'s2',label:'Study 2 KUCAT chapters today',meta:'KUCAT · check off in checklist',done:kcDone>0},
@@ -1713,6 +1956,7 @@ function renderTodayPage(){
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
           <div><div class="card-title">Today's tasks</div><div class="card-sub">${doneCount}/${missions.length} complete</div></div>
           <div style="display:flex;gap:5px">
+            <button class="btn btn-secondary btn-xs" onclick="showPage('livetracker')">Live Tracker</button>
             <button class="btn btn-secondary btn-xs" onclick="showPage('planner')">SAT plan</button>
             <button class="btn btn-secondary btn-xs" onclick="showPage('kucat')">KUCAT</button>
           </div>
@@ -1897,6 +2141,188 @@ function toggleMission(id){
 }
 function toggleReadingDay(iso){readingLog[iso]=!readingLog[iso];if(!readingLog[iso])delete readingLog[iso];saveAll();renderTodayPage();renderAchievements();renderXP();showToast(readingLog[iso]?'Reading logged ✓':'Reading removed')}
 function logBurnout(level){burnoutLog[todayISO()]={energy:level};saveAll();renderTodayPage();showToast('Energy logged: '+level+'/10')}
+
+/* ========== LIVE STUDY TRACKER PAGE ========== */
+function renderLiveTrackerPage(){
+  const pg=document.getElementById('page-livetracker');if(!pg)return;
+  const today=todayISO();
+  const viewIso=ltSelectedDay||today;
+  const stats=ltDayStats(viewIso);
+  const overallPct=ltOverallPct();
+  const daysDone=cycleDaysCompleted();
+  const week=cycleCurrentWeek();
+  const phase=cyclePhaseInfo();
+  const predicted=predictedScore()||userProfile.target||1500;
+
+  // deadlines sorted by date
+  const sortedDeadlines=[...deadlines].sort((a,b)=>new Date(a.date)-new Date(b.date));
+  const weeklyGoals=ltWeeklyGoals();
+  const monthlyGoals=ltMonthlyGoals();
+  const rec=ltRecommendation();
+  const skills=skillXP();
+  const SKILL_META={math:{label:'Math',icon:'calculator',color:'var(--accent)'},reading:{label:'Reading',icon:'bookopen',color:'var(--good)'},grammar:{label:'Grammar & Writing',icon:'pencil',color:'var(--warn)'},vocabulary:{label:'Vocabulary',icon:'book',color:'var(--elite)'}};
+
+  // calendar month
+  if(!ltCalMonth)ltCalMonth=today.slice(0,7);
+  const[cy,cm]=ltCalMonth.split('-').map(Number);
+  const firstOfMonth=new Date(cy,cm-1,1);
+  const startOffset=(firstOfMonth.getDay()+6)%7; // Monday-first
+  const daysInMonth=new Date(cy,cm,0).getDate();
+  const monthLabel=firstOfMonth.toLocaleDateString('en-US',{month:'long',year:'numeric'});
+  let calCells='';
+  for(let i=0;i<startOffset;i++)calCells+='<div class="lt-cal-day empty"></div>';
+  for(let day=1;day<=daysInMonth;day++){
+    const iso=`${cy}-${String(cm).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    const status=ltStatusForDay(iso);
+    const sel=iso===viewIso?' selected':'';
+    calCells+=`<div class="lt-cal-day status-${status}${sel}" onclick="ltSelectDay('${iso}')" title="${iso}">${day}</div>`;
+  }
+
+  // view day detail stats (for the selected calendar day, may differ from today)
+  const viewStats=ltDayStats(viewIso);
+  const viewLabel=viewIso===today?"Today":new Date(viewIso+'T00:00:00').toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'});
+
+  pg.innerHTML=`
+  <div style="margin-bottom:20px">
+    <div class="eyebrow" style="margin-bottom:4px">Live Study Tracker</div>
+    <div class="display-2" style="font-size:1.45rem;margin-bottom:4px">Your study cycle, updated every day.</div>
+  </div>
+
+  <div class="card lt-master" style="margin-bottom:18px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px">
+      <div>
+        <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-3);margin-bottom:4px">Overall Completion</div>
+        <div style="font-family:var(--font-num);font-size:2rem;font-weight:900;letter-spacing:-0.03em">${overallPct}%</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-3);margin-bottom:4px">Days Completed</div>
+        <div style="font-family:var(--font-num);font-size:1.3rem;font-weight:800">${daysDone} / ${CYCLE_LENGTH_DAYS}</div>
+      </div>
+    </div>
+    <div class="bar-track" style="margin-top:12px"><div class="bar-fill good" style="width:${overallPct}%"></div></div>
+    <div class="lt-master-grid">
+      <div class="progress-card"><div class="progress-card-label">Current Week</div><div class="progress-card-val">Week ${week}</div></div>
+      <div class="progress-card"><div class="progress-card-label">Current Phase</div><div class="progress-card-val" style="font-size:1.05rem">${phase}</div></div>
+      <div class="progress-card"><div class="progress-card-label">Projected SAT</div><div class="progress-card-val">${predicted}</div></div>
+      <div class="progress-card"><div class="progress-card-label">Cycle Started</div><div class="progress-card-val" style="font-size:1.05rem">Jul 3</div></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:18px;border-color:var(--accent);background:var(--accent-soft)">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><div style="color:var(--accent);display:flex">${ic('bulb',18)}</div><div class="card-title">Today's Best Plan</div></div>
+    ${rec.summary.map(l=>`<div style="font-size:0.82rem;color:var(--ink-2);margin-bottom:4px">${l}</div>`).join('')}
+    ${rec.focus.length?`<div style="font-size:0.78rem;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.05em;margin-top:10px;margin-bottom:6px">Today's Focus</div>
+    ${rec.focus.map(f=>`<div style="font-size:0.82rem;margin-bottom:3px">• ${esc(f.label)} <span style="color:var(--ink-3)">(${f.mins} min)</span></div>`).join('')}`
+    :`<div style="font-size:0.82rem;color:var(--good);font-weight:700;margin-top:8px">All of today's tasks are done — great work.</div>`}
+  </div>
+
+  <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:18px;align-items:start" class="lt-two-col">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div class="card-title">${esc(viewLabel)}'s Checklist</div>
+        ${ltSelectedDay&&ltSelectedDay!==today?`<button class="btn btn-ghost btn-sm" onclick="ltSelectDay(null)">Back to today</button>`:''}
+      </div>
+      ${stats.total===0&&viewIso!==today?`<div style="font-size:0.8rem;color:var(--ink-3);padding:8px 0">No tasks logged for this day.</div>`:''}
+      ${viewStats.items.map(t=>`
+        <div class="lt-task-row ${t.done?'done':''}">
+          <div class="lt-task-check" onclick="${t.custom?`ltToggleCustom('${viewIso}','${t.key}')`:`ltToggleTask('${viewIso}','${t.key}')`}">${t.done?ic('checkcircle',14):''}</div>
+          <div style="color:var(--ink-3);display:flex">${ic(t.icon,15)}</div>
+          <div class="lt-task-label">${esc(t.label)}</div>
+          <div class="lt-task-mins">${t.mins} min</div>
+          ${t.custom?`<button class="btn btn-ghost btn-sm" style="padding:2px 6px" onclick="ltDeleteCustom('${viewIso}','${t.key}')">✕</button>`:''}
+        </div>`).join('')}
+      <div style="display:flex;gap:8px;margin-top:10px">
+        <input type="text" id="lt_new_task" placeholder="Add a custom task…" style="flex:1;padding:8px 10px;border-radius:var(--r-sm);border:1.5px solid var(--line);background:var(--surface);font-size:0.82rem">
+        <button class="btn btn-secondary btn-sm" onclick="ltAddCustomTask('${viewIso}')">Add</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)">
+        <div>
+          <div style="font-size:0.7rem;color:var(--ink-3);font-weight:700;text-transform:uppercase;letter-spacing:0.05em">Progress</div>
+          <div style="font-family:var(--font-num);font-size:1.3rem;font-weight:800">${viewStats.pct}%</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:0.7rem;color:var(--ink-3);font-weight:700;text-transform:uppercase;letter-spacing:0.05em">Time Left</div>
+          <div style="font-family:var(--font-num);font-size:1.05rem;font-weight:700">${ltFmtMins(viewStats.minsLeft)}</div>
+        </div>
+      </div>
+      <div class="bar-track" style="margin-top:8px"><div class="bar-fill good" style="width:${viewStats.pct}%"></div></div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <button class="btn btn-ghost btn-sm" onclick="ltCalShift(-1)">←</button>
+        <div class="card-title" style="margin-bottom:0">${monthLabel}</div>
+        <button class="btn btn-ghost btn-sm" onclick="ltCalShift(1)">→</button>
+      </div>
+      <div class="lt-cal-grid">
+        ${['M','T','W','T','F','S','S'].map(d=>`<div class="lt-cal-dow">${d}</div>`).join('')}
+        ${calCells}
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;font-size:0.68rem;color:var(--ink-3)">
+        <span><span style="display:inline-block;width:9px;height:9px;border-radius:3px;background:var(--good);vertical-align:-1px"></span> Perfect / Completed</span>
+        <span><span style="display:inline-block;width:9px;height:9px;border-radius:3px;background:var(--accent);vertical-align:-1px"></span> Today</span>
+        <span><span style="display:inline-block;width:9px;height:9px;border-radius:3px;background:var(--bad);vertical-align:-1px"></span> Missed</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:18px">
+    <div class="card-title">Deadlines</div>
+    ${sortedDeadlines.map(d=>{
+      const ds=deadlineStatus(d.date);
+      return`<div class="lt-deadline-row ${ds.state}">
+        <div style="color:var(--ink-3);display:flex">${ic(d.icon||'flag',18)}</div>
+        <div style="flex:1">
+          <div style="font-weight:700;font-size:0.86rem">${esc(d.title)}</div>
+          <input type="date" value="${d.date}" onchange="ltUpdateDeadlineDate('${d.id}',this.value)" style="border:none;background:transparent;font-size:0.72rem;color:var(--ink-3);padding:0;margin-top:2px;font-family:var(--font-num)">
+        </div>
+        <div class="lt-deadline-badge">${ds.state==='overdue'?'⚠ '+ds.label:ds.label}</div>
+        <button class="btn btn-ghost btn-sm" style="padding:2px 6px" onclick="ltDeleteDeadline('${d.id}')">✕</button>
+      </div>`;
+    }).join('')}
+    <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+      <input type="text" id="lt_dl_title" placeholder="New deadline title…" style="flex:1;min-width:160px;padding:8px 10px;border-radius:var(--r-sm);border:1.5px solid var(--line);background:var(--surface);font-size:0.82rem">
+      <input type="date" id="lt_dl_date" style="padding:8px 10px;border-radius:var(--r-sm);border:1.5px solid var(--line);background:var(--surface);font-size:0.82rem">
+      <button class="btn btn-secondary btn-sm" onclick="ltAddDeadline()">Add deadline</button>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;margin-top:18px" class="lt-two-col">
+    <div class="card">
+      <div class="card-title" style="margin-bottom:10px">Weekly Goals</div>
+      ${weeklyGoals.map(g=>{const pct=Math.min(100,Math.round(g.done/g.target*100));return`
+        <div style="margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-bottom:4px"><span style="font-weight:600;display:flex;align-items:center;gap:6px">${ic(g.icon,14)}${esc(g.label)}</span><span style="color:var(--ink-3);font-family:var(--font-num)">${g.done}/${g.target}</span></div>
+          <div class="bar-track"><div class="bar-fill ${pct>=100?'good':''}" style="width:${pct}%"></div></div>
+        </div>`;}).join('')}
+    </div>
+    <div class="card">
+      <div class="card-title" style="margin-bottom:10px">Monthly Objectives</div>
+      ${Object.values(monthlyGoals).map(g=>{
+        const numeric=typeof g.current==='number';
+        const pct=numeric&&g.target?Math.min(100,Math.round(g.current/g.target*100)):(g.current!=='—'&&g.current>=g.target?100:0);
+        return`<div style="margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-bottom:4px"><span style="font-weight:600">${esc(g.label)}</span><span style="color:var(--ink-3);font-family:var(--font-num)">${g.current}${numeric?' / '+g.target:''}</span></div>
+          <div class="bar-track"><div class="bar-fill ${pct>=100?'good':''}" style="width:${pct}%"></div></div>
+        </div>`;}).join('')}
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:18px">
+    <div class="card-title" style="margin-bottom:12px">Skill Mastery</div>
+    <div class="grid grid-4" style="gap:12px">
+      ${Object.keys(SKILL_META).map(k=>{const s=skills[k];const m=SKILL_META[k];return`
+        <div style="text-align:center;padding:10px;border:1.5px solid var(--line);border-radius:var(--r)">
+          <div style="color:${m.color};display:flex;justify-content:center;margin-bottom:6px">${ic(m.icon,20)}</div>
+          <div style="font-size:0.72rem;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.04em">${m.label}</div>
+          <div style="font-family:var(--font-num);font-size:1.15rem;font-weight:800;margin:4px 0">Lv ${s.level}</div>
+          <div class="bar-track" style="height:5px"><div class="bar-fill" style="width:${s.pct}%;background:${m.color}"></div></div>
+          <div style="font-size:0.66rem;color:var(--ink-4);margin-top:4px">${s.xp} XP</div>
+        </div>`;}).join('')}
+    </div>
+  </div>
+  `;
+}
 /* ========== ROADMAP PAGE ========== */
 function renderRoadmapPage(){
   const sorted=[...satTests].sort((a,b)=>new Date(a.date)-new Date(b.date));
@@ -2067,6 +2493,17 @@ function saveTest(){
   saveAll();closeModal('testModal');['testMath','testRW','testNotes','testHardMath','testHardRW'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
   renderTestsPage();renderTodayPage();renderAnalyticsPage();renderAchievements();renderXP();showToast('Test saved — check analytics for insights')}
 function deleteTest(id){if(!confirm('Delete this test?'))return;satTests=satTests.filter(t=>t.id!==id);saveAll();renderTestsPage();renderTodayPage();renderAnalyticsPage()}
+/* ---- Module Predictor: uses the Hard Math/R&W fields already logged per test ---- */
+function ltParseFraction(str){if(!str)return null;const m=String(str).match(/(\d+(?:\.\d+)?)\s*\/\s*(\d+(?:\.\d+)?)/);if(!m)return null;const num=parseFloat(m[1]),den=parseFloat(m[2]);if(!den)return null;return num/den}
+function modulePredictor(){
+  const sorted=[...satTests].sort((a,b)=>new Date(b.date)-new Date(a.date));
+  const latest=sorted[0];
+  if(!latest)return null;
+  const mathAcc=ltParseFraction(latest.hardMath);
+  const rwAcc=ltParseFraction(latest.hardRW);
+  const tier=acc=>acc===null?null:acc>=0.75?'Hard':acc>=0.5?'Medium':'Easy';
+  return{mathAcc,rwAcc,mathTier:tier(mathAcc),rwTier:tier(rwAcc),testLabel:latest.name||fmtDate(latest.date)};
+}
 function renderTestsPage(){
   const sorted=[...satTests].sort((a,b)=>new Date(b.date)-new Date(a.date));
   const pg=document.getElementById('page-tests');if(!pg)return;
@@ -2083,7 +2520,16 @@ function renderTestsPage(){
       <div class="stat"><div class="stat-label">Score gain</div><div class="stat-value tabular" style="color:${gain>0?'var(--good)':gain<0?'var(--bad)':'inherit'}">${satTests.length>=2?(gain>=0?'+':'')+gain:'—'}</div><div class="stat-meta">first to latest</div></div>
       <div class="stat"><div class="stat-label">Target gap</div><div class="stat-value tabular">${best?(userProfile.target||1500)-best>0?'−'+((userProfile.target||1500)-best):'✓':'—'}</div><div class="stat-meta">pts to ${userProfile.target||1500}</div></div>
     </div>
-    ${satTests.length>=2?`<div class="card" style="margin-bottom:18px"><div style="font-size:0.88rem;font-weight:700;margin-bottom:12px">Score progression</div><canvas id="testScoreChart" height="110" style="width:100%"></canvas></div>`:''}
+    ${satTests.length>=2?`<div class="card" style="margin-bottom:18px"><div style="font-size:0.88rem;font-weight:700;margin-bottom:4px">Score progression</div><div style="font-size:0.74rem;color:var(--ink-3);margin-bottom:12px">Projected next test, based on your current pace: <strong style="color:var(--accent)">${predictedScore()||'—'}</strong></div><canvas id="testScoreChart" height="110" style="width:100%"></canvas></div>`:''}
+    ${(()=>{const mp=modulePredictor();if(!mp)return'';const tierChip=(t)=>t?`<span class="chip" style="background:${t==='Hard'?'var(--good-soft)':t==='Medium'?'var(--warn-soft)':'var(--bad-soft)'};color:${t==='Hard'?'var(--good)':t==='Medium'?'var(--warn)':'var(--bad)'}">${t} Module 2</span>`:`<span class="chip" style="background:var(--paper-3);color:var(--ink-3)">Log Hard Q accuracy to predict</span>`;
+    return`<div class="card" style="margin-bottom:18px">
+      <div style="font-size:0.88rem;font-weight:700;margin-bottom:4px">Module 2 Predictor</div>
+      <div style="font-size:0.74rem;color:var(--ink-3);margin-bottom:12px">Based on your Hard-question accuracy from "${esc(mp.testLabel)}" — the digital SAT routes you to an easier or harder Module 2 depending on Module 1 performance.</div>
+      <div class="grid grid-2" style="gap:12px">
+        <div style="padding:10px;border:1.5px solid var(--line);border-radius:var(--r)"><div style="font-size:0.72rem;font-weight:700;color:var(--ink-3);margin-bottom:4px">MATH</div>${tierChip(mp.mathTier)}${mp.mathAcc!==null?`<div style="font-size:0.7rem;color:var(--ink-4);margin-top:4px">${Math.round(mp.mathAcc*100)}% hard-question accuracy</div>`:''}</div>
+        <div style="padding:10px;border:1.5px solid var(--line);border-radius:var(--r)"><div style="font-size:0.72rem;font-weight:700;color:var(--ink-3);margin-bottom:4px">READING & WRITING</div>${tierChip(mp.rwTier)}${mp.rwAcc!==null?`<div style="font-size:0.7rem;color:var(--ink-4);margin-top:4px">${Math.round(mp.rwAcc*100)}% hard-question accuracy</div>`:''}</div>
+      </div>
+    </div>`;})()}
     <div id="testsListEl">${sorted.length?sorted.map(t=>{
       const chip=t.total>=1500?`<span class="chip chip-good">1500+ ✓</span>`:t.total>=1450?`<span class="chip chip-elite">1450+</span>`:t.total>=1400?`<span class="chip chip-accent">1400+</span>`:t.total>=1300?`<span class="chip chip-warn">1300+</span>`:'';
       return`<div class="card" style="margin-bottom:10px;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
@@ -2103,7 +2549,7 @@ function renderTestsPage(){
 let errFilter='all';
 function saveError(){
   const q=document.getElementById('errQuestion').value.trim();if(!q){showToast('Add a question description');return}
-  satErrors.push({id:'e_'+Date.now(),question:q,section:document.getElementById('errSection').value,topic:document.getElementById('errTopic').value,myAnswer:document.getElementById('errMyAnswer').value.trim(),correctAnswer:document.getElementById('errCorrectAnswer').value.trim(),reason:document.getElementById('errReason').value.trim(),fix:document.getElementById('errFix').value.trim(),reviewDate:document.getElementById('errReviewDate').value,difficulty:document.getElementById('errDifficulty').value,errType:document.getElementById('errType').value,reviewed:false,created:todayISO()});
+  satErrors.push({id:'e_'+Date.now(),question:q,section:document.getElementById('errSection').value,topic:document.getElementById('errTopic').value,myAnswer:document.getElementById('errMyAnswer').value.trim(),correctAnswer:document.getElementById('errCorrectAnswer').value.trim(),confidence:document.getElementById('errConfidence').value,reason:document.getElementById('errReason').value.trim(),fix:document.getElementById('errFix').value.trim(),reviewDate:document.getElementById('errReviewDate').value,difficulty:document.getElementById('errDifficulty').value,errType:document.getElementById('errType').value,reviewed:false,created:todayISO()});
   saveAll();closeModal('errorModal');['errQuestion','errMyAnswer','errCorrectAnswer','errReason','errFix'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
   renderErrorsPage();renderTodayPage();renderAnalyticsPage();renderWeaknessPage();renderAchievements();renderXP();showToast('Error logged')}
 function filterErrors(f){errFilter=f;renderErrorsPage()}
@@ -2118,6 +2564,7 @@ function renderErrorsPage(){
   const sorted=[...filtered].sort((a,b)=>new Date(b.created)-new Date(a.created));
   const tColor={trap:'var(--bad)',gap:'var(--accent)',timing:'var(--warn)',careless:'var(--ink-3)'};
   const tIcon={trap:'target',gap:'book',timing:'clock',careless:'warning'};
+  const dangerCount=satErrors.filter(e=>e.confidence==='confident').length;
   pg.innerHTML=`
     <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px">
       <div><div class="display-2" style="font-size:1.3rem">Elite Error Log</div><div class="card-sub">Every error has a root cause. No root cause = no improvement.</div></div>
@@ -2129,6 +2576,10 @@ function renderErrorsPage(){
       <div class="stat"><div class="stat-label">Gap</div><div class="stat-value tabular" style="color:var(--accent)">${tc.gap}</div></div>
       <div class="stat"><div class="stat-label">Timing</div><div class="stat-value tabular" style="color:var(--warn)">${tc.timing}</div></div>
     </div>
+    ${dangerCount>0?`<div class="card" style="margin-bottom:14px;border-color:var(--bad);background:var(--bad-soft)">
+      <div style="display:flex;align-items:center;gap:8px"><div style="color:var(--bad);display:flex">${ic('warning',16)}</div><div style="font-size:0.82rem;font-weight:700;color:var(--bad)">${dangerCount} dangerous misconception${dangerCount===1?'':'s'}</div></div>
+      <div style="font-size:0.76rem;color:var(--ink-3);margin-top:2px">You were confident but still wrong on ${dangerCount} question${dangerCount===1?'':'s'} — these are the highest-priority reviews, since you don't know that you don't know them.</div>
+    </div>`:''}
     <div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap">
       ${['all','trap','gap','timing','careless','review'].map(f=>`<button class="btn ${errFilter===f?'btn-primary':'btn-secondary'} btn-xs" onclick="filterErrors('${f}')">${f==='all'?'All':f==='trap'?'Trap':f==='gap'?'Gap':f==='timing'?'Timing':f==='careless'?'Careless':'Due review'}</button>`).join('')}
     </div>
@@ -2140,6 +2591,7 @@ function renderErrorsPage(){
           <span class="chip chip-accent">${esc(e.section)}</span>
           <span style="font-size:0.68rem;color:var(--ink-3);font-weight:600">${esc(e.topic)}</span>
           <span style="font-size:0.68rem;color:var(--ink-4)">${esc(e.difficulty)}</span>
+          ${e.confidence==='confident'?`<span class="chip" style="background:var(--bad-soft);color:var(--bad)">⚠ Confident but wrong</span>`:e.confidence==='guess'?`<span class="chip" style="background:var(--paper-3);color:var(--ink-3)">Guess</span>`:''}
         </div></div>
         <div style="display:flex;gap:5px;flex-shrink:0">
           ${!e.reviewed?`<button class="btn btn-secondary btn-xs" onclick="markErrorReviewed('${e.id}')">Reviewed ✓</button>`:'<span class="chip chip-good">✓ Reviewed</span>'}
@@ -3168,8 +3620,25 @@ ${renderGantt()}
   }).join('')}
 </div>
 
-<!-- KANBAN PIPELINE -->
-<div class="cmd-section-head" style="margin-top:8px"><div class="cmd-section-title" style="display:flex;align-items:center;gap:6px">${ic('graduation',15)} University Pipeline</div><div style="font-size:0.75rem;color:var(--ink-3)">${cmdData.unis.length} universities</div></div>
+<!-- SCORE-BASED COLLEGE READINESS -->
+${(()=>{
+  const predicted=predictedScore();
+  const rated=cmdData.unis.filter(u=>u.sat&&!isNaN(parseInt(u.sat)));
+  if(!predicted)return`<div class="cmd-section-head" style="margin-top:8px"><div class="cmd-section-title" style="display:flex;align-items:center;gap:6px">${ic('target',15)} College Readiness</div></div><div class="card" style="margin-bottom:8px"><div style="font-size:0.8rem;color:var(--ink-3)">Log 1+ practice test to unlock Safe / Target / Reach / Dream tiering for the universities you're tracking.</div></div>`;
+  if(!rated.length)return`<div class="cmd-section-head" style="margin-top:8px"><div class="cmd-section-title" style="display:flex;align-items:center;gap:6px">${ic('target',15)} College Readiness</div></div><div class="card" style="margin-bottom:8px"><div style="font-size:0.8rem;color:var(--ink-3)">Add an average SAT score to a university card below to see its readiness tier.</div></div>`;
+  const tiers={safety:[],target:[],reach:[],dream:[]};
+  rated.forEach(u=>{const diff=predicted-parseInt(u.sat);let tier;if(diff>=100)tier='safety';else if(diff>=0)tier='target';else if(diff>=-100)tier='reach';else tier='dream';tiers[tier].push(u)});
+  const tierMeta=[{id:'safety',label:'Safe',color:'var(--good)'},{id:'target',label:'Target',color:'var(--accent)'},{id:'reach',label:'Reach',color:'var(--warn)'},{id:'dream',label:'Dream',color:'var(--elite)'}];
+  return`<div class="cmd-section-head" style="margin-top:8px"><div class="cmd-section-title" style="display:flex;align-items:center;gap:6px">${ic('target',15)} College Readiness</div><div style="font-size:0.75rem;color:var(--ink-3)">Predicted SAT: ${predicted}</div></div>
+  <div class="grid grid-4" style="gap:10px;margin-bottom:8px">
+    ${tierMeta.map(tm=>`<div class="card" style="padding:12px;border-top:3px solid ${tm.color}">
+      <div style="font-size:0.72rem;font-weight:700;color:${tm.color};text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px">${tm.label} (${tiers[tm.id].length})</div>
+      ${tiers[tm.id].length?tiers[tm.id].map(u=>`<div style="font-size:0.78rem;margin-bottom:4px;display:flex;justify-content:space-between"><span>${esc(u.name)}</span><span style="color:var(--ink-4);font-family:var(--font-num)">${esc(u.sat)}</span></div>`).join(''):`<div style="font-size:0.74rem;color:var(--ink-4)">None yet</div>`}
+    </div>`).join('')}
+  </div>`;
+})()}
+
+<!-- KANBAN PIPELINE --><div class="cmd-section-head" style="margin-top:8px"><div class="cmd-section-title" style="display:flex;align-items:center;gap:6px">${ic('graduation',15)} University Pipeline</div><div style="font-size:0.75rem;color:var(--ink-3)">${cmdData.unis.length} universities</div></div>
 <div class="kanban-board" id="kanbanBoard">
   ${kanbanCols.map(col=>{
     const unis=cmdData.unis.filter(u=>u.col===col.id);
