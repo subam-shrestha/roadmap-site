@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Inter+Tight:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@600;700&family=Space+Mono:wght@400;700&family=Chakra+Petch:wght@500;600;700&family=Share+Tech+Mono&family=IBM+Plex+Serif:wght@500;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 /* ── DESIGN TOKENS ─────────────────────────────── */
 :root{
@@ -73,6 +74,84 @@
   --shadow-3:0 10px 30px rgba(0,0,0,0.70),0 3px 9px rgba(0,0,0,0.45);
   --shadow-4:0 28px 60px rgba(0,0,0,0.80),0 8px 20px rgba(0,0,0,0.50);
   --shadow-accent:0 4px 20px rgba(124,110,255,0.35);
+}
+/* ══════════════════════════════════════════════════════════
+   THEME: VANTAGE — precision instrument (blueprint/brass)
+   ══════════════════════════════════════════════════════════ */
+[data-theme="vantage"]{
+  --ink:#23272B;--ink-2:#454B51;--ink-3:#6B7178;--ink-4:#9AA0A6;
+  --paper:#EEF0F1;--paper-2:#E6E9EA;--paper-3:#DCE0E2;
+  --surface:#FFFFFF;--surface-2:#F6F7F8;
+  --line:rgba(47,93,138,0.14);--line-2:rgba(47,93,138,0.07);--line-strong:rgba(47,93,138,0.26);
+  --accent:#2F5D8A;--accent-2:#3E74A8;--accent-soft:rgba(47,93,138,0.10);--accent-ring:rgba(47,93,138,0.22);
+  --good:#2E6B4F;--good-soft:rgba(46,107,79,0.10);
+  --warn:#A97C33;--warn-soft:rgba(169,124,51,0.12);
+  --bad:#B33A3A;--bad-soft:rgba(179,58,58,0.10);
+  --elite:#5B4A9A;--elite-soft:rgba(91,74,154,0.10);
+  --math:#2F5D8A;--rw:#3E7A6E;
+  --paper-grad:linear-gradient(160deg,#EEF0F1 0%,#E9EBEC 50%,#E4E7E8 100%);
+  --shadow-1:0 1px 2px rgba(30,40,48,0.06);
+  --shadow-2:0 2px 6px rgba(30,40,48,0.08),0 1px 2px rgba(30,40,48,0.05);
+  --shadow-3:0 8px 20px rgba(30,40,48,0.10),0 2px 6px rgba(30,40,48,0.06);
+  --shadow-4:0 22px 46px rgba(30,40,48,0.13),0 6px 14px rgba(30,40,48,0.06);
+  --shadow-accent:0 3px 12px rgba(47,93,138,0.28);
+  --r-xs:2px;--r-sm:3px;--r:4px;--r-lg:5px;--r-xl:7px;
+  --ease:cubic-bezier(0.4,0,0.2,1);--ease-out:cubic-bezier(0.16,1,0.3,1);
+  --dur-1:90ms;--dur-2:150ms;--dur-3:240ms;
+  --font-ui:'Inter',-apple-system,sans-serif;--font-display:'Archivo Expanded','Inter',sans-serif;
+  --font-num:'Space Mono','DM Mono',monospace;--font-serif:'Archivo Expanded',serif;
+}
+/* ══════════════════════════════════════════════════════════
+   THEME: WING — glass cockpit HUD (avionics amber/green/red)
+   ══════════════════════════════════════════════════════════ */
+[data-theme="wing"]{
+  --ink:#DCE5DC;--ink-2:#AEBBAE;--ink-3:#7C877C;--ink-4:#4E594E;
+  --paper:#0A0D0A;--paper-2:#0E110D;--paper-3:#171A14;
+  --surface:#12150F;--surface-2:#181C16;
+  --line:rgba(242,169,59,0.10);--line-2:rgba(242,169,59,0.05);--line-strong:rgba(242,169,59,0.20);
+  --accent:#F2A93B;--accent-2:#F7C069;--accent-soft:rgba(242,169,59,0.13);--accent-ring:rgba(242,169,59,0.26);
+  --good:#6FCF7B;--good-soft:rgba(111,207,123,0.12);
+  --warn:#F2A93B;--warn-soft:rgba(242,169,59,0.13);
+  --bad:#E8544A;--bad-soft:rgba(232,84,74,0.15);
+  --elite:#8FD1FF;--elite-soft:rgba(143,209,255,0.12);
+  --math:#F2A93B;--rw:#6FCF7B;
+  --paper-grad:linear-gradient(160deg,#0A0D0A 0%,#0C0F0A 45%,#0E110C 100%);
+  --shadow-1:0 1px 3px rgba(0,0,0,0.5);
+  --shadow-2:0 3px 10px rgba(0,0,0,0.55),0 1px 3px rgba(0,0,0,0.35);
+  --shadow-3:0 8px 24px rgba(0,0,0,0.6),0 2px 8px rgba(0,0,0,0.4);
+  --shadow-4:0 24px 54px rgba(0,0,0,0.7),0 6px 16px rgba(0,0,0,0.45);
+  --shadow-accent:0 0 18px rgba(242,169,59,0.30);
+  --r-xs:1px;--r-sm:2px;--r:3px;--r-lg:4px;--r-xl:5px;
+  --ease:cubic-bezier(0.16,1,0.3,1);--ease-out:cubic-bezier(0.16,1,0.3,1);
+  --dur-1:130ms;--dur-2:220ms;--dur-3:420ms;
+  --font-ui:'Inter',-apple-system,sans-serif;--font-display:'Chakra Petch','Inter',sans-serif;
+  --font-num:'Share Tech Mono','DM Mono',monospace;--font-serif:'Chakra Petch',serif;
+}
+/* ══════════════════════════════════════════════════════════
+   THEME: LEDGER — precision trading terminal (charcoal/gold)
+   ══════════════════════════════════════════════════════════ */
+[data-theme="ledger"]{
+  --ink:#ECEDEF;--ink-2:#C2C5C9;--ink-3:#82868D;--ink-4:#4B4F55;
+  --paper:#14161A;--paper-2:#17191E;--paper-3:#1D2025;
+  --surface:#191C21;--surface-2:#1F2329;
+  --line:rgba(201,162,39,0.09);--line-2:rgba(201,162,39,0.05);--line-strong:rgba(201,162,39,0.18);
+  --accent:#C9A227;--accent-2:#DCB94A;--accent-soft:rgba(201,162,39,0.13);--accent-ring:rgba(201,162,39,0.24);
+  --good:#7FA65A;--good-soft:rgba(127,166,90,0.13);
+  --warn:#C9A227;--warn-soft:rgba(201,162,39,0.13);
+  --bad:#B0483F;--bad-soft:rgba(176,72,63,0.16);
+  --elite:#8C7BC9;--elite-soft:rgba(140,123,201,0.13);
+  --math:#C9A227;--rw:#7FA65A;
+  --paper-grad:linear-gradient(160deg,#14161A 0%,#15171C 50%,#17191E 100%);
+  --shadow-1:0 1px 3px rgba(0,0,0,0.45);
+  --shadow-2:0 3px 10px rgba(0,0,0,0.5),0 1px 3px rgba(0,0,0,0.3);
+  --shadow-3:0 8px 22px rgba(0,0,0,0.55),0 2px 7px rgba(0,0,0,0.35);
+  --shadow-4:0 24px 52px rgba(0,0,0,0.62),0 6px 15px rgba(0,0,0,0.4);
+  --shadow-accent:0 4px 16px rgba(201,162,39,0.24);
+  --r-xs:2px;--r-sm:3px;--r:4px;--r-lg:6px;--r-xl:8px;
+  --ease:cubic-bezier(0.22,1,0.36,1);--ease-out:cubic-bezier(0.22,1,0.36,1);
+  --dur-1:150ms;--dur-2:280ms;--dur-3:480ms;
+  --font-ui:'Inter',-apple-system,sans-serif;--font-display:'IBM Plex Serif',serif;
+  --font-num:'Roboto Mono','DM Mono',monospace;--font-serif:'IBM Plex Serif',serif;
 }
 /* ── BASE RESET ────────────────────────────────── */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -336,6 +415,63 @@ a{text-decoration:none;color:inherit}
 [data-theme="dark"] .card::before{
   background:linear-gradient(90deg,transparent,rgba(124,110,255,0.12),transparent)
 }
+/* ══════ VANTAGE signature: corner registration marks + focus-pull snap ══════ */
+[data-theme="vantage"] .card::before{
+  top:6px;left:6px;width:9px;height:9px;right:auto;bottom:auto;
+  border-top:1.4px solid var(--accent);border-left:1.4px solid var(--accent);
+  background:none;opacity:0.65
+}
+[data-theme="vantage"] .card::after{
+  content:'';position:absolute;bottom:6px;right:6px;width:9px;height:9px;
+  border-bottom:1.4px solid var(--accent);border-right:1.4px solid var(--accent);
+  opacity:0.65;pointer-events:none
+}
+[data-theme="vantage"] .stat{position:relative}
+[data-theme="vantage"] .stat::before{
+  content:'';position:absolute;top:6px;left:6px;width:8px;height:8px;
+  border-top:1.4px solid var(--accent);border-left:1.4px solid var(--accent);opacity:0.55;
+  transition:top var(--dur-1) var(--ease-out),left var(--dur-1) var(--ease-out)
+}
+[data-theme="vantage"] .stat::after{
+  content:'';position:absolute;bottom:6px;right:6px;width:8px;height:8px;
+  border-bottom:1.4px solid var(--accent);border-right:1.4px solid var(--accent);opacity:0.55;
+  transition:bottom var(--dur-1) var(--ease-out),right var(--dur-1) var(--ease-out)
+}
+[data-theme="vantage"] .stat:hover::before{top:4px;left:4px}
+[data-theme="vantage"] .stat:hover::after{bottom:4px;right:4px}
+[data-theme="vantage"] .btn-primary{background:var(--accent);box-shadow:none}
+[data-theme="vantage"] .btn-primary:hover{box-shadow:0 0 0 3px var(--accent-ring);transform:none}
+[data-theme="vantage"] .chip{border-radius:3px}
+/* ══════ WING signature: HUD reticle brackets + breathing "systems nominal" pulse ══════ */
+[data-theme="wing"] .card::before{background:none}
+[data-theme="wing"] .card::after,[data-theme="wing"] .stat::after{
+  content:'';position:absolute;inset:4px;pointer-events:none;opacity:0.55;
+  background:
+    linear-gradient(var(--line-strong),var(--line-strong)) top left/8px 1.4px no-repeat,
+    linear-gradient(var(--line-strong),var(--line-strong)) top left/1.4px 8px no-repeat,
+    linear-gradient(var(--line-strong),var(--line-strong)) top right/8px 1.4px no-repeat,
+    linear-gradient(var(--line-strong),var(--line-strong)) top right/1.4px 8px no-repeat,
+    linear-gradient(var(--line-strong),var(--line-strong)) bottom left/8px 1.4px no-repeat,
+    linear-gradient(var(--line-strong),var(--line-strong)) bottom left/1.4px 8px no-repeat,
+    linear-gradient(var(--line-strong),var(--line-strong)) bottom right/8px 1.4px no-repeat,
+    linear-gradient(var(--line-strong),var(--line-strong)) bottom right/1.4px 8px no-repeat
+}
+[data-theme="wing"] .stat{position:relative}
+@keyframes wingPulse{0%,100%{box-shadow:inset 3px 0 0 var(--accent),0 0 0 0 rgba(242,169,59,0)}50%{box-shadow:inset 3px 0 0 var(--accent),0 0 14px 0 rgba(242,169,59,0.22)}}
+[data-theme="wing"] .nav-item.active{animation:wingPulse 2.6s ease-in-out infinite}
+[data-theme="wing"] .btn-primary{background:var(--accent);color:#0A0D0A}
+[data-theme="wing"] .btn-primary:hover{box-shadow:0 0 16px rgba(242,169,59,0.35);transform:none}
+[data-theme="wing"] .chip{border-radius:2px}
+/* ══════ LEDGER signature: ledger register — tabular figures + gold tally-mark underline sweep ══════ */
+[data-theme="ledger"] .stat-value{
+  font-variant-numeric:tabular-nums;background-image:linear-gradient(var(--accent),var(--accent));
+  background-repeat:no-repeat;background-position:left bottom;background-size:0% 1.5px;
+  transition:background-size var(--dur-3) var(--ease);padding-bottom:2px
+}
+[data-theme="ledger"] .stat:hover .stat-value{background-size:100% 1.5px}
+[data-theme="ledger"] .stat-label,[data-theme="ledger"] .stat-value,[data-theme="ledger"] .stat-meta{text-align:right}
+[data-theme="ledger"] .chip{border-radius:2px;font-variant-numeric:tabular-nums}
+[data-theme="ledger"] .btn-primary{background:var(--accent);color:#14161A}
 .card-title{font-size:0.92rem;font-weight:700;letter-spacing:-0.01em}
 .card-sub{font-size:0.78rem;color:var(--ink-3);margin-top:2px}
 .card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px}
@@ -362,6 +498,9 @@ a{text-decoration:none;color:inherit}
 .grid-4{grid-template-columns:1fr 1fr 1fr 1fr}
 .grid-auto{grid-template-columns:repeat(auto-fill,minmax(155px,1fr))}
 @media(max-width:700px){.grid-4{grid-template-columns:1fr 1fr}.grid-3{grid-template-columns:1fr 1fr}.grid-2{grid-template-columns:1fr}}
+@media(max-width:640px){.qstat-row{flex-wrap:wrap}.qstat{flex:1 1 33%;border-bottom:1px solid var(--line-strong)}}
+@media(max-width:420px){.qstat{flex:1 1 50%}}
+@media(max-width:480px){.modal-body{padding:16px 16px 20px!important}.modal-head{padding:14px 16px!important}.modal{max-width:calc(100vw - 24px)!important}.modal-overlay{padding:12px}}
 .stat{
   background:var(--surface);border:1px solid var(--line-strong);
   border-radius:var(--r-lg);padding:16px;display:flex;flex-direction:column;gap:4px;
@@ -379,6 +518,20 @@ a{text-decoration:none;color:inherit}
 .chip-warn{background:var(--warn-soft);color:var(--warn)}
 .chip-bad{background:var(--bad-soft);color:var(--bad)}
 .chip-elite{background:var(--elite-soft);color:var(--elite)}
+.theme-popover{
+  position:absolute;bottom:calc(100% + 8px);left:0;width:230px;
+  background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--r-lg);
+  box-shadow:var(--shadow-4);padding:8px;z-index:60;
+  opacity:0;transform:translateY(6px) scale(0.98);pointer-events:none;
+  transition:opacity var(--dur-2) var(--ease-out),transform var(--dur-2) var(--ease-out)
+}
+.theme-popover.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.theme-popover-label{font-size:0.64rem;text-transform:uppercase;letter-spacing:0.06em;font-weight:700;color:var(--ink-4);padding:6px 8px 4px}
+.theme-opt{display:flex;align-items:center;gap:9px;width:100%;text-align:left;padding:8px;border-radius:var(--r-sm);font-size:0.8rem;font-weight:600;color:var(--ink-2)}
+.theme-opt:hover{background:var(--surface-2)}
+.theme-opt.active{background:var(--accent-soft);color:var(--accent)}
+.theme-opt-sub{margin-left:auto;font-size:0.66rem;font-weight:500;color:var(--ink-4)}
+.theme-swatch{width:16px;height:16px;border-radius:50%;flex-shrink:0}
 .mission-old-placeholder{display:none}
 .mission-title{font-size:0.83rem;font-weight:600;line-height:1.4}
 .mission-meta{font-size:0.72rem;color:var(--ink-3);margin-top:2px}
@@ -1101,7 +1254,7 @@ a{text-decoration:none;color:inherit}
       <button class="nav-item" id="nav-roadmap" onclick="showPage('roadmap')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>15-Week Roadmap</button>
       <button class="nav-item" id="nav-planner" onclick="showPage('planner')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Study Planner</button>
       <button class="nav-item" id="nav-tests" onclick="showPage('tests')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Practice Tests</button>
-      <button class="nav-item" id="nav-errors" onclick="showPage('errors')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Error Log</button>
+      <button class="nav-item" id="nav-errors" onclick="showPage('errors')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Error Log<span class="nav-badge" id="navErrorsBadge" style="display:none;background:var(--bad-soft);color:var(--bad)"></span></button>
       <button class="nav-item" id="nav-traps" onclick="showPage('traps')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Trap Database</button>
       <button class="nav-item" id="nav-hardq" onclick="showPage('hardq')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Hard-Q Bank</button>
       <button class="nav-item" id="nav-analytics" onclick="showPage('analytics')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Score Analytics</button>
@@ -1125,7 +1278,18 @@ a{text-decoration:none;color:inherit}
           <div style="flex:1;min-width:0"><div class="profile-name" id="profileName">User</div><div class="profile-role" id="profileEmail">user@email.com</div></div>
         </button>
         <div class="sidebar-utility">
-          <button class="util-btn" onclick="toggleTheme()" id="themeBtnLabel">Dark mode</button>
+          <div style="position:relative;flex:1">
+            <button class="util-btn" onclick="toggleThemePopover()" id="themeBtnLabel" style="width:100%">Light mode</button>
+            <div class="theme-popover" id="themePopover">
+              <div class="theme-popover-label">Appearance</div>
+              <button class="theme-opt" onclick="setAppTheme('light')" data-theme-opt="light"><span class="theme-swatch" style="background:#F3F1F8;border:1px solid #DDD9ED"></span>Light</button>
+              <button class="theme-opt" onclick="setAppTheme('dark')" data-theme-opt="dark"><span class="theme-swatch" style="background:#0D0C14;border:1px solid #7C6EFF"></span>Dark</button>
+              <div class="theme-popover-label" style="margin-top:6px">Design profiles</div>
+              <button class="theme-opt" onclick="setAppTheme('vantage')" data-theme-opt="vantage"><span class="theme-swatch" style="background:#EEF0F1;border:1px solid #2F5D8A"></span>Vantage <span class="theme-opt-sub">precision instrument</span></button>
+              <button class="theme-opt" onclick="setAppTheme('wing')" data-theme-opt="wing"><span class="theme-swatch" style="background:#0A0D0A;border:1px solid #F2A93B"></span>Wing <span class="theme-opt-sub">glass cockpit</span></button>
+              <button class="theme-opt" onclick="setAppTheme('ledger')" data-theme-opt="ledger"><span class="theme-swatch" style="background:#14161A;border:1px solid #C9A227"></span>Ledger <span class="theme-opt-sub">trading terminal</span></button>
+            </div>
+          </div>
           <button class="util-btn" onclick="exportData()">Export</button>
         </div>
         <button class="util-btn danger" style="width:100%" onclick="logout()">Sign out</button>
@@ -1144,7 +1308,7 @@ a{text-decoration:none;color:inherit}
     <div class="sheet"><div class="sheet-handle"></div><div class="sheet-grid">
       <button class="sheet-item" onclick="showPage('livetracker');closeMoreSheet()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Live Tracker</span></button>
       <button class="sheet-item" onclick="showPage('planner');closeMoreSheet()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Planner</span></button>
-      <button class="sheet-item" onclick="showPage('errors');closeMoreSheet()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg><span>Error Log</span></button>
+      <button class="sheet-item" onclick="showPage('errors');closeMoreSheet()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg><span>Error Log</span><span class="nav-badge" id="navErrorsBadgeSheet" style="display:none;background:var(--bad-soft);color:var(--bad)"></span></button>
       <button class="sheet-item" onclick="showPage('traps');closeMoreSheet()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Trap DB</span></button>
       <button class="sheet-item" onclick="showPage('hardq');closeMoreSheet()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Hard-Q</span></button>
       <button class="sheet-item" onclick="showPage('weekly');closeMoreSheet()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 11l3 3L22 4"/></svg><span>Review</span></button>
@@ -1216,11 +1380,11 @@ a{text-decoration:none;color:inherit}
       </select>
     </div>
     <div class="grid grid-2"><div class="field"><label class="field-label">My answer</label><input type="text" class="field-input" id="errMyAnswer" placeholder="A/B/C/D or value"></div><div class="field"><label class="field-label">Correct answer</label><input type="text" class="field-input" id="errCorrectAnswer" placeholder="A/B/C/D or value"></div></div>
-    <div class="field"><label class="field-label">How confident were you?</label><select class="field-input" id="errConfidence"><option value="guess">Guess</option><option value="unsure" selected>Unsure</option><option value="confident">Confident</option></select></div>
+    <div class="field"><label class="field-label">How confident were you?</label><select class="field-input" id="errConfidence" onchange="updateErrorReviewSuggestion()"><option value="guess">Guess</option><option value="unsure" selected>Unsure</option><option value="confident">Confident</option></select></div>
     <div class="field"><label class="field-label">Error type</label><select class="field-input" id="errType"><option value="trap">TRAP — I fell for a deliberate distractor</option><option value="gap">GAP — I didn't know the concept</option><option value="timing">TIMING — I rushed or ran out of time</option><option value="careless">CARELESS — Silly mistake I shouldn't make</option></select></div>
     <div class="field"><label class="field-label">Root cause (be specific)</label><textarea class="field-input" id="errReason" rows="2" placeholder="e.g. Assumed diagram was to scale — checked nothing. Next time read the text, not the figure."></textarea></div>
     <div class="field"><label class="field-label">Prevention rule (your personal rule to never repeat this)</label><textarea class="field-input" id="errFix" rows="2" placeholder="e.g. Always substitute quadratic roots back into the original equation before selecting answer."></textarea></div>
-    <div class="field"><label class="field-label">Schedule next review</label><input type="date" class="field-input" id="errReviewDate"></div>
+    <div class="field"><label class="field-label">Schedule next review <span style="font-weight:400;color:var(--ink-3)">— auto-suggested by confidence, editable</span></label><input type="date" class="field-input" id="errReviewDate"></div>
     <button class="btn btn-primary" style="width:100%;margin-top:4px" onclick="saveError()">Save to error log →</button>
   </div></div>
 </div>
@@ -1594,12 +1758,31 @@ function showPage(id){
 }
 function openMoreSheet(){document.getElementById('moreSheet').classList.add('show');document.body.style.overflow='hidden'}
 function closeMoreSheet(){document.getElementById('moreSheet').classList.remove('show');document.body.style.overflow=''}
-function openModal(id){document.getElementById(id).classList.add('show');document.body.style.overflow='hidden'}
+function errSuggestedReviewDate(conf){const days=conf==='confident'?1:conf==='guess'?2:4;const d=new Date();d.setDate(d.getDate()+days);return d.toISOString().split('T')[0]}
+function updateErrorReviewSuggestion(){const conf=document.getElementById('errConfidence');const rd=document.getElementById('errReviewDate');if(rd&&conf)rd.value=errSuggestedReviewDate(conf.value)}
+function openModal(id){
+  document.getElementById(id).classList.add('show');document.body.style.overflow='hidden';
+  if(id==='errorModal'){const rd=document.getElementById('errReviewDate');const conf=document.getElementById('errConfidence');if(rd&&!rd.value)rd.value=errSuggestedReviewDate(conf?conf.value:'unsure')}
+}
 function closeModal(id){document.getElementById(id).classList.remove('show');document.body.style.overflow=''}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('.modal-overlay.show').forEach(m=>m.classList.remove('show'));document.body.style.overflow='';closeMoreSheet()}});
 
 /* ========== THEME ========== */
-function toggleTheme(){const dark=document.documentElement.getAttribute('data-theme')==='dark';const next=dark?'light':'dark';document.documentElement.setAttribute('data-theme',next);try{localStorage.setItem('sm_theme',next)}catch(ex){}const l=document.getElementById('themeBtnLabel');if(l)l.textContent=next==='dark'?'Light mode':'Dark mode';setTimeout(redrawAllCharts,180)}
+const THEME_NAMES={light:'Light mode',dark:'Dark mode',vantage:'Vantage',wing:'Wing',ledger:'Ledger'};
+function toggleTheme(){const dark=document.documentElement.getAttribute('data-theme')==='dark';setAppTheme(dark?'light':'dark')}
+function toggleThemePopover(){const p=document.getElementById('themePopover');if(!p)return;p.classList.toggle('show')}
+function setAppTheme(name){
+  document.documentElement.setAttribute('data-theme',name);
+  try{localStorage.setItem('sm_theme',name)}catch(ex){}
+  const l=document.getElementById('themeBtnLabel');if(l)l.textContent=THEME_NAMES[name]||'Theme';
+  document.querySelectorAll('.theme-opt').forEach(b=>b.classList.toggle('active',b.dataset.themeOpt===name));
+  const p=document.getElementById('themePopover');if(p)p.classList.remove('show');
+  setTimeout(redrawAllCharts,180);
+}
+document.addEventListener('click',e=>{
+  const p=document.getElementById('themePopover');if(!p||!p.classList.contains('show'))return;
+  if(!p.contains(e.target)&&!e.target.closest('#themeBtnLabel'))p.classList.remove('show');
+});
 
 /* ========== HELPERS ========== */
 function esc(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
@@ -1609,7 +1792,7 @@ function calcStreak(){let s=0,d=new Date();if(!studyLog[todayISO()])d.setDate(d.
 function calcBestStreak(){const days=Object.keys(studyLog).filter(k=>studyLog[k]).sort();if(!days.length)return 0;let best=1,cur=1;for(let i=1;i<days.length;i++){const diff=Math.round((new Date(days[i])-new Date(days[i-1]))/86400000);if(diff===1){cur++;best=Math.max(best,cur)}else cur=1}return best}
 function predictedScore(){if(!satTests.length)return null;const s=[...satTests].sort((a,b)=>new Date(a.date)-new Date(b.date));const lat=s[s.length-1].total;if(s.length===1)return Math.min(1600,lat+30);const gain=lat-s[0].total;const de=Math.max(1,Math.round((new Date(s[s.length-1].date)-new Date(s[0].date))/86400000));const dl=Math.max(0,Math.round((new Date((userProfile.examDate||'2026-10-03')+'T00:00:00')-new Date())/86400000));return Math.max(400,Math.min(1600,Math.round(lat+(gain/de)*Math.min(dl,90))))}
 function getCurrentPhase(){const now=todayISO();if(now<='2026-07-18')return 0;if(now<='2026-08-15')return 1;if(now<='2026-09-12')return 2;return 3}
-function getCurrentWeek(){const start=new Date('2026-06-20T00:00:00');return Math.min(15,Math.max(1,Math.ceil((new Date()-start)/604800000)))}
+function getCurrentWeek(){const start=new Date(CYCLE_START+'T00:00:00');return Math.min(15,Math.max(1,Math.ceil((new Date()-start)/604800000)))}
 function getBurnoutLevel(){const last7=Object.keys(burnoutLog).sort().slice(-7);if(!last7.length)return 5;return Math.round(last7.reduce((a,k)=>a+(burnoutLog[k].energy||5),0)/last7.length)}
 function getWeakestTopics(n){const c={};satErrors.forEach(e=>{c[e.topic]=(c[e.topic]||0)+1});return Object.entries(c).sort((a,b)=>b[1]-a[1]).slice(0,n).map(([topic,count])=>({topic,count}))}
 function exportData(){const blob=new Blob([JSON.stringify({user:currentUser,tests:satTests,errors:satErrors,studyLog,profile:userProfile,weeklyReviews,readingLog,hardQLog},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`scoremax-elite-${todayISO()}.json`;a.click();showToast('Data exported')}
@@ -1707,12 +1890,12 @@ function ltWeeklyGoals(){
   const{start,end}=ltWeekRange();
   const studyDays=Object.keys(studyLog).filter(k=>ltInRange(k,start,end)).length;
   const readingDays=Object.keys(readingLog).filter(k=>readingLog[k]&&ltInRange(k,start,end)).length;
-  const errorsLogged=satErrors.filter(e=>e.created&&ltInRange(e.created,start,end)).length;
+  const errorsReviewedThisWeek=satErrors.filter(e=>e.reviewedAt&&ltInRange(e.reviewedAt,start,end)).length;
   const mocksTaken=satTests.filter(t=>t.date&&ltInRange(t.date,start,end)).length;
   return[
     {label:'Study Days',done:studyDays,target:7,icon:'flag'},
     {label:'Reading Sessions',done:readingDays,target:5,icon:'bookopen'},
-    {label:'Errors Reviewed',done:errorsLogged,target:10,icon:'warning'},
+    {label:'Errors Reviewed',done:errorsReviewedThisWeek,target:10,icon:'warning'},
     {label:'Mock Test Completed',done:Math.min(mocksTaken,1),target:1,icon:'clipboard'},
   ];
 }
@@ -1726,7 +1909,7 @@ function ltMonthlyGoals(){
   const studyDays=Object.keys(studyLog).filter(k=>ltInRange(k,start,end)).length;
   const readingSessions=Object.keys(readingLog).filter(k=>readingLog[k]&&ltInRange(k,start,end)).length;
   const mocks=satTests.filter(t=>t.date&&ltInRange(t.date,start,end)).length;
-  const reviewed=satErrors.filter(e=>e.reviewed&&e.created&&ltInRange(e.created,start,end)).length;
+  const reviewed=satErrors.filter(e=>e.reviewedAt&&ltInRange(e.reviewedAt,start,end)).length;
   const predicted=predictedScore();
   return{
     targetScore:{label:'Target Score',current:predicted||'—',target:userProfile.target||1500},
@@ -1830,9 +2013,12 @@ function renderTodayPage(){
   const cmdPct=cmdTotal?Math.round(cmdDone/cmdTotal*100):0;
 
   // Daily missions — cross-domain nudges (SAT plan/subject checklist now lives in Live Tracker, not duplicated here)
+  const overdueErrCount=errOverdueCount();
   let missions=[
     {id:'s0',label:'Log a Bluebook practice test',meta:'SAT · establishes baseline score',done:satTests.length>0},
-    {id:'s1',label:'Add errors to Error Log',meta:'SAT · 10 min',done:satErrors.length>=5},
+    overdueErrCount>0
+      ?{id:'s1',label:`Review ${overdueErrCount} overdue error${overdueErrCount===1?'':'s'}`,meta:'SAT · highest-leverage 10 min you can spend',done:false}
+      :{id:'s1',label:'Add errors to Error Log',meta:'SAT · 10 min',done:satErrors.length>=5},
     {id:'s2',label:'Study 2 KUCAT chapters today',meta:'KUCAT · check off in checklist',done:kcDone>0},
     {id:'s3',label:'Log daily reading session',meta:'SAT R&W · 15–20 min',done:!!readingLog[today]},
   ];
@@ -2326,7 +2512,7 @@ function renderLiveTrackerPage(){
 /* ========== ROADMAP PAGE ========== */
 function renderRoadmapPage(){
   const sorted=[...satTests].sort((a,b)=>new Date(a.date)-new Date(b.date));
-  const scoreByWeek={};sorted.forEach(t=>{const w=Math.min(15,Math.max(1,Math.ceil((new Date(t.date)-new Date('2026-06-20T00:00:00'))/604800000)));if(!scoreByWeek[w]||t.total>scoreByWeek[w])scoreByWeek[w]=t.total});
+  const scoreByWeek={};sorted.forEach(t=>{const w=Math.min(15,Math.max(1,Math.ceil((new Date(t.date)-new Date(CYCLE_START+'T00:00:00'))/604800000)));if(!scoreByWeek[w]||t.total>scoreByWeek[w])scoreByWeek[w]=t.total});
   const cw=getCurrentWeek();
   const checkHtml=SCORE_CHECKPOINTS.map(cp=>{
     const actual=scoreByWeek[cp.week];let cls='locked',badge='';
@@ -2430,7 +2616,7 @@ function renderPlanContainer(){
 }
 function generatePlan(){
   const hpd=parseFloat((document.getElementById('planHpd')&&document.getElementById('planHpd').value)||'2');
-  const start=new Date('2026-06-20T00:00:00');
+  const start=new Date(CYCLE_START+'T00:00:00');
   const days=[];
   WEEK_DATA.forEach(wk=>{
     wk.days.forEach((task,di)=>{
@@ -2546,25 +2732,67 @@ function renderTestsPage(){
   if(satTests.length>=2){setTimeout(()=>{const c=document.getElementById('testScoreChart');if(c)drawLineChart(c,[...satTests].sort((a,b)=>new Date(a.date)-new Date(b.date)).map(t=>t.total),[...satTests].sort((a,b)=>new Date(a.date)-new Date(b.date)).map(t=>fmtDate(t.date)),getCSSVar('--accent'))},80)}
 }
 /* ========== ERROR LOG ========== */
-let errFilter='all';
+let errFilter='all',errSort='smart',errSearch='';
 function saveError(){
   const q=document.getElementById('errQuestion').value.trim();if(!q){showToast('Add a question description');return}
-  satErrors.push({id:'e_'+Date.now(),question:q,section:document.getElementById('errSection').value,topic:document.getElementById('errTopic').value,myAnswer:document.getElementById('errMyAnswer').value.trim(),correctAnswer:document.getElementById('errCorrectAnswer').value.trim(),confidence:document.getElementById('errConfidence').value,reason:document.getElementById('errReason').value.trim(),fix:document.getElementById('errFix').value.trim(),reviewDate:document.getElementById('errReviewDate').value,difficulty:document.getElementById('errDifficulty').value,errType:document.getElementById('errType').value,reviewed:false,created:todayISO()});
-  saveAll();closeModal('errorModal');['errQuestion','errMyAnswer','errCorrectAnswer','errReason','errFix'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
+  satErrors.push({id:'e_'+Date.now(),question:q,section:document.getElementById('errSection').value,topic:document.getElementById('errTopic').value,myAnswer:document.getElementById('errMyAnswer').value.trim(),correctAnswer:document.getElementById('errCorrectAnswer').value.trim(),confidence:document.getElementById('errConfidence').value,reason:document.getElementById('errReason').value.trim(),fix:document.getElementById('errFix').value.trim(),reviewDate:document.getElementById('errReviewDate').value,difficulty:document.getElementById('errDifficulty').value,errType:document.getElementById('errType').value,reviewed:false,reviewedAt:null,created:todayISO()});
+  saveAll();closeModal('errorModal');['errQuestion','errMyAnswer','errCorrectAnswer','errReason','errFix','errReviewDate'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
   renderErrorsPage();renderTodayPage();renderAnalyticsPage();renderWeaknessPage();renderAchievements();renderXP();showToast('Error logged')}
 function filterErrors(f){errFilter=f;renderErrorsPage()}
-function markErrorReviewed(id){const e=satErrors.find(x=>x.id===id);if(e){e.reviewed=true;saveAll();renderErrorsPage();renderAnalyticsPage()}}
+function setErrSort(s){errSort=s;renderErrorsPage()}
+function setErrSearch(v){errSearch=v;renderErrorsPage()}
+function markErrorReviewed(id){const e=satErrors.find(x=>x.id===id);if(e){e.reviewed=true;e.reviewedAt=todayISO();saveAll();renderErrorsPage();renderAnalyticsPage();renderXP();renderTodayPage()}}
+function unmarkErrorReviewed(id){const e=satErrors.find(x=>x.id===id);if(e){e.reviewed=false;e.reviewedAt=null;saveAll();renderErrorsPage();renderAnalyticsPage()}}
 function deleteError(id){if(!confirm('Remove this error?'))return;satErrors=satErrors.filter(e=>e.id!==id);saveAll();renderErrorsPage();renderAnalyticsPage()}
+/* ---- Smart error log helpers ---- */
+function errIsOverdue(e){return!!(e.reviewDate&&e.reviewDate<todayISO()&&!e.reviewed)}
+function errUrgencyScore(e){
+  let s=0;
+  if(errIsOverdue(e)){const days=Math.round((new Date(todayISO()+'T00:00:00')-new Date(e.reviewDate+'T00:00:00'))/86400000);s+=100+Math.min(days,30)}
+  if(e.confidence==='confident'&&!e.reviewed)s+=50;
+  if(!e.reviewed)s+=10;
+  if(e.errType==='trap')s+=5;
+  return s;
+}
+function errRepeatKey(e){return`${e.section}|${e.topic}|${e.errType}`}
+function errRepeatOffenders(){
+  const groups={};
+  satErrors.filter(e=>!e.reviewed).forEach(e=>{const k=errRepeatKey(e);groups[k]=groups[k]||[];groups[k].push(e)});
+  return Object.entries(groups).filter(([,arr])=>arr.length>=3).map(([k,arr])=>({key:k,section:arr[0].section,topic:arr[0].topic,errType:arr[0].errType,count:arr.length}));
+}
+function errRelatedTrap(e){
+  if(e.errType!=='trap'||!e.topic)return null;
+  const sectionMap=e.section==='Math'?'Math':'R&W';
+  const words=e.topic.toLowerCase().split(/[^a-z]+/).filter(w=>w.length>3);
+  const pool=TRAP_DB.filter(t=>t.s===sectionMap);
+  return pool.find(t=>{const hay=(t.type+' '+t.name).toLowerCase();return words.some(w=>hay.includes(w))})||null;
+}
+function errOverdueCount(){return satErrors.filter(errIsOverdue).length}
+function updateErrorNavBadge(){
+  const n=errOverdueCount();
+  [document.getElementById('navErrorsBadge'),document.getElementById('navErrorsBadgeSheet')].forEach(el=>{
+    if(!el)return;
+    if(n>0){el.style.display='inline-flex';el.textContent=n+' due'}
+    else{el.style.display='none'}
+  });
+}
 function renderErrorsPage(){
   const pg=document.getElementById('page-errors');if(!pg)return;
   const tc={trap:0,gap:0,timing:0,careless:0};satErrors.forEach(e=>tc[e.errType]=(tc[e.errType]||0)+1);
   let filtered=satErrors;
   if(errFilter==='review'){const t=todayISO();filtered=satErrors.filter(e=>e.reviewDate&&e.reviewDate<=t&&!e.reviewed)}
   else if(errFilter!=='all')filtered=satErrors.filter(e=>e.errType===errFilter);
-  const sorted=[...filtered].sort((a,b)=>new Date(b.created)-new Date(a.created));
+  if(errSearch.trim()){
+    const q=errSearch.trim().toLowerCase();
+    filtered=filtered.filter(e=>(e.question||'').toLowerCase().includes(q)||(e.topic||'').toLowerCase().includes(q)||(e.reason||'').toLowerCase().includes(q));
+  }
+  const sorted=[...filtered].sort((a,b)=>errSort==='smart'?(errUrgencyScore(b)-errUrgencyScore(a))||(new Date(b.created)-new Date(a.created)):new Date(b.created)-new Date(a.created));
   const tColor={trap:'var(--bad)',gap:'var(--accent)',timing:'var(--warn)',careless:'var(--ink-3)'};
   const tIcon={trap:'target',gap:'book',timing:'clock',careless:'warning'};
-  const dangerCount=satErrors.filter(e=>e.confidence==='confident').length;
+  const dangerCount=satErrors.filter(e=>e.confidence==='confident'&&!e.reviewed).length;
+  const overdueCount=errOverdueCount();
+  const repeatOffenders=errRepeatOffenders();
+  const reviewRate=satErrors.length?Math.round(satErrors.filter(e=>e.reviewed).length/satErrors.length*100):0;
   pg.innerHTML=`
     <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px">
       <div><div class="display-2" style="font-size:1.3rem">Elite Error Log</div><div class="card-sub">Every error has a root cause. No root cause = no improvement.</div></div>
@@ -2574,34 +2802,58 @@ function renderErrorsPage(){
       <div class="stat"><div class="stat-label">Total errors</div><div class="stat-value tabular">${satErrors.length}</div></div>
       <div class="stat"><div class="stat-label">Trap</div><div class="stat-value tabular" style="color:var(--bad)">${tc.trap}</div></div>
       <div class="stat"><div class="stat-label">Gap</div><div class="stat-value tabular" style="color:var(--accent)">${tc.gap}</div></div>
-      <div class="stat"><div class="stat-label">Timing</div><div class="stat-value tabular" style="color:var(--warn)">${tc.timing}</div></div>
+      <div class="stat"><div class="stat-label">Review rate</div><div class="stat-value tabular" style="color:${reviewRate>=70?'var(--good)':reviewRate>=40?'var(--warn)':'var(--bad)'}">${reviewRate}%</div></div>
     </div>
-    ${dangerCount>0?`<div class="card" style="margin-bottom:14px;border-color:var(--bad);background:var(--bad-soft)">
+    ${overdueCount>0?`<div class="card" style="margin-bottom:10px;border-color:var(--bad);background:var(--bad-soft)">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:8px"><div style="color:var(--bad);display:flex">${ic('clock',16)}</div><div style="font-size:0.82rem;font-weight:700;color:var(--bad)">${overdueCount} review${overdueCount===1?'':'s'} overdue</div></div>
+        <button class="btn btn-secondary btn-xs" onclick="filterErrors('review')">Jump to due reviews</button>
+      </div>
+    </div>`:''}
+    ${dangerCount>0?`<div class="card" style="margin-bottom:10px;border-color:var(--bad);background:var(--bad-soft)">
       <div style="display:flex;align-items:center;gap:8px"><div style="color:var(--bad);display:flex">${ic('warning',16)}</div><div style="font-size:0.82rem;font-weight:700;color:var(--bad)">${dangerCount} dangerous misconception${dangerCount===1?'':'s'}</div></div>
       <div style="font-size:0.76rem;color:var(--ink-3);margin-top:2px">You were confident but still wrong on ${dangerCount} question${dangerCount===1?'':'s'} — these are the highest-priority reviews, since you don't know that you don't know them.</div>
     </div>`:''}
-    <div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap">
-      ${['all','trap','gap','timing','careless','review'].map(f=>`<button class="btn ${errFilter===f?'btn-primary':'btn-secondary'} btn-xs" onclick="filterErrors('${f}')">${f==='all'?'All':f==='trap'?'Trap':f==='gap'?'Gap':f==='timing'?'Timing':f==='careless'?'Careless':'Due review'}</button>`).join('')}
+    ${repeatOffenders.length?`<div class="card" style="margin-bottom:14px;border-color:var(--warn);background:var(--warn-soft)">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><div style="color:var(--warn);display:flex">${ic('target',16)}</div><div style="font-size:0.82rem;font-weight:700;color:var(--warn)">Recurring pattern detected</div></div>
+      ${repeatOffenders.map(r=>`<div style="font-size:0.76rem;color:var(--ink-2);margin-top:3px">You've made the same <strong>${esc(r.errType)}</strong> mistake in <strong>${esc(r.topic)}</strong> (${esc(r.section)}) <strong>${r.count} times</strong> without reviewing it. This is your highest-leverage fix right now.</div>`).join('')}
+    </div>`:''}
+    <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center">
+      <input class="field-input" style="flex:1;min-width:160px;margin-bottom:0" placeholder="Search errors by question, topic, or root cause…" value="${esc(errSearch)}" oninput="setErrSearch(this.value)">
+      <div style="display:flex;gap:4px;flex-shrink:0">
+        <button class="btn ${errSort==='smart'?'btn-primary':'btn-secondary'} btn-xs" onclick="setErrSort('smart')" title="Prioritizes overdue reviews and confident-but-wrong errors">Smart</button>
+        <button class="btn ${errSort==='recent'?'btn-primary':'btn-secondary'} btn-xs" onclick="setErrSort('recent')">Recent</button>
+      </div>
     </div>
-    <div>${sorted.length?sorted.map(e=>`<div class="card" style="margin-bottom:10px;border-left:4px solid ${tColor[e.errType]||'var(--line)'}">
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px">
-        <div style="flex:1"><div style="font-size:0.82rem;font-weight:700">${esc(e.question.slice(0,100))}${e.question.length>100?'…':''}</div>
+    <div class="err-filter-scroll" style="display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px">
+      ${['all','trap','gap','timing','careless','review'].map(f=>`<button class="btn ${errFilter===f?'btn-primary':'btn-secondary'} btn-xs" style="flex-shrink:0" onclick="filterErrors('${f}')">${f==='all'?'All':f==='trap'?'Trap':f==='gap'?'Gap':f==='timing'?'Timing':f==='careless'?'Careless':`Due review${overdueCount?` (${overdueCount})`:''}`}</button>`).join('')}
+    </div>
+    <div>${sorted.length?sorted.map(e=>{
+      const overdue=errIsOverdue(e);
+      const overdueDays=overdue?Math.round((new Date(todayISO()+'T00:00:00')-new Date(e.reviewDate+'T00:00:00'))/86400000):0;
+      const relTrap=errRelatedTrap(e);
+      return`<div class="card" style="margin-bottom:10px;border-left:4px solid ${overdue?'var(--bad)':tColor[e.errType]||'var(--line)'}">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px;flex-wrap:wrap">
+        <div style="flex:1;min-width:160px"><div style="font-size:0.82rem;font-weight:700">${esc(e.question.slice(0,100))}${e.question.length>100?'…':''}</div>
         <div style="display:flex;gap:5px;margin-top:4px;flex-wrap:wrap">
           <span class="chip" style="background:${tColor[e.errType]}22;color:${tColor[e.errType]}">${tIcon[e.errType]?ic(tIcon[e.errType],12):''} ${esc(e.errType)}</span>
           <span class="chip chip-accent">${esc(e.section)}</span>
           <span style="font-size:0.68rem;color:var(--ink-3);font-weight:600">${esc(e.topic)}</span>
           <span style="font-size:0.68rem;color:var(--ink-4)">${esc(e.difficulty)}</span>
           ${e.confidence==='confident'?`<span class="chip" style="background:var(--bad-soft);color:var(--bad)">⚠ Confident but wrong</span>`:e.confidence==='guess'?`<span class="chip" style="background:var(--paper-3);color:var(--ink-3)">Guess</span>`:''}
+          ${overdue?`<span class="chip" style="background:var(--bad-soft);color:var(--bad)">${overdueDays}d overdue</span>`:''}
         </div></div>
         <div style="display:flex;gap:5px;flex-shrink:0">
-          ${!e.reviewed?`<button class="btn btn-secondary btn-xs" onclick="markErrorReviewed('${e.id}')">Reviewed ✓</button>`:'<span class="chip chip-good">✓ Reviewed</span>'}
+          ${!e.reviewed?`<button class="btn btn-secondary btn-xs" onclick="markErrorReviewed('${e.id}')">Reviewed ✓</button>`:`<button class="chip chip-good" style="border:none;cursor:pointer" onclick="unmarkErrorReviewed('${e.id}')">✓ Reviewed</button>`}
           <button class="icon-btn" style="width:26px;height:26px" onclick="deleteError('${e.id}')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></button>
         </div>
       </div>
       ${e.reason?`<div style="font-size:0.76rem;color:var(--ink-3);margin-bottom:3px">Root cause: ${esc(e.reason)}</div>`:''}
       ${e.fix?`<div style="font-size:0.76rem;color:var(--accent)">Prevention rule: ${esc(e.fix)}</div>`:''}
-      ${e.reviewDate?`<div style="font-size:0.7rem;color:var(--ink-4);margin-top:3px">Next review: ${fmtDate(e.reviewDate)}</div>`:''}
-    </div>`).join(''):emptyState('checkcircle','No errors match this filter','All matching errors will appear here.','errorModal')}</div>`;
+      ${e.reviewDate?`<div style="font-size:0.7rem;color:${overdue?'var(--bad)':'var(--ink-4)'};margin-top:3px;font-weight:${overdue?700:400}">Next review: ${fmtDate(e.reviewDate)}${overdue?' — overdue':''}</div>`:''}
+      ${relTrap?`<div style="font-size:0.7rem;color:var(--warn);margin-top:5px;padding-top:5px;border-top:1px solid var(--line)">${ic('bulb',12)} Matches known trap: <strong>${esc(relTrap.name)}</strong> — ${esc(relTrap.cue)}</div>`:''}
+    </div>`;}).join(''):emptyState('checkcircle','No errors match this filter','All matching errors will appear here.','errorModal')}</div>`;
+  updateErrorNavBadge();
 }
 
 /* ========== TRAP DATABASE ========== */
@@ -3919,7 +4171,7 @@ function getMyUid(){
 
 
 /* ========== KUCAT PREP PAGE ========== */
-let kucatData={examDate:'2025-09-14',startDate:new Date().toISOString().split('T')[0],studyHours:0,streak:0,lastStudyDate:null,checklists:{},formulas:{},mockScores:[],weakTopics:{},dailyLog:[],mtAttempts:[]};
+let kucatData={examDate:'2026-09-14',startDate:new Date().toISOString().split('T')[0],studyHours:0,streak:0,lastStudyDate:null,checklists:{},formulas:{},mockScores:[],weakTopics:{},dailyLog:[],mtAttempts:[]};
 (function loadKucat(){try{const s=localStorage.getItem('kucat_v3');if(s){const d=JSON.parse(s);kucatData=Object.assign({},kucatData,d)}}catch(e){}})();
 function saveKucat(){try{localStorage.setItem('kucat_v3',JSON.stringify(kucatData))}catch(e){}}
 
@@ -4008,7 +4260,7 @@ const KC_FORMULAS={
 
 // KC_RESOURCES removed — replaced by AI mock test
 
-const KC_DEADLINES=[{label:'KUCAT Application Opens',date:'2025-07-01',type:'good',note:'Fill form at entrance.ku.edu.np'},{label:'Application Deadline',date:'2025-08-15',type:'warn',note:'Last day to submit — do not miss'},{label:'Admit Card Download',date:'2025-09-05',type:'accent',note:'Download from KU portal'},{label:'KUCAT Exam Day',date:'2025-09-14',type:'bad',note:'BSc CS / BTech AI entrance exam'},{label:'Result Declaration',date:'2025-09-28',type:'elite',note:'Approx 2 weeks after exam'}];
+const KC_DEADLINES=[{label:'KUCAT Application Opens',date:'2026-07-01',type:'good',note:'Fill form at entrance.ku.edu.np'},{label:'Application Deadline',date:'2026-08-15',type:'warn',note:'Last day to submit — do not miss'},{label:'Admit Card Download',date:'2026-09-05',type:'accent',note:'Download from KU portal'},{label:'KUCAT Exam Day',date:'2026-09-14',type:'bad',note:'BSc CS / BTech AI entrance exam'},{label:'Result Declaration',date:'2026-09-28',type:'elite',note:'Approx 2 weeks after exam'}];
 
 const KC_EXAM_FORMAT=[
   {subject:'Physics',marks:40,questions:40,note:'Mechanics, Heat, Optics, Waves, Electricity, Modern Physics — 40 topics from official KU syllabus'},
@@ -5028,7 +5280,10 @@ function kcLogHours(){
 (function boot(){
   const saved=document.documentElement.getAttribute('data-theme')||'light';
   const stored=(() => { try { return localStorage.getItem('sm_theme') } catch(e) { return null } })();
-  if(stored){document.documentElement.setAttribute('data-theme',stored);const l=document.getElementById('themeBtnLabel');if(l)l.textContent=stored==='dark'?'Light mode':'Dark mode'}
+  const activeTheme=stored||saved;
+  document.documentElement.setAttribute('data-theme',activeTheme);
+  const l=document.getElementById('themeBtnLabel');if(l)l.textContent=THEME_NAMES[activeTheme]||'Theme';
+  document.querySelectorAll('.theme-opt').forEach(b=>b.classList.toggle('active',b.dataset.themeOpt===activeTheme));
   let user=null;try{const s=localStorage.getItem('sm_elite_user');if(s)user=JSON.parse(s)}catch(e){}
   if(user&&user.name&&user.email){currentUser=user;initApp()}else{document.getElementById('authScreen').style.display='flex'}
 })();
