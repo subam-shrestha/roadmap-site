@@ -1033,7 +1033,7 @@ a{text-decoration:none;color:inherit}
 }
 
 /* Page slide-in for cards */
-.page.active .card{animation:cardSlideIn 0.36s var(--ease) both}
+.page.just-entered .card{animation:cardSlideIn 0.36s var(--ease) both}
 .page.active .card:nth-child(2){animation-delay:0.05s}
 .page.active .card:nth-child(3){animation-delay:0.10s}
 .page.active .card:nth-child(4){animation-delay:0.15s}
@@ -1182,6 +1182,10 @@ a{text-decoration:none;color:inherit}
 .lt-task-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1.5px solid var(--line);border-radius:var(--r);margin-bottom:8px;transition:border-color var(--dur-2),background var(--dur-2)}
 .lt-task-row.done{border-color:var(--good);background:var(--good-soft)}
 .lt-task-check{width:20px;height:20px;border-radius:6px;border:2px solid var(--line-strong);flex-shrink:0;display:grid;place-items:center;cursor:pointer;transition:all var(--dur-2)}
+.lt-task-row.just-toggled .lt-task-check{animation:taskCheckPop 0.32s var(--ease)}
+@keyframes taskCheckPop{0%{transform:scale(0.7)}55%{transform:scale(1.2)}100%{transform:scale(1)}}
+.lt-task-row.just-toggled{animation:taskRowFlash 0.5s var(--ease)}
+@keyframes taskRowFlash{0%{transform:scale(0.99)}30%{transform:scale(1.008)}100%{transform:scale(1)}}
 .lt-task-row.done .lt-task-check{background:var(--good);border-color:var(--good);color:#fff}
 .lt-task-label{flex:1;font-size:0.85rem;font-weight:600}
 .lt-task-row.done .lt-task-label{text-decoration:line-through;color:var(--ink-3)}
@@ -1195,9 +1199,16 @@ a{text-decoration:none;color:inherit}
 .lt-cal-day.status-perfect{background:var(--good);border-color:var(--good);color:#fff}
 .lt-cal-day.status-completed{background:var(--good-soft);border-color:var(--good)}
 .lt-cal-day.status-missed{background:var(--bad-soft);border-color:var(--bad);color:var(--bad)}
+.lt-cal-day.status-partial{background:var(--warn-soft);border-color:var(--warn);color:var(--warn)}
 .lt-cal-day.status-upcoming{color:var(--ink-3)}
 .lt-cal-day.status-before{color:var(--ink-4);opacity:0.5}
 .lt-cal-day.selected{outline:2px solid var(--elite);outline-offset:2px}
+.lt-cal-day{position:relative}
+.lt-cal-markers{position:absolute;bottom:3px;left:50%;transform:translateX(-50%);display:flex;gap:2px}
+.lt-cal-marker{width:4px;height:4px;border-radius:50%;flex-shrink:0}
+.lt-cal-marker.mock{background:#DC2626}
+.lt-cal-marker.deadline{background:#7C3AED}
+.lt-cal-marker.rest{background:#0EA5E9}
 .lt-deadline-row{display:flex;align-items:center;gap:12px;padding:12px;border:1.5px solid var(--line);border-radius:var(--r);margin-bottom:8px}
 .lt-deadline-row.soon{border-color:var(--warn);background:var(--warn-soft)}
 .lt-deadline-row.overdue{border-color:var(--bad);background:var(--bad-soft)}
@@ -1250,8 +1261,12 @@ a{text-decoration:none;color:inherit}
       <button class="nav-item" id="nav-streak" onclick="showPage('streak')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Streaks</button>
       <button class="nav-item" id="nav-achievements" onclick="showPage('achievements')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>Achievements</button>
 
+      <div class="nav-group-label" style="margin-top:4px;display:flex;align-items:center;gap:5px"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#0EA5E9;flex-shrink:0"></span>IELTS Prep</div>
+      <button class="nav-item" id="nav-ielts" onclick="showPage('ielts')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>IELTS Overview</button>
+      <button class="nav-item" id="nav-ieltsplan" onclick="showPage('ieltsplan')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>IELTS Planner</button>
+
       <div class="nav-group-label" style="margin-top:4px;display:flex;align-items:center;gap:5px"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#4338CA;flex-shrink:0"></span>SAT Prep</div>
-      <button class="nav-item" id="nav-roadmap" onclick="showPage('roadmap')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>15-Week Roadmap</button>
+      <button class="nav-item" id="nav-roadmap" onclick="showPage('roadmap')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>14-Week Roadmap</button>
       <button class="nav-item" id="nav-planner" onclick="showPage('planner')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Study Planner</button>
       <button class="nav-item" id="nav-tests" onclick="showPage('tests')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Practice Tests</button>
       <button class="nav-item" id="nav-errors" onclick="showPage('errors')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Error Log<span class="nav-badge" id="navErrorsBadge" style="display:none;background:var(--bad-soft);color:var(--bad)"></span></button>
@@ -1433,11 +1448,19 @@ a{text-decoration:none;color:inherit}
 /* ========== DATA ========== */
 let currentUser=null,satTests=[],satErrors=[],planTasks={},studyLog={},collegeProgress={},generatedPlan=null,xpEvents=[],userProfile={target:1500,examDate:'2026-10-03',dailyGoal:2},weeklyReviews=[],readingLog={},hardQLog={},burnoutLog={};
 let dailyTracker={},deadlines=null;
+let liveTimer=null,sessionLog={},dayLog={};
 function uk(k){return'smE_'+(currentUser?currentUser.email:'x')+'_'+k}
 function sv(k,v){try{localStorage.setItem(uk(k),JSON.stringify(v))}catch(e){}}
 function lv(k,d){try{const v=localStorage.getItem(uk(k));return v!==null?JSON.parse(v):d}catch(e){return d}}
-function saveAll(){sv('tests',satTests);sv('errors',satErrors);sv('planTasks',planTasks);sv('studyLog',studyLog);sv('collegeProgress',collegeProgress);if(generatedPlan)sv('planMeta',{days:generatedPlan});sv('xpEvents',xpEvents);sv('profile',userProfile);sv('weeklyReviews',weeklyReviews);sv('readingLog',readingLog);sv('hardQLog',hardQLog);sv('burnoutLog',burnoutLog);sv('myGoals',myGoals);sv('dailyTracker',dailyTracker);sv('deadlines',deadlines)}
-function loadAll(){satTests=lv('tests',[]);satErrors=lv('errors',[]);planTasks=lv('planTasks',{});studyLog=lv('studyLog',{});collegeProgress=lv('collegeProgress',{});xpEvents=lv('xpEvents',[]);userProfile=lv('profile',{target:1500,examDate:'2026-10-03',dailyGoal:2});const pm=lv('planMeta',null);generatedPlan=pm?(pm.days||pm):null;weeklyReviews=lv('weeklyReviews',[]);readingLog=lv('readingLog',{});hardQLog=lv('hardQLog',{});burnoutLog=lv('burnoutLog',{});myGoals=lv('myGoals',null);if(!myGoals)myGoals=DEFAULT_MY_GOALS.map(t=>({id:'g_'+Math.random().toString(36).slice(2,9),text:t,done:false}));dailyTracker=lv('dailyTracker',{});deadlines=lv('deadlines',null);if(!deadlines)deadlines=DEFAULT_DEADLINES.map(d=>({...d}));runCycleResetIfNeeded()}
+function saveAll(){sv('tests',satTests);sv('errors',satErrors);sv('planTasks',planTasks);sv('studyLog',studyLog);sv('collegeProgress',collegeProgress);if(generatedPlan)sv('planMeta',{days:generatedPlan});sv('xpEvents',xpEvents);sv('profile',userProfile);sv('weeklyReviews',weeklyReviews);sv('readingLog',readingLog);sv('hardQLog',hardQLog);sv('burnoutLog',burnoutLog);sv('myGoals',myGoals);sv('dailyTracker',dailyTracker);sv('deadlines',deadlines);sv('liveTimer',liveTimer);sv('sessionLog',sessionLog);sv('dayLog',dayLog)}
+function loadAll(){satTests=lv('tests',[]);satErrors=lv('errors',[]);planTasks=lv('planTasks',{});studyLog=lv('studyLog',{});collegeProgress=lv('collegeProgress',{});xpEvents=lv('xpEvents',[]);userProfile=lv('profile',{target:1500,examDate:'2026-10-03',dailyGoal:2});const pm=lv('planMeta',null);generatedPlan=pm?(pm.days||pm):null;weeklyReviews=lv('weeklyReviews',[]);readingLog=lv('readingLog',{});hardQLog=lv('hardQLog',{});burnoutLog=lv('burnoutLog',{});myGoals=lv('myGoals',null);if(!myGoals)myGoals=DEFAULT_MY_GOALS.map(t=>({id:'g_'+Math.random().toString(36).slice(2,9),text:t,done:false}));dailyTracker=lv('dailyTracker',{});deadlines=lv('deadlines',null);if(!deadlines)deadlines=DEFAULT_DEADLINES.map(d=>({...d}));liveTimer=lv('liveTimer',null);if(!liveTimer)liveTimer={status:'stopped',accumulatedMs:0,startedAt:null,dateISO:todayISO()};sessionLog=lv('sessionLog',{});dayLog=lv('dayLog',{});
+  // One-time migration: the old generatedPlan was built from the 15-week
+  // SAT-only WEEK_DATA, which overlapped the IELTS Sprint phase entirely.
+  // WEEK_DATA is now a real 14-week IELTS+SAT+App curriculum — discard any
+  // plan generated before this so the app regenerates fresh from it below,
+  // instead of silently continuing to show the old mismatched content.
+  if(!lv('weekDataV3Migrated',false)){generatedPlan=null;sv('weekDataV3Migrated',true)}
+  runCycleResetIfNeeded()}
 
 /* ========== NEW STUDY CYCLE — lock-in reset (fresh start July 12, IELTS-first) ========== */
 const CYCLE_START='2026-07-12';
@@ -1453,6 +1476,255 @@ function cycleDayNumber(iso){return Math.floor((new Date(iso+'T00:00:00')-new Da
 function cycleDaysCompleted(){const today=todayISO();const n=cycleDayNumber(today<CYCLE_START?CYCLE_START:today);return Math.max(0,Math.min(CYCLE_LENGTH_DAYS,n))}
 function cycleCurrentWeek(){return Math.max(1,Math.min(Math.ceil(CYCLE_LENGTH_DAYS/7),Math.ceil(cycleDaysCompleted()/7)))}
 function cyclePhaseInfo(){const d=cycleDaysCompleted();const phases=[{name:'IELTS Sprint',end:35},{name:'SAT Intensive',end:63},{name:'SAT Final Push (to Oct 3)',end:84},{name:'Application Prep',end:98}];for(const p of phases)if(d<=p.end)return p.name;return'Application Prep'}
+
+/* ============================================================
+   UNIFIED TASK LAYER (v2 schema) — StudyMax Elite ecosystem step 1
+   ------------------------------------------------------------
+   Canonical shape every task normalizes to, regardless of where
+   it actually lives on disk today:
+     { id, legacyKey, date, subject:'sat'|'ielts'|'app'|'general',
+       source:'curriculum'|'custom', label, meta, estMins,
+       priority:'high'|'med'|'low', done, completedAt }
+
+   This does NOT move data yet — planTasks / dailyTracker remain the
+   physical storage, so every existing render function keeps working
+   untouched. It gives every future page (Dashboard, Calendar, XP,
+   Analytics, College Command, IELTS planner) exactly ONE read
+   function and ONE write function to use instead of five different
+   objects with five different key formats. That's the actual "one
+   master task system" requirement — the storage consolidation is
+   step 2, once each page is repointed at these two functions.
+
+   KNOWN GAP this layer exposes (not fixed here, flagged for the
+   planner-upgrade phase): LT_TASK_TEMPLATE is hardcoded SAT-only
+   (Vocabulary/Algebra/Reading/Grammar) and fires every single day,
+   including the 35 days of IELTS Sprint phase where it makes no
+   sense. There is currently no IELTS curriculum data at all — the
+   getUnifiedTasksForDate() function below has the subject:'ielts'
+   branch stubbed and ready, waiting on that content.
+   ============================================================ */
+
+function taskId(date,subject,idx){return `${date}__${subject}__${idx}`}
+
+// Canonical READ: every task that exists for a given ISO date, from
+// every current source, normalized to the v2 shape above.
+function getUnifiedTasksForDate(iso){
+  const out=[];
+  // Curriculum task for this date (from generatedPlan / WEEK_DATA) — subject
+  // is whatever the actual phase is that day (ielts/sat/app), not assumed.
+  const planDay=(typeof generatedPlan!=='undefined'&&generatedPlan)?generatedPlan.find(d=>d.date===iso):null;
+  const daySubject=planDay?(planDay.subject||'sat'):null;
+  if(planDay){
+    planDay.tasks.forEach((t,i)=>{
+      const legacyKey=`${iso}_${i}`; // unchanged legacy format — old saved data still applies
+      out.push({
+        id:taskId(iso,daySubject,i),legacyKey,isCustom:false,date:iso,subject:daySubject,source:'curriculum',
+        label:t.label,meta:t.meta||'',estMins:30,priority:'high',
+        icon:daySubject==='ielts'?'globe':daySubject==='app'?'graduation':'flag',
+        done:!!(planTasks[legacyKey]&&planTasks[legacyKey].completed),
+        completedAt:(planTasks[legacyKey]&&planTasks[legacyKey].completedAt)||null,
+        sessionMinutes:(planTasks[legacyKey]&&planTasks[legacyKey].sessionMinutes)||null
+      });
+    });
+  }
+  // Daily basics template (Vocabulary/Algebra/Reading/Grammar) — only applies
+  // on SAT-phase days now. It used to fire every single day regardless of
+  // phase, including the 35 days of IELTS Sprint, which was the exact
+  // "generic Live Tracker tasks" bug flagged earlier. Now that real per-day
+  // curriculum exists for every phase (including embedded SAT-maintenance
+  // tasks during the IELTS Sprint), this generic block would just be
+  // duplicate filler on non-SAT days, so it's gated off for those.
+  if(typeof LT_TASK_TEMPLATE!=='undefined'&&daySubject==='sat'){
+    LT_TASK_TEMPLATE.forEach(t=>{
+      const legacyKey=ltBasicKey(iso,t.key);
+      out.push({
+        id:taskId(iso,'sat',t.key),legacyKey,isCustom:false,date:iso,subject:'sat',source:'curriculum',
+        label:t.label,meta:'Daily basics',estMins:t.mins,priority:'med',icon:t.icon,
+        done:!!(planTasks[legacyKey]&&planTasks[legacyKey].completed),
+        completedAt:(planTasks[legacyKey]&&planTasks[legacyKey].completedAt)||null,
+        sessionMinutes:(planTasks[legacyKey]&&planTasks[legacyKey].sessionMinutes)||null
+      });
+    });
+  }
+  // Custom Live Tracker items added by the user for this day
+  if(typeof ltDayData==='function'){
+    const d=ltDayData(iso);
+    d.custom.forEach(c=>{
+      out.push({
+        id:c.id,legacyKey:c.id,isCustom:true,date:iso,subject:c.subject||'general',source:'custom',
+        label:c.label,meta:'Custom',estMins:c.mins||15,priority:c.priority||'low',icon:'star',
+        done:!!c.done,completedAt:c.completedAt||null,sessionMinutes:c.sessionMinutes||null
+      });
+    });
+  }
+  return out;
+}
+
+// Canonical WRITE: mark ANY task (any source) done/undone by its v2
+// identity. Internally still writes to whichever legacy store owns that
+// task today, so every existing render path keeps working unmodified.
+function setUnifiedTaskDone(legacyKey,isCustom,doneVal,date){
+  const now=doneVal?new Date().toISOString():null;
+  // If a timer session is running/paused for this exact date, stamp how many
+  // minutes into that session the task was completed — cleared on uncheck.
+  const sessionMin=(doneVal&&liveTimer&&date&&liveTimer.dateISO===date&&liveTimer.status!=='stopped')
+    ?Math.round(ltTimerElapsedMs()/60000):null;
+  if(isCustom){
+    const iso=date||(ltSelectedDay||todayISO());
+    const d=ltEnsureDay(iso);
+    const item=d.custom.find(c=>c.id===legacyKey);
+    if(item){item.done=doneVal;item.completedAt=now;item.sessionMinutes=doneVal?sessionMin:null}
+  } else {
+    planTasks[legacyKey]=planTasks[legacyKey]||{};
+    planTasks[legacyKey].completed=doneVal;
+    planTasks[legacyKey].completedAt=now;
+    planTasks[legacyKey].sessionMinutes=doneVal?sessionMin:null;
+  }
+  saveAll();
+}
+
+// Range convenience wrapper — Calendar/Analytics/XP will all want this.
+function getUnifiedTasksForRange(startIso,endIso){
+  const out=[];
+  let d=new Date(startIso+'T00:00:00');
+  const end=new Date(endIso+'T00:00:00');
+  while(d<=end){
+    const iso=d.toISOString().split('T')[0];
+    out.push(...getUnifiedTasksForDate(iso));
+    d.setDate(d.getDate()+1);
+  }
+  return out;
+}
+
+/* ============================================================
+   LIVE TRACKER STUDY TIMER — step 2, extended
+   ------------------------------------------------------------
+   Ground truth is wall-clock math, not a running interval: while
+   'running', elapsed = accumulatedMs + (Date.now() - startedAt).
+   The setInterval only repaints the display every second — it does
+   NOT drive the actual timing. That's what makes this survive a
+   refresh, a closed tab, or the app being reopened tomorrow: on
+   load we just read startedAt from localStorage and recompute from
+   the real clock, we never trust an interval to have kept running.
+
+   dayLog[iso] = {minutes, status:'missed'|'partial'|'complete',
+                  source:'manual'|'auto', loggedAt}
+   This is the richer per-day record streak/calendar logic reads.
+   'complete' = hit the daily-goal hours OR finished most of the
+   day's curriculum tasks — so an efficient day still counts even
+   under the hour target. studyLog/sessionLog are still written
+   alongside it for backward compatibility with existing code.
+
+   Auto-logging only runs while the app is open (on load, and every
+   60s via ltDayRolloverInterval) — there's no server or background
+   process, so a day finalized while the tab was fully closed gets
+   caught up retroactively the next time the app is opened, not at
+   the literal midnight it happened.
+   ============================================================ */
+let ltTimerInterval=null,ltDayRolloverInterval=null;
+
+function ltTimerElapsedMs(){
+  if(!liveTimer)return 0;
+  if(liveTimer.status==='running')return liveTimer.accumulatedMs+(Date.now()-liveTimer.startedAt);
+  return liveTimer.accumulatedMs;
+}
+function ltTimerFmt(ms){
+  const s=Math.max(0,Math.floor(ms/1000));
+  const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=s%60;
+  return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+}
+// Task completion % for a day, from the unified task layer — used to decide
+// whether a day counts as 'complete' even if the timer minutes fell short.
+function ltDayTaskPct(iso){
+  const tasks=getUnifiedTasksForDate(iso);
+  if(!tasks.length)return 0;
+  return Math.round(tasks.filter(t=>t.done).length/tasks.length*100);
+}
+function ltComputeDayStatus(iso,minutes){
+  const goalMin=(userProfile.dailyGoal||2)*60;
+  const taskPct=ltDayTaskPct(iso);
+  if(minutes<=0&&taskPct===0)return'missed';
+  if(minutes>=goalMin||taskPct>=80)return'complete';
+  return'partial';
+}
+// Single funnel every logging path (manual Log, Reset, auto rollover) goes
+// through — one place that writes dayLog + keeps studyLog/sessionLog in sync.
+function ltFinalizeDay(iso,minutes,source){
+  const status=ltComputeDayStatus(iso,minutes);
+  dayLog[iso]={minutes:Math.round(minutes),status,source,loggedAt:new Date().toISOString()};
+  sessionLog[iso]=Math.round(minutes);
+  studyLog[iso]=status!=='missed';
+}
+// Rolls yesterday's un-finalized session into dayLog before today's timer
+// starts fresh, so leaving the timer running overnight (or just forgetting
+// to log) doesn't silently lose the day or misattribute it to today.
+function ltTimerCheckDayRollover(){
+  const today=todayISO();
+  if(!liveTimer||liveTimer.dateISO===today)return;
+  let carry=liveTimer.accumulatedMs;
+  if(liveTimer.status==='running')carry+=(Date.now()-liveTimer.startedAt);
+  ltFinalizeDay(liveTimer.dateISO,carry/60000,'auto');
+  liveTimer={status:'stopped',accumulatedMs:0,startedAt:null,dateISO:today};
+  saveAll();
+}
+function ltTimerUpdateDisplay(){
+  const disp=document.getElementById('ltTimerDisplay');
+  if(disp)disp.textContent=ltTimerFmt(ltTimerElapsedMs());
+  const startBtn=document.getElementById('ltTimerStartBtn'),pauseBtn=document.getElementById('ltTimerPauseBtn');
+  const running=liveTimer&&liveTimer.status==='running';
+  if(startBtn)startBtn.style.display=running?'none':'inline-flex';
+  if(pauseBtn)pauseBtn.style.display=running?'inline-flex':'none';
+  const badge=document.getElementById('ltTimerStateBadge');
+  if(badge)badge.textContent=running?'Running':(liveTimer&&liveTimer.status==='paused'?'Paused':'Stopped');
+  const logged=document.getElementById('ltTimerLoggedNote');
+  if(logged){const dl=dayLog[todayISO()];logged.textContent=dl?`Logged: ${dl.minutes} min (${dl.status})`:'Not logged yet today';}
+}
+function ltTimerEnsureInterval(){
+  if(ltTimerInterval){clearInterval(ltTimerInterval);ltTimerInterval=null}
+  if(liveTimer&&liveTimer.status==='running')ltTimerInterval=setInterval(ltTimerUpdateDisplay,1000);
+}
+function ltTimerStart(){
+  ltTimerCheckDayRollover();
+  if(liveTimer.status==='running')return;
+  liveTimer.status='running';
+  liveTimer.startedAt=Date.now();
+  saveAll();ltTimerEnsureInterval();ltTimerUpdateDisplay();
+}
+function ltTimerPause(){
+  if(!liveTimer||liveTimer.status!=='running')return;
+  liveTimer.accumulatedMs+=(Date.now()-liveTimer.startedAt);
+  liveTimer.status='paused';liveTimer.startedAt=null;
+  saveAll();ltTimerEnsureInterval();ltTimerUpdateDisplay();
+}
+// Checkpoint — logs current total elapsed to today's dayLog WITHOUT
+// stopping or zeroing the timer. Idempotent: always snapshots the full
+// elapsed-so-far, so pressing it repeatedly never double-counts.
+function ltTimerLog(){
+  if(!liveTimer)return;
+  ltFinalizeDay(liveTimer.dateISO,ltTimerElapsedMs()/60000,'manual');
+  saveAll();ltTimerUpdateDisplay();renderXP();
+  showToast(`Logged ${dayLog[liveTimer.dateISO].minutes} min — timer keeps running`);
+}
+function ltTimerReset(){
+  if(!liveTimer)return;
+  const elapsedMin=Math.round(ltTimerElapsedMs()/60000);
+  if(elapsedMin>0&&!confirm(`Log ${elapsedMin} min to today and reset the timer to zero?`))return;
+  if(liveTimer.status==='running')liveTimer.accumulatedMs+=(Date.now()-liveTimer.startedAt);
+  ltFinalizeDay(liveTimer.dateISO,liveTimer.accumulatedMs/60000,'manual');
+  liveTimer={status:'stopped',accumulatedMs:0,startedAt:null,dateISO:todayISO()};
+  saveAll();ltTimerEnsureInterval();ltTimerUpdateDisplay();
+  renderLiveTrackerPage();renderXP();
+}
+// Called once at app boot — resumes ticking immediately if a session was
+// left running across a refresh, tab close, or app reopen, and starts the
+// 60s watcher that catches a date change while the app stays open.
+function ltTimerBoot(){
+  ltTimerCheckDayRollover();
+  ltTimerEnsureInterval();
+  ltTimerUpdateDisplay();
+  if(ltDayRolloverInterval)clearInterval(ltDayRolloverInterval);
+  ltDayRolloverInterval=setInterval(ltTimerCheckDayRollover,60000);
+}
 
 /* ========== MY GOALS (top-right achievement tracker) ========== */
 const DEFAULT_MY_GOALS=['SAT 1500+','IELTS 8.0','Excellent grades','6–10 impressive software/AI projects','Strong GitHub profile','Portfolio website','Leadership experience','Hackathon participation (or wins if possible)','Good recommendation letters','Well-crafted personal statement'];
@@ -1641,81 +1913,76 @@ const HARD_Q_CERTS=[
   {id:'hq8',name:'1500 Elite',icon:'gem',req:'Score 1500+ on any timed Bluebook practice test',threshold:null,count:1},
 ];
 const WEEK_DATA=[
-  {w:1,phase:'Phase 1 · Foundation',color:'#4F46E5',obj:'Diagnostic baseline + error log launch + daily reading system',time:'2–3 hrs/day',target:null,note:'Diagnostic only — no target score yet',
-    days:['Diagnostic (untimed) + profile + launch reading log','FULL TEST — Bluebook #1 (timed)','Deep error review — classify every error: TRAP/GAP/TIMING/CARELESS','Math: Linear equations 30q | R&W: Central idea + main purpose 20q','Math: Systems 25q | R&W: Textual evidence 20q','Math: Ratios & rates 30q | R&W: Inference 20q','Math: Percentages 20q | R&W: Vocab in context 25q | Error log review'],
-    metrics:['Test logged with full error classification','≥10 error log entries with root causes','Daily reading started (15 min/day minimum)','Every error classified as TRAP/GAP/TIMING/CARELESS'],
-    mistakes:['Reviewing errors too fast — spend 90+ min on post-test analysis','Skipping the "prevention rule" field in error log','Not classifying errors by type'],
-    recovery:'If score < 1100: add 30 min/day on your 2 most-missed topic categories. Do not panic — the baseline is data, not a verdict.'},
-  {w:2,phase:'Phase 1 · Foundation',color:'#4F46E5',obj:'Statistics + data interpretation + close all easy-question gaps (target: zero easy errors)',time:'2–3 hrs/day',target:null,note:'Accuracy gate: Easy ≥ 95%',
-    days:['FULL TEST — Bluebook #2 (timed)','Error review — redo ALL hard questions cold from memory','Math: Statistics (mean/median/mode) 25q | R&W: Function of paragraph 20q','Math: Standard deviation 20q | R&W: Cross-text connections 20q','Math: Linear functions & graphs 25q | R&W: Data interpretation 20q','Math: Scatterplots 20q | R&W: Transitions 25q | Error log review','REST — light error log scan; 30 min on 2 weakest topics only'],
-    metrics:['Easy accuracy ≥ 95%','Error log ≥ 20 entries total','Zero gap errors in topics already covered in Week 1','Reading log: 6/7 days'],
-    mistakes:['Skipping the rest day','Not revisiting Week 1 gap errors before moving on'],
-    recovery:'If easy accuracy < 90%: 30 min/day foundation drills only. Fix the floor before raising the ceiling.'},
-  {w:3,phase:'Phase 1 · Foundation',color:'#4F46E5',obj:'Quadratics mastery + punctuation — the two highest-ROI pillars for crossing 1400',time:'2–3 hrs/day',target:null,note:'Gate: Zero easy errors on most recent test',
-    days:['FULL TEST — Bluebook #3 (timed)','Error review — analyze timing patterns; document skip-and-return rule','Math: Quadratic equations 30q (factoring, quad formula, vertex form)','Math: Quadratic graphs + parabolas 25q | R&W: Sentence boundaries 20q','Math: Polynomial operations 20q | R&W: Comma usage & punctuation 25q','Math: Word problems (linear + quad) 25q | R&W: Subject-verb agreement 20q','Hard Focus: 20 Hard Math + 20 Hard R&W (Weeks 1–3, no scaffolding)'],
-    metrics:['Skip-and-return strategy documented','Quadratic hard-question accuracy ≥ 80%','Punctuation accuracy ≥ 85%','Error log ≥ 30 entries'],
-    mistakes:['Ignoring timing strategy — pacing gains are often bigger than knowledge gains','Treating hard questions as unanswerable — they follow patterns'],
-    recovery:'If quadratics < 75%: Add 20 extra quadratic warm-up questions before every session for one week.'},
-  {w:4,phase:'Phase 1 · Foundation',color:'#4F46E5',obj:'CHECKPOINT W4 — Foundation Gate (1300+). Exponentials + modifiers + weekly review.',time:'2–3 hrs/day',target:1300,note:'TARGET: 1300+ | Gate: Easy 95%, Med 85%, Hard 65%',
-    days:['FULL TEST — Bluebook #4 — CHECKPOINT TEST','Error review — find single weakest Math + R&W topic; 30 targeted q each','Math: Exponential functions 25q | R&W: Pronoun agreement 20q','Math: Radicals & rational exponents 25q | R&W: Modifiers & parallelism 20q','Math: Absolute value 20q | R&W: Verb tense & mood 20q','Math: Exponential vs. linear models 20q | R&W: Concision 25q','Hard Marathon: 30 Hard Math + 20 Hard R&W, timed | Weekly review form'],
-    metrics:['Score ≥ 1300','Easy ≥ 95%, Medium ≥ 85%, Hard ≥ 65%','Weekly review completed','Weakest topics scheduled for Week 5'],
-    mistakes:['Panicking if score < 1300 — adjust the plan, not the attitude','Skipping the weekly review — analytics depend on it'],
-    recovery:'If score < 1280: Replace 50% of Week 5 advanced sessions with targeted foundation repair on the 3 most-missed topics. Add 30 min/day for 1 week.'},
-  {w:5,phase:'Phase 2 · Skill Build',color:'#0D9488',obj:'Geometry sprint + rhetorical goal mastery — the biggest 1400→1500 score separators',time:'2.5–3.5 hrs/day',target:null,note:'Gate: Easy 97%, Med 90%, Hard 75%',
-    days:['FULL TEST — Bluebook #5 (timed)','Error review — update weakness radar; plan +20 min/day on weakest types','Math: Geometry — lines, angles, triangles 25q | R&W: Rhetorical goal 20q','Math: Circles — arc length, sector area 25q | R&W: Rhetorical synthesis 20q','Math: Coordinate geometry 20q | R&W: Notes-based writing 20q','Math: Right triangle trig (SOHCAHTOA) 20q | R&W: Command of evidence 20q','1500 Focus: 15 Hard coord geometry + 10 synthesis + 10 notes-based'],
-    metrics:['Rhetorical goal accuracy ≥ 80%','Geometry accuracy ≥ 75% on medium questions','Notes-based writing ≥ 70%','Reading log 7/7 days'],
-    mistakes:['Treating synthesis questions as essays — they are logic puzzles','Rushing geometry without drawing a diagram'],
-    recovery:'If rhetorical goal < 70%: Read 5 passages annotating each paragraph\'s PURPOSE before answering any questions this week.'},
-  {w:6,phase:'Phase 2 · Skill Build',color:'#0D9488',obj:'Advanced trig + complex numbers + cross-text — the elite question cluster',time:'2.5–3.5 hrs/day',target:null,note:'Gate: Med 90%, Hard 75%',
-    days:['FULL TEST — Bluebook #6 (timed)','Error review — list top 5 missed topics across all tests; drill top 2 today','Math: Trig identities + unit circle 20q | R&W: Advanced inference 20q','Math: Complex numbers 20q + Trig in non-right triangles 15q','Math: Mixed hard set (no topic labels) 30q | R&W: Cross-text advanced 20q','Math: Hard word problems 20q | R&W: Timed R&W section sim (27q / 32 min)','Math Blitz: 10 complex + 10 trig + 10 exp modeling + 10 hard geometry'],
-    metrics:['Complex numbers ≥ 75%','Cross-text ≥ 75%','First timed R&W section sim completed','Cumulative error log ≥ 45 entries'],
-    mistakes:['Skipping complex numbers because they seem rare — they appear on hard Module 2','Not timing the R&W section simulation strictly'],
-    recovery:'If complex numbers < 65%: SAT only tests 6 complex number patterns. Make a reference card of all 6 patterns and drill each.'},
-  {w:7,phase:'Phase 2 · Skill Build',color:'#0D9488',obj:'Phase 2 benchmark debrief — hard-only drills — confirm mastery before Trap Mastery phase',time:'2.5–3 hrs/day',target:null,note:'Phase 2 Benchmark — target ≥ 1380',
-    days:['FULL TEST — Bluebook #7 — PHASE 2 BENCHMARK','Full debrief 2hr — classify every error; update weakness radar','Comprehensive Math review: 5q per topic from all Phase 2 topics','Comprehensive R&W review: 5q per topic from all Phase 2 topics','Hard-Only Math: 40 hard questions, 70 min','Hard-Only R&W: 27 hard questions, 32 min — log all errors','REST + identify Final 3 Math weaknesses + Final 3 R&W weaknesses for Phase 3'],
-    metrics:['Hard Math accuracy ≥ 70%','Hard R&W accuracy ≥ 72%','Phase 3 target weaknesses identified','All Phase 2 topics reviewed'],
-    mistakes:['Rushing the 2hr debrief — it\'s the most valuable session of Phase 2','Not updating the weakness radar — analytics depend on it'],
-    recovery:'If Phase 2 benchmark < 1350: Extend Phase 2 by one week. Insert a Recovery Week before Phase 3. Do not enter trap training without a solid skill base.'},
-  {w:8,phase:'Phase 3 · Trap Mastery',color:'#7C3AED',obj:'CHECKPOINT W8 — Mid-Point (1400+). Launch systematic trap training.',time:'2.5–3.5 hrs/day',target:1400,note:'TARGET: 1400+ | Adaptive branching activates if < 1350',
-    days:['FULL TEST — Bluebook #8 — MID-POINT CHECKPOINT','Error analysis: classify each wrong answer as TRAP / GAP / TIMING — build trap inventory','Math Trap Training: 20 quad word problems (extraneous roots) + 10 diagram traps + 10 stats traps','R&W Trap Training: 15 main idea (too narrow) + 10 transition traps + 10 vocab traps','Math: Systems with no/infinite solutions 20q | Quad discriminant 15q','R&W: Rhetorical goal advanced 20q | Command of evidence hard 20q','Timed Pressure: 44 Math / 70 min + 54 R&W / 64 min'],
-    metrics:['Total score ≥ 1400','Trap error rate falling vs. Week 4','Can name all 8 Math and 8 R&W traps','All Trap Database entries read'],
-    mistakes:['Confusing trap errors with gap errors — they require different fixes','Not documenting new trap patterns in the Trap Database'],
-    recovery:'If score < 1350: Two extra days of foundation repair before continuing trap training. Do not skip to advanced traps before closing knowledge gaps.'},
-  {w:9,phase:'Phase 3 · Trap Mastery',color:'#7C3AED',obj:'Advanced stats + exponential modeling + verb mastery — close the last knowledge gaps',time:'3 hrs/day',target:null,note:'Gate: Med 93%, Hard 82%',
-    days:['FULL TEST — Bluebook #9 (timed)','Error review — analyze Module 1 vs Module 2 separately; Module 2 ceiling is key','Advanced Math — Exponential/Log: 25q growth/decay + 10q interpreting e^x','Advanced Math — Stats: 20q distributions + 10q probability + 10q margin of error','Advanced Math — Geometry+Trig: 15q circles + 10q similar triangles + 10q trig algebraic','Advanced R&W: 20 notes-based + 15 rhetorical synthesis + 10 cross-text comparison','Hard-Only Timed: 30 Hard Math (weakest) + 20 Hard R&W (weakest) — target 80%+'],
-    metrics:['Module 1 accuracy ≥ 95% (to unlock hard Module 2)','Module 2 hard accuracy ≥ 75%','Margin of error questions ≥ 80%','Synthesis questions ≥ 82%'],
-    mistakes:['Neglecting Module 1 — errors there prevent hard questions in Module 2','Drilling complex numbers while statistics gaps remain open'],
-    recovery:'If Module 2 accuracy < 70%: The problem is usually Module 1 errors. Drill Module 1 topics to 97%+ before attempting Module 2 simulations.'},
-  {w:10,phase:'Phase 3 · Trap Mastery',color:'#7C3AED',obj:'Timing mastery + pacing drills + 800-Math strategy — push toward peak efficiency',time:'3 hrs/day',target:null,note:'Gate: Med 93%, Hard 82%',
-    days:['FULL TEST — Bluebook #10 (timed)','Error review — timing analysis: Math Q22 at 35 min, R&W Q27 at 32 min benchmark','Math Pacing Drill: Q1–22 in 33 min + Q23–44 in 37 min | R&W Pacing: 27q in 30 min','800 Math Strategy: top 5 hard question types — 10q each = 50 total, target 0 errors','Fresh hard Math set (unseen): 40q timed 70 min — log all errors with root cause','Fresh hard R&W (unseen): 27q timed 32 min — drill 10 worst error-log questions','REST — review timing notes; trap cues; skip-and-return rules'],
-    metrics:['Finishing Math with ≥ 3 min to check','Finishing R&W with ≥ 2 min to check','Skip rate < 3 questions per section','Zero timing errors in review'],
-    mistakes:['Going too fast on easy questions and making careless errors','Spending 4+ min on any single hard question — skip and return'],
-    recovery:'If timing still poor: Practice 15-question sprints daily with a phone timer. Speed on medium questions is where most time is lost.'},
-  {w:11,phase:'Phase 3 · Trap Mastery',color:'#7C3AED',obj:'CHECKPOINT W11 — Pre-Peak (1450+). Build Final 15 Question Types list.',time:'2.5–3 hrs/day',target:1450,note:'TARGET: 1450+ | Recovery week follows if < 1420',
-    days:['FULL TEST — Bluebook #11 — PHASE 3 FINAL','Full debrief 2.5hr — compare Test 1 vs Test 11; build Final 15 Question Types list','Drill Final 15 Question Types: 5 fresh questions each = 75 total','Math: 44 mixed hard, 70 min — target 40+ correct','R&W: 27 mixed hard, 32 min — target 24+ correct','Module 2 Pressure Sim: Hard Math Mod 2 (27q/35min) + R&W Mod 2 (27q/32min)','Light review — redo 20 error log questions you got right; confirm mastery'],
-    metrics:['Total score ≥ 1450','Final 15 list documented','Hard Math ≥ 40/44','Hard R&W ≥ 24/27','Daily warm-up routine established'],
-    mistakes:['Making the Final 15 list too vague — be specific ("extraneous roots in word problems", not "hard math")','Skipping the Test 1 vs Test 11 comparison — progress visibility is motivating and diagnostic'],
-    recovery:'If score < 1420: Insert Recovery Week before Phase 4. Cut intensity, add sleep, review your top 15 error log entries. Do not add new material.'},
-  {w:12,phase:'Phase 4 · Peak Performance',color:'#DC2626',obj:'Phase 4 launch — real-test conditions every day + daily warm-up + surgical drilling',time:'2.5–3 hrs/day',target:null,note:'Gate: Med 95%, Hard 88%',
-    days:['FULL TEST — Bluebook #12 — PHASE 4 BEGINS','Error review — every wrong answer gets root cause; should be only trap/timing by now','Daily Warm-Up: 5q Final 15 (5/5 required) | Math: 25 hard q weakest 3 topics | R&W: 15 hard q weakest 2 topics','Daily Warm-Up: 5q Final 15 | Trap Review: all trap error entries → 20 trap-style drills','Daily Warm-Up: 5q Final 15 | Math: 44q / 68 min (faster than pace) | R&W: 27q / 30 min (faster)','Daily Warm-Up: 5q Final 15 | Module 2 Sim: 27 Hard Math + 27 Hard R&W back-to-back','Daily Warm-Up: 5q Final 15 | Light error review | Sleep 8+ hrs'],
-    metrics:['Daily warm-up 5/5 every day','Hard accuracy ≥ 85%','Zero gap errors (only trap/timing allowed)','Burnout energy ≥ 6/10'],
-    mistakes:['Skipping daily warm-up — non-negotiable in Phase 4','Introducing new topics — only drill known weaknesses'],
-    recovery:'If burnout < 5/10: Cut to 2 hrs/day for 3 days. Sleep ≥ 7.5 hrs is non-negotiable. Short-term intensity reduction protects long-term peak performance.'},
-  {w:13,phase:'Phase 4 · Peak Performance',color:'#DC2626',obj:'Endurance + ceiling breaker + consistency test — simulate exact test-day conditions',time:'2–3 hrs/day',target:null,note:'Target: ≥ 1470 on practice test',
-    days:['FULL TEST — Bluebook #13 (timed)','Error review — gap errors: 45-min targeted drill; trap errors: review trap catalog','Daily Warm-Up: 5q Final 15 | Math: Polynomial + exponential hard 20q | R&W: Synthesis + notes 15q','Daily Warm-Up: 5q Final 15 | Math: Geometry + trig hard 20q | R&W: Transitions + evidence 15q','Daily Warm-Up: 5q Final 15 | Endurance: Full R&W (54q/64min) → Full Math (44q/70min) immediately after','Daily Warm-Up: 5q Final 15 | Ceiling analysis: find exact question types limiting you; 30 targeted q','Light day (30 min only): 10q Final 15, must score 10/10'],
-    metrics:['Endurance drill completed without accuracy drop in second section','Ceiling analysis: 2–3 remaining question types identified','Light day: 10/10 on Final 15'],
-    mistakes:['Not starting with R&W before Math in endurance drill — simulates real test order','Ignoring ceiling analysis — most near-1500 students have 2–3 very specific question types blocking them'],
-    recovery:'Score < 1460: Focused 20-min ceiling-breaker sessions targeting only 2 question types. Surgical drilling beats broad review at this stage.'},
-  {w:14,phase:'Phase 4 · Peak Performance',color:'#DC2626',obj:'Polish + consistency + perfection drills + test-day logistics locked in',time:'2–2.5 hrs/day',target:null,note:'Goal: ≤ 6 Math errors, ≤ 8 R&W errors',
-    days:['FULL TEST — Bluebook #14 — PENULTIMATE PRACTICE','Final debrief — wrong answers should be < 6 Math, < 8 R&W; list ceiling questions','Daily Warm-Up: 5q Final 15 | Math: Top 3 hardest topics 10q each | R&W: Top 2 hardest 10q each','Daily Warm-Up: 5q Final 15 | Module ×2: Hard Math module twice with 5-min break (consistency test)','Daily Warm-Up: 5q Final 15 | R&W Perfection: 27q / 28 min | Math: 20 hard mixed — must score ≥ 18/20','Daily Warm-Up: 5q Final 15 | Light review — note biggest improvements since Week 1','REST — review timing strategy; trap cues; plan test-day logistics'],
-    metrics:['Math errors ≤ 6','R&W errors ≤ 8','R&W perfection drill: 26–27/27','Consistency test: second run within ±2 of first','Test-day logistics fully planned'],
-    mistakes:['Cramming new material in Week 14 — this erodes confidence and confuses pattern recognition','Not sleeping 8+ hours every night this week'],
-    recovery:'Any score dip in Week 14 is almost always burnout or anxiety, not knowledge. Reduce study time, increase sleep, review your score progression chart from Week 1.'},
-  {w:15,phase:'Final Optimization',color:'#16A34A',obj:'FINAL SPRINT — Last practice test + taper + test-day strategy execution',time:'1–2 hrs/day (tapering)',target:1500,note:'TARGET: 1500+ on Oct 3 | 750+ Math + 760+ R&W',
-    days:['FULL TEST — Bluebook #15 — FINAL PRACTICE (real conditions)','Light review (≤ 90 min) — only questions you were unsure on; confirm timing strategy','Final Warm-Up Day 1: 10q Final 15 (10/10) + 10 Hard Math weakest + 10 Hard R&W weakest | No new material','Final Warm-Up Day 2: 10q Final 15 (10/10) + 20 mixed hard (no timer) — reinforce correct thinking','Final Warm-Up Day 3: 10q Final 15 (10/10) + 20 medium (confidence builder) | Review test strategy','NIGHT BEFORE: No math. Light error log scan only. Pack bag (ID, pencils, calculator, snacks). Sleep by 10 PM.','SAT TEST DAY — Target: 750+ Math + 760+ R&W = 1500+'],
-    metrics:['Final practice ≥ 1500','10/10 on Final 15 warm-up every day','Bag packed by Friday evening','In bed by 10 PM the night before exam'],
-    mistakes:['Studying hard the night before — the preparation is complete; extra studying now only creates anxiety','Skipping the taper — intensity must drop in the final week for peak performance'],
-    recovery:'If final practice < 1480: Do NOT add more studying. Trust your preparation. Execute your strategy. The gap between practice and real test day is real and in your favor.'},
+  {w:1,subject:'ielts',phase:'IELTS Sprint · Diagnostic',color:'#0EA5E9',obj:'Diagnostic baseline across all 4 skills + format familiarization + weakness map',time:'2.5-3 hrs/day IELTS + 20 min SAT maintenance',target:null,note:'Diagnostic week — no target band yet',
+    days:['Diagnostic: Full IELTS mock test (all 4 skills, timed) — establish baseline bands | SAT maintenance: skim error log, no new work','Listening format deep-dive: 4 sections, question types (forms/notes/maps/MCQ/matching) | SAT maintenance: 15 vocab words','Reading format deep-dive: True/False/Not Given + matching headings + skimming/scanning | SAT maintenance: 15 algebra warm-up q','Writing Task 1 format (Academic: line graphs, bar charts, tables, maps, process diagrams) + practice overview paragraph | SAT maintenance: 10 grammar q','Writing Task 2 format (opinion/discussion/problem-solution essays) + thesis practice | SAT maintenance: 15 reading comp q','Speaking format (Part 1/2/3) + record 5-min baseline sample for self-review | SAT maintenance: 15 vocab words','Vocabulary system launch (topic-list method + collocations) + Grammar diagnostic | Review Week 1 diagnostics, build weakness map'],
+    metrics:['Baseline bands logged for all 4 skills','Format familiarity confirmed for all 4 skills','Weakness map built from diagnostic','Speaking baseline recorded'],
+    mistakes:['Skipping the baseline recording — you need a reference point to measure real progress','Studying content before knowing the exact question formats'],
+    recovery:'If baseline feels far from Band 8: that\'s exactly why you have 5 weeks. Foundation work in Weeks 1-2 moves scores faster than most people expect.'},
+  {w:2,subject:'ielts',phase:'IELTS Sprint · Listening & Reading',color:'#0EA5E9',obj:'Listening + Reading question-type systems — the two most trainable skills for a fast band jump',time:'2.5-3 hrs/day IELTS + 20 min SAT maintenance',target:null,note:'Gate: Listening ≥75%, Reading ≥70% on section drills',
+    days:['Listening S1&2: form/note/map completion drill (30q) | SAT maintenance: 15 vocab words','Reading: True/False/Not Given strategy + skimming/scanning drills (2 passages) | SAT maintenance: 15 algebra q','Listening S3&4: multiple choice + matching + academic discussion (30q) | SAT maintenance: 10 grammar q','Reading: Matching headings + Yes/No/Not Given + summary completion (2 passages) | SAT maintenance: 15 vocab words','Listening full test simulation (40q, 30 min) timed + deep error review','Reading full test simulation (40q, 60 min) timed + deep error review','Weekly review — error log analysis; redo hardest 15 Listening + Reading questions | SAT maintenance: 20 mixed reading/algebra q'],
+    metrics:['Listening accuracy ≥80% on section drills','Reading accuracy ≥75% on section drills','Full Listening sim completed timed','Full Reading sim completed timed'],
+    mistakes:['Not reading the questions before the passage — wastes time','Losing focus on Listening Section 4 (academic monologue) — hardest section for most'],
+    recovery:'If Reading accuracy <65%: slow down and prioritize accuracy over finishing all 40 questions. Partial completion with high accuracy beats rushed guessing.'},
+  {w:3,subject:'ielts',phase:'IELTS Sprint · Writing',color:'#0EA5E9',obj:'Writing Task 1 & Task 2 mastery — the slowest-moving skill, so it gets the most dedicated week',time:'2.5-3 hrs/day IELTS + 20 min SAT maintenance',target:null,note:'Gate: complete a full T1+T2 timed combo by day 5',
+    days:['Writing T1 — line graphs & bar charts: structure (overview + 2 body paragraphs) + practice | SAT maintenance: 15 vocab words','Writing T1 — tables, maps & process diagrams + full practice essay (150+ words, 20 min) | SAT maintenance: 15 algebra q','Writing T2 — opinion essays: 4-paragraph structure + thesis/argument practice | SAT maintenance: 10 grammar q','Writing T2 — discussion & problem-solution essays + full practice essay (250+ words, 40 min) | SAT maintenance: 15 reading comp q','Writing T1+T2 timed combo (1 hr total) under real exam conditions + self-assessment vs band descriptors','Vocabulary: paraphrasing bank (30 academic synonyms) + Grammar: complex/compound sentences for writing | SAT maintenance: 15 vocab words','Full writing review — analyze 2 Band 9 model essays, identify gaps, redo 1 essay from earlier this week'],
+    metrics:['4 full practice essays written this week','Self-assessed against official band descriptors','Complex sentence usage increasing in drafts','Paraphrasing bank ≥30 entries'],
+    mistakes:['Writing Task 1 as a story instead of a data summary — no speculation, just report the data','Task 2 essays with no clear position — examiners penalize ambiguous stances'],
+    recovery:'If essays feel stuck under Band 7: the fastest gains come from studying Band 9 model answers sentence-by-sentence, not writing more from scratch.'},
+  {w:4,subject:'ielts',phase:'IELTS Sprint · Speaking & Pronunciation',color:'#0EA5E9',obj:'Speaking fluency + pronunciation systems — build a recorded track record to measure real progress',time:'2.5-3 hrs/day IELTS + 20 min SAT maintenance',target:null,note:'Gate: complete a full recorded speaking mock by day 6',
+    days:['Speaking Part 1 — personal topics, fluency drills, record + review 10 min | SAT maintenance: 15 vocab words','Speaking Part 2 — cue card practice x3 topics (1 min prep + 2 min talk each), recorded | SAT maintenance: 15 algebra q','Speaking Part 3 — abstract discussion questions, extended answer practice | SAT maintenance: 10 grammar q','Pronunciation — word stress + sentence stress drills (shadowing exercise) | SAT maintenance: 15 reading comp q','Pronunciation — intonation patterns + connected speech (linking, elision) | SAT maintenance: 15 vocab words','Full speaking mock (all 3 parts, recorded, timed 11-14 min) + self-score against band descriptors','Weekly review — speaking vocabulary (idioms/collocations) + redo weakest part from mock'],
+    metrics:['3 recorded Part 2 responses reviewed for filler words','Full speaking mock completed and self-scored','Pronunciation drills completed daily','Fluency: fewer long pauses vs Week 1 baseline recording'],
+    mistakes:['Memorizing scripted answers — examiners can tell, and it caps your score around Band 6','Speaking too fast to avoid pauses — clarity matters more than speed'],
+    recovery:'If fluency stalls: compare this week\'s recordings to your Day 5 Week 1 baseline. Progress in speaking is often invisible day-to-day but clear week-to-week.'},
+  {w:5,subject:'ielts',phase:'IELTS Sprint · Mock Tests & Taper',color:'#0369A1',obj:'Full mock tests + final taper — confirm band trajectory and protect energy for test day',time:'2-2.5 hrs/day, tapering by day 6-7',target:8,note:'TARGET: Band 8+ | TEST DAY Aug 15',
+    days:['FULL MOCK TEST #1 — all 4 skills, timed, exam conditions (no SAT maintenance today — protect IELTS focus)','Deep error review — Mock #1: classify every error, update weakness radar per skill','Targeted double session on weakest skill from Mock #1 | SAT maintenance: 15 vocab words','FULL MOCK TEST #2 — all 4 skills, timed, exam conditions (no SAT maintenance today — protect IELTS focus)','Deep error review — Mock #2: compare vs Mock #1, confirm band trajectory per skill','Light review — flashcards, re-read model answers, logistics prep (ID, test center directions, timing) — LOW intensity','IELTS TEST DAY (Aug 15) — 15 min light warm-up only. No new content. Trust the preparation.'],
+    metrics:['Mock #2 shows improvement over Mock #1 in at least 2 skills','All 4 skill weaknesses documented with root causes','Test-day logistics confirmed by day 6','Full night’s sleep on day 6 and day 7'],
+    mistakes:['Cramming new material in the final 48 hours — it raises anxiety without raising your band','Skipping the Mock #1 vs Mock #2 comparison — it’s your clearest signal of real progress'],
+    recovery:'If Mock #2 is flat vs Mock #1: that\'s common — speaking/writing gains often show up on test day itself once nerves settle. Trust the 5 weeks of work.'},
+  {w:6,subject:'sat',phase:'SAT · Foundation Reset',color:'#4F46E5',obj:'Fresh diagnostic after the IELTS Sprint + close easy-question gaps across every major topic',time:'2.5-3 hrs/day',target:null,note:'Diagnostic reset — confirm where 5 weeks of light maintenance left your SAT skills',
+    days:['FULL TEST — Bluebook #1 (timed) — fresh baseline after IELTS Sprint','Deep error review — classify every error: TRAP/GAP/TIMING/CARELESS | reopen error log','Math: Linear equations + systems 30q | R&W: Central idea + main purpose 20q','Math: Ratios, rates, percentages 30q | R&W: Textual evidence + inference 20q','Math: Statistics (mean/median/mode/std dev) 25q | R&W: Function of paragraph 20q','Math: Linear functions & graphs 25q | R&W: Comma usage & subject-verb agreement 25q','Hard Focus: 20 Hard Math + 20 Hard R&W (no scaffolding) | weekly review form'],
+    metrics:['Test logged with full error classification','≥15 error log entries with root causes','Easy accuracy ≥90%','Every error classified TRAP/GAP/TIMING/CARELESS'],
+    mistakes:['Assuming light SAT maintenance during IELTS Sprint kept you fully sharp — treat this as a real diagnostic','Reviewing errors too fast — spend 60+ min on post-test analysis'],
+    recovery:'If score < 1100: add 30 min/day on your 2 most-missed topic categories before Week 2. Momentum rebuilds fast — the prior work isn\'t gone.'},
+  {w:7,subject:'sat',phase:'SAT · Quadratics + Punctuation',color:'#4F46E5',obj:'Quadratics mastery + punctuation — the two highest-ROI pillars for crossing 1400 — into first checkpoint',time:'2.5-3 hrs/day',target:1300,note:'TARGET: 1300+ | Gate: Easy 95%, Med 85%, Hard 65%',
+    days:['FULL TEST — Bluebook #2 (timed)','Error review — redo all hard questions cold from memory | update weakness radar','Math: Quadratic equations 30q (factoring, quad formula, vertex form)','Math: Quadratic graphs + parabolas 25q | R&W: Sentence boundaries + punctuation 25q','Math: Exponential functions + radicals 25q | R&W: Pronoun agreement + modifiers 20q','Math: Absolute value + polynomial ops 20q | R&W: Verb tense, mood & concision 25q','CHECKPOINT — FULL TEST — Bluebook #3 | Hard Marathon: 30 Hard Math + 20 Hard R&W'],
+    metrics:['Score ≥1300 on checkpoint test','Quadratic hard-question accuracy ≥80%','Punctuation accuracy ≥85%','Error log ≥35 entries'],
+    mistakes:['Panicking if score <1300 — adjust the plan, not the attitude','Treating hard questions as unanswerable — they follow patterns'],
+    recovery:'If score <1280: Week 3 shifts 50% of session time to targeted foundation repair on your 3 most-missed topics.'},
+  {w:8,subject:'sat',phase:'SAT · Geometry + Trig + Rhetoric',color:'#0D9488',obj:'Geometry, trig & complex numbers + rhetorical goal mastery — the biggest 1400→1500 separators',time:'2.5-3.5 hrs/day',target:null,note:'Gate: Easy 97%, Med 90%, Hard 75%',
+    days:['FULL TEST — Bluebook #4 (timed)','Error review — update weakness radar; +20 min/day on weakest types','Math: Geometry — lines, angles, triangles, circles 30q | R&W: Rhetorical goal 20q','Math: Coordinate geometry + right triangle trig (SOHCAHTOA) 25q | R&W: Rhetorical synthesis 20q','Math: Trig identities + unit circle + complex numbers 25q | R&W: Command of evidence 20q','Math: Mixed hard set (no topic labels) 25q | R&W: Cross-text connections advanced 20q','1500 Focus: 15 Hard coord geometry + 10 synthesis + 10 notes-based | timed R&W sim (27q/32min)'],
+    metrics:['Rhetorical goal accuracy ≥80%','Geometry+trig accuracy ≥75% on medium questions','Complex numbers ≥70%','Cumulative error log ≥50 entries'],
+    mistakes:['Rushing geometry without drawing a diagram','Treating synthesis questions as essays — they are logic puzzles','Skipping complex numbers because they seem rare — they appear on hard Module 2'],
+    recovery:'If rhetorical goal <70%: read 5 passages annotating each paragraph\'s PURPOSE before answering any questions this week.'},
+  {w:9,subject:'sat',phase:'SAT · Benchmark + Real Checkpoint',color:'#7C3AED',obj:'Phase benchmark + trap training launch, landing on your real Sept 12 SAT checkpoint attempt',time:'2.5-3.5 hrs/day',target:1400,note:'TARGET: 1400+ on the real Sept 12 attempt — this is not a drill',
+    days:['FULL TEST — Bluebook #5 (timed) — Phase benchmark','Full debrief 90 min — classify every error; update weakness radar; identify Final 3 Math + Final 3 R&W weaknesses','Hard-Only Math: 40 hard questions, 70 min | Hard-Only R&W: 27 hard questions, 32 min','Math Trap Training: 20 quad word problems (extraneous roots) + 10 diagram traps + 10 stats traps','R&W Trap Training: 15 main idea (too narrow) + 10 transition traps + 10 vocab traps','Math: Systems with no/infinite solutions 20q + discriminant 15q | R&W: Rhetorical goal advanced 20q','CHECKPOINT — REAL SAT ATTEMPT (Sept 12) — Target 1400+ | rest the day before, execute strategy'],
+    metrics:['Real checkpoint score ≥1400','Hard Math accuracy ≥70%','Hard R&W accuracy ≥72%','Final 3+3 weaknesses documented for Week 5'],
+    mistakes:['Cramming new material the night before Sept 12 — trust the prep, execute the strategy','Confusing trap errors with gap errors — they require different fixes'],
+    recovery:'If Sept 12 score <1350: Week 5 becomes a recovery week — two extra days of foundation repair before resuming trap training. Oct 3 is still 3 weeks away.'},
+  {w:10,subject:'sat',phase:'SAT · Timing Mastery',color:'#7C3AED',obj:'Timing mastery + advanced content — react to real Sept 12 results with surgical precision',time:'3 hrs/day',target:null,note:'Gate: Med 93%, Hard 82% | Finishing Math with ≥3 min to check',
+    days:['FULL TEST — Bluebook #6 (timed)','Error review — analyze Sept 12 results in depth; Module 1 vs Module 2 separately','Advanced Math: Exponential/log growth-decay 20q + stats/probability/margin of error 20q','Math Pacing Drill: Q1–22 in 33 min + Q23–44 in 37 min | R&W Pacing: 27q in 30 min','800 Math Strategy: top 5 hard question types — 10q each, target zero errors','Fresh hard Math (unseen) 40q timed 70 min | Fresh hard R&W (unseen) 27q timed 32 min','Advanced R&W: 20 notes-based + 15 rhetorical synthesis + 10 cross-text comparison'],
+    metrics:['Module 1 accuracy ≥95% (unlocks hard Module 2)','Module 2 hard accuracy ≥75%','Skip rate <3 questions per section','Zero timing errors in review'],
+    mistakes:['Neglecting Module 1 — errors there prevent hard questions in Module 2','Going too fast on easy questions and making careless errors'],
+    recovery:'If timing is still poor: practice 15-question sprints daily with a phone timer. Speed on medium questions is where most time is lost.'},
+  {w:11,subject:'sat',phase:'SAT · Pre-Peak Checkpoint',color:'#DC2626',obj:'Pre-peak checkpoint + Peak Performance launch — build the Final 15 Question Types list',time:'2.5-3 hrs/day',target:1450,note:'TARGET: 1450+ | Gate: Med 95%, Hard 88%',
+    days:['FULL TEST — Bluebook #7 — PRE-PEAK CHECKPOINT','Full debrief 2hr — compare Sept 12 vs today; build Final 15 Question Types list','Drill Final 15 Question Types: 5 fresh questions each = 75 total','Math: 44 mixed hard, 70 min — target 40+ correct | R&W: 27 mixed hard, 32 min — target 24+ correct','Daily Warm-Up: 5q Final 15 | Trap Review: all trap log entries → 20 trap-style drills','Daily Warm-Up: 5q Final 15 | Module 2 Pressure Sim: Hard Math (27q/35min) + R&W (27q/32min)','Light review — redo 20 error log questions you got right; confirm mastery | Sleep 8+ hrs'],
+    metrics:['Score ≥1450','Final 15 list documented','Hard Math ≥40/44','Hard R&W ≥24/27','Daily warm-up routine established'],
+    mistakes:['Making the Final 15 list too vague — be specific ("extraneous roots in word problems," not "hard math")','Skipping daily warm-up from here on — non-negotiable in the final stretch'],
+    recovery:'If score <1420: cut new material entirely for Week 7. Only drill known weaknesses from the Final 15 list. Add sleep before adding hours.'},
+  {w:12,subject:'sat',phase:'SAT · Final Taper + Test Day',color:'#16A34A',obj:'FINAL SPRINT — last full practice test, taper, and test-day strategy execution',time:'1-2 hrs/day (tapering)',target:1500,note:'TARGET: 1500+ on Oct 3 | 750+ Math + 750+ R&W',
+    days:['FULL TEST — Bluebook #8 — FINAL FULL PRACTICE (real conditions)','Endurance: Full R&W (54q/64min) → Full Math (44q/70min) immediately after, no break','Daily Warm-Up: 5q Final 15 (5/5 required) | Ceiling analysis: 20 targeted q on your 2-3 blocking question types','Daily Warm-Up: 10q Final 15 (10/10) | Math: top 3 hardest topics 10q each | R&W: top 2 hardest 10q each','Daily Warm-Up: 10q Final 15 (10/10) | R&W Perfection: 27q/28min | Math: 20 hard mixed, target ≥18/20','NIGHT BEFORE: no new math. Light error log scan only. Pack bag (ID, pencils/calculator, snacks). Sleep by 10 PM.','SAT TEST DAY — Target: 750+ Math + 750+ R&W = 1500+. Execute the strategy, trust the prep.'],
+    metrics:['Final practice ≥1480','10/10 on Final 15 warm-up every day','Bag packed by Oct 2 evening','In bed by 10 PM the night before'],
+    mistakes:['Studying hard the night before — preparation is complete; extra studying now only creates anxiety','Skipping the taper — intensity must drop this week for peak performance'],
+    recovery:'If final practice <1460: do NOT add more studying. Trust your preparation, execute your strategy. The gap between practice and real test day is usually in your favor when well-rested.'},
+  {w:13,subject:'app',phase:'App Prep · Essay Foundations',color:'#B45309',obj:'Process SAT results, finalize the college list, and get strong early drafts of core essays down',time:'1.5-2 hrs/day',target:null,note:'RD deadline Jan 1 — plenty of runway, but early strong drafts beat late rushed ones',
+    days:['Process SAT score report | Finalize college list — lock in 7 schools with reach/match/safety balance','Personal statement — brainstorm 3 possible topics + outline strongest one','Personal statement — draft 1 (650 words, Common App prompt)','Request letters of recommendation from 2 teachers + 1 counselor — send personalized request emails','Personal statement — revise draft 1 based on self-review against strong examples','Build activities list — 10 entries, each with impact-focused description (150 char)','Weekly review — personal statement draft 2 + confirm recommender requests sent'],
+    metrics:['Personal statement draft 1 completed','3 recommendation requests sent','Activities list ≥8 entries drafted','College list finalized at 7 schools'],
+    mistakes:['Writing the personal statement about what you did instead of who you are — admissions officers read thousands of "did X" essays','Waiting too long to request recommendation letters — teachers need lead time'],
+    recovery:'If the personal statement feels flat: step away for a day, then read it aloud. Flat essays usually tell instead of show a specific moment.'},
+  {w:14,subject:'app',phase:'App Prep · Supplements & Logistics',color:'#B45309',obj:'Supplemental essays, financial aid forms, and a full application checklist for every school',time:'1.5-2 hrs/day',target:null,note:'Check each school\'s specific deadlines — some differ from the general Jan 1 RD date',
+    days:['Supplemental essays — identify all prompts across 7 schools, group by theme (why us / why major / community)','Draft supplemental essay #1 (highest-priority school)','Draft supplemental essay #2 + #3','Financial aid — start CSS Profile / school-specific international aid forms','Draft remaining supplemental essays (batch by shared theme where possible)','Full application review — every school\'s checklist: essays, recommenders, test scores, forms','Weekly review — confirm every school on track for Jan 1 RD deadline | plan November checkpoints'],
+    metrics:['All required supplemental essays have a first draft','Financial aid forms started for every school requiring them','Every school has a complete checklist with no missing items','November review checkpoints scheduled'],
+    mistakes:['Reusing one "why us" essay across schools without customizing — admissions officers notice generic answers','Missing financial aid deadlines, which are sometimes earlier than the application deadline itself'],
+    recovery:'If supplemental essays are piling up: prioritize by deadline and by how much you actually want each school — invest the most time in your top 2-3 choices.'},
 ];
 // College milestones are now tracked via CMD_PHASES in the USA 2027 Command Center
 const MATH_RES=[{name:'Khan Academy SAT',icon:'book',desc:'Official College Board partner — free, adaptive, linked to PSAT data.',url:'https://www.khanacademy.org/sat'},{name:'Bluebook (Official)',icon:'flask',desc:'The only official digital SAT practice platform. Use this for all full-length tests.',url:'https://bluebook.collegeboard.org'},{name:'Desmos Calculator',icon:'calculator',desc:'The exact calculator built into the SAT. Master it before test day.',url:'https://www.desmos.com/scientific'},{name:'Art of Problem Solving',icon:'bulb',desc:'Advanced math training for the hardest SAT question clusters.',url:'https://artofproblemsolving.com'}];
@@ -1743,7 +2010,7 @@ const BADGES=[
 /* ========== AUTH ========== */
 function login(){const n=(document.getElementById('authName').value||'').trim(),e=(document.getElementById('authEmail').value||'').trim();if(!n||!e){showToast('Enter name and email');return}currentUser={name:n,email:e};try{localStorage.setItem('sm_elite_user',JSON.stringify(currentUser))}catch(ex){}initApp()}
 function logout(){try{localStorage.removeItem('sm_elite_user')}catch(ex){}location.reload()}
-function initApp(){loadAll();buildPages();renderAll();renderGoalFabCount();document.getElementById('authScreen').style.display='none';document.getElementById('mainApp').style.display='flex';document.getElementById('mainApp').style.flexDirection='column';const av=document.getElementById('profileAvatar');if(av)av.src=`https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(currentUser.name)}&backgroundColor=4F46E5&fontColor=ffffff`;document.getElementById('profileName').textContent=currentUser.name;document.getElementById('profileEmail').textContent=currentUser.email;const td=document.getElementById('testDate');if(td)td.value=todayISO();const ed=document.getElementById('errReviewDate');if(ed)ed.value=new Date(Date.now()+3*86400000).toISOString().split('T')[0]}
+function initApp(){loadAll();buildPages();renderAll();renderGoalFabCount();ltTimerBoot();document.getElementById('authScreen').style.display='none';document.getElementById('mainApp').style.display='flex';document.getElementById('mainApp').style.flexDirection='column';const av=document.getElementById('profileAvatar');if(av)av.src=`https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(currentUser.name)}&backgroundColor=4F46E5&fontColor=ffffff`;document.getElementById('profileName').textContent=currentUser.name;document.getElementById('profileEmail').textContent=currentUser.email;const td=document.getElementById('testDate');if(td)td.value=todayISO();const ed=document.getElementById('errReviewDate');if(ed)ed.value=new Date(Date.now()+3*86400000).toISOString().split('T')[0];setTimeout(()=>{const pt=document.getElementById('page-today');if(pt)pt.classList.remove('just-entered')},450);if(!generatedPlan)generatePlan()}
 
 /* ========== NAV ========== */
 function showPage(id){
@@ -1756,7 +2023,7 @@ function showPage(id){
     window.scrollTo(0,0);
     return;
   }
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-item,.tab-item').forEach(n=>n.classList.remove('active'));const p=document.getElementById('page-'+id);if(p)p.classList.add('active');const nb=document.getElementById('nav-'+id);if(nb)nb.classList.add('active');const tb=document.getElementById('tab-'+id);if(tb)tb.classList.add('active');window.scrollTo(0,0);const map={today:renderTodayPage,livetracker:renderLiveTrackerPage,planner:renderPlanContainer,tests:renderTestsPage,errors:renderErrorsPage,analytics:renderAnalyticsPage,weaknesses:renderWeaknessPage,streak:renderStreakPage,roadmap:renderRoadmapPage,traps:renderTrapsPage,hardq:renderHardQPage,weekly:renderWeeklyPage,resources:renderResources,college:renderCollegePage,achievements:renderAchievements,kucat:renderKucatPage,mocktest:renderMockTestCenter};if(map[id])map[id]()
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-item,.tab-item').forEach(n=>n.classList.remove('active'));const p=document.getElementById('page-'+id);if(p){p.classList.add('active');p.classList.add('just-entered');clearTimeout(p._justEnteredTimer);p._justEnteredTimer=setTimeout(()=>p.classList.remove('just-entered'),450)}const nb=document.getElementById('nav-'+id);if(nb)nb.classList.add('active');const tb=document.getElementById('tab-'+id);if(tb)tb.classList.add('active');window.scrollTo(0,0);const map={today:renderTodayPage,livetracker:renderLiveTrackerPage,planner:renderPlanContainer,ielts:renderIeltsPage,ieltsplan:renderIeltsPlannerPage,tests:renderTestsPage,errors:renderErrorsPage,analytics:renderAnalyticsPage,weaknesses:renderWeaknessPage,streak:renderStreakPage,roadmap:renderRoadmapPage,traps:renderTrapsPage,hardq:renderHardQPage,weekly:renderWeeklyPage,resources:renderResources,college:renderCollegePage,achievements:renderAchievements,kucat:renderKucatPage,mocktest:renderMockTestCenter};if(map[id])map[id]()
 }
 function openMoreSheet(){document.getElementById('moreSheet').classList.add('show');document.body.style.overflow='hidden'}
 function closeMoreSheet(){document.getElementById('moreSheet').classList.remove('show');document.body.style.overflow=''}
@@ -1811,25 +2078,64 @@ function ltDayData(iso){const raw=dailyTracker[iso];return{custom:(raw&&raw.cust
 function ltEnsureDay(iso){if(!dailyTracker[iso])dailyTracker[iso]={custom:[],note:''};return dailyTracker[iso]}
 function ltPlanTaskForDay(iso){return generatedPlan?generatedPlan.find(dd=>dd.date===iso):null}
 function ltBasicKey(iso,subjectKey){return`${iso}_b_${subjectKey}`}
-function ltToggleTask(iso,planKey){planTasks[planKey]=planTasks[planKey]||{};planTasks[planKey].completed=!planTasks[planKey].completed;studyLog[iso]=true;saveAll();renderLiveTrackerPage();renderXP();renderAnalyticsPage()}
-function ltAddCustomTask(iso){const inp=document.getElementById('lt_new_task');const label=inp&&inp.value.trim();if(!label){showToast('Enter a task name');return}const d=ltEnsureDay(iso);d.custom.push({id:'ct_'+Math.random().toString(36).slice(2,8),label,done:false,mins:15});if(inp)inp.value='';saveAll();renderLiveTrackerPage()}
-function ltToggleCustom(iso,id){const d=ltEnsureDay(iso);const t=d.custom.find(c=>c.id===id);if(t){t.done=!t.done;studyLog[iso]=true;saveAll();renderLiveTrackerPage();renderXP()}}
+function ltToggleTask(iso,planKey){setUnifiedTaskDone(planKey,false,!(planTasks[planKey]&&planTasks[planKey].completed),iso);studyLog[iso]=true;saveAll();ltUpdateTaskRowUI(iso,planKey);renderXP();renderAnalyticsPage()}
+function ltAddCustomTask(iso){const inp=document.getElementById('lt_new_task');const label=inp&&inp.value.trim();if(!label){showToast('Enter a task name');return}const d=ltEnsureDay(iso);d.custom.push({id:'ct_'+Math.random().toString(36).slice(2,8),label,done:false,mins:15,subject:'general',completedAt:null});if(inp)inp.value='';saveAll();renderLiveTrackerPage()}
+function ltToggleCustom(iso,id){const d=ltEnsureDay(iso);const t=d.custom.find(c=>c.id===id);if(t){setUnifiedTaskDone(id,true,!t.done,iso);studyLog[iso]=true;saveAll();ltUpdateTaskRowUI(iso,id);renderXP()}}
+// Updates just the one task row + progress numbers + calendar cell in place,
+// instead of rebuilding the whole Live Tracker page. This is what stops a
+// single checkbox click from replaying every card's entrance animation —
+// that full-page-teardown-on-every-click pattern is exactly what caused the
+// "reload flash" bug. Falls back to a full render if the row isn't in the
+// DOM (e.g. viewer switched days between click and this running).
+function ltUpdateTaskRowUI(iso,key){
+  const row=document.querySelector(`.page.active .lt-task-row[data-taskkey="${key}"]`);
+  if(!row){renderLiveTrackerPage();return}
+  const wasComplete=document.getElementById('ltProgressPct')&&document.getElementById('ltProgressPct').textContent==='100%';
+  const stats=ltDayStats(iso);
+  const item=stats.items.find(i=>i.key===key);
+  if(!item)return;
+  row.classList.toggle('done',item.done);
+  row.classList.remove('just-toggled');void row.offsetWidth;row.classList.add('just-toggled');
+  const checkEl=row.querySelector('.lt-task-check');
+  if(checkEl)checkEl.innerHTML=item.done?ic('checkcircle',14):'';
+  const badge=row.querySelector('.lt-task-session-badge');
+  if(badge)badge.textContent=(item.done&&item.sessionMinutes!=null)?`@ ${item.sessionMinutes} min`:'';
+  const pctEl=document.getElementById('ltProgressPct');if(pctEl)pctEl.textContent=stats.pct+'%';
+  const timeEl=document.getElementById('ltTimeLeft');if(timeEl)timeEl.textContent=ltFmtMins(stats.minsLeft);
+  const barEl=document.getElementById('ltProgressBar');if(barEl)barEl.style.width=stats.pct+'%';
+  const cell=document.querySelector(`.page.active .lt-cal-day[title="${iso}"]`);
+  if(cell){const newStatus=ltStatusForDay(iso);cell.className=cell.className.replace(/status-\S+/,'status-'+newStatus)}
+  // Also refresh the per-day/per-week progress counters on a full day planner
+  // page (Study Planner / IELTS Planner), if this row lives on one of those.
+  const dayWrap=row.closest('[data-planday]');
+  if(dayWrap){
+    const dstats=ltDayStats(dayWrap.dataset.planday);
+    const dLabel=dayWrap.querySelector('.plannerday-progress');
+    if(dLabel)dLabel.textContent=`${dstats.done}/${dstats.total}`;
+    const weekWrap=row.closest('[data-planweek]');
+    if(weekWrap){
+      const wLabel=weekWrap.querySelector('.plannerweek-progress');
+      if(wLabel){
+        const weekDays=JSON.parse(weekWrap.dataset.weekdates);
+        let wDone=0,wTotal=0;
+        weekDays.forEach(d=>{const s=ltDayStats(d);wDone+=s.done;wTotal+=s.total});
+        wLabel.textContent=`${wDone}/${wTotal} tasks`;
+      }
+    }
+  }
+  // Goal-completed celebration — only on the moment a day crosses into 100%,
+  // not on every click, and not when un-checking away from 100%.
+  if(!wasComplete&&stats.total>0&&stats.pct===100&&typeof spawnConfettiBurst==='function'){
+    const r=row.getBoundingClientRect();
+    spawnConfettiBurst(r.left+r.width/2,r.top+r.height/2);
+    showToast('Day complete — nice work.');
+  }
+}
 function ltDeleteCustom(iso,id){const d=ltEnsureDay(iso);d.custom=d.custom.filter(c=>c.id!==id);saveAll();renderLiveTrackerPage()}
 function ltDayStats(iso){
-  const d=ltDayData(iso);
-  const items=[];
-  const planDay=ltPlanTaskForDay(iso);
-  if(planDay){
-    planDay.tasks.forEach((t,i)=>{
-      const key=`${iso}_${i}`;
-      items.push({key,label:t.label,mins:30,icon:'flag',done:!!(planTasks[key]&&planTasks[key].completed),plan:true});
-    });
-  }
-  LT_TASK_TEMPLATE.forEach(t=>{
-    const key=ltBasicKey(iso,t.key);
-    items.push({key,label:t.label,mins:t.mins,icon:t.icon,done:!!(planTasks[key]&&planTasks[key].completed)});
-  });
-  d.custom.forEach(c=>items.push({key:c.id,label:c.label,mins:c.mins||15,icon:'star',done:!!c.done,custom:true}));
+  // Delegates to the unified task layer (step 1) instead of re-deriving from
+  // planTasks/dailyTracker directly — one read implementation, not two.
+  const items=getUnifiedTasksForDate(iso).map(t=>({key:t.legacyKey,label:t.label,mins:t.estMins,icon:t.icon,done:t.done,plan:t.source==='curriculum'&&t.subject==='sat'&&!t.meta.includes('Daily basics'),custom:t.isCustom,sessionMinutes:t.sessionMinutes}));
   const total=items.length,done=items.filter(t=>t.done).length;
   const pct=total?Math.round(done/total*100):0;
   const minsLeft=items.filter(t=>!t.done).reduce((a,t)=>a+t.mins,0);
@@ -1842,11 +2148,38 @@ function ltStatusForDay(iso){
   const stats=ltDayStats(iso);
   if(iso===today)return stats.total&&stats.done===stats.total?'perfect':'current';
   if(iso>today)return'upcoming';
-  // past day within cycle
+  // past day — prefer the finalized dayLog record (factors timer minutes +
+  // tasks together) when one exists; falls back to task-only logic for
+  // historical days that predate the timer/dayLog feature.
+  const log=dayLog[iso];
+  if(log){
+    if(log.status==='missed')return stats.done>0?'completed':'missed';
+    if(log.status==='complete')return(stats.total&&stats.done===stats.total)?'perfect':'completed';
+    return'partial';
+  }
   if(stats.total===0)return'missed';
   if(stats.done===stats.total)return'perfect';
   if(stats.done>0)return'completed';
   return'missed';
+}
+// Detects day-type from the curriculum text + deadlines list so the calendar
+// can show small dots for mock/checkpoint tests, college deadlines, and
+// deliberately light/rest days — distinct from completion status color.
+function ltDayMarkers(iso){
+  const markers=[];
+  const planDay=(typeof generatedPlan!=='undefined'&&generatedPlan)?generatedPlan.find(d=>d.date===iso):null;
+  if(planDay){
+    const text=planDay.tasks.map(t=>t.label).join(' ');
+    if(/FULL TEST|CHECKPOINT|FULL MOCK TEST|MOCK TEST|TEST DAY/i.test(text))markers.push('mock');
+    if(/LOW intensity|NIGHT BEFORE|Light review/i.test(text))markers.push('rest');
+  }
+  if(typeof deadlines!=='undefined'&&deadlines&&deadlines.some(d=>d.date===iso))markers.push('deadline');
+  return markers;
+}
+function ltDayMarkersHtml(iso){
+  const m=ltDayMarkers(iso);
+  if(!m.length)return'';
+  return `<div class="lt-cal-markers">${m.map(k=>`<div class="lt-cal-marker ${k}"></div>`).join('')}</div>`;
 }
 function ltOverallPct(){
   const today=todayISO();
@@ -1948,17 +2281,19 @@ function ltCalShift(delta){
 }
 let ltSelectedDay=null;
 function ltSelectDay(iso){ltSelectedDay=iso;renderLiveTrackerPage()}
-function renderXP(){const xp=(satTests.length*100)+(satErrors.length*10)+(weeklyReviews.length*50)+(Object.keys(studyLog).length*20)+(Object.keys(readingLog).length*5);const lv=Math.floor(xp/500)+1;const pct=(xp%500)/500*100;const l=document.getElementById('xpLevel');if(l)l.textContent=lv;const x=document.getElementById('xpCount');if(x)x.textContent=xp+' XP';const b=document.getElementById('xpBarFill');if(b)b.style.width=pct+'%'}
+function renderXP(){const taskCompletions=Object.values(planTasks).filter(t=>t.completed).length;const studyMinutes=Object.values(sessionLog).reduce((a,m)=>a+m,0);const xp=(satTests.length*100)+(satErrors.length*10)+(weeklyReviews.length*50)+(Object.keys(studyLog).length*20)+(Object.keys(readingLog).length*5)+(taskCompletions*8)+Math.floor(studyMinutes/5);const lv=Math.floor(xp/500)+1;const pct=(xp%500)/500*100;const l=document.getElementById('xpLevel');if(l)l.textContent=lv;const x=document.getElementById('xpCount');if(x)x.textContent=xp+' XP';const b=document.getElementById('xpBarFill');if(b)b.style.width=pct+'%'}
 function openProfileModal(){const pt=document.getElementById('profileTarget');const ped=document.getElementById('profileExamDate');const pg=document.getElementById('profileGoal');if(pt)pt.value=userProfile.target||1500;if(ped)ped.value=userProfile.examDate||'2026-10-03';if(pg)pg.value=userProfile.dailyGoal||2;openModal('profileModal')}
 function saveProfile(){const pt=document.getElementById('profileTarget');const ped=document.getElementById('profileExamDate');const pg=document.getElementById('profileGoal');userProfile.target=parseInt(pt&&pt.value)||1500;userProfile.examDate=(ped&&ped.value)||'2026-10-03';userProfile.dailyGoal=parseFloat(pg&&pg.value)||2;saveAll();closeModal('profileModal');renderTodayPage();showToast('Profile saved')}
-function resetAll(){satTests=[];satErrors=[];planTasks={};studyLog={};collegeProgress={};generatedPlan=null;xpEvents=[];weeklyReviews=[];readingLog={};hardQLog={};burnoutLog={};dailyTracker={};saveAll();renderAll();closeModal('profileModal');showToast('All data reset')}
+function resetAll(){satTests=[];satErrors=[];planTasks={};studyLog={};collegeProgress={};generatedPlan=null;xpEvents=[];weeklyReviews=[];readingLog={};hardQLog={};burnoutLog={};dailyTracker={};if(ltTimerInterval)clearInterval(ltTimerInterval);if(ltDayRolloverInterval)clearInterval(ltDayRolloverInterval);liveTimer={status:'stopped',accumulatedMs:0,startedAt:null,dateISO:todayISO()};sessionLog={};dayLog={};saveAll();renderAll();closeModal('profileModal');showToast('All data reset')}
 /* ========== BUILD PAGES ========== */
 function buildPages(){
   document.getElementById('contentInner').innerHTML=`
-  <div class="page active" id="page-today"></div>
+  <div class="page active just-entered" id="page-today"></div>
   <div class="page" id="page-livetracker"></div>
   <div class="page" id="page-roadmap"></div>
   <div class="page" id="page-planner"></div>
+  <div class="page" id="page-ielts"></div>
+  <div class="page" id="page-ieltsplan"></div>
   <div class="page" id="page-tests"></div>
   <div class="page" id="page-errors"></div>
   <div class="page" id="page-traps"></div>
@@ -1974,7 +2309,7 @@ function buildPages(){
   <div class="page" id="page-kucat"></div>
   <div class="page" id="page-mocktest"></div>`;
 }
-function renderAll(){loadCmdData();renderTodayPage();renderLiveTrackerPage();renderTestsPage();renderErrorsPage();renderAnalyticsPage();renderStreakPage();renderWeaknessPage();renderAchievements();renderResources();renderCollegePage();renderWeeklyPage();renderXP();if(generatedPlan)renderPlanContainer();renderKucatPage();renderMockTestCenter()}
+function renderAll(){loadCmdData();renderTodayPage();renderLiveTrackerPage();renderTestsPage();renderErrorsPage();renderAnalyticsPage();renderStreakPage();renderWeaknessPage();renderAchievements();renderResources();renderCollegePage();renderWeeklyPage();renderXP();if(generatedPlan)renderPlanContainer();renderKucatPage();renderMockTestCenter();renderIeltsPage();renderIeltsPlannerPage()}
 
 /* ========== DASHBOARD PAGE ========== */
 function renderTodayPage(){
@@ -2010,17 +2345,11 @@ function renderTodayPage(){
   const cmdTotal=cmdPhases.reduce((a,p)=>a+(p.tasks||[]).length,0);
   const cmdPct=cmdTotal?Math.round(cmdDone/cmdTotal*100):0;
 
-  // Daily missions — cross-domain nudges (SAT plan/subject checklist now lives in Live Tracker, not duplicated here)
+  // Today's real task stats, read straight from the unified layer that Live
+  // Tracker itself uses — this card shows the same numbers, never a second
+  // set of tasks with their own state.
   const overdueErrCount=errOverdueCount();
-  let missions=[
-    {id:'s0',label:'Log a Bluebook practice test',meta:'SAT · establishes baseline score',done:satTests.length>0},
-    overdueErrCount>0
-      ?{id:'s1',label:`Review ${overdueErrCount} overdue error${overdueErrCount===1?'':'s'}`,meta:'SAT · highest-leverage 10 min you can spend',done:false}
-      :{id:'s1',label:'Add errors to Error Log',meta:'SAT · 10 min',done:satErrors.length>=5},
-    {id:'s2',label:'Do one IELTS skill block',meta:'IELTS · listening, reading, writing or speaking',done:!!studyLog[today]},
-    {id:'s3',label:'Log daily reading session',meta:'SAT R&W · 15–20 min',done:!!readingLog[today]},
-  ];
-  const doneCount=missions.filter(m=>m.done).length;
+  const todayStats=ltDayStats(today);
 
   // Reading dots
   const dow=(new Date().getDay()+6)%7;
@@ -2143,21 +2472,27 @@ function renderTodayPage(){
   <!-- MAIN CONTENT GRID: left (missions + coach) + right (SAT score + reading) -->
   <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:14px;margin-bottom:18px;align-items:start">
     <div>
-      <!-- TODAY'S MISSIONS -->
+      <!-- TODAY'S PROGRESS SNAPSHOT — reads Live Tracker's numbers, doesn't
+           duplicate its checklist. Live Tracker is the only place tasks get
+           checked off; this just shows where today stands and links there. -->
       <div class="card" style="margin-bottom:12px">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-          <div><div class="card-title">Today's tasks</div><div class="card-sub">${doneCount}/${missions.length} complete</div></div>
-          <div style="display:flex;gap:5px">
-            <button class="btn btn-secondary btn-xs" onclick="showPage('livetracker')">Live Tracker</button>
-            <button class="btn btn-secondary btn-xs" onclick="showPage('planner')">SAT plan</button>
-            <button class="btn btn-secondary btn-xs" onclick="promptIELTS()">IELTS</button>
-          </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+          <div><div class="card-title">Today's Progress</div><div class="card-sub">${todayStats.done}/${todayStats.total} tasks · ${todayStats.pct}%</div></div>
+          <button class="btn btn-primary btn-xs" onclick="showPage('livetracker')">Open Live Tracker →</button>
         </div>
-        <div style="display:flex;flex-direction:column;gap:6px">
-          ${missions.map(m=>m.id.startsWith('s')
-            ?`<div class="mission ${m.done?'done':''}"><div class="check ${m.done?'on':''}" style="cursor:default;flex-shrink:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div style="flex:1"><div class="mission-title">${esc(m.label)}</div><div class="mission-meta">${esc(m.meta||'')} · <span style="color:var(--accent);font-weight:700">auto-tracked</span></div></div></div>`
-            :`<div class="mission ${m.done?'done':''}"><button class="check ${m.done?'on':''}" onclick="toggleMission('${m.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></button><div style="flex:1"><div class="mission-title">${esc(m.label)}</div><div class="mission-meta">${esc(m.meta||'')}</div></div></div>`
-          ).join('')}
+        <div class="bar-track" style="margin-bottom:12px"><div class="bar-fill good" style="width:${todayStats.pct}%"></div></div>
+        <div style="display:flex;flex-direction:column;gap:5px">
+          ${todayStats.items.slice(0,4).map(t=>`<div style="display:flex;align-items:center;gap:8px;font-size:0.78rem;color:${t.done?'var(--ink-3)':'var(--ink)'};${t.done?'text-decoration:line-through':''}">
+            <div style="width:14px;height:14px;border-radius:4px;flex-shrink:0;display:grid;place-items:center;background:${t.done?'var(--good)':'transparent'};border:1.5px solid ${t.done?'var(--good)':'var(--line-strong)'}">${t.done?ic('checkcircle',9):''}</div>
+            ${esc(t.label.length>60?t.label.slice(0,60)+'…':t.label)}
+          </div>`).join('')}
+          ${todayStats.total>4?`<div style="font-size:0.7rem;color:var(--ink-3);margin-top:2px">+ ${todayStats.total-4} more in Live Tracker</div>`:''}
+          ${todayStats.total===0?`<div style="font-size:0.78rem;color:var(--ink-3)">No plan generated yet — <a href="#" onclick="generatePlan();return false" style="color:var(--accent)">generate your 14-week plan</a>.</div>`:''}
+        </div>
+        <div style="display:flex;gap:6px;margin-top:12px;padding-top:10px;border-top:1px solid var(--line)">
+          <button class="btn btn-secondary btn-xs" onclick="showPage('tests')">Log SAT test</button>
+          ${overdueErrCount>0?`<button class="btn btn-secondary btn-xs" onclick="showPage('errors')">Review ${overdueErrCount} overdue error${overdueErrCount===1?'':'s'}</button>`:''}
+          <button class="btn btn-secondary btn-xs" onclick="promptIELTS()">Log IELTS band</button>
         </div>
       </div>
       <!-- AI COACH -->
@@ -2311,27 +2646,6 @@ function animateCheck(btn,completing){
   }
 }
 
-function toggleMission(id){
-  if(id.startsWith('s'))return;
-  planTasks[id]=planTasks[id]||{};
-  const nowDone=!planTasks[id].completed;
-  planTasks[id].completed=nowDone;
-  saveAll();
-  const btn=document.querySelector(`button.check[onclick="toggleMission('${id}')"]`);
-  if(btn){
-    btn.classList.toggle('on',nowDone);
-    animateCheck(btn,nowDone);
-    const row=btn.closest('.mission');
-    if(row&&nowDone){
-      row.classList.add('completing');
-      setTimeout(()=>{row.classList.remove('completing');row.classList.add('done')},400);
-    } else if(row){
-      row.classList.remove('done','completing');
-    }
-  }
-  // Only update non-visible pages — never re-render the page the user is looking at
-  renderAnalyticsPage();renderXP();
-}
 function toggleReadingDay(iso){readingLog[iso]=!readingLog[iso];if(!readingLog[iso])delete readingLog[iso];saveAll();renderTodayPage();renderAchievements();renderXP();showToast(readingLog[iso]?'Reading logged ✓':'Reading removed')}
 function logBurnout(level){burnoutLog[todayISO()]={energy:level};saveAll();renderTodayPage();showToast('Energy logged: '+level+'/10')}
 
@@ -2368,7 +2682,7 @@ function renderLiveTrackerPage(){
     const iso=`${cy}-${String(cm).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
     const status=ltStatusForDay(iso);
     const sel=iso===viewIso?' selected':'';
-    calCells+=`<div class="lt-cal-day status-${status}${sel}" onclick="ltSelectDay('${iso}')" title="${iso}">${day}</div>`;
+    calCells+=`<div class="lt-cal-day status-${status}${sel}" onclick="ltSelectDay('${iso}')" title="${iso}">${day}${ltDayMarkersHtml(iso)}</div>`;
   }
 
   // view day detail stats (for the selected calendar day, may differ from today)
@@ -2379,6 +2693,22 @@ function renderLiveTrackerPage(){
   <div style="margin-bottom:20px">
     <div class="eyebrow" style="margin-bottom:4px">Live Study Tracker</div>
     <div class="display-2" style="font-size:1.45rem;margin-bottom:4px">Your study cycle, updated every day.</div>
+  </div>
+
+  <div class="card" style="margin-bottom:18px">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px">
+      <div>
+        <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-3);margin-bottom:4px">Study Session <span id="ltTimerStateBadge" style="font-weight:600;color:var(--accent);text-transform:none;letter-spacing:0">Stopped</span></div>
+        <div id="ltTimerDisplay" style="font-family:var(--font-num);font-size:2rem;font-weight:900;letter-spacing:-0.02em;font-variant-numeric:tabular-nums">${ltTimerFmt(ltTimerElapsedMs())}</div>
+        <div id="ltTimerLoggedNote" style="font-size:0.7rem;color:var(--ink-3);margin-top:2px">${dayLog[todayISO()]?`Logged: ${dayLog[todayISO()].minutes} min (${dayLog[todayISO()].status})`:'Not logged yet today'}</div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-primary btn-sm" id="ltTimerStartBtn" onclick="ltTimerStart()" style="display:${liveTimer&&liveTimer.status==='running'?'none':'inline-flex'}">${liveTimer&&liveTimer.status==='paused'?'Resume':'Start'}</button>
+        <button class="btn btn-sm" id="ltTimerPauseBtn" onclick="ltTimerPause()" style="display:${liveTimer&&liveTimer.status==='running'?'inline-flex':'none'}">Pause</button>
+        <button class="btn btn-sm" onclick="ltTimerLog()">Log</button>
+        <button class="btn btn-sm" onclick="ltTimerReset()">Reset</button>
+      </div>
+    </div>
   </div>
 
   <div class="card lt-master" style="margin-bottom:18px">
@@ -2417,11 +2747,12 @@ function renderLiveTrackerPage(){
       </div>
       ${stats.total===0&&viewIso!==today?`<div style="font-size:0.8rem;color:var(--ink-3);padding:8px 0">No tasks logged for this day.</div>`:''}
       ${viewStats.items.map(t=>`
-        <div class="lt-task-row ${t.done?'done':''}">
+        <div class="lt-task-row ${t.done?'done':''}" data-taskkey="${t.key}">
           <div class="lt-task-check" onclick="${t.custom?`ltToggleCustom('${viewIso}','${t.key}')`:`ltToggleTask('${viewIso}','${t.key}')`}">${t.done?ic('checkcircle',14):''}</div>
           <div style="color:var(--ink-3);display:flex">${ic(t.icon,15)}</div>
           <div class="lt-task-label">${esc(t.label)}</div>
           <div class="lt-task-mins">${t.mins} min</div>
+          <div class="lt-task-session-badge" style="font-size:0.68rem;color:var(--accent);font-weight:600;white-space:nowrap">${t.done&&t.sessionMinutes!=null?`@ ${t.sessionMinutes} min`:''}</div>
           ${t.custom?`<button class="btn btn-ghost btn-sm" style="padding:2px 6px" onclick="ltDeleteCustom('${viewIso}','${t.key}')">✕</button>`:''}
         </div>`).join('')}
       <div style="display:flex;gap:8px;margin-top:10px">
@@ -2431,14 +2762,14 @@ function renderLiveTrackerPage(){
       <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)">
         <div>
           <div style="font-size:0.7rem;color:var(--ink-3);font-weight:700;text-transform:uppercase;letter-spacing:0.05em">Progress</div>
-          <div style="font-family:var(--font-num);font-size:1.3rem;font-weight:800">${viewStats.pct}%</div>
+          <div id="ltProgressPct" style="font-family:var(--font-num);font-size:1.3rem;font-weight:800">${viewStats.pct}%</div>
         </div>
         <div style="text-align:right">
           <div style="font-size:0.7rem;color:var(--ink-3);font-weight:700;text-transform:uppercase;letter-spacing:0.05em">Time Left</div>
-          <div style="font-family:var(--font-num);font-size:1.05rem;font-weight:700">${ltFmtMins(viewStats.minsLeft)}</div>
+          <div id="ltTimeLeft" style="font-family:var(--font-num);font-size:1.05rem;font-weight:700">${ltFmtMins(viewStats.minsLeft)}</div>
         </div>
       </div>
-      <div class="bar-track" style="margin-top:8px"><div class="bar-fill good" style="width:${viewStats.pct}%"></div></div>
+      <div class="bar-track" style="margin-top:8px"><div class="bar-fill good" id="ltProgressBar" style="width:${viewStats.pct}%"></div></div>
     </div>
 
     <div class="card">
@@ -2453,8 +2784,12 @@ function renderLiveTrackerPage(){
       </div>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;font-size:0.68rem;color:var(--ink-3)">
         <span><span style="display:inline-block;width:9px;height:9px;border-radius:3px;background:var(--good);vertical-align:-1px"></span> Perfect / Completed</span>
+        <span><span style="display:inline-block;width:9px;height:9px;border-radius:3px;background:var(--warn);vertical-align:-1px"></span> Partial</span>
         <span><span style="display:inline-block;width:9px;height:9px;border-radius:3px;background:var(--accent);vertical-align:-1px"></span> Today</span>
         <span><span style="display:inline-block;width:9px;height:9px;border-radius:3px;background:var(--bad);vertical-align:-1px"></span> Missed</span>
+        <span><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#DC2626;vertical-align:1px"></span> Mock/Checkpoint test</span>
+        <span><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#7C3AED;vertical-align:1px"></span> Deadline</span>
+        <span><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#0EA5E9;vertical-align:1px"></span> Rest/light day</span>
       </div>
     </div>
   </div>
@@ -2588,7 +2923,7 @@ function renderRoadmapPage(){
 
   document.getElementById('page-roadmap').innerHTML=`
     <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:18px;flex-wrap:wrap">
-      <div><div class="display-2" style="font-size:1.3rem">15-Week Roadmap</div><div class="card-sub">Foundation → Skill Build → Trap Mastery → Peak Performance · Target: 1500+</div></div>
+      <div><div class="display-2" style="font-size:1.3rem">14-Week Roadmap</div><div class="card-sub">IELTS Sprint → SAT Rebuild → Application Prep · IELTS Band 8+ · SAT 1500+</div></div>
       <button class="btn btn-primary btn-sm" onclick="openModal('weeklyModal')">Weekly review</button>
     </div>
     <div style="margin-bottom:18px"><div class="eyebrow" style="margin-bottom:10px">Score Checkpoints</div><div class="grid grid-4" style="gap:10px">${checkHtml}</div></div>
@@ -2608,12 +2943,78 @@ function renderRoadmapPage(){
 }
 function toggleWeekRow(w){const r=document.getElementById('wkrow_'+w);const d=document.getElementById('wkdet_'+w);if(!r||!d)return;const exp=r.classList.toggle('expanded');d.style.display=exp?'block':'none'}
 
+/* ========== IELTS PLANNER (lean — planner view only, no SAT-scale apparatus) ========== */
+function toggleIeltsWeekRow(w){const r=document.getElementById('iwkrow_'+w);const d=document.getElementById('iwkdet_'+w);if(!r||!d)return;const exp=r.classList.toggle('expanded');d.style.display=exp?'block':'none'}
+function renderIeltsPage(){
+  const ieltsWeeks=WEEK_DATA.filter(w=>w.subject==='ielts');
+  const examDate=new Date('2026-08-15T00:00:00');
+  const daysLeft=Math.max(0,Math.floor((examDate-new Date())/86400000));
+  const cycleDay=cycleDaysCompleted();
+  const sprintDay=Math.min(35,Math.max(0,cycleDay));
+  const currentBand=(typeof cmdData!=='undefined'&&cmdData.ieltsScore)?cmdData.ieltsScore:null;
+  const cw=Math.max(1,Math.min(5,Math.ceil(sprintDay/7)||1));
+
+  const weekHtml=ieltsWeeks.map(wk=>`
+    <div class="week-row ${wk.w===cw?'expanded':''}" id="iwkrow_${wk.w}" style="border-left:4px solid ${wk.color}">
+      <div class="week-num" style="background:${wk.color};white-space:nowrap">W${wk.w}</div>
+      <div class="week-content" onclick="toggleIeltsWeekRow(${wk.w})">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
+          <div>
+            <div class="week-phase" style="color:${wk.color}">${esc(wk.phase)}</div>
+            <div class="week-title">${esc(wk.obj)}</div>
+          </div>
+          <div style="display:flex;gap:5px;flex-shrink:0;flex-wrap:wrap">
+            ${wk.w===cw?'<span class="chip chip-accent">Current</span>':''}
+            ${wk.target?`<span class="chip chip-elite">Target Band ${wk.target}+</span>`:''}
+          </div>
+        </div>
+        <div class="week-metrics">
+          <span>⏰ <strong>${esc(wk.time)}</strong></span>
+          <span style="color:var(--ink-3)">${esc(wk.note)}</span>
+        </div>
+        <div class="week-details" id="iwkdet_${wk.w}">
+          <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--elite);margin-bottom:6px">Daily focus</div>
+          ${wk.days.map((dd,i)=>`<div style="font-size:0.77rem;display:flex;gap:6px;margin-bottom:4px;align-items:flex-start"><span style="color:var(--ink-4);font-weight:700;flex-shrink:0">${i+1}.</span><span>${esc(dd)}</span></div>`).join('')}
+          <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--good);margin-top:10px;margin-bottom:6px">Gate to clear</div>
+          ${wk.metrics.slice(0,2).map(m=>`<div style="font-size:0.76rem;display:flex;gap:5px;margin-bottom:4px"><span style="color:var(--good);flex-shrink:0">▸</span><span>${esc(m)}</span></div>`).join('')}
+        </div>
+      </div>
+    </div>`).join('');
+
+  document.getElementById('page-ielts').innerHTML=`
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:18px;flex-wrap:wrap">
+      <div><div class="display-2" style="font-size:1.3rem">IELTS Prep</div><div class="card-sub">5-week Sprint · Jul 12 → Aug 15 · Target Band 8+</div></div>
+      <div style="display:flex;gap:6px">
+        <button class="btn btn-secondary btn-sm" onclick="showPage('ieltsplan')">Full Planner →</button>
+        <button class="btn btn-primary btn-sm" onclick="promptIELTS()">Log mock band score</button>
+      </div>
+    </div>
+
+    <div class="grid grid-3" style="gap:10px;margin-bottom:18px">
+      <div class="card" style="padding:14px;text-align:center">
+        <div style="font-family:var(--font-num);font-size:1.5rem;font-weight:800;color:var(--elite)">${daysLeft}</div>
+        <div style="font-size:0.68rem;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.05em">Days to test</div>
+      </div>
+      <div class="card" style="padding:14px;text-align:center">
+        <div style="font-family:var(--font-num);font-size:1.5rem;font-weight:800">${currentBand||'—'}</div>
+        <div style="font-size:0.68rem;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.05em">Last logged band</div>
+      </div>
+      <div class="card" style="padding:14px;text-align:center">
+        <div style="font-family:var(--font-num);font-size:1.5rem;font-weight:800;color:var(--good)">8.0+</div>
+        <div style="font-size:0.68rem;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.05em">Target</div>
+      </div>
+    </div>
+
+    <div class="eyebrow" style="margin-bottom:12px">Week Overview — tap any week to expand, or open the Full Planner to check off tasks</div>
+    ${weekHtml}`;
+}
+
 /* ========== PLANNER ========== */
 function renderPlanContainer(){
   const pg=document.getElementById('page-planner');if(!pg)return;
   pg.innerHTML=`
     <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:18px;flex-wrap:wrap">
-      <div><div class="display-2" style="font-size:1.3rem">Study Planner</div><div class="card-sub">15-week day-by-day plan · Jun 20 → Oct 3, 2026</div></div>
+      <div><div class="display-2" style="font-size:1.3rem">Study Planner</div><div class="card-sub">SAT + Application day-by-day plan · Aug 16 → Oct 17, 2026 · IELTS lives under IELTS Prep</div></div>
       <button class="btn btn-primary btn-sm" onclick="generatePlan()">Regenerate plan</button>
     </div>
     ${!generatedPlan?`<div class="card"><div class="card-title" style="margin-bottom:12px">Generate your elite plan</div>
@@ -2628,56 +3029,86 @@ function generatePlan(){
   WEEK_DATA.forEach(wk=>{
     wk.days.forEach((task,di)=>{
       const date=new Date(start);date.setDate(start.getDate()+(wk.w-1)*7+di);
-      days.push({date:date.toISOString().split('T')[0],week:wk.w,phase:wk.phase,tasks:[{label:task,meta:wk.time+' · '+wk.phase}]});
+      // Each day's curriculum string is written as one or more items separated
+      // by "|" (e.g. "Math: ... | R&W: ..." or "Listening drill | SAT maintenance: ...").
+      // Split these into separate trackable tasks so Live Tracker shows every
+      // distinct activity as its own checkbox, instead of one giant item that
+      // hides whether you actually did the Math half, the R&W half, etc.
+      const parts=task.split('|').map(s=>s.trim()).filter(Boolean);
+      const tasks=parts.map(label=>({label,meta:wk.time+' · '+wk.phase}));
+      days.push({date:date.toISOString().split('T')[0],week:wk.w,phase:wk.phase,subject:wk.subject||'sat',tasks});
     });
   });
-  generatedPlan=days;saveAll();renderPlanContainer();renderTodayPage();showToast('15-week elite plan generated!')}
-function renderPlanWeeks(){
-  if(!generatedPlan)return'';
-  const byWeek={};generatedPlan.forEach(d=>{byWeek[d.week]=byWeek[d.week]||[];byWeek[d.week].push(d)});
-  return Object.entries(byWeek).map(([wk,days])=>{
+  generatedPlan=days;saveAll();renderPlanContainer();renderTodayPage();renderIeltsPage();renderIeltsPlannerPage();showToast('14-week IELTS + SAT + Application plan generated!')}
+// Shared full day-by-day planner — every task on every day gets its own real
+// checkbox, wired through the exact same ltToggleTask()/unified-layer path
+// Live Tracker uses. No separate write mechanism, so nothing can drift out
+// of sync with Live Tracker, XP, streaks, or the calendar.
+function renderFullDayPlanner(includeSubjects,excludeSubjects){
+  if(!generatedPlan)return'<div class="card">No plan generated yet. <button class="btn btn-primary btn-sm" onclick="generatePlan()">Generate plan</button></div>';
+  const days=generatedPlan.filter(d=>{
+    if(includeSubjects&&!includeSubjects.includes(d.subject))return false;
+    if(excludeSubjects&&excludeSubjects.includes(d.subject))return false;
+    return true;
+  });
+  if(!days.length)return'<div class="card" style="color:var(--ink-3)">No days match this filter.</div>';
+  const byWeek={};days.forEach(d=>{byWeek[d.week]=byWeek[d.week]||[];byWeek[d.week].push(d)});
+  const cw=getCurrentWeek();
+  const today=todayISO();
+  return Object.entries(byWeek).map(([wk,wdays])=>{
     const wkData=WEEK_DATA.find(w=>w.w==wk)||{};
-    const done=days.filter(d=>d.tasks.some((_,i)=>planTasks[`${d.date}_${i}`]&&planTasks[`${d.date}_${i}`].completed)).length;
-    const isCurrentWeek=parseInt(wk)===getCurrentWeek();
-    return`<div class="card" style="margin-bottom:12px;${isCurrentWeek?'border-color:var(--accent)':''}">
+    let wTotal=0,wDone=0;
+    wdays.forEach(d=>{const s=ltDayStats(d.date);wTotal+=s.total;wDone+=s.done});
+    const isCurrentWeek=parseInt(wk)===cw;
+    return`<div class="card" style="margin-bottom:12px;${isCurrentWeek?'border-color:var(--accent)':''}" data-planweek data-weekdates='${JSON.stringify(wdays.map(d=>d.date))}'>
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
         <div><div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:${wkData.color||'var(--ink-3)'}">${esc(wkData.phase||'Week '+wk)}</div>
         <div style="font-size:0.88rem;font-weight:700">Week ${wk}${isCurrentWeek?' — <span style="color:var(--accent)">Current week</span>':''}</div></div>
-        <div style="display:flex;align-items:center;gap:8px"><span class="chip chip-good" style="${done===days.length?'':'display:none'}" id="wk${wk}done">✓ Complete</span>
-        <span style="font-size:0.78rem;color:var(--ink-3)">${done}/${days.length} days</span></div>
+        <span class="plannerweek-progress" style="font-size:0.78rem;color:var(--ink-3)">${wDone}/${wTotal} tasks</span>
       </div>
-      <div style="display:flex;flex-direction:column;gap:5px">
-        ${days.map(d=>`<div class="mission ${d.tasks.some((_,i)=>planTasks[`${d.date}_${i}`]&&planTasks[`${d.date}_${i}`].completed)?'done':''}">
-          <button class="check ${d.tasks.some((_,i)=>planTasks[`${d.date}_${i}`]&&planTasks[`${d.date}_${i}`].completed)?'on':''}" onclick="togglePlanDay('${d.date}',${d.tasks.length},this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></button>
-          <div style="flex:1"><div class="mission-title">${esc(d.tasks[0].label)}</div><div class="mission-meta">${fmtDate(d.date)} · ${esc(d.tasks[0].meta)}</div></div>
-        </div>`).join('')}
+      <div style="display:flex;flex-direction:column;gap:12px">
+        ${wdays.map(d=>{
+          const s=ltDayStats(d.date);
+          const isToday=d.date===today;
+          return`<div data-planday="${d.date}" style="${isToday?'background:var(--accent-soft);border-radius:var(--r);padding:8px;margin:-8px':''}">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+              <div style="font-size:0.72rem;font-weight:700;color:${isToday?'var(--accent)':'var(--ink-3)'}">${fmtDate(d.date)}${isToday?' · Today':''}</div>
+              <div class="plannerday-progress" style="font-size:0.68rem;color:var(--ink-3)">${s.done}/${s.total}</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:5px">
+              ${d.tasks.map((t,i)=>{
+                const key=`${d.date}_${i}`;
+                const isDone=!!(planTasks[key]&&planTasks[key].completed);
+                return`<div class="lt-task-row ${isDone?'done':''}" data-taskkey="${key}">
+                  <div class="lt-task-check" onclick="ltToggleTask('${d.date}','${key}')">${isDone?ic('checkcircle',14):''}</div>
+                  <div class="lt-task-label" style="flex:1">${esc(t.label)}</div>
+                </div>`;
+              }).join('')}
+            </div>
+          </div>`;
+        }).join('')}
       </div>
     </div>`;
   }).join('');
 }
-function togglePlanDay(date,taskCount,btn){
-  const firstId=`${date}_0`;
-  const wasDone=!!(planTasks[firstId]&&planTasks[firstId].completed);
-  const nowDone=!wasDone;
-  for(let i=0;i<taskCount;i++){const id=`${date}_${i}`;planTasks[id]=planTasks[id]||{};planTasks[id].completed=nowDone}
-  saveAll();
-  if(btn){
-    btn.classList.toggle('on',nowDone);
-    animateCheck(btn,nowDone);
-    const row=btn.closest('.mission');
-    if(row){
-      if(nowDone){
-        row.classList.add('completing');
-        setTimeout(()=>{row.classList.remove('completing');row.classList.add('done')},400);
-      } else {
-        row.classList.remove('done','completing');
-      }
-    }
-  }
-  // Only update non-visible pages — never re-render the page the user is looking at
-  renderAnalyticsPage();renderXP();
+// Study Planner (SAT) — explicitly excludes IELTS days now, so it's a clean
+// separate section from IELTS Prep instead of showing everything mixed together.
+function renderPlanWeeks(){
+  return renderFullDayPlanner(null,['ielts']);
 }
-
+// IELTS Full Planner — every IELTS Sprint day, its own dedicated page.
+function renderIeltsPlannerPage(){
+  const pg=document.getElementById('page-ieltsplan');if(!pg)return;
+  pg.innerHTML=`
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:18px;flex-wrap:wrap">
+      <div><div class="display-2" style="font-size:1.3rem">IELTS Full Planner</div><div class="card-sub">IELTS Prep · every day, Jul 12 → Aug 15</div></div>
+      <button class="btn btn-secondary btn-sm" onclick="showPage('ielts')">← IELTS Prep overview</button>
+    </div>
+    <div style="margin-bottom:18px;padding:12px 14px;background:var(--accent-soft);border-radius:var(--r);font-size:0.78rem;color:var(--ink-2)">
+      Same task system as Live Tracker and IELTS Prep — check something off here and it updates everywhere, nothing is duplicated.
+    </div>
+    ${renderFullDayPlanner(['ielts'])}`;
+}
 /* ========== TESTS PAGE ========== */
 function saveTest(){
   const math=parseInt(document.getElementById('testMath').value);const rw=parseInt(document.getElementById('testRW').value);
