@@ -1375,6 +1375,7 @@ a{text-decoration:none;color:inherit}
       <button class="nav-item" id="nav-roadmap" onclick="showPage('roadmap')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>14-Week Roadmap</button>
       <button class="nav-item" id="nav-planner" onclick="showPage('planner')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Study Planner</button>
       <button class="nav-item" id="nav-tests" onclick="showPage('tests')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Practice Tests</button>
+      <button class="nav-item" id="nav-topicgrid" onclick="showPage('topicgrid')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Topic Grid</button>
       <button class="nav-item" id="nav-errors" onclick="showPage('errors')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Error Log<span class="nav-badge" id="navErrorsBadge" style="display:none;background:var(--bad-soft);color:var(--bad)"></span></button>
       <button class="nav-item" id="nav-traps" onclick="showPage('traps')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Trap Database</button>
       <button class="nav-item" id="nav-hardq" onclick="showPage('hardq')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Hard-Q Bank</button>
@@ -1617,7 +1618,7 @@ a{text-decoration:none;color:inherit}
 </div>
 <script>
 /* ========== DATA ========== */
-let currentUser=null,satTests=[],satErrors=[],planTasks={},studyLog={},collegeProgress={},generatedPlan=null,xpEvents=[],userProfile={target:1500,examDate:'2026-10-03',dailyGoal:2},weeklyReviews=[],readingLog={},hardQLog={},burnoutLog={},satAdaptiveRuns=[];
+let currentUser=null,satTests=[],satErrors=[],planTasks={},studyLog={},collegeProgress={},generatedPlan=null,xpEvents=[],userProfile={target:1500,examDate:'2026-10-03',dailyGoal:2},weeklyReviews=[],readingLog={},hardQLog={},burnoutLog={},satAdaptiveRuns=[],satTopicGrid={},taskShifts={};
 let dailyTracker={},deadlines=null;
 let liveTimer=null,sessionLog={},dayLog={};
 let ieltsWriting=[],ieltsVocab=[],ieltsSpeaking=[],ieltsMocks=[];
@@ -1625,14 +1626,14 @@ let ieltsStudioTab='writing',ieltsVocabReviewIdx=0,ieltsVocabReviewQueue=[];
 function uk(k){return'smE_'+(currentUser?currentUser.email:'x')+'_'+k}
 function sv(k,v){try{localStorage.setItem(uk(k),JSON.stringify(v))}catch(e){}}
 function lv(k,d){try{const v=localStorage.getItem(uk(k));return v!==null?JSON.parse(v):d}catch(e){return d}}
-function saveAll(){sv('tests',satTests);sv('errors',satErrors);sv('planTasks',planTasks);sv('studyLog',studyLog);sv('collegeProgress',collegeProgress);if(generatedPlan)sv('planMeta',{days:generatedPlan});sv('xpEvents',xpEvents);sv('profile',userProfile);sv('weeklyReviews',weeklyReviews);sv('readingLog',readingLog);sv('hardQLog',hardQLog);sv('burnoutLog',burnoutLog);sv('myGoals',myGoals);sv('dailyTracker',dailyTracker);sv('deadlines',deadlines);sv('liveTimer',liveTimer);sv('sessionLog',sessionLog);sv('dayLog',dayLog);sv('ieltsWriting',ieltsWriting);sv('ieltsVocab',ieltsVocab);sv('ieltsSpeaking',ieltsSpeaking);sv('ieltsMocks',ieltsMocks);sv('adaptiveRuns',satAdaptiveRuns)}
-function loadAll(){satTests=lv('tests',[]);satErrors=lv('errors',[]);planTasks=lv('planTasks',{});studyLog=lv('studyLog',{});collegeProgress=lv('collegeProgress',{});xpEvents=lv('xpEvents',[]);userProfile=lv('profile',{target:1500,examDate:'2026-10-03',dailyGoal:2});const pm=lv('planMeta',null);generatedPlan=pm?(pm.days||pm):null;weeklyReviews=lv('weeklyReviews',[]);readingLog=lv('readingLog',{});hardQLog=lv('hardQLog',{});burnoutLog=lv('burnoutLog',{});myGoals=lv('myGoals',null);if(!myGoals)myGoals=DEFAULT_MY_GOALS.map(t=>({id:'g_'+Math.random().toString(36).slice(2,9),text:t,done:false}));dailyTracker=lv('dailyTracker',{});deadlines=lv('deadlines',null);if(!deadlines)deadlines=DEFAULT_DEADLINES.map(d=>({...d}));liveTimer=lv('liveTimer',null);if(!liveTimer)liveTimer={status:'stopped',accumulatedMs:0,startedAt:null,dateISO:todayISO()};sessionLog=lv('sessionLog',{});dayLog=lv('dayLog',{});satAdaptiveRuns=lv('adaptiveRuns',[]);ieltsWriting=lv('ieltsWriting',[]);ieltsVocab=lv('ieltsVocab',[]);ieltsSpeaking=lv('ieltsSpeaking',[]);ieltsMocks=lv('ieltsMocks',[]);
+function saveAll(){sv('tests',satTests);sv('errors',satErrors);sv('planTasks',planTasks);sv('studyLog',studyLog);sv('collegeProgress',collegeProgress);if(generatedPlan)sv('planMeta',{days:generatedPlan});sv('xpEvents',xpEvents);sv('profile',userProfile);sv('weeklyReviews',weeklyReviews);sv('readingLog',readingLog);sv('hardQLog',hardQLog);sv('burnoutLog',burnoutLog);sv('myGoals',myGoals);sv('dailyTracker',dailyTracker);sv('deadlines',deadlines);sv('liveTimer',liveTimer);sv('sessionLog',sessionLog);sv('dayLog',dayLog);sv('ieltsWriting',ieltsWriting);sv('ieltsVocab',ieltsVocab);sv('ieltsSpeaking',ieltsSpeaking);sv('ieltsMocks',ieltsMocks);sv('adaptiveRuns',satAdaptiveRuns);sv('topicGrid',satTopicGrid);sv('taskShifts',taskShifts)}
+function loadAll(){satTests=lv('tests',[]);satErrors=lv('errors',[]);planTasks=lv('planTasks',{});studyLog=lv('studyLog',{});collegeProgress=lv('collegeProgress',{});xpEvents=lv('xpEvents',[]);userProfile=lv('profile',{target:1500,examDate:'2026-10-03',dailyGoal:2});const pm=lv('planMeta',null);generatedPlan=pm?(pm.days||pm):null;weeklyReviews=lv('weeklyReviews',[]);readingLog=lv('readingLog',{});hardQLog=lv('hardQLog',{});burnoutLog=lv('burnoutLog',{});myGoals=lv('myGoals',null);if(!myGoals)myGoals=DEFAULT_MY_GOALS.map(t=>({id:'g_'+Math.random().toString(36).slice(2,9),text:t,done:false}));dailyTracker=lv('dailyTracker',{});deadlines=lv('deadlines',null);if(!deadlines)deadlines=DEFAULT_DEADLINES.map(d=>({...d}));liveTimer=lv('liveTimer',null);if(!liveTimer)liveTimer={status:'stopped',accumulatedMs:0,startedAt:null,dateISO:todayISO()};sessionLog=lv('sessionLog',{});dayLog=lv('dayLog',{});satAdaptiveRuns=lv('adaptiveRuns',[]);satTopicGrid=lv('topicGrid',{});taskShifts=lv('taskShifts',{});ieltsWriting=lv('ieltsWriting',[]);ieltsVocab=lv('ieltsVocab',[]);ieltsSpeaking=lv('ieltsSpeaking',[]);ieltsMocks=lv('ieltsMocks',[]);
   // One-time migration: the old generatedPlan was built from the 15-week
   // SAT-only WEEK_DATA, which overlapped the IELTS Sprint phase entirely.
   // WEEK_DATA is now a real 14-week IELTS+SAT+App curriculum — discard any
   // plan generated before this so the app regenerates fresh from it below,
   // instead of silently continuing to show the old mismatched content.
-  if(!lv('weekDataV3Migrated',false)){generatedPlan=null;sv('weekDataV3Migrated',true)}
+  if(!lv('weekDataV4Migrated',false)){generatedPlan=null;sv('weekDataV4Migrated',true)}
   runCycleResetIfNeeded();
   seedDesmosGrammarTasksIfNeeded()}
 
@@ -1709,13 +1710,37 @@ function getUnifiedTasksForDate(iso){
   if(planDay){
     planDay.tasks.forEach((t,i)=>{
       const legacyKey=`${iso}_${i}`; // unchanged legacy format — old saved data still applies
+      const rec=(typeof taskShifts!=='undefined')?taskShifts[legacyKey]:null;
+      if(rec&&rec.currentDate!==iso)return; // shifted forward to a later date — don't show it here anymore
       out.push({
         id:taskId(iso,daySubject,i),legacyKey,isCustom:false,date:iso,subject:daySubject,source:'curriculum',
         label:t.label,meta:t.meta||'',estMins:30,priority:'high',
         icon:daySubject==='ielts'?'globe':daySubject==='app'?'graduation':'flag',
         done:!!(planTasks[legacyKey]&&planTasks[legacyKey].completed),
         completedAt:(planTasks[legacyKey]&&planTasks[legacyKey].completedAt)||null,
-        sessionMinutes:(planTasks[legacyKey]&&planTasks[legacyKey].sessionMinutes)||null
+        sessionMinutes:(planTasks[legacyKey]&&planTasks[legacyKey].sessionMinutes)||null,
+        shiftCount:rec?rec.shiftCount:0,shiftedFrom:null
+      });
+    });
+  }
+  // Tasks originally scheduled on an earlier date but shifted forward into
+  // this one (capped at 2 shifts per task — see ltShiftTaskTomorrow).
+  if(typeof taskShifts!=='undefined'){
+    Object.entries(taskShifts).forEach(([legacyKey,rec])=>{
+      if(rec.currentDate!==iso||rec.originalDate===iso)return;
+      const origDate=legacyKey.slice(0,10),idx=parseInt(legacyKey.slice(11),10);
+      const origPlanDay=(typeof generatedPlan!=='undefined'&&generatedPlan)?generatedPlan.find(d=>d.date===origDate):null;
+      const t=origPlanDay&&origPlanDay.tasks[idx];
+      if(!t)return;
+      const origSubject=origPlanDay.subject||'sat';
+      out.push({
+        id:taskId(origDate,origSubject,idx),legacyKey,isCustom:false,date:iso,subject:origSubject,source:'curriculum',
+        label:t.label,meta:(t.meta?t.meta+' · ':'')+'shifted from '+fmtDate(origDate),estMins:30,priority:'high',
+        icon:origSubject==='ielts'?'globe':origSubject==='app'?'graduation':'flag',
+        done:!!(planTasks[legacyKey]&&planTasks[legacyKey].completed),
+        completedAt:(planTasks[legacyKey]&&planTasks[legacyKey].completedAt)||null,
+        sessionMinutes:(planTasks[legacyKey]&&planTasks[legacyKey].sessionMinutes)||null,
+        shiftCount:rec.shiftCount,shiftedFrom:origDate
       });
     });
   }
@@ -1745,7 +1770,8 @@ function getUnifiedTasksForDate(iso){
       out.push({
         id:c.id,legacyKey:c.id,isCustom:true,date:iso,subject:c.subject||'general',source:'custom',
         label:c.label,meta:'Custom',estMins:c.mins||15,priority:c.priority||'low',icon:'star',
-        done:!!c.done,completedAt:c.completedAt||null,sessionMinutes:c.sessionMinutes||null
+        done:!!c.done,completedAt:c.completedAt||null,sessionMinutes:c.sessionMinutes||null,
+        shiftCount:c.shiftCount||0,shiftedFrom:null
       });
     });
   }
@@ -2105,6 +2131,16 @@ const HARD_Q_CERTS=[
   {id:'hq7',name:'Trap Immune',icon:'shield',req:'Study all 16 traps in the Trap Database',threshold:1.0,count:16},
   {id:'hq8',name:'1500 Elite',icon:'gem',req:'Score 1500+ on any timed Bluebook practice test',threshold:null,count:1},
 ];
+const VIDEO_LINKS={
+  ielts_listening:{label:'Listening strategy — IELTS Liz',url:'https://www.youtube.com/@ieltsliz'},
+  ielts_reading:{label:'Reading strategy — IELTS Liz',url:'https://www.youtube.com/@ieltsliz'},
+  ielts_writing:{label:'Writing Task strategy — IELTS Liz',url:'https://www.youtube.com/@ieltsliz'},
+  ielts_speaking:{label:'Speaking strategy — IELTS Liz',url:'https://www.youtube.com/@ieltsliz'},
+  ielts_general:{label:'IELTS strategy — IELTS Official',url:'https://www.youtube.com/IELTSofficial'},
+  sat_math:{label:'Math skill video — Khan Academy Official SAT Prep',url:'https://satsuite.collegeboard.org/practice/khan-academy'},
+  sat_rw:{label:'R&W skill video — Khan Academy Official SAT Prep',url:'https://satsuite.collegeboard.org/practice/khan-academy'},
+  sat_general:{label:'SAT strategy — Khan Academy Official SAT Prep',url:'https://satsuite.collegeboard.org/practice/khan-academy'}
+};
 const WEEK_DATA=[
   {w:1,subject:'ielts',phase:'IELTS Sprint · Diagnostic',color:'#0EA5E9',obj:'Diagnostic baseline across all 4 skills + format familiarization + weakness map',time:'2.5-3 hrs/day IELTS + 20 min SAT maintenance',target:null,note:'Diagnostic week — no target band yet',
     days:['Diagnostic: Full IELTS mock test (all 4 skills, timed) — establish baseline bands | SAT maintenance: skim error log, no new work','Listening format deep-dive: 4 sections, question types (forms/notes/maps/MCQ/matching) | SAT maintenance: 15 vocab words','Reading format deep-dive: True/False/Not Given + matching headings + skimming/scanning | SAT maintenance: 15 algebra warm-up q','Writing Task 1 format (Academic: line graphs, bar charts, tables, maps, process diagrams) + practice overview paragraph | SAT maintenance: 10 grammar q','Writing Task 2 format (opinion/discussion/problem-solution essays) + thesis practice | SAT maintenance: 15 reading comp q','Speaking format (Part 1/2/3) + record 5-min baseline sample for self-review | SAT maintenance: 15 vocab words','Vocabulary system launch (topic-list method + collocations) + Grammar diagnostic | Review Week 1 diagnostics, build weakness map'],
@@ -2208,6 +2244,13 @@ const BADGES=[
   {icon:'mic',name:'Speaking Regular',cond:'Log 15 speaking sessions',check:()=>ieltsSpeaking.length>=15},
   {icon:'trophy',name:'Full Mock Logged',cond:'Log your first full IELTS mock test',check:()=>ieltsMocks.length>=1},
   {icon:'crown',name:'Band 8 Sprinter',cond:'Score an overall band 8+ on a mock',check:()=>ieltsMocks.some(m=>m.overall>=8)},
+  {icon:'bolt',name:'First Adaptive Run',cond:'Complete your first Adaptive Practice Test or Quick Drill',check:()=>satAdaptiveRuns.length>=1},
+  {icon:'target',name:'Adaptive Regular',cond:'Complete 5 adaptive practice runs',check:()=>satAdaptiveRuns.length>=5},
+  {icon:'crown',name:'Both Sides Now',cond:'Complete an adaptive run in both R&W and Math',check:()=>satAdaptiveRuns.some(r=>r.subject==='rw')&&satAdaptiveRuns.some(r=>r.subject==='math')},
+  {icon:'shield',name:'Hard Mode',cond:'Score 700+ on an adaptive run routed to the Harder Module 2',check:()=>satAdaptiveRuns.some(r=>r.track==='hard'&&r.scaled>=700)},
+  {icon:'gem',name:'Full Circuit',cond:'Complete a Full Adaptive Test (R&W + Math in one sitting)',check:()=>satTests.some(t=>t.notes&&t.notes.includes('Auto-logged from in-app adaptive full test'))},
+  {icon:'chartbar',name:'Topic Grid: Halfway',cond:'Check off 14 of 28 topics as mastered',check:()=>typeof topicGridDoneCount==='function'&&topicGridDoneCount()>=14},
+  {icon:'trophy',name:'Topic Grid: Complete',cond:'Check off all 28 SAT topics as mastered',check:()=>typeof topicGridDoneCount==='function'&&topicGridDoneCount()>=28},
 ];
 /* ========== AUTH ========== */
 function login(){const n=(document.getElementById('authName').value||'').trim(),e=(document.getElementById('authEmail').value||'').trim();if(!n||!e){showToast('Enter name and email');return}currentUser={name:n,email:e};try{localStorage.setItem('sm_elite_user',JSON.stringify(currentUser))}catch(ex){}initApp()}
@@ -2225,7 +2268,7 @@ function showPage(id){
     window.scrollTo(0,0);
     return;
   }
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-item,.tab-item').forEach(n=>n.classList.remove('active'));const p=document.getElementById('page-'+id);if(p){p.classList.add('active');p.classList.add('just-entered');clearTimeout(p._justEnteredTimer);p._justEnteredTimer=setTimeout(()=>p.classList.remove('just-entered'),450)}const nb=document.getElementById('nav-'+id);if(nb)nb.classList.add('active');const tb=document.getElementById('tab-'+id);if(tb)tb.classList.add('active');window.scrollTo(0,0);const map={today:renderTodayPage,livetracker:renderLiveTrackerPage,planner:renderPlanContainer,ielts:renderIeltsPage,ieltsplan:renderIeltsPlannerPage,ieltsstudio:renderIeltsStudioPage,tests:renderTestsPage,errors:renderErrorsPage,analytics:renderAnalyticsPage,weaknesses:renderWeaknessPage,streak:renderStreakPage,roadmap:renderRoadmapPage,traps:renderTrapsPage,hardq:renderHardQPage,weekly:renderWeeklyPage,resources:renderResources,college:renderCollegePage,achievements:renderAchievements,kucat:renderKucatPage,mocktest:renderMockTestCenter};if(map[id])map[id]()
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-item,.tab-item').forEach(n=>n.classList.remove('active'));const p=document.getElementById('page-'+id);if(p){p.classList.add('active');p.classList.add('just-entered');clearTimeout(p._justEnteredTimer);p._justEnteredTimer=setTimeout(()=>p.classList.remove('just-entered'),450)}const nb=document.getElementById('nav-'+id);if(nb)nb.classList.add('active');const tb=document.getElementById('tab-'+id);if(tb)tb.classList.add('active');window.scrollTo(0,0);const map={today:renderTodayPage,livetracker:renderLiveTrackerPage,planner:renderPlanContainer,ielts:renderIeltsPage,ieltsplan:renderIeltsPlannerPage,ieltsstudio:renderIeltsStudioPage,tests:renderTestsPage,topicgrid:renderTopicGridPage,errors:renderErrorsPage,analytics:renderAnalyticsPage,weaknesses:renderWeaknessPage,streak:renderStreakPage,roadmap:renderRoadmapPage,traps:renderTrapsPage,hardq:renderHardQPage,weekly:renderWeeklyPage,resources:renderResources,college:renderCollegePage,achievements:renderAchievements,kucat:renderKucatPage,mocktest:renderMockTestCenter};if(map[id])map[id]()
 }
 function openMoreSheet(){document.getElementById('moreSheet').classList.add('show');document.body.style.overflow='hidden'}
 function closeMoreSheet(){document.getElementById('moreSheet').classList.remove('show');document.body.style.overflow=''}
@@ -2266,7 +2309,7 @@ function getCurrentPhase(){const now=todayISO();if(now<='2026-07-18')return 0;if
 function getCurrentWeek(){const start=new Date(CYCLE_START+'T00:00:00');return Math.min(15,Math.max(1,Math.ceil((new Date()-start)/604800000)))}
 function getBurnoutLevel(){const last7=Object.keys(burnoutLog).sort().slice(-7);if(!last7.length)return 5;return Math.round(last7.reduce((a,k)=>a+(burnoutLog[k].energy||5),0)/last7.length)}
 function getWeakestTopics(n){const c={};satErrors.forEach(e=>{c[e.topic]=(c[e.topic]||0)+1});return Object.entries(c).sort((a,b)=>b[1]-a[1]).slice(0,n).map(([topic,count])=>({topic,count}))}
-function exportData(){const blob=new Blob([JSON.stringify({user:currentUser,tests:satTests,errors:satErrors,studyLog,profile:userProfile,weeklyReviews,readingLog,hardQLog,adaptiveRuns:satAdaptiveRuns},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`scoremax-elite-${todayISO()}.json`;a.click();showToast('Data exported')}
+function exportData(){const blob=new Blob([JSON.stringify({user:currentUser,tests:satTests,errors:satErrors,planTasks,studyLog,collegeProgress,generatedPlan,xpEvents,profile:userProfile,weeklyReviews,readingLog,hardQLog,burnoutLog,myGoals,dailyTracker,deadlines,sessionLog,dayLog,ieltsWriting,ieltsVocab,ieltsSpeaking,ieltsMocks,adaptiveRuns:satAdaptiveRuns,topicGrid:satTopicGrid,taskShifts,exportedAt:new Date().toISOString()},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`scoremax-elite-${todayISO()}.json`;a.click();sv('lastBackup',todayISO());showToast('Full backup exported')}
 function emptyState(icon,title,sub,modal){return`<div class="card" style="text-align:center;padding:48px 24px"><div style="margin-bottom:12px;color:var(--ink-4);display:flex;justify-content:center">${ic(icon,34)}</div><div style="font-weight:700;font-size:0.95rem;margin-bottom:4px">${title}</div><div style="font-size:0.8rem;color:var(--ink-3);margin-bottom:16px">${sub}</div>${modal?`<button class="btn btn-primary btn-sm" onclick="openModal('${modal}')">Get started</button>`:''}</div>`}
 let _toastTimer;
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_toastTimer);_toastTimer=setTimeout(()=>t.classList.remove('show'),2800)}
@@ -2280,6 +2323,30 @@ function ltDayData(iso){const raw=dailyTracker[iso];return{custom:(raw&&raw.cust
 function ltEnsureDay(iso){if(!dailyTracker[iso])dailyTracker[iso]={custom:[],note:''};return dailyTracker[iso]}
 function ltPlanTaskForDay(iso){return generatedPlan?generatedPlan.find(dd=>dd.date===iso):null}
 function ltBasicKey(iso,subjectKey){return`${iso}_b_${subjectKey}`}
+function ltAddDays(iso,n){const d=new Date(iso+'T00:00:00');d.setDate(d.getDate()+n);return d.toISOString().split('T')[0]}
+function ltShiftTaskTomorrow(legacyKey,isCustom,fromIso){
+  if(isCustom){
+    const d=ltEnsureDay(fromIso);
+    const idx=d.custom.findIndex(c=>c.id===legacyKey);
+    if(idx===-1)return;
+    const item=d.custom[idx];
+    if(item.done){showToast('Already done — nothing to shift');return}
+    const sc=item.shiftCount||0;
+    if(sc>=2){showToast('Already shifted the max 2 days — it has to be done today');return}
+    const toIso=ltAddDays(fromIso,1);
+    d.custom.splice(idx,1);
+    item.shiftCount=sc+1;
+    ltEnsureDay(toIso).custom.push(item);
+    saveAll();renderLiveTrackerPage();showToast(`Shifted to ${fmtDate(toIso)} (${item.shiftCount}/2 used)`);
+  } else {
+    const rec=taskShifts[legacyKey]||{originalDate:fromIso,currentDate:fromIso,shiftCount:0};
+    if(planTasks[legacyKey]&&planTasks[legacyKey].completed){showToast('Already done — nothing to shift');return}
+    if(rec.shiftCount>=2){showToast('Already shifted the max 2 days — it has to be done today');return}
+    const toIso=ltAddDays(rec.currentDate,1);
+    taskShifts[legacyKey]={originalDate:rec.originalDate,currentDate:toIso,shiftCount:rec.shiftCount+1};
+    saveAll();renderLiveTrackerPage();showToast(`Shifted to ${fmtDate(toIso)} (${rec.shiftCount+1}/2 used)`);
+  }
+}
 function ltToggleTask(iso,planKey){setUnifiedTaskDone(planKey,false,!(planTasks[planKey]&&planTasks[planKey].completed),iso);studyLog[iso]=true;saveAll();ltUpdateTaskRowUI(iso,planKey);renderXP();renderAnalyticsPage()}
 function ltAddCustomTask(iso){const inp=document.getElementById('lt_new_task');const label=inp&&inp.value.trim();if(!label){showToast('Enter a task name');return}const d=ltEnsureDay(iso);d.custom.push({id:'ct_'+Math.random().toString(36).slice(2,8),label,done:false,mins:15,subject:'general',completedAt:null});if(inp)inp.value='';saveAll();renderLiveTrackerPage()}
 function ltToggleCustom(iso,id){const d=ltEnsureDay(iso);const t=d.custom.find(c=>c.id===id);if(t){setUnifiedTaskDone(id,true,!t.done,iso);studyLog[iso]=true;saveAll();ltUpdateTaskRowUI(iso,id);renderXP()}}
@@ -2337,7 +2404,7 @@ function ltDeleteCustom(iso,id){const d=ltEnsureDay(iso);d.custom=d.custom.filte
 function ltDayStats(iso){
   // Delegates to the unified task layer (step 1) instead of re-deriving from
   // planTasks/dailyTracker directly — one read implementation, not two.
-  const items=getUnifiedTasksForDate(iso).map(t=>({key:t.legacyKey,label:t.label,mins:t.estMins,icon:t.icon,done:t.done,plan:t.source==='curriculum'&&t.subject==='sat'&&!t.meta.includes('Daily basics'),custom:t.isCustom,sessionMinutes:t.sessionMinutes}));
+  const items=getUnifiedTasksForDate(iso).map(t=>({key:t.legacyKey,label:t.label,mins:t.estMins,icon:t.icon,done:t.done,plan:t.source==='curriculum'&&t.subject==='sat'&&!t.meta.includes('Daily basics'),custom:t.isCustom,sessionMinutes:t.sessionMinutes,shiftCount:t.shiftCount||0,shiftedFrom:t.shiftedFrom||null}));
   const total=items.length,done=items.filter(t=>t.done).length;
   const pct=total?Math.round(done/total*100):0;
   const minsLeft=items.filter(t=>!t.done).reduce((a,t)=>a+t.mins,0);
@@ -2372,16 +2439,20 @@ function ltDayMarkers(iso){
   const planDay=(typeof generatedPlan!=='undefined'&&generatedPlan)?generatedPlan.find(d=>d.date===iso):null;
   if(planDay){
     const text=planDay.tasks.map(t=>t.label).join(' ');
-    if(/FULL TEST|CHECKPOINT|FULL MOCK TEST|MOCK TEST|TEST DAY/i.test(text))markers.push('mock');
-    if(/LOW intensity|NIGHT BEFORE|Light review/i.test(text))markers.push('rest');
+    const mockMatch=text.match(/[^.|]*?(FULL TEST|CHECKPOINT|FULL MOCK TEST|MOCK TEST|TEST DAY)[^.|]*/i);
+    if(mockMatch)markers.push({type:'mock',label:mockMatch[0].trim()});
+    if(/LOW intensity|NIGHT BEFORE|Light review/i.test(text))markers.push({type:'rest',label:'Light / rest day'});
   }
-  if(typeof deadlines!=='undefined'&&deadlines&&deadlines.some(d=>d.date===iso))markers.push('deadline');
+  if(typeof deadlines!=='undefined'&&deadlines){
+    const hits=deadlines.filter(d=>d.date===iso);
+    if(hits.length)markers.push({type:'deadline',label:hits.map(d=>d.title).join(', ')});
+  }
   return markers;
 }
 function ltDayMarkersHtml(iso){
   const m=ltDayMarkers(iso);
   if(!m.length)return'';
-  return `<div class="lt-cal-markers">${m.map(k=>`<div class="lt-cal-marker ${k}"></div>`).join('')}</div>`;
+  return `<div class="lt-cal-markers">${m.map(k=>`<div class="lt-cal-marker ${k.type}" title="${esc(k.label)}"></div>`).join('')}</div>`;
 }
 function ltOverallPct(){
   const today=todayISO();
@@ -2486,7 +2557,7 @@ function ltSelectDay(iso){ltSelectedDay=iso;renderLiveTrackerPage()}
 function renderXP(){const taskCompletions=Object.values(planTasks).filter(t=>t.completed).length;const studyMinutes=Object.values(sessionLog).reduce((a,m)=>a+m,0);const vocabMastered=ieltsVocab.filter(v=>v.level>=5).length;const xp=(satTests.length*100)+(satErrors.length*10)+(weeklyReviews.length*50)+(Object.keys(studyLog).length*20)+(Object.keys(readingLog).length*5)+(taskCompletions*8)+Math.floor(studyMinutes/5)+(ieltsWriting.length*15)+(ieltsSpeaking.length*10)+(vocabMastered*5)+(ieltsMocks.length*80)+(satAdaptiveRuns.length*40);const lv=Math.floor(xp/500)+1;const pct=(xp%500)/500*100;const l=document.getElementById('xpLevel');if(l)l.textContent=lv;const x=document.getElementById('xpCount');if(x)x.textContent=xp+' XP';const b=document.getElementById('xpBarFill');if(b)b.style.width=pct+'%'}
 function openProfileModal(){const pt=document.getElementById('profileTarget');const ped=document.getElementById('profileExamDate');const pg=document.getElementById('profileGoal');if(pt)pt.value=userProfile.target||1500;if(ped)ped.value=userProfile.examDate||'2026-10-03';if(pg)pg.value=userProfile.dailyGoal||2;openModal('profileModal')}
 function saveProfile(){const pt=document.getElementById('profileTarget');const ped=document.getElementById('profileExamDate');const pg=document.getElementById('profileGoal');userProfile.target=parseInt(pt&&pt.value)||1500;userProfile.examDate=(ped&&ped.value)||'2026-10-03';userProfile.dailyGoal=parseFloat(pg&&pg.value)||2;saveAll();closeModal('profileModal');renderTodayPage();showToast('Profile saved')}
-function resetAll(){satTests=[];satErrors=[];planTasks={};studyLog={};collegeProgress={};generatedPlan=null;xpEvents=[];weeklyReviews=[];readingLog={};hardQLog={};burnoutLog={};dailyTracker={};satAdaptiveRuns=[];if(ltTimerInterval)clearInterval(ltTimerInterval);if(ltDayRolloverInterval)clearInterval(ltDayRolloverInterval);liveTimer={status:'stopped',accumulatedMs:0,startedAt:null,dateISO:todayISO()};sessionLog={};dayLog={};ieltsWriting=[];ieltsVocab=[];ieltsSpeaking=[];ieltsMocks=[];saveAll();renderAll();closeModal('profileModal');showToast('All data reset')}
+function resetAll(){satTests=[];satErrors=[];planTasks={};studyLog={};collegeProgress={};generatedPlan=null;xpEvents=[];weeklyReviews=[];readingLog={};hardQLog={};burnoutLog={};dailyTracker={};satAdaptiveRuns=[];satTopicGrid={};taskShifts={};if(ltTimerInterval)clearInterval(ltTimerInterval);if(ltDayRolloverInterval)clearInterval(ltDayRolloverInterval);liveTimer={status:'stopped',accumulatedMs:0,startedAt:null,dateISO:todayISO()};sessionLog={};dayLog={};ieltsWriting=[];ieltsVocab=[];ieltsSpeaking=[];ieltsMocks=[];saveAll();renderAll();closeModal('profileModal');showToast('All data reset')}
 /* ========== BUILD PAGES ========== */
 function buildPages(){
   document.getElementById('contentInner').innerHTML=`
@@ -2498,6 +2569,7 @@ function buildPages(){
   <div class="page" id="page-ieltsplan"></div>
   <div class="page" id="page-ieltsstudio"></div>
   <div class="page" id="page-tests"></div>
+  <div class="page" id="page-topicgrid"></div>
   <div class="page" id="page-errors"></div>
   <div class="page" id="page-traps"></div>
   <div class="page" id="page-hardq"></div>
@@ -2564,7 +2636,18 @@ function renderTodayPage(){
 
   const lockDay=cycleDaysCompleted();
   const lockPhase=cyclePhaseInfo();
+  const lastBackup=lv('lastBackup',null);
+  const backupDaysAgo=lastBackup?Math.floor((new Date(today)-new Date(lastBackup))/86400000):null;
+  const backupDismissedToday=lv('backupNudgeDismissed',null)===today;
+  const showBackupNudge=!backupDismissedToday&&(lastBackup===null?lockDay>=7:backupDaysAgo>=7);
   document.getElementById('page-today').innerHTML=`
+  ${showBackupNudge?`<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--warn-soft);border:1.5px solid var(--warn);border-radius:var(--r);padding:11px 14px;margin-bottom:14px;font-size:0.8rem">
+    <div style="color:var(--ink)"><strong>⚠ ${lastBackup?`It's been ${backupDaysAgo} days since your last backup`:`You haven't backed up yet (day ${lockDay} of your cycle)`}.</strong> Everything here — tests, error log, vocab, adaptive runs — only lives in this browser. Clearing browser data or switching devices loses it all, no recovery.</div>
+    <div style="display:flex;gap:6px;flex-shrink:0">
+      <button class="btn btn-primary btn-sm" onclick="exportData();renderTodayPage()">Export now</button>
+      <button class="btn btn-ghost btn-sm" onclick="sv('backupNudgeDismissed','${today}');renderTodayPage()">Not today</button>
+    </div>
+  </div>`:''}
   <!-- GREETING HEADER -->
   <div style="margin-bottom:14px">
     <div class="eyebrow" style="margin-bottom:4px">${greet}</div>
@@ -2948,14 +3031,16 @@ function renderLiveTrackerPage(){
         <div class="card-title">${esc(viewLabel)}'s Checklist</div>
         ${ltSelectedDay&&ltSelectedDay!==today?`<button class="btn btn-ghost btn-sm" onclick="ltSelectDay(null)">Back to today</button>`:''}
       </div>
+      ${ltDayMarkers(viewIso).map(mk=>`<div style="display:flex;align-items:center;gap:8px;font-size:0.78rem;font-weight:600;padding:7px 10px;border-radius:var(--r-sm);margin-bottom:8px;background:${mk.type==='deadline'?'#7C3AED22':mk.type==='mock'?'#DC262622':'#0EA5E922'};color:${mk.type==='deadline'?'#7C3AED':mk.type==='mock'?'#DC2626':'#0EA5E9'}"><span style="width:7px;height:7px;border-radius:50%;background:currentColor;flex-shrink:0"></span>${mk.type==='deadline'?'🚩 Deadline: ':mk.type==='mock'?'📝 ':''}${esc(mk.label)}</div>`).join('')}
       ${stats.total===0&&viewIso!==today?`<div style="font-size:0.8rem;color:var(--ink-3);padding:8px 0">No tasks logged for this day.</div>`:''}
       ${viewStats.items.map(t=>`
         <div class="lt-task-row ${t.done?'done':''}" data-taskkey="${t.key}">
           <div class="lt-task-check" onclick="${t.custom?`ltToggleCustom('${viewIso}','${t.key}')`:`ltToggleTask('${viewIso}','${t.key}')`}">${t.done?ic('checkcircle',14):''}</div>
           <div style="color:var(--ink-3);display:flex">${ic(t.icon,15)}</div>
-          <div class="lt-task-label">${esc(t.label)}</div>
+          <div class="lt-task-label">${esc(t.label)}${t.shiftedFrom?`<span style="display:inline-block;margin-left:6px;font-size:0.64rem;font-weight:700;color:var(--warn);background:var(--warn-soft);padding:1px 6px;border-radius:var(--r-full)">shifted from ${esc(fmtDate(t.shiftedFrom))}</span>`:''}</div>
           <div class="lt-task-mins">${t.mins} min</div>
           <div class="lt-task-session-badge" style="font-size:0.68rem;color:var(--accent);font-weight:600;white-space:nowrap">${t.done&&t.sessionMinutes!=null?`@ ${t.sessionMinutes} min`:''}</div>
+          ${!t.done&&(t.shiftCount||0)<2?`<button class="btn btn-ghost btn-sm" style="padding:2px 8px;font-size:0.68rem;white-space:nowrap" onclick="ltShiftTaskTomorrow('${t.key}',${!!t.custom},'${viewIso}')" title="Push to tomorrow (${2-(t.shiftCount||0)} shift${2-(t.shiftCount||0)!==1?'s':''} left)">→ Tomorrow</button>`:''}
           ${t.custom?`<button class="btn btn-ghost btn-sm" style="padding:2px 6px" onclick="ltDeleteCustom('${viewIso}','${t.key}')">✕</button>`:''}
         </div>`).join('')}
       <div style="display:flex;gap:8px;margin-top:10px">
@@ -3233,14 +3318,43 @@ function generatePlan(){
   WEEK_DATA.forEach(wk=>{
     wk.days.forEach((task,di)=>{
       const date=new Date(start);date.setDate(start.getDate()+(wk.w-1)*7+di);
+      const iso=date.toISOString().split('T')[0];
       // Each day's curriculum string is written as one or more items separated
       // by "|" (e.g. "Math: ... | R&W: ..." or "Listening drill | SAT maintenance: ...").
       // Split these into separate trackable tasks so Live Tracker shows every
       // distinct activity as its own checkbox, instead of one giant item that
       // hides whether you actually did the Math half, the R&W half, etc.
       const parts=task.split('|').map(s=>s.trim()).filter(Boolean);
-      const tasks=parts.map(label=>({label,meta:wk.time+' · '+wk.phase}));
-      days.push({date:date.toISOString().split('T')[0],week:wk.w,phase:wk.phase,subject:wk.subject||'sat',tasks});
+      let tasks=parts.map(label=>({label,meta:wk.time+' · '+wk.phase}));
+      // Augmentation added Jul 18 2026: only dates from Jul 19 onward are
+      // touched, so today (Jul 18) stays byte-for-byte unchanged. Weeks
+      // 5/9/12 are excluded from the Saturday override because those
+      // Saturdays are already the real IELTS exam day, the real Sept 12
+      // SAT checkpoint, and the real Oct 3 SAT attempt. Weeks 2-4 Saturdays
+      // (inside the pre-Aug-15 IELTS Sprint) are deliberately left as IELTS
+      // content to protect the nearer exam, flagged to the user rather
+      // than silently overridden either way.
+      if(iso>='2026-07-19'&&!/TEST DAY|REAL SAT ATTEMPT/i.test(task)){
+        if([6,7,8,10,11].includes(wk.w)&&di===6){
+          tasks=[{label:'Full Adaptive Practice Test — Reading & Writing + Math (in-app, timed & adaptive)',meta:'Practice Tests → Full Adaptive Test · score logs automatically toward your Oct 3 trajectory'}];
+        } else {
+          if(wk.subject==='ielts'){
+            let vid=VIDEO_LINKS.ielts_general;
+            if(/Listening/i.test(task))vid=VIDEO_LINKS.ielts_listening;
+            else if(/Reading/i.test(task))vid=VIDEO_LINKS.ielts_reading;
+            else if(/Writing/i.test(task))vid=VIDEO_LINKS.ielts_writing;
+            else if(/Speaking/i.test(task))vid=VIDEO_LINKS.ielts_speaking;
+            tasks=[...tasks,{label:'Video: '+vid.label,meta:vid.url}];
+            if(/mock|simulation|FULL/i.test(task)){
+              tasks=[...tasks,{label:'Practice test: Engnovate IELTS Tests',meta:'https://engnovate.com/ielts-tests/'}];
+            }
+          } else if(wk.subject==='sat'){
+            const vid=/Math/i.test(task)?VIDEO_LINKS.sat_math:(/R&W/i.test(task)?VIDEO_LINKS.sat_rw:VIDEO_LINKS.sat_general);
+            tasks=[...tasks,{label:'Video: '+vid.label,meta:vid.url}];
+          }
+        }
+      }
+      days.push({date:iso,week:wk.w,phase:wk.phase,subject:wk.subject||'sat',tasks});
     });
   });
   generatedPlan=days;saveAll();renderPlanContainer();renderTodayPage();renderIeltsPage();renderIeltsPlannerPage();showToast('14-week IELTS + SAT + Application plan generated!')}
@@ -3655,7 +3769,7 @@ function renderTestsPage(){
       <div style="font-size:0.88rem;font-weight:700;margin-bottom:10px">Adaptive practice runs</div>
       ${[...satAdaptiveRuns].sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,6).map(r=>`
         <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line-2);font-size:0.78rem">
-          <div><strong>${r.scaled}</strong> <span style="color:var(--ink-3)">${r.subject==='math'?'Math':'R&W'} · ${r.track==='hard'?'Harder':'Easier'} M2 · ${fmtDate(r.date)}</span></div>
+          <div><strong>${r.scaled}</strong> <span style="color:var(--ink-3)">${r.subject==='math'?'Math':'R&W'} T${r.testNum||1} · ${r.track==='hard'?'Harder':'Easier'} M2 · ${fmtDate(r.date)}</span></div>
           <div style="color:var(--ink-3)">${r.raw}/${r.total} raw · weakest ${PT_SUBJECTS[r.subject].domainLabel[r.weakest]||'—'}</div>
         </div>`).join('')}
     </div>`:''}
@@ -7278,10 +7392,856 @@ const SKILL_TOPIC_MAP={
 };
 const DIFF_LABEL={E:"Easy",M:"Medium",H:"Hard"};
 
+const MATH2_M1 = [
+{id:"m2_m1_01",domain:"AL",skill:"Linear equations",topic:"Linear equations",difficulty:"M",
+ stem:"If 5x + 3 = 3x + 15, what is the value of x?",
+ choices:["3","4","6","9"],answer:2,
+ explanation:"5x + 3 = 3x + 15 → 2x = 12 → x = 6.",
+ trap:"Subtracting incorrectly (15−3=12, then dividing by the wrong coefficient difference) can lead to picking 4 instead of 6."},
+{id:"m2_m1_02",domain:"AL",skill:"Word problems (linear)",topic:"Word problems",difficulty:"M",
+ stem:"A rideshare charges a $4 base fee plus $1.50 per mile. If a trip cost $19, how many miles was the trip?",
+ choices:["9","10","12","15"],answer:1,
+ explanation:"19 = 4 + 1.5x → 15 = 1.5x → x = 10.",
+ trap:"Dividing the full $19 by $1.50 without subtracting the base fee first gives approximately 12.7, close to but not exactly 12 or 15, both wrong."},
+{id:"m2_m1_03",domain:"AL",skill:"Systems of equations",topic:"Systems of equations",difficulty:"M",
+ stem:"If 2x + y = 11 and x − y = 1, what is the value of x?",
+ choices:["3","4","5","6"],answer:1,
+ explanation:"Adding the equations: (2x+y)+(x−y) = 3x = 12 → x = 4. Check: y = 11 − 2(4) = 3, and x − y = 4 − 3 = 1. Correct.",
+ trap:"Recompute carefully — a sign error when adding the equations can produce x=5 by mistakenly treating −y and +y as canceling incorrectly."},
+{id:"m2_m1_04",domain:"AL",skill:"Systems of equations",topic:"Systems of equations",difficulty:"M",
+ stem:"A system of two linear equations has infinitely many solutions. If one equation is 2y = 4x + 8, which of the following could be the other equation?",
+ choices:["y = 2x + 4","y = 2x − 4","y = −2x + 4","4y = 8x + 32"],answer:0,
+ explanation:"2y = 4x + 8 simplifies to y = 2x + 4. An equation is equivalent (giving infinitely many solutions) if it's the same line — y = 2x + 4 matches exactly.",
+ trap:"Choice D looks like a valid multiple at first glance (4y=8x+32 → y=2x+8), but dividing by 4 gives y=2x+8, not y=2x+4 — a different line, so it's a trap, not the answer."},
+{id:"m2_m1_05",domain:"AL",skill:"Linear inequalities",topic:"Word problems",difficulty:"M",
+ stem:"A moving company charges $80 plus $25 per hour. If a customer's budget is at most $330, what is the maximum number of whole hours they can book?",
+ choices:["9","10","11","12"],answer:1,
+ explanation:"80 + 25h ≤ 330 → 25h ≤ 250 → h ≤ 10, so the maximum whole number of hours is 10.",
+ trap:"Dividing 330 by 25 directly without subtracting the $80 flat fee first gives 13.2, which can lead to picking an answer that ignores the base charge."},
+{id:"m2_m1_06",domain:"AL",skill:"Linear equations",topic:"Linear equations",difficulty:"M",
+ stem:"The line given by 3x − 4y = 20 is graphed in the xy-plane. What is the slope of the line?",
+ choices:["−3/4","3/4","−4/3","4/3"],answer:1,
+ explanation:"Solving for y: −4y = −3x + 20 → y = (3/4)x − 5. The slope is 3/4.",
+ trap:"Forgetting to flip the sign when dividing by −4 gives the wrong-sign slope −3/4."},
+{id:"m2_m1_07",domain:"AL",skill:"Word problems (linear)",topic:"Word problems",difficulty:"M",
+ stem:"Two internet providers charge different rates. Provider A charges $30 plus $5 per device connected. Provider B charges $50 plus $3 per device. For how many devices do they charge the same total amount?",
+ choices:["8","9","10","12"],answer:2,
+ explanation:"30 + 5d = 50 + 3d → 2d = 20 → d = 10.",
+ trap:"Setting up the equation with the rates reversed leads to a negative or incorrect device count."},
+{id:"m2_m1_08",domain:"AL",skill:"Systems of equations",topic:"Systems of equations",difficulty:"M",
+ stem:"A total of 150 tickets were sold for a play, some at $10 and some at $18. If total revenue was $2,020, how many $18 tickets were sold?",
+ choices:["55","60","65","70"],answer:2,
+ explanation:"Let x = number of $18 tickets. 10(150−x) + 18x = 2020 → 1500 + 8x = 2020 → 8x = 520 → x = 65.",
+ trap:"A sign or setup error in the substitution can lead to picking 60 or 70 instead of the correctly solved 65."},
+{id:"m2_m1_09",domain:"AM",skill:"Quadratics: factoring",topic:"Quadratics",difficulty:"M",
+ stem:"What are the solutions to x² + 2x − 24 = 0?",
+ choices:["x = 4, x = −6","x = −4, x = 6","x = 6, x = −4","x = 24, x = −1"],answer:0,
+ explanation:"Factoring: (x + 6)(x − 4) = 0, so x = −6 or x = 4.",
+ trap:"Reversing the sign pairing gives x = −4, x = 6, which doesn't satisfy the original equation."},
+{id:"m2_m1_10",domain:"AM",skill:"Quadratics: vertex form",topic:"Quadratics",difficulty:"M",
+ stem:"The function h(t) = −16t² + 80t + 6 models the height, in feet, of a ball t seconds after being thrown. At what time does the ball reach its maximum height?",
+ choices:["t = 2","t = 2.5","t = 3","t = 4"],answer:1,
+ explanation:"Vertex at t = −b/(2a) = −80/(2×−16) = −80/−32 = 2.5.",
+ trap:"Dividing incorrectly (forgetting the factor of 2 in the denominator) can produce t = 5 or other values not matching the true vertex."},
+{id:"m2_m1_11",domain:"AM",skill:"Functions",topic:"Functions",difficulty:"M",
+ stem:"If f(x) = 2x² + 3x − 1, what is f(−3)?",
+ choices:["8","10","14","20"],answer:0,
+ explanation:"f(−3) = 2(9) + 3(−3) − 1 = 18 − 9 − 1 = 8.",
+ trap:"A sign slip on the middle term (treating −3 as +3) gives 18+9−1=26, not matching any choice, showing the importance of careful sign tracking."},
+{id:"m2_m1_12",domain:"AM",skill:"Functions: transformations",topic:"Functions",difficulty:"M",
+ stem:"The graph of g(x) is the graph of f(x) = x² shifted 2 units left and 5 units up. Which equation defines g(x)?",
+ choices:["g(x) = (x + 2)² + 5","g(x) = (x − 2)² + 5","g(x) = (x + 2)² − 5","g(x) = (x − 5)² + 2"],answer:0,
+ explanation:"Shifting left by 2 replaces x with (x + 2); shifting up by 5 adds 5: g(x) = (x+2)² + 5.",
+ trap:"Choice B uses (x−2), which shifts the graph right, not left — a common sign confusion with horizontal shifts."},
+{id:"m2_m1_13",domain:"AM",skill:"Exponential models",topic:"Exponential models",difficulty:"M",
+ stem:"A population of bacteria triples every 4 hours. If the population starts at 200, which expression gives the population after t hours?",
+ choices:["200(3)^(t/4)","200(3)^(4t)","200(4)^(t/3)","200 + 3(t/4)"],answer:0,
+ explanation:"Tripling every 4 hours means the exponent counts complete 4-hour periods: t/4. The base is 3 for tripling.",
+ trap:"Choice B inverts the exponent, making the population triple every 1/4 of an hour instead of every 4 hours — far too fast."},
+{id:"m2_m1_14",domain:"AM",skill:"Polynomials",topic:"Polynomials",difficulty:"M",
+ stem:"What is the product of (3x + 4)(x − 2)?",
+ choices:["3x² − 2x − 8","3x² + 2x − 8","3x² − 2x + 8","3x² − 10x − 8"],answer:0,
+ explanation:"(3x+4)(x−2) = 3x² − 6x + 4x − 8 = 3x² − 2x − 8.",
+ trap:"Adding the middle terms incorrectly (−6x+4x=−2x is correct, but a sign slip could give +2x instead) is a common arithmetic error."},
+{id:"m2_m1_15",domain:"AM",skill:"Quadratics: discriminant",topic:"Quadratics",difficulty:"M",
+ stem:"For how many real values of x does 3x² − 6x + 3 = 0 have a solution?",
+ choices:["0","1","2","Infinitely many"],answer:1,
+ explanation:"Discriminant = b² − 4ac = 36 − 36 = 0, which means exactly one real solution (a repeated root).",
+ trap:"Forgetting that a discriminant of exactly 0 gives one repeated solution, not zero solutions, is a common misunderstanding."},
+{id:"m2_m1_16",domain:"AM",skill:"Complex numbers",topic:"Complex numbers",difficulty:"M",
+ stem:"What is the value of (4 − i)(2 + 3i), where i = √−1?",
+ choices:["8 + 10i + 3","11 + 10i","5 + 10i","11 − 10i"],answer:1,
+ explanation:"(4−i)(2+3i) = 8 + 12i − 2i − 3i² = 8 + 10i − 3(−1) = 8 + 10i + 3 = 11 + 10i.",
+ trap:"Forgetting that i² = −1 (treating it as +1 instead) gives 8 + 10i − 3 = 5 + 10i, a common sign error."},
+{id:"m2_m1_17",domain:"PSD",skill:"Statistics: mean and median",topic:"Statistics",difficulty:"M",
+ stem:"A data set has values 3, 5, 8, 8, 12, 36. How much greater is the mean than the median?",
+ choices:["3","4","5","6"],answer:1,
+ explanation:"Mean = (3+5+8+8+12+36)/6 = 72/6 = 12. Median = (8+8)/2 = 8. Difference = 4.",
+ trap:"Using only one of the two middle values instead of averaging them for an even-sized data set is a common median error."},
+{id:"m2_m1_18",domain:"PSD",skill:"Ratios & rates",topic:"Ratios & rates",difficulty:"M",
+ stem:"A recipe calls for 3 cups of flour for every 5 cups of water. If a baker uses 18 cups of flour, how many cups of water are needed to keep the same ratio?",
+ choices:["24","28","30","32"],answer:2,
+ explanation:"3/5 = 18/x → x = 30 (since 18 is 6× 3, water is 6× 5 = 30).",
+ trap:"Setting up the ratio inverted gives a fraction that doesn't match the intended proportion direction."},
+{id:"m2_m1_19",domain:"PSD",skill:"Word problems (data)",topic:"Word problems",difficulty:"M",
+ stem:"A store's revenue decreased from $60,000 to $51,000 over one year. What was the percent decrease?",
+ choices:["9%","12%","15%","18%"],answer:2,
+ explanation:"Percent decrease = (9000/60000) × 100 = 15%.",
+ trap:"Dividing the decrease by the new value instead of the original ($9000/51000 ≈ 17.6%) gives a plausible-looking but incorrect answer."},
+{id:"m2_m1_20",domain:"GT",skill:"Geometry: area",topic:"Geometry",difficulty:"M",
+ stem:"A rectangular garden has a length that is 3 feet more than its width. If the area is 88 square feet, what is the width, in feet?",
+ choices:["7","8","9","11"],answer:1,
+ explanation:"w(w+3) = 88 → w² + 3w − 88 = 0 → (w+11)(w−8) = 0 → w = 8 (rejecting the negative solution).",
+ trap:"Forgetting to reject the negative root (w = −11) or misreading which factor gives the width can lead to selecting 11."},
+{id:"m2_m1_21",domain:"GT",skill:"Geometry: triangle angles",topic:"Geometry",difficulty:"M",
+ stem:"In triangle ABC, angle A measures 35° and angle B measures 85°. What is the measure of angle C?",
+ choices:["55°","60°","65°","70°"],answer:1,
+ explanation:"The angles of a triangle sum to 180°: 180 − 35 − 85 = 60°.",
+ trap:"Adding the two given angles and stopping there (120°) skips the final subtraction from 180."},
+{id:"m2_m1_22",domain:"GT",skill:"Trigonometry: right triangle ratios",topic:"Trigonometry",difficulty:"M",
+ stem:"In a right triangle, one leg has length 9 and the hypotenuse has length 15. What is the cosine of the angle opposite the leg of length 9?",
+ choices:["0.6","0.7","0.75","0.8"],answer:3,
+ explanation:"The missing leg = √(15²−9²) = √(225−81) = √144 = 12. Cosine of the angle opposite the 9-leg equals the adjacent side (12) over hypotenuse (15) = 12/15 = 0.8.",
+ trap:"Using sin instead of cos (9/15=0.6) answers a different question than the one asked."}
+];
+if(typeof module!=="undefined")module.exports=MATH2_M1;
+const MATH2_M2E = [
+{id:"m2_m2e_01",domain:"AL",skill:"Linear equations",topic:"Linear equations",difficulty:"E",
+ stem:"If x + 7 = 15, what is the value of x?",
+ choices:["7","8","9","15"],answer:1,
+ explanation:"x + 7 = 15 → x = 8.",
+ trap:"Adding instead of subtracting 7 gives 22, an answer well outside the listed choices — a subtler slip is forgetting to isolate x fully."},
+{id:"m2_m2e_02",domain:"AL",skill:"Word problems (linear)",topic:"Word problems",difficulty:"E",
+ stem:"A concert ticket costs $15. If a group spends a total of $45, how many tickets did they buy?",
+ choices:["2","3","4","5"],answer:1,
+ explanation:"45 ÷ 15 = 3 tickets.",
+ trap:"Multiplying instead of dividing gives a result far outside the choices; a subtler error is miscounting to 4 or 5 tickets."},
+{id:"m2_m2e_03",domain:"AL",skill:"Systems of equations",topic:"Systems of equations",difficulty:"E",
+ stem:"If x + y = 6 and x = 2, what is the value of y?",
+ choices:["2","3","4","8"],answer:2,
+ explanation:"Substitute x = 2: 2 + y = 6 → y = 4.",
+ trap:"Adding x and the total (2 + 6) instead of subtracting gives 8."},
+{id:"m2_m2e_04",domain:"AL",skill:"Systems of equations",topic:"Systems of equations",difficulty:"E",
+ stem:"Which ordered pair (x, y) satisfies both y = x + 2 and y = 6?",
+ choices:["(2, 6)","(3, 6)","(4, 6)","(6, 6)"],answer:2,
+ explanation:"Set x + 2 = 6 → x = 4, so the pair is (4, 6).",
+ trap:"Forgetting to subtract 2 gives x = 6, producing the incorrect pair (6, 6)."},
+{id:"m2_m2e_05",domain:"AL",skill:"Linear inequalities",topic:"Word problems",difficulty:"E",
+ stem:"A parking lot charges $6 plus $3 per hour. If a driver has at most $24 to spend, what is the maximum number of whole hours they can park?",
+ choices:["5","6","7","8"],answer:1,
+ explanation:"6 + 3h ≤ 24 → 3h ≤ 18 → h ≤ 6.",
+ trap:"Dividing the full $24 by $3 without subtracting the flat fee first gives 8, ignoring the base charge."},
+{id:"m2_m2e_06",domain:"AL",skill:"Linear equations",topic:"Linear equations",difficulty:"E",
+ stem:"What is the slope of the line that passes through the points (1, 2) and (3, 10)?",
+ choices:["2","3","4","6"],answer:2,
+ explanation:"Slope = (10 − 2)/(3 − 1) = 8/2 = 4.",
+ trap:"Dividing in the wrong order (2/8) gives a fraction, not matching the expected whole-number pattern here."},
+{id:"m2_m2e_07",domain:"AL",skill:"Word problems (linear)",topic:"Word problems",difficulty:"E",
+ stem:"A delivery service charges a $5 base fee plus $3 per package. How much does delivering 6 packages cost?",
+ choices:["$18","$21","$23","$24"],answer:2,
+ explanation:"5 + 3(6) = 5 + 18 = 23.",
+ trap:"Forgetting the base fee and computing only 3 × 6 = 18 misses the flat charge."},
+{id:"m2_m2e_08",domain:"AL",skill:"Systems of equations",topic:"Systems of equations",difficulty:"E",
+ stem:"A jar contains 40 coins, all either nickels or dimes. If there are 15 nickels, how many dimes are there?",
+ choices:["15","20","25","30"],answer:2,
+ explanation:"40 − 15 = 25 dimes.",
+ trap:"Adding instead of subtracting (40 + 15) gives an answer outside the possible range of coins."},
+{id:"m2_m2e_09",domain:"AM",skill:"Quadratics: factoring",topic:"Quadratics",difficulty:"E",
+ stem:"What are the solutions to x² − 16 = 0?",
+ choices:["x = 4 only","x = −4 only","x = 4 or x = −4","x = 16 or x = −16"],answer:2,
+ explanation:"x² = 16 → x = 4 or x = −4.",
+ trap:"Forgetting the negative root gives only x = 4, missing half the solution set."},
+{id:"m2_m2e_10",domain:"AM",skill:"Functions",topic:"Functions",difficulty:"E",
+ stem:"If f(x) = 3x + 2, what is f(4)?",
+ choices:["9","12","14","16"],answer:2,
+ explanation:"f(4) = 3(4) + 2 = 12 + 2 = 14.",
+ trap:"Forgetting to add 2 after multiplying gives 12."},
+{id:"m2_m2e_11",domain:"AM",skill:"Functions",topic:"Functions",difficulty:"E",
+ stem:"If g(x) = x² + 1, what is g(3)?",
+ choices:["7","9","10","12"],answer:2,
+ explanation:"g(3) = 3² + 1 = 9 + 1 = 10.",
+ trap:"Forgetting to add 1 and stopping at 9 skips the final step."},
+{id:"m2_m2e_12",domain:"AM",skill:"Quadratics: standard form",topic:"Quadratics",difficulty:"E",
+ stem:"What is the y-intercept of the graph of y = x² − 5x + 7?",
+ choices:["−5","5","7","12"],answer:2,
+ explanation:"The y-intercept occurs at x = 0: y = 0 − 0 + 7 = 7.",
+ trap:"Using the coefficient of x (−5) instead of the constant term is a common mix-up when identifying the y-intercept."},
+{id:"m2_m2e_13",domain:"AM",skill:"Exponential models",topic:"Exponential models",difficulty:"E",
+ stem:"An investment doubles in value every year. If it starts at $100, what is its value after 3 years?",
+ choices:["$300","$600","$800","$900"],answer:2,
+ explanation:"100 → 200 (yr1) → 400 (yr2) → 800 (yr3).",
+ trap:"Multiplying by 2 only twice (missing the third doubling) gives $400."},
+{id:"m2_m2e_14",domain:"AM",skill:"Polynomials",topic:"Polynomials",difficulty:"E",
+ stem:"What is the sum of (2x + 1) and (x − 4)?",
+ choices:["3x − 3","3x + 3","x − 3","x + 3"],answer:0,
+ explanation:"(2x + 1) + (x − 4) = 3x − 3.",
+ trap:"Adding the constants incorrectly (1 + 4 instead of 1 − 4) gives 3x + 5, not matching the correct combination."},
+{id:"m2_m2e_15",domain:"AM",skill:"Quadratics: roots",topic:"Quadratics",difficulty:"E",
+ stem:"If one solution to x² + kx − 15 = 0 is x = 3, what is the value of k?",
+ choices:["−2","2","3","5"],answer:1,
+ explanation:"Substitute x = 3: 9 + 3k − 15 = 0 → 3k = 6 → k = 2.",
+ trap:"A sign error when moving the constant term across the equation can flip the result to k = −2."},
+{id:"m2_m2e_16",domain:"AM",skill:"Complex numbers",topic:"Complex numbers",difficulty:"E",
+ stem:"What is the value of i² + 5, where i = √−1?",
+ choices:["4","5","6","−4"],answer:0,
+ explanation:"i² = −1, so i² + 5 = −1 + 5 = 4.",
+ trap:"Treating i² as +1 instead of −1 gives 6, a common sign confusion with imaginary numbers."},
+{id:"m2_m2e_17",domain:"PSD",skill:"Statistics: mean",topic:"Statistics",difficulty:"E",
+ stem:"What is the mean of the data set 2, 4, 6, 8, 10?",
+ choices:["5","6","7","8"],answer:1,
+ explanation:"(2+4+6+8+10)/5 = 30/5 = 6.",
+ trap:"Dividing by 4 instead of the correct count of 5 values gives 7.5, closest to an incorrect rounded choice."},
+{id:"m2_m2e_18",domain:"PSD",skill:"Ratios & rates",topic:"Ratios & rates",difficulty:"E",
+ stem:"A car travels 100 miles in 2 hours at a constant speed. How far does it travel in 4 hours at the same speed?",
+ choices:["150 miles","175 miles","200 miles","225 miles"],answer:2,
+ explanation:"Speed = 100/2 = 50 mph. Distance in 4 hours = 50 × 4 = 200 miles.",
+ trap:"Simply doubling the mileage without confirming the rate stays constant can lead to arithmetic slips at higher hour counts, though here it happens to align — always compute the rate first."},
+{id:"m2_m2e_19",domain:"PSD",skill:"Word problems (data)",topic:"Word problems",difficulty:"E",
+ stem:"A jacket originally priced at $50 is on sale for 30% off. What is the sale price?",
+ choices:["$15","$30","$35","$40"],answer:2,
+ explanation:"30% of 50 is 15, so the sale price is 50 − 15 = 35.",
+ trap:"Reporting the discount amount ($15) instead of the final sale price is a common misread of what's being asked."},
+{id:"m2_m2e_20",domain:"GT",skill:"Geometry: area",topic:"Geometry",difficulty:"E",
+ stem:"A rectangle has a length of 9 and a width of 6. What is its area?",
+ choices:["15","30","54","60"],answer:2,
+ explanation:"Area = length × width = 9 × 6 = 54.",
+ trap:"Adding the dimensions instead of multiplying gives the perimeter-related value 15, not the area."},
+{id:"m2_m2e_21",domain:"GT",skill:"Geometry: triangle angles",topic:"Geometry",difficulty:"E",
+ stem:"A triangle has angles measuring 50° and 70°. What is the measure of the third angle?",
+ choices:["50°","60°","65°","70°"],answer:1,
+ explanation:"180 − 50 − 70 = 60°.",
+ trap:"Adding the two given angles and stopping there (120°) skips the final subtraction from 180."},
+{id:"m2_m2e_22",domain:"GT",skill:"Trigonometry: right triangle ratios",topic:"Trigonometry",difficulty:"E",
+ stem:"In a right triangle, the two legs have lengths 6 and 8. What is the length of the hypotenuse?",
+ choices:["10","12","14","48"],answer:0,
+ explanation:"By the Pythagorean theorem: √(6² + 8²) = √(36+64) = √100 = 10.",
+ trap:"Adding the legs directly (6 + 8 = 14) instead of applying the Pythagorean theorem gives an incorrect hypotenuse length."}
+];
+if(typeof module!=="undefined")module.exports=MATH2_M2E;
+const MATH2_M2H = [
+{id:"m2_m2h_01",domain:"AL",skill:"Systems of equations",topic:"Systems of equations",difficulty:"H",
+ stem:"For what value of k does the system 2x + 3y = 15 and 4x + ky = 30 have infinitely many solutions?",
+ choices:["3","6","9","12"],answer:1,
+ explanation:"For infinitely many solutions, the second equation must be a multiple of the first. Multiplying the first equation by 2 gives 4x + 6y = 30, so k = 6.",
+ trap:"Matching only the constant terms (15 to 30) without checking that the y-coefficient must scale by the same factor leads to picking an unrelated value."},
+{id:"m2_m2h_02",domain:"AL",skill:"Word problems (linear)",topic:"Word problems",difficulty:"H",
+ stem:"A cyclist and a runner start at the same point and travel in opposite directions. The cyclist travels at 15 mph and the runner at 5 mph. After how many minutes will they be 10 miles apart?",
+ choices:["20","30","40","50"],answer:1,
+ explanation:"Combined speed = 20 mph. Time = 10/20 = 0.5 hours = 30 minutes.",
+ trap:"Using only the cyclist's speed (10/15 hours = 40 min) ignores that both people are moving apart simultaneously."},
+{id:"m2_m2h_03",domain:"AL",skill:"Systems of equations",topic:"Systems of equations",difficulty:"H",
+ stem:"If x − y = 5 and x² − y² = 65, and x + y ≠ 0, what is the value of x + y?",
+ choices:["5","9","13","65"],answer:2,
+ explanation:"x² − y² factors as (x − y)(x + y). Substituting x − y = 5: 5(x + y) = 65, so x + y = 13.",
+ trap:"Dividing 65 by the wrong factor, or trying to solve for x and y individually instead of using the difference-of-squares identity, is far slower and more error-prone."},
+{id:"m2_m2h_04",domain:"AL",skill:"Linear inequalities",topic:"Word problems",difficulty:"H",
+ stem:"A manufacturer's profit P, in dollars, from selling x units is modeled by P = 30x − 1500. For what values of x is the profit at least $3,000?",
+ choices:["x ≥ 100","x ≥ 125","x ≥ 150","x ≥ 175"],answer:2,
+ explanation:"30x − 1500 ≥ 3000 → 30x ≥ 4500 → x ≥ 150.",
+ trap:"Forgetting to add 1500 before dividing (dividing 3000 by 30 directly) gives x ≥ 100, missing the fixed cost adjustment."},
+{id:"m2_m2h_05",domain:"AL",skill:"Linear equations",topic:"Linear equations",difficulty:"H",
+ stem:"Line ℓ passes through (−2, 5) and is parallel to the line 3x − y = 4. What is the y-intercept of line ℓ?",
+ choices:["6","8","9","11"],answer:3,
+ explanation:"3x − y = 4 → y = 3x − 4, so slope = 3. Line ℓ: y − 5 = 3(x − (−2)) → y = 3x + 6 + 5 = 3x + 11. Y-intercept is 11.",
+ trap:"Using the given line's y-intercept (−4) instead of computing the new parallel line's intercept through the given point is a common shortcut error."},
+{id:"m2_m2h_06",domain:"AL",skill:"Systems of equations",topic:"Systems of equations",difficulty:"H",
+ stem:"A chemist mixes a 10% acid solution with a 40% acid solution to create 10 liters of a 25% acid solution. How many liters of the 10% solution are used?",
+ choices:["3","4","5","6"],answer:2,
+ explanation:"Let x = liters of 10% solution. 0.10x + 0.40(10−x) = 0.25(10) → 0.10x + 4 − 0.40x = 2.5 → −0.30x = −1.5 → x = 5.",
+ trap:"Setting up the weighted average with the wrong solution assigned to (10−x) reverses the final answer."},
+{id:"m2_m2h_07",domain:"AL",skill:"Word problems (linear)",topic:"Word problems",difficulty:"H",
+ stem:"A workshop produces items at a fixed cost of $1,500 plus $5 per item. Each item sells for $15. What is the minimum number of items that must be sold for revenue to exceed total cost?",
+ choices:["100","125","150","151"],answer:3,
+ explanation:"15x > 1500 + 5x → 10x > 1500 → x > 150, so the minimum whole number is 151.",
+ trap:"Rounding to 150 gives a point where revenue still does not exceed cost, since 150 doesn't satisfy the strict inequality."},
+{id:"m2_m2h_08",domain:"AM",skill:"Quadratics: word problems",topic:"Quadratics",difficulty:"H",
+ stem:"A ball is thrown so its height h, in feet, after t seconds is h(t) = −16t² + 32t + 3. After how many seconds does the ball hit the ground (h = 0), rounded to the nearest tenth?",
+ choices:["1.9","2.0","2.1","2.2"],answer:2,
+ explanation:"Using the quadratic formula: t = [−32 ± √(32² − 4(−16)(3))]/(2×−16) = [−32 ± √1216]/(−32). √1216 ≈ 34.87. Taking the positive root: t = (−32−34.87)/(−32) ≈ 2.09, which rounds to 2.1.",
+ trap:"Ignoring the small initial height term (treating it as h = −16t² + 32t) gives a cleaner but incorrect t = 2.0, missing the extra fraction of a second the initial height adds."},
+{id:"m2_m2h_09",domain:"AM",skill:"Functions: composition",topic:"Functions",difficulty:"H",
+ stem:"If f(x) = 3x − 1 and g(x) = x² + 2, what is f(g(2))?",
+ choices:["11","14","17","20"],answer:2,
+ explanation:"g(2) = 4 + 2 = 6. f(6) = 3(6) − 1 = 17.",
+ trap:"Reversing the composition order and computing g(f(2)) = g(5) = 27 gives a very different, incorrect result — order matters in composition."},
+{id:"m2_m2h_10",domain:"AM",skill:"Exponential models",topic:"Exponential models",difficulty:"H",
+ stem:"A radioactive substance decays such that its mass is halved every 4 years. If the initial mass is 160 grams, after how many years will the mass first drop below 21 grams?",
+ choices:["12","16","20","24"],answer:0,
+ explanation:"Mass at each 4-year mark: 160 → 80 (4 yr) → 40 (8 yr) → 20 (12 yr). The mass first drops below 21 grams at 12 years, since 20 < 21.",
+ trap:"Miscounting halving intervals is a common off-by-one error with repeated percentage decay."},
+{id:"m2_m2h_11",domain:"AM",skill:"Polynomials: factoring",topic:"Polynomials",difficulty:"H",
+ stem:"If x³ − 3x² − 4x + 12 has a factor of (x − 2), what is the remaining quadratic factor?",
+ choices:["x² − x − 6","x² + x − 6","x² − 5x − 6","x² − x + 6"],answer:0,
+ explanation:"Dividing by (x−2) using synthetic division with root 2: coefficients 1,−3,−4,12 → bring down 1; 1×2=2, −3+2=−1; −1×2=−2, −4+(−2)=−6; −6×2=−12, 12+(−12)=0. Quotient: x²−x−6.",
+ trap:"A sign error in synthetic division commonly produces x²+x−6, which looks similar but is incorrect."},
+{id:"m2_m2h_12",domain:"AM",skill:"Complex numbers",topic:"Complex numbers",difficulty:"H",
+ stem:"What is (3 − 2i)², where i = √−1?",
+ choices:["5 − 12i","5 + 12i","13 − 12i","9 − 4i"],answer:0,
+ explanation:"(3−2i)² = 9 − 12i + 4i² = 9 − 12i − 4 = 5 − 12i.",
+ trap:"Forgetting the middle term entirely (treating it like a difference of squares, 9−4i²=9+4=13) skips the cross term needed for a true square expansion."},
+{id:"m2_m2h_13",domain:"AM",skill:"Functions: rational",topic:"Functions",difficulty:"H",
+ stem:"For the function f(x) = (x² − 9)/(x − 3), what value does f(x) approach as x approaches 3, even though f is undefined at x = 3?",
+ choices:["0","3","6","9"],answer:2,
+ explanation:"Factoring: (x−3)(x+3)/(x−3) = x+3 for x≠3. As x approaches 3, this approaches 3+3 = 6.",
+ trap:"Concluding the function has no limit simply because it's undefined at x=3 ignores that the factored form is continuous and approaches a specific value nearby."},
+{id:"m2_m2h_14",domain:"AM",skill:"Quadratics: systems",topic:"Quadratics",difficulty:"H",
+ stem:"The line y = x − 1 intersects the parabola y = x² − 4x − 1 at two points. What is the sum of the x-coordinates of the two intersection points?",
+ choices:["3","4","5","6"],answer:2,
+ explanation:"Set x−1 = x²−4x−1 → 0 = x²−5x. Sum of roots = −b/a = 5.",
+ trap:"Solving for the individual roots, x(x−5)=0 giving x=0 and x=5, and then subtracting instead of summing gives 5 by coincidence — but with different coefficients this shortcut fails, so always use −b/a directly."},
+{id:"m2_m2h_15",domain:"AM",skill:"Exponential models",topic:"Exponential models",difficulty:"H",
+ stem:"The value of an investment grows according to V(t) = 4000(1.04)^t, where t is in years. Approximately how many years will it take for the investment to double? (Use log 2 ≈ 0.301, log 1.04 ≈ 0.017)",
+ choices:["14","16","18","20"],answer:2,
+ explanation:"Solve 2 = 1.04^t → t = log2/log1.04 ≈ 0.301/0.017 ≈ 17.7, which rounds to about 18 years.",
+ trap:"Misapplying the given log approximations without dividing correctly can produce values like 14 or 20 that don't match the actual doubling time."},
+{id:"m2_m2h_16",domain:"PSD",skill:"Statistics: standard deviation concept",topic:"Statistics",difficulty:"H",
+ stem:"Two data sets have the same mean, but Data Set A has a standard deviation of 3 and Data Set B has a standard deviation of 9. Which statement is best supported by this information?",
+ choices:["Data Set A's values are, on average, farther from the mean than Data Set B's values.","Data Set B's values are, on average, farther from the mean than Data Set A's values.","The two data sets have identical distributions.","Data Set A has a larger range than Data Set B."],answer:1,
+ explanation:"A larger standard deviation indicates values are more spread out from the mean on average, so Data Set B's values are farther from the mean.",
+ trap:"Choice D conflates standard deviation with range — the guaranteed interpretation is about average distance from the mean, not range specifically."},
+{id:"m2_m2h_17",domain:"PSD",skill:"Ratios & rates",topic:"Ratios & rates",difficulty:"H",
+ stem:"Machine A can complete a job in 5 hours. Machine B can complete the same job in 8 hours. Working together at their individual rates, how many hours will it take them to complete the job, rounded to the nearest hundredth?",
+ choices:["3.08","3.25","3.50","4.00"],answer:0,
+ explanation:"Combined rate = 1/5 + 1/8 = 8/40 + 5/40 = 13/40 job per hour. Time = 40/13 ≈ 3.08 hours.",
+ trap:"Averaging the two individual times ((5+8)/2 = 6.5) instead of combining rates gives a plausible-looking but incorrect answer."},
+{id:"m2_m2h_18",domain:"PSD",skill:"Word problems (data)",topic:"Word problems",difficulty:"H",
+ stem:"A survey of 500 randomly selected voters found that 260 support a proposed measure, with a margin of error of 4 percentage points. Based on this survey, which is the most plausible conclusion about all voters in the population?",
+ choices:["Exactly 52% of all voters support the measure.","Between approximately 48% and 56% of all voters support the measure.","More than 60% of all voters support the measure.","Fewer than 45% of all voters support the measure."],answer:1,
+ explanation:"260/500 = 52%. With a 4-point margin of error, the plausible range is 52% ± 4%, or about 48% to 56%.",
+ trap:"Choice A ignores the margin of error and treats the sample statistic as an exact population value, which sample surveys cannot guarantee."},
+{id:"m2_m2h_19",domain:"PSD",skill:"Statistics: mean shift",topic:"Statistics",difficulty:"H",
+ stem:"A data set of 10 values has a mean of 15. If one value, currently 10, is changed to 30, what is the new mean?",
+ choices:["15","16","17","19"],answer:2,
+ explanation:"Original sum = 150. New sum = 150 − 10 + 30 = 170. New mean = 170/10 = 17.",
+ trap:"Forgetting to remove the old value (10) before adding the new one and instead just adding 30 to the original sum gives an inflated mean of 18."},
+{id:"m2_m2h_20",domain:"GT",skill:"Geometry: circles",topic:"Geometry",difficulty:"H",
+ stem:"A circle has an area of 36π square inches. What is the circumference of the circle, in inches?",
+ choices:["6π","9π","12π","18π"],answer:2,
+ explanation:"Area = πr² = 36π → r² = 36 → r = 6. Circumference = 2πr = 12π.",
+ trap:"Using the area value directly as if it were r² without taking the square root gives a wildly oversized circumference."},
+{id:"m2_m2h_21",domain:"GT",skill:"Geometry: similar triangles",topic:"Geometry",difficulty:"H",
+ stem:"Triangle ABC is similar to triangle DEF, with a scale factor of 2:3 from ABC to DEF. If the area of triangle ABC is 24 square units, what is the area of triangle DEF?",
+ choices:["36","48","54","72"],answer:2,
+ explanation:"Area scales with the square of the linear scale factor. Going from ABC to DEF the linear factor is 3/2, so the area factor is (3/2)² = 9/4. Area of DEF = 24 × 9/4 = 54.",
+ trap:"Applying the linear scale factor directly to area (24 × 3/2 = 36) instead of squaring it first is one of the most common similar-figure errors on the SAT."},
+{id:"m2_m2h_22",domain:"GT",skill:"Trigonometry: identities",topic:"Trigonometry",difficulty:"H",
+ stem:"If sin(θ) = 7/25 and θ is an angle in a right triangle, what is the value of cos(θ)?",
+ choices:["7/25","18/25","24/25","25/7"],answer:2,
+ explanation:"Using the Pythagorean identity with a 7-24-25 right triangle: cos(θ) = adjacent/hypotenuse = 24/25.",
+ trap:"Guessing an incorrect third side instead of recognizing the 7-24-25 Pythagorean triple can lead to an answer that doesn't satisfy sin²+cos²=1."}
+];
+if(typeof module!=="undefined")module.exports=MATH2_M2H;
+const RW2_M1 = [
+{id:"rw2_m1_01",domain:"CAS",skill:"Words in Context",difficulty:"M",
+ passage:"The critic's review was notably _______: she praised the film's visuals in one paragraph, then dismissed the entire project as forgettable in the next.",
+ stem:"Which choice completes the text with the most logical word?",
+ choices:["consistent","inconsistent","enthusiastic","dismissive"],answer:1,
+ explanation:"Praising visuals then dismissing the whole project shows contradictory judgments — \"inconsistent\" fits precisely.",
+ trap:"\"Dismissive\" only captures the second half of the review, missing the initial praise that creates the contradiction."},
+{id:"rw2_m1_02",domain:"CAS",skill:"Words in Context",difficulty:"M",
+ passage:"The old bridge, once considered an engineering marvel, is now so _______ that officials have banned all vehicle traffic across it.",
+ stem:"Which choice completes the text with the most logical word?",
+ choices:["reinforced","dilapidated","celebrated","spacious"],answer:1,
+ explanation:"A ban on vehicle traffic implies structural decay, matching \"dilapidated.\"",
+ trap:"\"Celebrated\" contradicts the ban entirely and doesn't explain why traffic would be restricted."},
+{id:"rw2_m1_03",domain:"CAS",skill:"Text Structure and Purpose",difficulty:"M",
+ passage:"The article begins by summarizing a widely accepted theory about ocean currents, then presents new satellite data that complicates several of the theory's core assumptions.",
+ stem:"What is the main purpose of the article's structure?",
+ choices:["To establish an accepted view before challenging it with new evidence.","To prove the theory is entirely wrong.","To describe the history of satellite technology.","To compare two unrelated scientific fields."],answer:0,
+ explanation:"Summarizing an accepted theory before introducing complicating evidence is a classic setup-then-complicate structure, matching choice A.",
+ trap:"Choice B overstates the article's claim — \"complicates\" is not the same as \"proves entirely wrong.\""},
+{id:"rw2_m1_04",domain:"CAS",skill:"Cross-Text Connections",difficulty:"M",
+ passage:"Text 1: An urban planner argues that building more highways reduces traffic congestion by giving drivers more route options.\nText 2: A transportation study found that cities which expanded highway capacity saw congestion return to previous levels within five years, as more people chose to drive.",
+ stem:"Based on the texts, how would the author of Text 2 most likely respond to the planner's argument in Text 1?",
+ choices:["By agreeing that highway expansion permanently reduces congestion.","By questioning the argument, since expanded capacity was followed by a return to prior congestion levels.","By denying that congestion is a real problem.","By recommending immediate highway expansion in all cities."],answer:1,
+ explanation:"Text 2's finding — congestion returning within five years — directly challenges the claim that highway expansion permanently reduces congestion.",
+ trap:"Choice A ignores that Text 2 explicitly reports the congestion-relief effect faded over time."},
+{id:"rw2_m1_05",domain:"INI",skill:"Central Ideas and Details",difficulty:"M",
+ passage:"A city's participatory budgeting program let residents vote directly on how to spend $2 million in public funds. In its first three years, projects funded through the program had a 91% completion rate, compared to 68% for projects chosen through the traditional council process.",
+ stem:"Which choice best states the main idea of the text?",
+ choices:["The traditional council process is faster than participatory budgeting.","Participatory budgeting was associated with a notably higher project completion rate than the traditional process.","Residents voted against most proposed projects.","The city eliminated its traditional budgeting process entirely."],answer:1,
+ explanation:"The text's central comparison is completion rates between the two approaches, favoring participatory budgeting — matching choice B.",
+ trap:"Choice D is not supported; the text compares two processes without saying one was eliminated."},
+{id:"rw2_m1_06",domain:"INI",skill:"Command of Evidence (quantitative)",difficulty:"M",
+ passage:"A nutritionist claims that a school's switch to scratch-cooked meals increased the proportion of students eating a full lunch.",
+ stem:"Which finding, if true, would most directly support the nutritionist's claim?",
+ choices:["The percentage of students finishing their lunch trays rose from 54% to 79% in the semester after the switch.","The school hired two new cafeteria staff members.","Lunch periods were extended by five minutes.","Parents were surveyed about their preferences for school lunches."],answer:0,
+ explanation:"Choice A provides a direct, measurable increase in the exact behavior (finishing lunch) the claim is about, tied to the timing of the switch.",
+ trap:"Choice C could plausibly affect eating behavior but doesn't address the specific claim about scratch-cooked meals as the cause."},
+{id:"rw2_m1_07",domain:"INI",skill:"Inferences",difficulty:"M",
+ passage:"A marine biologist studying a coral reef found that colonies located near a wastewater outflow pipe showed significantly slower growth rates than colonies of the same species located elsewhere on the same reef, despite similar water temperatures and light exposure.",
+ stem:"Which choice most logically completes the text?",
+ choices:["the wastewater outflow is likely contributing to the slower growth observed near the pipe.","water temperature is the primary factor affecting coral growth on this reef.","all coral colonies on the reef are declining at the same rate.","the reef will fully recover within a few years."],answer:0,
+ explanation:"With temperature and light controlled for, proximity to the outflow pipe stands out as the most likely explanation for the growth difference.",
+ trap:"Choice B is directly contradicted by the passage, which states temperature was similar across locations."},
+{id:"rw2_m1_08",domain:"SEC",skill:"Boundaries: commas",difficulty:"M",
+ passage:"The novelist Chimamanda whose latest book topped bestseller lists for six weeks will speak at the festival.",
+ stem:"Which choice completes the text with the most conventional punctuation?",
+ choices:["The novelist Chimamanda, whose latest book topped bestseller lists for six weeks, will speak at the festival.","The novelist Chimamanda whose latest book, topped bestseller lists for six weeks, will speak at the festival.","The novelist Chimamanda, whose latest book topped bestseller lists for six weeks will speak, at the festival.","The novelist, Chimamanda whose latest book topped bestseller lists for six weeks, will speak at the festival."],answer:0,
+ explanation:"The nonessential clause \"whose latest book topped bestseller lists for six weeks\" needs commas on both sides.",
+ trap:"Choice D places a comma right after \"novelist,\" incorrectly separating the title from the name it identifies."},
+{id:"rw2_m1_09",domain:"SEC",skill:"Subject-verb agreement",difficulty:"M",
+ passage:"The list of ingredients required for the recipe _______ printed on the back of the box.",
+ stem:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+ choices:["are","is","were","have been"],answer:1,
+ explanation:"The subject is the singular \"list,\" not the plural \"ingredients,\" so the singular verb \"is\" agrees.",
+ trap:"\"Are\" incorrectly agrees with the nearby plural noun \"ingredients\" instead of the true subject \"list.\""},
+{id:"rw2_m1_10",domain:"SEC",skill:"Verb tense",difficulty:"M",
+ passage:"By next spring, the construction crew _______ the new wing of the hospital for over a year.",
+ stem:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+ choices:["builds","built","will have been building","was building"],answer:2,
+ explanation:"Future perfect progressive (\"will have been building\") correctly describes an ongoing action that will be completed relative to a future point (\"by next spring\").",
+ trap:"\"Was building\" incorrectly places the action entirely in the past, ignoring the future time marker \"by next spring.\""},
+{id:"rw2_m1_11",domain:"SEC",skill:"Boundaries: commas",difficulty:"M",
+ passage:"Determined to finish the marathon despite the injury she kept running.",
+ stem:"Which choice completes the text with the most conventional punctuation?",
+ choices:["Determined to finish the marathon despite the injury, she kept running.","Determined, to finish the marathon despite the injury she kept running.","Determined to finish the marathon, despite the injury she kept running.","Determined to finish the marathon despite the injury, she, kept running."],answer:0,
+ explanation:"A comma is needed after the introductory participial phrase \"Determined to finish the marathon despite the injury.\"",
+ trap:"Choice C splits the introductory phrase with an unnecessary comma in the middle, breaking up a unit that should stay together."},
+{id:"rw2_m1_12",domain:"SEC",skill:"Modifier placement",difficulty:"M",
+ passage:"Worried about the storm forecast, the picnic was moved indoors by the organizers.",
+ stem:"Which choice best revises the sentence to correct a dangling modifier?",
+ choices:["Worried about the storm forecast, the organizers moved the picnic indoors.","The picnic, worried about the storm forecast, was moved indoors by the organizers.","Worried about the storm forecast, moving the picnic indoors was done by the organizers.","No change."],answer:0,
+ explanation:"The modifier \"Worried about the storm forecast\" must describe a person — only choice A places \"the organizers\" immediately after the comma.",
+ trap:"Choice B illogically describes the picnic as worried."},
+{id:"rw2_m1_13",domain:"SEC",skill:"Parallel structure",difficulty:"M",
+ passage:"The internship taught her to manage a budget, communicate with clients, and she also learned to lead a small team.",
+ stem:"Which choice best revises the underlined portion to maintain parallel structure?",
+ choices:["to lead a small team","leading a small team was also learned","she learned to lead a small team","learning to lead a small team"],answer:0,
+ explanation:"The list needs three parallel infinitive phrases: \"to manage,\" \"to communicate,\" and \"to lead.\" Only choice A matches this pattern.",
+ trap:"Choice C reintroduces a full clause (\"she learned\"), breaking the parallel infinitive list."},
+{id:"rw2_m1_14",domain:"SEC",skill:"Sentence boundaries",difficulty:"M",
+ passage:"The lecture ran long, _______ several students had to leave before the Q&A began.",
+ stem:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+ choices:["so","so,","and so,","being that"],answer:0,
+ explanation:"\"So\" correctly joins the two independent clauses as a coordinating conjunction after the existing comma.",
+ trap:"\"So,\" with an extra comma after it awkwardly separates the conjunction from the clause it introduces."},
+{id:"rw2_m1_15",domain:"SEC",skill:"Boundaries: commas in a series",difficulty:"M",
+ passage:"The exhibit features paintings sculptures and photographs from the museum's private collection.",
+ stem:"Which choice completes the text with the most conventional punctuation?",
+ choices:["The exhibit features paintings, sculptures, and photographs from the museum's private collection.","The exhibit features, paintings sculptures and photographs from the museum's private collection.","The exhibit features paintings, sculptures and, photographs from the museum's private collection.","The exhibit features paintings sculptures, and photographs, from the museum's private collection."],answer:0,
+ explanation:"Each item in the three-part series needs a comma: paintings, sculptures, and photographs.",
+ trap:"Choice B inserts a comma right after the verb, incorrectly separating it from its object."},
+{id:"rw2_m1_16",domain:"EOI",skill:"Transitions",difficulty:"M",
+ passage:"The nonprofit's fundraising gala brought in a record $500,000 this year. _______, the organization announced it would need to cut two community programs due to rising operating costs.",
+ stem:"Which choice completes the text with the most logical transition?",
+ choices:["Similarly","Yet","As a result","For instance"],answer:1,
+ explanation:"The record fundraising and the need to cut programs form an unexpected contrast, which \"Yet\" signals.",
+ trap:"\"As a result\" would incorrectly suggest the program cuts were caused by the successful gala, reversing the actual relationship."},
+{id:"rw2_m1_17",domain:"EOI",skill:"Transitions",difficulty:"M",
+ passage:"The new software update fixed the app's most common crash bug. _______, users reported that battery drain became noticeably worse after installing it.",
+ stem:"Which choice completes the text with the most logical transition?",
+ choices:["However","Similarly","Consequently","In summary"],answer:0,
+ explanation:"The sentence introduces a downside that contrasts with the fix described first, so \"However\" fits.",
+ trap:"\"Consequently\" would wrongly imply the battery drain was caused by fixing the crash bug, rather than being a separate, unrelated issue."},
+{id:"rw2_m1_18",domain:"EOI",skill:"Rhetorical Synthesis",difficulty:"M",
+ passage:"A student has gathered the following notes:\n- A neighborhood tool-lending library opened in 2017.\n- It now loans out over 1,200 tools per year.\n- A 2023 survey found members saved an average of $340 annually on tool purchases and rentals.\n- The library is staffed entirely by volunteers.",
+ stem:"The student wants to emphasize the program's financial benefit to members. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+ choices:["The library opened in 2017.","The library is staffed entirely by volunteers.","A 2023 survey found members saved an average of $340 annually on tool purchases and rentals.","The library now loans out over 1,200 tools per year."],answer:2,
+ explanation:"Only choice C reports a direct financial benefit to members, matching the stated goal precisely.",
+ trap:"Choice D shows program scale but not a financial benefit to individual members."},
+{id:"rw2_m1_19",domain:"EOI",skill:"Rhetorical Synthesis",difficulty:"M",
+ passage:"A student has gathered the following notes:\n- A city launched a composting pilot program in 12 neighborhoods in 2021.\n- By 2023, the program expanded citywide.\n- Landfill waste from participating households dropped by an average of 30%.\n- The program provides free compost bins to all residents.",
+ stem:"The student wants to show that the pilot program's early results justified its citywide expansion. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+ choices:["The program provides free compost bins to all residents.","landfill waste from participating households dropped by an average of 30%, likely prompting the program's 2023 citywide expansion.","The pilot program began in 12 neighborhoods in 2021.","The program expanded citywide by 2023."],answer:1,
+ explanation:"Only choice B links a measurable result (30% reduction) to the expansion, directly supporting the idea that results justified growth.",
+ trap:"Choice D reports the expansion but not the results that justified it, missing half of what the goal requires."},
+{id:"rw2_m1_20",domain:"CAS",skill:"Words in Context",difficulty:"M",
+ passage:"The committee's decision was widely seen as _______ , since it reversed a policy the same committee had unanimously endorsed only a year earlier.",
+ stem:"Which choice completes the text with the most logical word?",
+ choices:["predictable","puzzling","routine","overdue"],answer:1,
+ explanation:"Reversing a unanimous decision from just a year earlier would naturally be seen as \"puzzling.\"",
+ trap:"\"Predictable\" is the opposite of the surprise implied by an abrupt reversal."},
+{id:"rw2_m1_21",domain:"INI",skill:"Central Ideas and Details",difficulty:"M",
+ passage:"An analysis of 15 years of hiring data at a mid-sized firm found that internal promotions correlated with longer average employee tenure, while external hires for the same roles correlated with higher rates of turnover within two years.",
+ stem:"Which choice best states the main idea of the text?",
+ choices:["External hires always outperform internal promotions.","Internal promotions were associated with longer tenure, while external hires for the same roles saw more early turnover.","The firm stopped hiring externally after the analysis.","Tenure length has no relationship to hiring source."],answer:1,
+ explanation:"The text's central comparison is tenure and turnover by hiring source, favoring internal promotions — matching choice B.",
+ trap:"Choice D directly contradicts the passage, which reports a clear relationship between hiring source and turnover."},
+{id:"rw2_m1_22",domain:"SEC",skill:"Subject-verb agreement",difficulty:"M",
+ passage:"Each of the applicants _______ required to submit three letters of recommendation.",
+ stem:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+ choices:["are","is","were","have been"],answer:1,
+ explanation:"\"Each\" is singular, so the singular verb \"is\" agrees, regardless of the plural noun \"applicants\" that follows it.",
+ trap:"\"Are\" incorrectly agrees with the plural \"applicants\" instead of the singular subject \"Each.\""},
+{id:"rw2_m1_23",domain:"CAS",skill:"Text Structure and Purpose",difficulty:"M",
+ passage:"The podcast episode opens with a personal story about the host's grandmother, then transitions into a broader discussion of immigration policy in the 1960s.",
+ stem:"What is the main effect of opening with the personal story?",
+ choices:["It provides a human, relatable entry point into a broader policy discussion.","It proves the host's grandmother influenced immigration policy.","It distracts listeners from the episode's main topic.","It replaces the need for factual research."],answer:0,
+ explanation:"Personal anecdotes at the start of policy discussions typically function to make an abstract topic feel grounded and relatable.",
+ trap:"Choice B overstates the anecdote's role — a personal story illustrates a broader topic, it doesn't claim direct influence on policy."},
+{id:"rw2_m1_24",domain:"EOI",skill:"Transitions",difficulty:"M",
+ passage:"The city's new curbside composting program cost $1.2 million to launch. _______, officials project it will save $3 million annually in landfill fees once fully adopted.",
+ stem:"Which choice completes the text with the most logical transition?",
+ choices:["However","Similarly","In other words","For example"],answer:0,
+ explanation:"The sentence contrasts an upfront cost with a projected long-term saving, which \"However\" appropriately signals.",
+ trap:"\"In other words\" would suggest the second sentence restates the first, but it actually introduces a new, contrasting projection."},
+{id:"rw2_m1_25",domain:"INI",skill:"Command of Evidence (quantitative)",difficulty:"M",
+ passage:"A researcher claims that a new classroom seating arrangement improved student participation specifically among quieter students.",
+ stem:"Which finding, if true, would most directly support the researcher's claim?",
+ choices:["Among students who spoke fewer than twice per class before the change, average comments per class rose from 0.8 to 2.6 after switching to the new arrangement.","Overall classroom noise levels increased after the change.","The new arrangement used round tables instead of rows.","Teachers reported liking the new arrangement."],answer:0,
+ explanation:"The claim specifically concerns quieter students. Choice A isolates that subgroup and shows a clear participation increase, directly supporting the specific claim.",
+ trap:"Choice B reports an overall effect but doesn't confirm the change was concentrated among quieter students specifically, as the claim states."},
+{id:"rw2_m1_26",domain:"SEC",skill:"Sentence boundaries: fragments",difficulty:"M",
+ passage:"_______ the museum extended its hours through the holiday weekend.",
+ stem:"Which choice completes the text so that it forms a complete, correctly punctuated sentence?",
+ choices:["Anticipating record crowds,","Anticipating record crowds","Record crowds being anticipated,","Due to anticipating record crowds being"],answer:0,
+ explanation:"An introductory participial phrase requires a comma before the independent clause that follows.",
+ trap:"Choice B omits the necessary comma after the introductory phrase, leaving it unclearly attached to the main clause."},
+{id:"rw2_m1_27",domain:"CAS",skill:"Cross-Text Connections",difficulty:"M",
+ passage:"Text 1: A nutrition writer argues that meal-kit delivery services help households eat healthier by providing pre-portioned, balanced ingredients.\nText 2: A consumer study found that meal-kit subscribers' grocery purchases outside the kits included more processed snacks than non-subscribers' purchases, offsetting some of the kits' nutritional benefits.",
+ stem:"Based on the texts, how would the author of Text 2 most likely respond to the writer's argument in Text 1?",
+ choices:["By fully agreeing that meal kits make households healthier overall.","By complicating the argument, noting that subscribers' other purchases may offset the kits' benefits.","By denying that meal kits contain balanced ingredients.","By arguing meal kits should be banned."],answer:1,
+ explanation:"Text 2's finding about increased processed-snack purchases directly complicates the claim that meal kits straightforwardly improve household eating.",
+ trap:"Choice C misstates Text 2, which doesn't dispute the kits' contents, only the broader shopping pattern around them."}
+];
+if(typeof module!=="undefined")module.exports=RW2_M1;
+const RW2_M2E = [
+{id:"rw2_m2e_01",domain:"CAS",skill:"Words in Context",difficulty:"E",
+ passage:"The kitten was so _______ that it hid under the couch the moment a stranger walked in.",
+ stem:"Which choice completes the text with the most logical word?",
+ choices:["bold","shy","hungry","loud"],answer:1,
+ explanation:"Hiding from a stranger matches \"shy.\"",
+ trap:"\"Bold\" is the opposite of hiding behavior."},
+{id:"rw2_m2e_02",domain:"CAS",skill:"Words in Context",difficulty:"E",
+ passage:"After winning the championship, the team received a _______ welcome from thousands of cheering fans at the airport.",
+ stem:"Which choice completes the text with the most logical word?",
+ choices:["hostile","tepid","triumphant","quiet"],answer:2,
+ explanation:"Thousands of cheering fans matches a \"triumphant\" welcome.",
+ trap:"\"Tepid\" (lukewarm) contradicts the enthusiastic crowd described."},
+{id:"rw2_m2e_03",domain:"CAS",skill:"Text Structure and Purpose",difficulty:"E",
+ passage:"The article first explains how solar panels convert sunlight into electricity, then describes three ways homeowners can reduce installation costs.",
+ stem:"What is the main purpose of the article's structure?",
+ choices:["To explain a process, then offer practical advice related to it.","To argue that solar panels are too expensive for most homes.","To compare solar and wind energy.","To describe the history of electricity."],answer:0,
+ explanation:"Moving from explaining a process to offering related practical advice matches choice A.",
+ trap:"Choice B isn't supported — the article offers cost-reduction tips, which suggests panels are attainable, not too expensive."},
+{id:"rw2_m2e_04",domain:"CAS",skill:"Cross-Text Connections",difficulty:"E",
+ passage:"Text 1: A coach claims that team scrimmages are the best way to prepare for games.\nText 2: A study of youth soccer teams found that teams doing more individual skill drills improved faster than teams doing mostly scrimmages.",
+ stem:"Based on the texts, how would the author of Text 2 most likely respond to the coach's claim in Text 1?",
+ choices:["By agreeing that scrimmages are the best preparation method.","By questioning the claim, since teams doing individual drills improved faster than scrimmage-focused teams.","By stating that practice does not matter.","By recommending teams stop scrimmaging entirely."],answer:1,
+ explanation:"Text 2's finding directly complicates the coach's claim by showing a different method led to faster improvement.",
+ trap:"Choice D overstates Text 2's finding — it shows drills were more effective, not that scrimmages should be eliminated."},
+{id:"rw2_m2e_05",domain:"INI",skill:"Central Ideas and Details",difficulty:"E",
+ passage:"A small town replaced its old paper library cards with a mobile app. Within six months, library visits from teenagers increased by 35%.",
+ stem:"Which choice best states the main idea of the text?",
+ choices:["The library closed due to low attendance.","Switching to a mobile app was associated with a rise in teen library visits.","Teenagers stopped using the library after the app launched.","The app was too complicated for most users."],answer:1,
+ explanation:"The text links the app switch to increased teen visits, matching choice B.",
+ trap:"Choice C directly contradicts the passage, which reports increased visits, not a stop in usage."},
+{id:"rw2_m2e_06",domain:"INI",skill:"Command of Evidence (quantitative)",difficulty:"E",
+ passage:"A gym owner claims that adding group fitness classes increased overall membership.",
+ stem:"Which finding, if true, would most directly support the gym owner's claim?",
+ choices:["Membership rose 22% in the six months after group classes were introduced, compared to flat growth the six months prior.","The gym repainted its walls last year.","Personal training sessions cost more than group classes.","The gym is open seven days a week."],answer:0,
+ explanation:"Choice A directly compares membership growth before and after the change, isolating the effect of the classes.",
+ trap:"Choice D describes gym hours, unrelated to membership growth or the classes."},
+{id:"rw2_m2e_07",domain:"INI",skill:"Command of Evidence (quantitative)",difficulty:"E",
+ passage:"A librarian claims that hosting free coding workshops increased teen library card sign-ups.",
+ stem:"Which finding, if true, would most directly support the librarian's claim?",
+ choices:["Teen library card sign-ups rose 50% during the months workshops were offered, compared to the same months the year before.","The library added new fiction titles this year.","Adult sign-ups stayed flat.","The workshops were held on Saturdays."],answer:0,
+ explanation:"Choice A shows a clear, comparable increase in exactly the metric the claim addresses.",
+ trap:"Choice C is about adults, not the teen sign-ups the claim is about."},
+{id:"rw2_m2e_08",domain:"INI",skill:"Inferences",difficulty:"E",
+ passage:"Every plant on the sunny side of the greenhouse grew twice as tall as plants on the shaded side, even though both groups received the same water and soil.",
+ stem:"Which choice most logically completes the text?",
+ choices:["sunlight exposure likely explains the difference in plant height.","the plants on the shaded side were a different species.","the greenhouse will be torn down soon.","watering schedules caused the height difference."],answer:0,
+ explanation:"With water and soil controlled for, sunlight exposure is the clear remaining explanation for the height difference.",
+ trap:"Choice D is directly contradicted by the passage, which states both groups received the same water."},
+{id:"rw2_m2e_09",domain:"SEC",skill:"Boundaries: commas in a series",difficulty:"E",
+ passage:"The bakery sells bread pastries and coffee every morning.",
+ stem:"Which choice completes the text with the most conventional punctuation?",
+ choices:["The bakery sells bread, pastries, and coffee every morning.","The bakery sells, bread pastries and coffee every morning.","The bakery sells bread, pastries and, coffee every morning.","The bakery sells bread pastries, and coffee, every morning."],answer:0,
+ explanation:"Each item in the three-part series needs a comma: bread, pastries, and coffee.",
+ trap:"Choice B places a comma right after the verb, incorrectly separating it from its object."},
+{id:"rw2_m2e_10",domain:"SEC",skill:"Verb tense",difficulty:"E",
+ passage:"Every Friday, the manager _______ the weekly schedule to all employees.",
+ stem:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+ choices:["sends","sent","sending","will have sent"],answer:0,
+ explanation:"\"Every Friday\" signals a habitual present action, requiring the simple present \"sends.\"",
+ trap:"\"Sent\" is past tense and doesn't match the repeated, ongoing routine described."},
+{id:"rw2_m2e_11",domain:"SEC",skill:"Subject-verb agreement",difficulty:"E",
+ passage:"The three kittens in the box _______ everyone who walks by smile.",
+ stem:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+ choices:["makes","make","is making","has made"],answer:1,
+ explanation:"\"Kittens\" is plural, so the plural verb \"make\" agrees.",
+ trap:"\"Makes\" is singular and doesn't agree with the plural subject \"kittens.\""},
+{id:"rw2_m2e_12",domain:"SEC",skill:"Sentence boundaries: fragments",difficulty:"E",
+ passage:"_______ the class finished the project a full week early.",
+ stem:"Which choice completes the text so that it forms a complete, correctly punctuated sentence?",
+ choices:["Working efficiently as a team,","Working efficiently as a team","The team working efficiently,","Because of working efficiently being"],answer:0,
+ explanation:"An introductory participial phrase requires a comma before the independent clause that follows.",
+ trap:"Choice B omits the required comma after the introductory phrase."},
+{id:"rw2_m2e_13",domain:"SEC",skill:"Modifier placement",difficulty:"E",
+ passage:"Thrilled about the acceptance letter, the celebration lasted all evening for the family.",
+ stem:"Which choice best revises the sentence to correct a dangling modifier?",
+ choices:["Thrilled about the acceptance letter, the family celebrated all evening.","The celebration, thrilled about the acceptance letter, lasted all evening for the family.","Thrilled about the acceptance letter, celebrating was done all evening by the family.","No change."],answer:0,
+ explanation:"The modifier must describe the people who are thrilled — only choice A places \"the family\" right after the comma.",
+ trap:"Choice B illogically describes the celebration as thrilled."},
+{id:"rw2_m2e_14",domain:"SEC",skill:"Boundaries: commas",difficulty:"E",
+ passage:"To catch the early train Priya left the house before sunrise.",
+ stem:"Which choice completes the text with the most conventional punctuation?",
+ choices:["To catch the early train, Priya left the house before sunrise.","To catch, the early train Priya left the house before sunrise.","To catch the early train, Priya left, the house before sunrise.","To catch the early train Priya, left the house before sunrise."],answer:0,
+ explanation:"A comma is needed after the introductory infinitive phrase \"To catch the early train.\"",
+ trap:"Choice D inserts a comma between the subject and its verb, which is never correct."},
+{id:"rw2_m2e_15",domain:"SEC",skill:"Parallel structure",difficulty:"E",
+ passage:"On weekends, she likes to hike, to read, and painting.",
+ stem:"Which choice best revises the underlined portion to maintain parallel structure?",
+ choices:["to paint","painting was enjoyable","she also paints","paints too"],answer:0,
+ explanation:"The list needs three parallel infinitive phrases: \"to hike,\" \"to read,\" and \"to paint.\"",
+ trap:"\"Painting was enjoyable\" breaks the parallel infinitive structure entirely with a full clause."},
+{id:"rw2_m2e_16",domain:"EOI",skill:"Transitions",difficulty:"E",
+ passage:"The farmers market opens at 8 a.m. _______, the grocery store across the street doesn't open until 10 a.m.",
+ stem:"Which choice completes the text with the most logical transition?",
+ choices:["In contrast","Similarly","As a result","In addition"],answer:0,
+ explanation:"The sentence contrasts two different opening times, so \"In contrast\" fits.",
+ trap:"\"Similarly\" would suggest the two times are alike, but they're actually different."},
+{id:"rw2_m2e_17",domain:"EOI",skill:"Transitions",difficulty:"E",
+ passage:"The town removed the old traffic light and installed a roundabout. _______, traffic accidents at the intersection dropped by half within a year.",
+ stem:"Which choice completes the text with the most logical transition?",
+ choices:["However","As a result","For example","In contrast"],answer:1,
+ explanation:"The roundabout installation directly led to fewer accidents, so \"As a result\" correctly signals cause and effect.",
+ trap:"\"However\" would suggest a contrast, but the sentence actually describes a direct consequence."},
+{id:"rw2_m2e_18",domain:"EOI",skill:"Rhetorical Synthesis",difficulty:"E",
+ passage:"A student has gathered the following notes:\n- The school's chess club started in 2020 with 6 members.\n- It now has 55 active members.\n- A 2023 survey found 70% of members said the club improved their focus in other classes.\n- The club meets twice a week after school.",
+ stem:"The student wants to highlight the club's impact on members. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+ choices:["The club started in 2020 with 6 members.","A 2023 survey found that 70% of members said the club improved their focus in other classes.","The club meets twice a week after school.","The club now has 55 active members."],answer:1,
+ explanation:"Only choice B states a measured impact on members (improved focus), matching the goal exactly.",
+ trap:"Choice D shows growth in size, not impact on members specifically."},
+{id:"rw2_m2e_19",domain:"EOI",skill:"Rhetorical Synthesis",difficulty:"E",
+ passage:"A student has gathered the following notes:\n- A city bike-share program launched in 2019 with 200 bikes.\n- It now has 1,500 bikes across 80 stations.\n- A 2022 study found bike-share users drove 15% fewer miles per week than non-users.\n- The program partners with local businesses for station sponsorships.",
+ stem:"The student wants to present a link between the bike-share program and reduced driving. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+ choices:["The program partners with local businesses for station sponsorships.","The program now has 1,500 bikes across 80 stations.","A 2022 study found that bike-share users drove 15% fewer miles per week than non-users.","The program launched in 2019 with 200 bikes."],answer:2,
+ explanation:"Only choice C directly links the program to reduced driving, matching the stated goal.",
+ trap:"Choice B shows program growth but not an effect on driving habits."},
+{id:"rw2_m2e_20",domain:"CAS",skill:"Words in Context",difficulty:"E",
+ passage:"The hikers were relieved to find the trail marker, since the dense fog had made the path almost _______.",
+ stem:"Which choice completes the text with the most logical word?",
+ choices:["obvious","invisible","colorful","short"],answer:1,
+ explanation:"Dense fog obscuring the path matches \"invisible.\"",
+ trap:"\"Obvious\" contradicts the relief described, which implies the path was hard to see."},
+{id:"rw2_m2e_21",domain:"INI",skill:"Central Ideas and Details",difficulty:"E",
+ passage:"A hospital introduced a new checklist before surgeries. In the following year, post-surgery complications dropped by 18%.",
+ stem:"Which choice best states the main idea of the text?",
+ choices:["Surgeries became more expensive after the checklist was introduced.","Introducing a pre-surgery checklist was associated with fewer post-surgery complications.","The hospital stopped performing surgeries.","The checklist had no effect on patient outcomes."],answer:1,
+ explanation:"The text links the checklist to reduced complications, matching choice B.",
+ trap:"Choice D directly contradicts the passage, which reports an 18% drop in complications."},
+{id:"rw2_m2e_22",domain:"SEC",skill:"Subject-verb agreement",difficulty:"E",
+ passage:"The box of old photographs _______ stored in the attic for decades.",
+ stem:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+ choices:["were","was","have been","are"],answer:1,
+ explanation:"The subject is the singular \"box,\" not the plural \"photographs,\" so \"was\" agrees.",
+ trap:"\"Were\" incorrectly agrees with the nearby plural noun \"photographs\" instead of the true subject \"box.\""},
+{id:"rw2_m2e_23",domain:"CAS",skill:"Text Structure and Purpose",difficulty:"E",
+ passage:"The blog post opens by describing one family's struggle with high energy bills, then explains how home insulation upgrades can lower costs.",
+ stem:"What is the main purpose of the post's structure?",
+ choices:["To use a relatable example to introduce a practical solution.","To argue that energy bills cannot be reduced.","To compare two unrelated home renovation projects.","To describe the history of home insulation."],answer:0,
+ explanation:"Opening with a relatable struggle before offering a solution matches choice A.",
+ trap:"Choice B is contradicted by the post's structure, which offers a solution rather than claiming costs can't be reduced."},
+{id:"rw2_m2e_24",domain:"EOI",skill:"Transitions",difficulty:"E",
+ passage:"The new bakery uses only locally sourced flour. _______, its prices are noticeably higher than those of chain bakeries nearby.",
+ stem:"Which choice completes the text with the most logical transition?",
+ choices:["Similarly","However","For example","In addition"],answer:1,
+ explanation:"The sentence contrasts a quality feature with a downside (higher prices), which \"However\" signals.",
+ trap:"\"In addition\" would suggest the price point simply adds another positive detail, but it's actually presented as a drawback."},
+{id:"rw2_m2e_25",domain:"SEC",skill:"Verb tense",difficulty:"E",
+ passage:"Last night, the storm _______ several trees along Main Street.",
+ stem:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+ choices:["knocks down","knocked down","knocking down","will knock down"],answer:1,
+ explanation:"\"Last night\" signals a completed past action, requiring the past-tense \"knocked down.\"",
+ trap:"\"Knocks down\" is present tense and doesn't match the past-time signal \"last night.\""},
+{id:"rw2_m2e_26",domain:"INI",skill:"Command of Evidence (quantitative)",difficulty:"E",
+ passage:"A teacher claims that allowing students to choose their own reading books increased how much they read overall.",
+ stem:"Which finding, if true, would most directly support the teacher's claim?",
+ choices:["Average pages read per week rose from 40 to 85 after students were allowed to choose their own books.","The school library added new shelving this year.","Students prefer fiction over nonfiction.","The reading period is 30 minutes long."],answer:0,
+ explanation:"Choice A directly compares reading volume before and after the change, isolating the effect of student choice.",
+ trap:"Choice C is a preference detail, not evidence about how much students read overall."},
+{id:"rw2_m2e_27",domain:"EOI",skill:"Rhetorical Synthesis",difficulty:"E",
+ passage:"A student has gathered the following notes:\n- A community garden started composting food scraps in 2021.\n- The garden diverts about 3,000 pounds of food waste from landfills yearly.\n- Garden yields increased 20% after switching to compost-based soil.\n- The garden hosts monthly workshops on composting.",
+ stem:"The student wants to show a benefit of composting for the garden itself, not just the environment. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+ choices:["The garden diverts about 3,000 pounds of food waste from landfills yearly.","Garden yields increased 20% after switching to compost-based soil.","The garden hosts monthly workshops on composting.","The garden started composting food scraps in 2021."],answer:1,
+ explanation:"Only choice B shows a benefit to the garden itself (higher yields), matching the specific goal.",
+ trap:"Choice A is an environmental benefit, not a benefit to the garden's own productivity as the goal requires."}
+];
+if(typeof module!=="undefined")module.exports=RW2_M2E;
+const RW2_M2H = [
+{id:"rw2_m2h_01",domain:"CAS",skill:"Words in Context",difficulty:"H",
+ passage:"The board's decision to approve the merger despite unanimous employee opposition struck many analysts as _______, given the company's public commitment to collaborative governance.",
+ stem:"Which choice completes the text with the most logical and precise word?",
+ choices:["consistent","incongruous","predictable","transparent"],answer:1,
+ explanation:"\"Incongruous\" (not fitting, out of harmony) precisely captures the mismatch between the decision and the company's stated values.",
+ trap:"\"Predictable\" is nearly the opposite of the surprise implied by acting against a stated commitment."},
+{id:"rw2_m2h_02",domain:"CAS",skill:"Words in Context",difficulty:"H",
+ passage:"Rather than confronting the allegation directly, the spokesperson offered a _______ statement that neither confirmed nor denied the claim, leaving reporters with more questions than answers.",
+ stem:"Which choice completes the text with the most logical and precise word?",
+ choices:["candid","evasive","damning","conclusive"],answer:1,
+ explanation:"\"Evasive\" precisely fits a statement designed to avoid confirming or denying, matching \"leaving reporters with more questions.\"",
+ trap:"\"Conclusive\" is the opposite of a statement that leaves questions unanswered."},
+{id:"rw2_m2h_03",domain:"CAS",skill:"Text Structure and Purpose",difficulty:"H",
+ passage:"The historian spends most of the chapter documenting a king's military failures in exhaustive detail, only to argue in the final pages that these very failures forced administrative reforms that stabilized the kingdom for a century.",
+ stem:"Which choice best describes the function of the chapter's structure?",
+ choices:["It uses an extended account of failure to set up a reframing of that failure as historically productive.","It proves the king was an entirely incompetent ruler.","It presents two unrelated historical episodes for comparison.","It argues that military failure always leads to stronger institutions."],answer:0,
+ explanation:"The build-up of documented failure followed by a reframing of its long-term significance is a classic setup-and-reveal structure, matching choice A.",
+ trap:"Choice D overgeneralizes a specific historical claim about one kingdom into a universal rule the text never asserts."},
+{id:"rw2_m2h_04",domain:"CAS",skill:"Cross-Text Connections",difficulty:"H",
+ passage:"Text 1: An economist argues that rent control policies primarily benefit long-term tenants at the direct expense of housing supply, since developers build less in rent-controlled markets.\nText 2: A comparative study of twelve cities found no consistent relationship between rent control policies and new housing construction rates, with several rent-controlled cities building more housing than comparable uncontrolled cities during the same period.",
+ stem:"Based on the texts, how would the author of Text 2 most likely respond to the economist's argument in Text 1?",
+ choices:["By fully endorsing the claim that rent control reduces housing supply.","By questioning the argument, since the twelve-city data showed no consistent supply relationship.","By denying that rent control benefits long-term tenants.","By arguing all cities should adopt rent control immediately."],answer:1,
+ explanation:"Text 2's finding — no consistent relationship, with some rent-controlled cities building more — directly complicates the economist's causal claim about supply.",
+ trap:"Choice C misstates Text 2, which doesn't address tenant benefits, only the supply-side claim."},
+{id:"rw2_m2h_05",domain:"INI",skill:"Command of Evidence (quantitative)",difficulty:"H",
+ passage:"A public health researcher claims that a city's needle-exchange program reduced disease transmission specifically by increasing contact with health services, not merely by providing clean needles.",
+ stem:"Which finding, if true, would most directly support the researcher's claim?",
+ choices:["Disease transmission fell 30%, and the decline was concentrated among participants who also attended at least one health screening offered at exchange sites.","Disease transmission fell 30% among program participants overall.","The program distributed twice as many needles this year as last year.","The program operates in five locations citywide."],answer:0,
+ explanation:"The claim distinguishes between two mechanisms. Choice A isolates health-service contact as the driver by showing the decline concentrated among those who used screenings, directly supporting the specific claim.",
+ trap:"Choice B shows an overall effect but doesn't distinguish between the two competing explanations the claim addresses."},
+{id:"rw2_m2h_06",domain:"INI",skill:"Inferences",difficulty:"H",
+ passage:"Archaeologists excavating a medieval trading post found that pottery styles from a distant region appeared abruptly in one layer, fully formed and technically sophisticated, with no simpler transitional examples in earlier layers. Written records from a nearby port note the arrival of a large merchant fleet in the same period.",
+ stem:"Which choice most logically completes the text?",
+ choices:["the pottery was likely brought by traders rather than developed locally through gradual innovation.","local potters independently invented the same techniques by coincidence.","the merchant fleet had no connection to the trading post.","the pottery styles predate the founding of the trading post."],answer:0,
+ explanation:"The abrupt, fully formed appearance with no transitional examples, combined with recorded fleet arrival, most directly supports import via trade rather than local, gradual development.",
+ trap:"Choice B proposes an unsupported coincidence when a simpler, evidence-backed explanation (trade) is available."},
+{id:"rw2_m2h_07",domain:"INI",skill:"Central Ideas and Details",difficulty:"H",
+ passage:"A ten-year audit of a state's job-training grants found that programs requiring participants to complete a paid apprenticeship component had a 68% job-placement rate one year after completion, compared to 34% for programs offering classroom instruction alone — despite both program types receiving comparable per-participant funding.",
+ stem:"Which choice best states the main idea of the text?",
+ choices:["Classroom instruction is not a valuable part of job training.","Programs with a paid apprenticeship component were associated with substantially higher job placement than classroom-only programs, despite similar funding.","Funding levels were the primary factor determining placement rates.","All job-training programs in the state failed to produce results."],answer:1,
+ explanation:"The text's central comparison is placement rates by program structure, explicitly noting comparable funding to isolate program design as the key variable — matching choice B.",
+ trap:"Choice C is directly contradicted by the passage's point that funding was comparable across both groups."},
+{id:"rw2_m2h_08",domain:"SEC",skill:"Boundaries: colon vs. semicolon",difficulty:"H",
+ passage:"The audit revealed a troubling pattern _______ three consecutive quarters showed unexplained discrepancies in the same account.",
+ stem:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+ choices:[":",";",", ",  " — and"],answer:0,
+ explanation:"A colon correctly introduces an explanation of the preceding independent clause (\"revealed a troubling pattern\").",
+ trap:"A semicolon requires two independent clauses in a balanced relationship, not one clause explaining another — a colon is the more precise choice."},
+{id:"rw2_m2h_09",domain:"SEC",skill:"Parallel structure",difficulty:"H",
+ passage:"The report was criticized for relying on outdated data, ignoring dissenting expert opinions, and it also failed to disclose its funding sources.",
+ stem:"Which choice best revises the underlined portion to maintain parallel structure?",
+ choices:["failing to disclose its funding sources","it failed to disclose its funding sources","a failure to disclose its funding sources occurred","its funding sources were not disclosed"],answer:0,
+ explanation:"The list needs three parallel gerund phrases: \"relying,\" \"ignoring,\" and \"failing.\" Only choice A matches this pattern.",
+ trap:"Choice D introduces a passive construction that breaks the parallel active-gerund pattern of the list."},
+{id:"rw2_m2h_10",domain:"SEC",skill:"Modifier placement",difficulty:"H",
+ passage:"Originally intended as a temporary shelter, the building's use as permanent housing surprised the architects who designed it decades earlier.",
+ stem:"Which choice best revises the sentence to correct a misplaced modifier?",
+ choices:["Originally intended as a temporary shelter, the architects who designed the building decades earlier were surprised by its use as permanent housing.","The architects who designed the building decades earlier, originally intending it as a temporary shelter, were surprised by its use as permanent housing.","Originally intended as a temporary shelter, the building surprised the architects who designed it decades earlier by becoming permanent housing.","No change."],answer:2,
+ explanation:"The modifier \"Originally intended as a temporary shelter\" must describe \"the building,\" not the architects — choice C keeps \"the building\" as the subject immediately following the modifier while remaining logically clear.",
+ trap:"Choice A illogically attaches the modifier to \"the architects,\" who were not what was intended as a shelter."},
+{id:"rw2_m2h_11",domain:"SEC",skill:"Subject-verb agreement",difficulty:"H",
+ passage:"Neither the auditor's findings nor the board's own internal review _______ able to account for the missing funds.",
+ stem:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+ choices:["were","was","have been","are"],answer:1,
+ explanation:"With \"neither...nor,\" the verb agrees with the nearer subject, the singular \"review,\" so \"was\" is correct.",
+ trap:"\"Were\" incorrectly agrees with the farther, plural subject \"findings\" instead of the nearer singular \"review.\""},
+{id:"rw2_m2h_12",domain:"EOI",skill:"Transitions",difficulty:"H",
+ passage:"The pilot program's early results showed a measurable drop in emergency room visits among enrolled patients. _______, a closer analysis revealed that enrolled patients were, on average, younger and healthier than the general patient population, raising questions about whether the program itself drove the improvement.",
+ stem:"Which choice completes the text with the most logical transition?",
+ choices:["However","Similarly","For instance","As a result"],answer:0,
+ explanation:"The second sentence complicates the promising early finding with a confounding factor — a contrast best signaled by \"However.\"",
+ trap:"\"As a result\" would wrongly suggest the demographic finding was caused by the emergency-room results, rather than being a separate complicating factor."},
+{id:"rw2_m2h_13",domain:"EOI",skill:"Transitions",difficulty:"H",
+ passage:"Proponents of the zoning change argue it will increase affordable housing by allowing smaller lot sizes. Opponents counter that smaller lots typically produce higher-priced units due to increased construction costs per square foot. _______, both sides agree that the change's actual effect will depend heavily on which incentives accompany it.",
+ stem:"Which choice completes the text with the most logical transition?",
+ choices:["Nonetheless","Consequently","For instance","Specifically"],answer:0,
+ explanation:"Despite their disagreement, the two sides converge on one point — \"Nonetheless\" signals this concession despite the preceding contrast.",
+ trap:"\"Consequently\" would incorrectly imply the agreement is a direct result of the opponents' point rather than a shared conclusion reached despite disagreement."},
+{id:"rw2_m2h_14",domain:"EOI",skill:"Rhetorical Synthesis",difficulty:"H",
+ passage:"A student has gathered the following notes:\n- A regional dialect survey recorded speech from 250 residents across four towns.\n- Researchers found a distinctive consonant shift only among residents under 30.\n- The shift was absent in recordings from the same towns made 30 years earlier.\n- Researchers note the towns began sharing a single high school via consolidation 12 years ago.",
+ stem:"The student wants to suggest a possible cause for the consonant shift while acknowledging it is not proven. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+ choices:["The consonant shift appeared only among residents under 30, and researchers note the towns began sharing a high school 12 years ago, a possible but unconfirmed influence.","Researchers recorded speech from 250 residents across four towns.","The shift was absent in recordings made 30 years earlier.","The four towns are located in the same region."],answer:0,
+ explanation:"Only choice A both names a plausible cause (school consolidation) and explicitly hedges it as \"possible but unconfirmed,\" matching the exact goal.",
+ trap:"Choice C provides relevant supporting detail but never proposes a cause, which is the actual goal."},
+{id:"rw2_m2h_15",domain:"EOI",skill:"Rhetorical Synthesis",difficulty:"H",
+ passage:"A student has gathered the following notes:\n- A hospital piloted a new medication-reconciliation process in 2022.\n- Prescription errors at discharge dropped 24% in the pilot unit within four months.\n- Patient readmission rates in the pilot unit fell slightly, from 14% to 12%.\n- The process was developed with input from hospital pharmacists.",
+ stem:"The student wants to argue that the process's benefits extended beyond reducing prescription errors alone. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+ choices:["The process was developed with input from hospital pharmacists.","Prescription errors at discharge dropped 24% in the pilot unit within four months.","Beyond cutting prescription errors by 24%, the pilot unit also saw readmission rates fall from 14% to 12%.","The process was piloted in 2022."],answer:2,
+ explanation:"Only choice C explicitly connects the prescription-error reduction to an additional benefit (readmissions), directly matching the \"beyond\" requirement of the goal.",
+ trap:"Choice B reports only the prescription-error result, missing the \"beyond that\" requirement of the stated goal."},
+{id:"rw2_m2h_16",domain:"INI",skill:"Command of Evidence (quantitative)",difficulty:"H",
+ passage:"A transportation researcher argues that a city's new bike-share expansion reduced car commuting mainly by making short trips more convenient, not simply by lowering costs.",
+ stem:"Which finding, if true, would most directly support the researcher's claim?",
+ choices:["Car-commute reductions were concentrated among trips under two miles, even in neighborhoods where bike-share pricing was unchanged.","Bike-share membership fees decreased by 15% citywide.","Total bike-share ridership doubled after the expansion.","The city added 200 new bike-share stations."],answer:0,
+ explanation:"The claim distinguishes convenience from cost as the driver. Choice A shows the effect concentrated on short trips even where price didn't change, isolating convenience as the cause.",
+ trap:"Choice C shows a related effect (ridership) but doesn't distinguish between the two competing explanations the claim addresses."},
+{id:"rw2_m2h_17",domain:"SEC",skill:"Sentence boundaries: comma splice",difficulty:"H",
+ passage:"The negotiations continued for weeks, neither delegation would budge on the central demand.",
+ stem:"Which choice best corrects the underlined portion?",
+ choices:["weeks; neither delegation would budge","weeks, and neither delegation would budge","weeks neither delegation would budge","weeks, neither delegation, would budge"],answer:0,
+ explanation:"The original is a comma splice joining two independent clauses. A semicolon correctly joins them without a conjunction.",
+ trap:"Choice C removes the comma entirely, creating a run-on sentence rather than fixing the splice."},
+{id:"rw2_m2h_18",domain:"CAS",skill:"Words in Context",difficulty:"H",
+ passage:"The novelist's prose, often praised for its _______, could shift from sparse, one-word sentences to sprawling, clause-laden paragraphs within the same chapter.",
+ stem:"Which choice completes the text with the most logical and precise word?",
+ choices:["monotony","versatility","brevity","obscurity"],answer:1,
+ explanation:"The ability to shift between very different styles within one chapter is precisely what \"versatility\" describes.",
+ trap:"\"Brevity\" only captures one of the two contrasting styles mentioned, missing the sprawling paragraphs."},
+{id:"rw2_m2h_19",domain:"INI",skill:"Inferences",difficulty:"H",
+ passage:"Engineers testing a new alloy found that samples cooled rapidly in water were significantly more brittle than samples cooled slowly in air, even though both sets had identical chemical composition. Metallurgical records show rapid cooling typically produces a finer internal crystal structure.",
+ stem:"Which choice most logically completes the text?",
+ choices:["the finer crystal structure produced by rapid cooling likely contributes to the increased brittleness observed.","chemical composition is the primary factor determining an alloy's brittleness.","the water-cooled samples were contaminated during testing.","slow cooling always produces stronger materials in every alloy."],answer:0,
+ explanation:"With composition held constant, the cooling-rate-linked difference in crystal structure is the clear remaining explanation for the brittleness difference.",
+ trap:"Choice D overgeneralizes a specific finding about one alloy into a universal claim the passage never makes."},
+{id:"rw2_m2h_20",domain:"SEC",skill:"Boundaries: semicolon with conjunctive adverb",difficulty:"H",
+ passage:"The prototype met every performance benchmark _______ the review board still requested additional safety testing before approval.",
+ stem:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+ choices:["; nevertheless,","; nevertheless","nevertheless,",", nevertheless"],answer:0,
+ explanation:"A semicolon correctly joins two independent clauses, and the conjunctive adverb \"nevertheless\" is followed by a comma.",
+ trap:"Choice D uses only a comma before \"nevertheless,\" which is insufficient to join two independent clauses and creates a comma splice."},
+{id:"rw2_m2h_21",domain:"CAS",skill:"Text Structure and Purpose",difficulty:"H",
+ passage:"The critic devotes the opening section to a detailed, sympathetic account of the director's early struggles to secure funding, then pivots in a single sharp paragraph to argue that this same scrappy resourcefulness ultimately produced the film's most significant flaws.",
+ stem:"Which choice best describes the function of the review's structure?",
+ choices:["It builds sympathy through an extended account before undermining it with a sharper, more consequential critique.","It presents two equally weighted, unrelated opinions about the director.","It disproves the claim that the director struggled to secure funding.","It summarizes the plot before offering technical analysis."],answer:0,
+ explanation:"The extended sympathetic account followed by a shorter but structurally emphasized critique is a classic build-up-then-pivot structure, matching choice A.",
+ trap:"Choice C misreads the structure — the critic never disputes the funding struggles, only their ultimate consequence for the film."},
+{id:"rw2_m2h_22",domain:"INI",skill:"Central Ideas and Details",difficulty:"H",
+ passage:"A longitudinal study tracking 500 small businesses over fifteen years found that firms that invested in employee training during economic downturns had a 41% survival rate five years later, compared to 19% for firms that cut training budgets during the same downturns — even though both groups faced comparable revenue declines.",
+ stem:"Which choice best states the main idea of the text?",
+ choices:["Cutting costs during downturns is always the safest strategy.","Firms that maintained training investment during downturns had notably higher survival rates than those that cut training, despite similar revenue pressures.","Revenue decline was the sole determinant of business survival.","Employee training has no measurable effect on business outcomes."],answer:1,
+ explanation:"The text's central comparison is survival rates by training strategy during downturns, explicitly noting comparable revenue pressure to isolate training as the key variable.",
+ trap:"Choice C is directly contradicted by the passage's point that revenue declines were comparable across both groups."},
+{id:"rw2_m2h_23",domain:"EOI",skill:"Transitions",difficulty:"H",
+ passage:"The city's new stormwater management system was projected to reduce flooding in the historic district by 60%. _______, the first major storm after installation caused flooding nearly identical in severity to storms before the system was built.",
+ stem:"Which choice completes the text with the most logical transition?",
+ choices:["Instead","Similarly","Therefore","Specifically"],answer:0,
+ explanation:"The sentence describes an outcome that directly contradicts the projection, which \"Instead\" appropriately signals.",
+ trap:"\"Therefore\" would incorrectly suggest the flooding was a logical consequence of the projection, rather than a contradiction of it."},
+{id:"rw2_m2h_24",domain:"SEC",skill:"Parallel structure",difficulty:"H",
+ passage:"The grant reviewers praised the proposal for identifying an underserved population, outlining measurable outcomes, and it also included a realistic implementation timeline.",
+ stem:"Which choice best revises the underlined portion to maintain parallel structure?",
+ choices:["including a realistic implementation timeline","it included a realistic implementation timeline","a realistic implementation timeline was included","the inclusion of a realistic implementation timeline"],answer:0,
+ explanation:"The list requires three parallel gerund phrases: \"identifying,\" \"outlining,\" and \"including.\" Only choice A matches this pattern.",
+ trap:"Choice B reintroduces a full independent clause, breaking the parallel gerund list."},
+{id:"rw2_m2h_25",domain:"CAS",skill:"Cross-Text Connections",difficulty:"H",
+ passage:"Text 1: A sociologist argues that declining church attendance in a region primarily reflects growing secularism among younger generations.\nText 2: A demographic study found attendance decline correlated more strongly with increased average commute times and Sunday retail employment than with any measured shift in stated religious belief.",
+ stem:"Based on the texts, how would the author of Text 2 most likely respond to the sociologist's argument in Text 1?",
+ choices:["By fully endorsing secularism as the primary cause.","By suggesting practical scheduling factors, rather than belief change, more strongly explain the decline.","By denying that church attendance has declined at all.","By arguing religious belief is no longer relevant to sociology."],answer:1,
+ explanation:"Text 2's stronger correlation with commute times and work schedules, rather than belief measures, directly complicates the secularism-focused explanation.",
+ trap:"Choice C misstates Text 2, which confirms the decline occurred — it just disputes the proposed cause."},
+{id:"rw2_m2h_26",domain:"SEC",skill:"Modifier placement",difficulty:"H",
+ passage:"Trained extensively in classical technique, the jazz improvisations of the pianist surprised critics who expected a more rigid style.",
+ stem:"Which choice best revises the sentence to correct a misplaced modifier?",
+ choices:["Trained extensively in classical technique, the pianist surprised critics who expected a more rigid style with her jazz improvisations.","The jazz improvisations, trained extensively in classical technique, surprised critics who expected a more rigid style.","Trained extensively in classical technique, critics who expected a more rigid style were surprised by the pianist's jazz improvisations.","No change."],answer:0,
+ explanation:"The modifier \"Trained extensively in classical technique\" must describe \"the pianist,\" not her improvisations — only choice A places \"the pianist\" immediately after the comma.",
+ trap:"Choice C illogically attaches the modifier to \"critics,\" who were not the ones trained in classical technique."},
+{id:"rw2_m2h_27",domain:"INI",skill:"Command of Evidence (quantitative)",difficulty:"H",
+ passage:"An economist argues that a state's new tax credit for electric vehicles increased adoption mainly by shifting the timing of planned purchases, not by expanding the overall pool of buyers.",
+ stem:"Which finding, if true, would most directly support the economist's claim?",
+ choices:["EV sales rose sharply the month the credit took effect but fell below the pre-credit trend for the following eighteen months, with cumulative three-year sales similar to projections without the credit.","EV sales rose sharply the month the credit took effect and remained elevated for the following three years.","Total vehicle sales in the state increased by 5% after the credit was introduced.","The credit was worth $7,500 per vehicle."],answer:0,
+ explanation:"The claim is about timing-shift versus genuine pool expansion. Choice A shows a spike followed by a below-trend dip that washes out over time, directly supporting a timing-shift rather than expansion explanation.",
+ trap:"Choice B would actually support the opposite conclusion — sustained elevated sales would suggest genuine pool expansion, not simply shifted timing."}
+];
+if(typeof module!=="undefined")module.exports=RW2_M2H;
+
+const PT_TESTS={
+  rw:[
+    {label:"Test 1",m1:()=>RW_M1,m2e:()=>RW_M2E,m2h:()=>RW_M2H},
+    {label:"Test 2",m1:()=>RW2_M1,m2e:()=>RW2_M2E,m2h:()=>RW2_M2H}
+  ],
+  math:[
+    {label:"Test 1",m1:()=>MATH_M1,m2e:()=>MATH_M2E,m2h:()=>MATH_M2H},
+    {label:"Test 2",m1:()=>MATH2_M1,m2e:()=>MATH2_M2E,m2h:()=>MATH2_M2H}
+  ]
+};
 const PT_SUBJECTS={
   rw:{
     label:"Reading & Writing",
-    m1:()=>RW_M1, m2e:()=>RW_M2E, m2h:()=>RW_M2H,
+    m1:(tn)=>PT_TESTS.rw[(tn||1)-1].m1(), m2e:(tn)=>PT_TESTS.rw[(tn||1)-1].m2e(), m2h:(tn)=>PT_TESTS.rw[(tn||1)-1].m2h(),
+    testCount:()=>PT_TESTS.rw.length,
     refCount:27, refSeconds:32*60,
     domainLabel:{INI:"Information & Ideas",CAS:"Craft & Structure",SEC:"Standard English Conventions",EOI:"Expression of Ideas"},
     section:(q)=>({INI:"Reading",CAS:"Reading",SEC:"Writing",EOI:"Writing"}[q.domain]),
@@ -7290,7 +8250,8 @@ const PT_SUBJECTS={
   },
   math:{
     label:"Math",
-    m1:()=>MATH_M1, m2e:()=>MATH_M2E, m2h:()=>MATH_M2H,
+    m1:(tn)=>PT_TESTS.math[(tn||1)-1].m1(), m2e:(tn)=>PT_TESTS.math[(tn||1)-1].m2e(), m2h:(tn)=>PT_TESTS.math[(tn||1)-1].m2h(),
+    testCount:()=>PT_TESTS.math.length,
     refCount:22, refSeconds:35*60,
     domainLabel:{AL:"Algebra",AM:"Advanced Math",PSD:"Problem-Solving & Data Analysis",GT:"Geometry & Trigonometry"},
     section:()=>"Math",
@@ -7301,25 +8262,27 @@ const PT_SUBJECTS={
 
 let ptState=null;
 
-function ptQuestionsFor(track,subject){const S=PT_SUBJECTS[subject];return track==='hard'?S.m2h():S.m2e()}
+function ptQuestionsFor(track,subject,testNum){const S=PT_SUBJECTS[subject];return track==='hard'?S.m2h(testNum):S.m2e(testNum)}
 
 function ptModuleSeconds(count,subject){const S=PT_SUBJECTS[subject||(ptState&&ptState.subject)||'rw'];return Math.round(count*(S.refSeconds/S.refCount))}
 
-function ptStart(subject){
+function ptStart(subject,testNum){
   if(!subject){ptRenderModePicker();return}
-  if(ptState){if(!confirm('A test is already in progress. Discard it and start over?'))return}
   const S=PT_SUBJECTS[subject];
+  if(!testNum){if(S.testCount()>1){ptRenderTestPicker(subject);return}testNum=1}
+  if(ptState){if(!confirm('A test is already in progress. Discard it and start over?'))return}
   ptState={
     subject,
+    testNum,
     module:1,
     track:null,
-    questions:[...S.m1()],
+    questions:[...S.m1(testNum)],
     idx:0,
     answers:{},
     flags:{},
     timeSpent:{},
     qStartTs:Date.now(),
-    secondsLeft:ptModuleSeconds(S.m1().length,subject),
+    secondsLeft:ptModuleSeconds(S.m1(testNum).length,subject),
     module1Correct:0,
     module2Correct:0,
     timerId:null,
@@ -7328,6 +8291,29 @@ function ptStart(subject){
   document.getElementById('ptOverlay').classList.add('show');
   document.body.style.overflow='hidden';
   ptRenderScreen('intro');
+}
+
+function ptRenderTestPicker(subject){
+  document.getElementById('ptOverlay').classList.add('show');
+  document.getElementById('ptHeader').style.display='none';
+  document.body.style.overflow='hidden';
+  const S=PT_SUBJECTS[subject];
+  const root=document.getElementById('ptBody');
+  root.innerHTML=`
+  <div class="pt-intro">
+    <div class="pt-intro-badge">${S.label.toUpperCase()}</div>
+    <h2>Choose a test</h2>
+    <p>Each test has its own original 27/27/27 (R&W) or 22/22/22 (Math) question set — same adaptive structure, different questions.</p>
+    <div class="pt-mode-picker">
+      ${PT_TESTS[subject].map((t,i)=>`
+      <div class="pt-mode-card" onclick="ptStart('${subject}',${i+1})">
+        <div class="pt-mode-tag">${t.m1().length+t.m2e().length} QUESTIONS</div>
+        <div class="pt-mode-name">${esc(t.label)}</div>
+        <div class="pt-mode-desc">Module 1 fixed, Module 2 adapts to your performance.</div>
+      </div>`).join('')}
+    </div>
+    <button class="btn btn-secondary" style="margin-top:20px" onclick="ptExit()">Cancel</button>
+  </div>`;
 }
 
 function ptRenderModePicker(){
@@ -7426,7 +8412,7 @@ function ptSubmitModule(auto){
 
 function ptBeginModule2(){
   ptState.module=2;
-  ptState.questions=[...ptQuestionsFor(ptState.track,ptState.subject)];
+  ptState.questions=[...ptQuestionsFor(ptState.track,ptState.subject,ptState.testNum)];
   ptState.idx=0;
   ptState.secondsLeft=ptModuleSeconds(ptState.questions.length,ptState.subject);
   ptBeginModule();
@@ -7464,7 +8450,7 @@ function ptScaleScore(raw,total,track){
 function ptFinishTest(){
   const subject=ptState.subject;
   const S=PT_SUBJECTS[subject];
-  const m1Q=S.m1(), m2Q=ptQuestionsFor(ptState.track,subject);
+  const m1Q=S.m1(ptState.testNum), m2Q=ptQuestionsFor(ptState.track,subject,ptState.testNum);
   const allQ=[...m1Q,...m2Q];
   const allAns={...ptState.m1Answers,...ptState.answers};
   const raw=ptState.module1Correct+ptState.module2Correct;
@@ -7509,7 +8495,7 @@ function ptFinishTest(){
   });
 
   const run={
-    id:'pr_'+Date.now(),date:todayISO(),subject,
+    id:'pr_'+Date.now(),date:todayISO(),subject,testNum:ptState.testNum,
     raw,total,scaled,track:ptState.track,
     module1Correct:ptState.module1Correct,module1Total:m1Q.length,
     module2Correct:ptState.module2Correct,module2Total:m2Q.length,
@@ -7556,11 +8542,11 @@ function ptRenderScreen(kind){
 
 function ptIntroHtml(){
   const S=PT_SUBJECTS[ptState.subject];
-  const m1=S.m1(),m2e=S.m2e();
+  const m1=S.m1(ptState.testNum),m2e=S.m2e(ptState.testNum);
   return`
   <div class="pt-intro">
-    <div class="pt-intro-badge">${S.label.toUpperCase()} · ADAPTIVE</div>
-    <h2>Practice Test — ${S.label}</h2>
+    <div class="pt-intro-badge">${S.label.toUpperCase()} · TEST ${ptState.testNum} · ADAPTIVE</div>
+    <h2>Practice Test — ${S.label} (Test ${ptState.testNum})</h2>
     <p>This is a <strong>module-adaptive</strong> test, same structure as the real digital SAT: Module 1 is fixed difficulty. Your Module 1 performance determines whether you get an easier or harder Module 2 — and your Module 2 difficulty affects your score ceiling, exactly like Bluebook.</p>
     <div class="pt-intro-grid">
       <div><div class="pt-intro-num">${m1.length}</div><div class="pt-intro-label">Module 1 questions</div></div>
@@ -7580,7 +8566,7 @@ function ptQuestionHtml(){
   const letters=['A','B','C','D'];
   const sel=ptState.answers[q.id];
   const hdr=document.getElementById('ptHeader');
-  if(hdr)hdr.querySelector('.pt-mod-label').textContent=`${S.label} · Module ${ptState.module}${ptState.module===2?' ('+(ptState.track==='hard'?'Harder':'Easier')+')':''}`;
+  if(hdr)hdr.querySelector('.pt-mod-label').textContent=`${S.label} T${ptState.testNum} · Module ${ptState.module}${ptState.module===2?' ('+(ptState.track==='hard'?'Harder':'Easier')+')':''}`;
   const timerEl=document.getElementById('ptTimer');
   if(timerEl)timerEl.textContent=ptFmtTime(ptState.secondsLeft);
   return`
@@ -7662,9 +8648,10 @@ function ptResultsHtml(){
 let dqState=null;
 
 function ptDrillPool(subject){
-  const S=PT_SUBJECTS[subject];
-  return [...S.m1(),...S.m2e(),...S.m2h()].map((q,i)=>({...q,_k:i})).sort(()=>Math.random()-0.5);
+  const pool=PT_TESTS[subject].flatMap(t=>[...t.m1(),...t.m2e(),...t.m2h()]);
+  return pool.map((q,i)=>({...q,_k:i})).sort(()=>Math.random()-0.5);
 }
+function ptDrillPoolSize(subject){return PT_TESTS[subject].reduce((a,t)=>a+t.m1().length+t.m2e().length+t.m2h().length,0)}
 
 function ptStartDrill(subject){
   if(!subject){ptRenderDrillModePicker();return}
@@ -7687,12 +8674,12 @@ function ptRenderDrillModePicker(){
     <p>Untimed, instant feedback after every question — good for warm-ups or targeted review.</p>
     <div class="pt-mode-picker">
       <div class="pt-mode-card" onclick="ptStartDrill('rw')">
-        <div class="pt-mode-tag">${RW_M1.length+RW_M2E.length+RW_M2H.length} QUESTIONS</div>
+        <div class="pt-mode-tag">${ptDrillPoolSize('rw')} QUESTIONS</div>
         <div class="pt-mode-name">Reading &amp; Writing</div>
         <div class="pt-mode-desc">Mixed difficulty, all four domains, shuffled.</div>
       </div>
       <div class="pt-mode-card" onclick="ptStartDrill('math')">
-        <div class="pt-mode-tag">${MATH_M1.length+MATH_M2E.length+MATH_M2H.length} QUESTIONS</div>
+        <div class="pt-mode-tag">${ptDrillPoolSize('math')} QUESTIONS</div>
         <div class="pt-mode-name">Math</div>
         <div class="pt-mode-desc">Mixed difficulty, all four domains, shuffled.</div>
       </div>
@@ -7838,7 +8825,7 @@ let ptFullState=null;
 function ptStartFull(){
   if(ptState){if(!confirm('A test is already in progress. Discard it and start over?'))return}
   ptFullState={rwRun:null,mathRun:null,startTs:Date.now()};
-  ptStart('rw');
+  ptStart('rw',1);
   ptState.fullTestMode=true;
 }
 
@@ -7872,10 +8859,10 @@ function ptFullBreakHtml(){
 function ptBeginFullMath(){
   const S=PT_SUBJECTS.math;
   ptState={
-    subject:'math',module:1,track:null,
-    questions:[...S.m1()],idx:0,answers:{},flags:{},timeSpent:{},
+    subject:'math',testNum:1,module:1,track:null,
+    questions:[...S.m1(1)],idx:0,answers:{},flags:{},timeSpent:{},
     qStartTs:Date.now(),
-    secondsLeft:ptModuleSeconds(S.m1().length,'math'),
+    secondsLeft:ptModuleSeconds(S.m1(1).length,'math'),
     module1Correct:0,module2Correct:0,timerId:null,testStartTs:Date.now(),
     fullTestMode:true
   };
@@ -7926,6 +8913,50 @@ function ptFullClose(){
   document.body.style.overflow='';
   ptState=null;ptFullState=null;
   if(typeof renderTestsPage==='function')renderTestsPage();
+}
+
+/* ========== SAT TOPIC GRID ========== */
+const TOPIC_GRID_DATA=[
+  {group:'Reading & Writing · Information & Ideas',color:'var(--rw,var(--accent))',topics:['Central idea','Textual evidence','Command of evidence','Inference']},
+  {group:'Reading & Writing · Craft & Structure',color:'var(--rw,var(--accent))',topics:['Vocabulary in context','Rhetorical goal','Cross-text connections']},
+  {group:'Reading & Writing · Standard English Conventions',color:'var(--rw,var(--accent))',topics:['Punctuation','Sentence boundaries','Subject-verb agreement','Modifiers','Parallelism','Verb tense']},
+  {group:'Reading & Writing · Expression of Ideas',color:'var(--rw,var(--accent))',topics:['Transitions','Notes-based writing','Concision']},
+  {group:'Math · Algebra',color:'var(--math,var(--accent-2))',topics:['Linear equations','Systems of equations','Word problems']},
+  {group:'Math · Advanced Math',color:'var(--math,var(--accent-2))',topics:['Quadratics','Functions','Exponential models','Polynomials','Complex numbers']},
+  {group:'Math · Problem-Solving & Data Analysis',color:'var(--math,var(--accent-2))',topics:['Statistics','Ratios & rates']},
+  {group:'Math · Geometry & Trigonometry',color:'var(--math,var(--accent-2))',topics:['Geometry','Trigonometry']}
+];
+function topicGridToggle(t){satTopicGrid[t]=!satTopicGrid[t];saveAll();renderTopicGridPage();if(typeof renderXP==='function')renderXP()}
+function topicGridTotalCount(){return TOPIC_GRID_DATA.reduce((a,g)=>a+g.topics.length,0)}
+function topicGridDoneCount(){return Object.values(satTopicGrid).filter(Boolean).length}
+function renderTopicGridPage(){
+  const root=document.getElementById('page-topicgrid');
+  if(!root)return;
+  const total=topicGridTotalCount(),done=topicGridDoneCount();
+  const pct=total?Math.round((done/total)*100):0;
+  root.innerHTML=`
+  <div class="card" style="margin-bottom:18px">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+      <div><div class="display-2" style="font-size:1.3rem">Topic Grid</div><div class="card-sub">Check off every SAT topic as you master it. This is a mastery checklist, separate from daily curriculum tasks — check a topic once you're consistently getting it right, not just once you've studied it.</div></div>
+      <div style="text-align:right"><div style="font-family:var(--font-num);font-size:1.4rem;font-weight:800;color:var(--accent)">${done}/${total}</div><div style="font-size:0.7rem;color:var(--ink-3)">topics mastered</div></div>
+    </div>
+    <div style="height:8px;background:var(--paper-2);border-radius:var(--r-full);overflow:hidden;margin-top:12px"><div style="height:100%;width:${pct}%;background:var(--accent);border-radius:var(--r-full);transition:width .3s ease"></div></div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px">
+    ${TOPIC_GRID_DATA.map(g=>`
+      <div class="card">
+        <div style="font-size:0.78rem;font-weight:700;color:${g.color};margin-bottom:10px">${esc(g.group)}</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          ${g.topics.map(t=>`
+            <button onclick="topicGridToggle('${t.replace(/'/g,"\\'")}')" style="display:flex;align-items:center;gap:10px;text-align:left;background:${satTopicGrid[t]?'var(--good-soft)':'var(--paper-2)'};border:1.5px solid ${satTopicGrid[t]?'var(--good)':'var(--line)'};border-radius:var(--r-sm);padding:9px 12px;cursor:pointer;font-size:0.82rem;color:var(--ink);width:100%">
+              <span style="flex-shrink:0;width:18px;height:18px;border-radius:5px;border:1.5px solid ${satTopicGrid[t]?'var(--good)':'var(--line-strong)'};background:${satTopicGrid[t]?'var(--good)':'transparent'};display:flex;align-items:center;justify-content:center">
+                ${satTopicGrid[t]?'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>':''}
+              </span>
+              <span style="${satTopicGrid[t]?'text-decoration:line-through;color:var(--ink-3)':''}">${esc(t)}</span>
+            </button>`).join('')}
+        </div>
+      </div>`).join('')}
+  </div>`;
 }
 
 /* ========== BOOT ========== */
